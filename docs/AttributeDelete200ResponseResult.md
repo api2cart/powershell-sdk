@@ -1,0 +1,21 @@
+# AttributeDelete200ResponseResult
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Deleted** | **String** |  | [optional] 
+
+## Examples
+
+- Prepare the resource
+```powershell
+$AttributeDelete200ResponseResult = Initialize-PSOpenAPIToolsAttributeDelete200ResponseResult  -Deleted null
+```
+
+- Convert the resource to JSON
+```powershell
+$AttributeDelete200ResponseResult | ConvertTo-JSON
+```
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
