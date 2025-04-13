@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **WeightUnit** | **String** |  | [optional] 
 **SortOrder** | **Int32** |  | [optional] 
 **InStock** | **Boolean** |  | [optional] 
+**OnSale** | **Boolean** |  | [optional] 
 **Backorders** | **String** |  | [optional] 
 **ManageStock** | **String** |  | [optional] 
 **IsStockManaged** | **Boolean** |  | [optional] 
@@ -94,6 +95,7 @@ $Product = Initialize-PSOpenAPIToolsProduct  -Id null `
  -WeightUnit null `
  -SortOrder null `
  -InStock null `
+ -OnSale null `
  -Backorders null `
  -ManageStock null `
  -IsStockManaged null `

@@ -173,6 +173,8 @@ Defines whether the product is downloadable
 A list of material strings for materials used in the product.
 .PARAMETER AutoRenew
 When true, automatically renews a listing upon its expiration.
+.PARAMETER OnSale
+Set whether the product on sale
 .OUTPUTS
 
 ProductUpdate<PSCustomObject>
@@ -417,7 +419,10 @@ function Initialize-ProductUpdate {
         ${Materials},
         [Parameter(Position = 78, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${AutoRenew} = $false
+        ${AutoRenew} = $false,
+        [Parameter(Position = 79, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${OnSale} = $false
     )
 
     Process {
@@ -505,6 +510,7 @@ function Initialize-ProductUpdate {
             "downloadable" = ${Downloadable}
             "materials" = ${Materials}
             "auto_renew" = ${AutoRenew}
+            "on_sale" = ${OnSale}
         }
 
 
@@ -542,7 +548,7 @@ function ConvertFrom-JsonToProductUpdate {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductUpdate
-        $AllProperties = ("id", "model", "old_price", "price", "special_price", "sprice_create", "sprice_expire", "cost_price", "fixed_cost_shipping_price", "retail_price", "quantity", "available_for_view", "weight", "weight_unit", "dimensions_unit", "increase_quantity", "reduce_quantity", "warehouse_id", "reserve_quantity", "manage_stock", "backorder_status", "name", "sku", "visible", "manufacturer", "manufacturer_id", "categories_ids", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "description", "short_description", "meta_title", "meta_keywords", "meta_description", "store_id", "lang_id", "in_stock", "status", "seo_url", "report_request_id", "disable_report_cache", "reindex", "tags", "clear_cache", "gtin", "upc", "mpn", "ean", "isbn", "taxable", "product_class", "height", "length", "width", "harmonized_system_code", "country_of_origin", "search_keywords", "barcode", "is_virtual", "is_free_shipping", "reserve_price", "buyitnow_price", "avail_from", "tax_class_id", "type", "avail", "delivery_code", "check_process_status", "package_details", "stores_ids", "manufacturer_info", "production_partner_ids", "shipping_template_id", "when_made", "is_supply", "downloadable", "materials", "auto_renew")
+        $AllProperties = ("id", "model", "old_price", "price", "special_price", "sprice_create", "sprice_expire", "cost_price", "fixed_cost_shipping_price", "retail_price", "quantity", "available_for_view", "weight", "weight_unit", "dimensions_unit", "increase_quantity", "reduce_quantity", "warehouse_id", "reserve_quantity", "manage_stock", "backorder_status", "name", "sku", "visible", "manufacturer", "manufacturer_id", "categories_ids", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "description", "short_description", "meta_title", "meta_keywords", "meta_description", "store_id", "lang_id", "in_stock", "status", "seo_url", "report_request_id", "disable_report_cache", "reindex", "tags", "clear_cache", "gtin", "upc", "mpn", "ean", "isbn", "taxable", "product_class", "height", "length", "width", "harmonized_system_code", "country_of_origin", "search_keywords", "barcode", "is_virtual", "is_free_shipping", "reserve_price", "buyitnow_price", "avail_from", "tax_class_id", "type", "avail", "delivery_code", "check_process_status", "package_details", "stores_ids", "manufacturer_info", "production_partner_ids", "shipping_template_id", "when_made", "is_supply", "downloadable", "materials", "auto_renew", "on_sale")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -1023,6 +1029,12 @@ function ConvertFrom-JsonToProductUpdate {
             $AutoRenew = $JsonParameters.PSobject.Properties["auto_renew"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "on_sale"))) { #optional property not found
+            $OnSale = $null
+        } else {
+            $OnSale = $JsonParameters.PSobject.Properties["on_sale"].value
+        }
+
         $PSO = [PSCustomObject]@{
             "id" = ${Id}
             "model" = ${Model}
@@ -1103,6 +1115,7 @@ function ConvertFrom-JsonToProductUpdate {
             "downloadable" = ${Downloadable}
             "materials" = ${Materials}
             "auto_renew" = ${AutoRenew}
+            "on_sale" = ${OnSale}
         }
 
         return $PSO

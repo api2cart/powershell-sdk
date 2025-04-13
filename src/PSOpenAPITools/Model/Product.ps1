@@ -75,6 +75,8 @@ No description available.
 No description available.
 .PARAMETER InStock
 No description available.
+.PARAMETER OnSale
+No description available.
 .PARAMETER Backorders
 No description available.
 .PARAMETER ManageStock
@@ -226,81 +228,84 @@ function Initialize-Product {
         [System.Nullable[Boolean]]
         ${InStock},
         [Parameter(Position = 30, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Backorders},
+        [System.Nullable[Boolean]]
+        ${OnSale},
         [Parameter(Position = 31, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ManageStock},
+        ${Backorders},
         [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${ManageStock},
+        [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${IsStockManaged},
-        [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
-        ${CreateAt},
         [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
-        ${ModifiedAt},
+        ${CreateAt},
         [Parameter(Position = 35, ValueFromPipelineByPropertyName = $true)]
+        [PSCustomObject]
+        ${ModifiedAt},
+        [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${TaxClassId},
-        [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 37, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${SpecialPrice},
-        [Parameter(Position = 37, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject[]]
-        ${TierPrice},
         [Parameter(Position = 38, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
-        ${GroupPrice},
+        ${TierPrice},
         [Parameter(Position = 39, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
-        ${Images},
+        ${GroupPrice},
         [Parameter(Position = 40, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
-        ${ProductOptions},
+        ${Images},
         [Parameter(Position = 41, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${UUpc},
+        [PSCustomObject[]]
+        ${ProductOptions},
         [Parameter(Position = 42, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${UMpn},
+        ${UUpc},
         [Parameter(Position = 43, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${UGtin},
+        ${UMpn},
         [Parameter(Position = 44, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${UIsbn},
+        ${UGtin},
         [Parameter(Position = 45, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${UEan},
+        ${UIsbn},
         [Parameter(Position = 46, ValueFromPipelineByPropertyName = $true)]
-        [String[]]
-        ${RelatedProductsIds},
+        [String]
+        ${UEan},
         [Parameter(Position = 47, ValueFromPipelineByPropertyName = $true)]
         [String[]]
-        ${UpSellProductsIds},
+        ${RelatedProductsIds},
         [Parameter(Position = 48, ValueFromPipelineByPropertyName = $true)]
         [String[]]
-        ${CrossSellProductsIds},
+        ${UpSellProductsIds},
         [Parameter(Position = 49, ValueFromPipelineByPropertyName = $true)]
+        [String[]]
+        ${CrossSellProductsIds},
+        [Parameter(Position = 50, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${DimensionsUnit},
-        [Parameter(Position = 50, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${Width},
         [Parameter(Position = 51, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Height},
+        ${Width},
         [Parameter(Position = 52, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Length},
+        ${Height},
         [Parameter(Position = 53, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${Length},
+        [Parameter(Position = 54, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Discounts},
-        [Parameter(Position = 54, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 55, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${AdditionalFields},
-        [Parameter(Position = 55, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 56, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${CustomFields}
     )
@@ -341,6 +346,7 @@ function Initialize-Product {
             "weight_unit" = ${WeightUnit}
             "sort_order" = ${SortOrder}
             "in_stock" = ${InStock}
+            "on_sale" = ${OnSale}
             "backorders" = ${Backorders}
             "manage_stock" = ${ManageStock}
             "is_stock_managed" = ${IsStockManaged}
@@ -404,7 +410,7 @@ function ConvertFrom-JsonToProduct {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in Product
-        $AllProperties = ("id", "type", "u_model", "u_sku", "name", "description", "short_description", "price", "advanced_price", "cost_price", "quantity", "inventory", "group_items", "u_brand_id", "u_brand", "categories_ids", "stores_ids", "url", "seo_url", "meta_title", "meta_keywords", "meta_description", "avail_sale", "avail_view", "is_virtual", "is_downloadable", "weight", "weight_unit", "sort_order", "in_stock", "backorders", "manage_stock", "is_stock_managed", "create_at", "modified_at", "tax_class_id", "special_price", "tier_price", "group_price", "images", "product_options", "u_upc", "u_mpn", "u_gtin", "u_isbn", "u_ean", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "dimensions_unit", "width", "height", "length", "discounts", "additional_fields", "custom_fields")
+        $AllProperties = ("id", "type", "u_model", "u_sku", "name", "description", "short_description", "price", "advanced_price", "cost_price", "quantity", "inventory", "group_items", "u_brand_id", "u_brand", "categories_ids", "stores_ids", "url", "seo_url", "meta_title", "meta_keywords", "meta_description", "avail_sale", "avail_view", "is_virtual", "is_downloadable", "weight", "weight_unit", "sort_order", "in_stock", "on_sale", "backorders", "manage_stock", "is_stock_managed", "create_at", "modified_at", "tax_class_id", "special_price", "tier_price", "group_price", "images", "product_options", "u_upc", "u_mpn", "u_gtin", "u_isbn", "u_ean", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "dimensions_unit", "width", "height", "length", "discounts", "additional_fields", "custom_fields")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -589,6 +595,12 @@ function ConvertFrom-JsonToProduct {
             $InStock = $null
         } else {
             $InStock = $JsonParameters.PSobject.Properties["in_stock"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "on_sale"))) { #optional property not found
+            $OnSale = $null
+        } else {
+            $OnSale = $JsonParameters.PSobject.Properties["on_sale"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "backorders"))) { #optional property not found
@@ -778,6 +790,7 @@ function ConvertFrom-JsonToProduct {
             "weight_unit" = ${WeightUnit}
             "sort_order" = ${SortOrder}
             "in_stock" = ${InStock}
+            "on_sale" = ${OnSale}
             "backorders" = ${Backorders}
             "manage_stock" = ${ManageStock}
             "is_stock_managed" = ${IsStockManaged}

@@ -82,6 +82,7 @@ Name | Type | Description | Notes
 **Downloadable** | **Boolean** | Defines whether the product is downloadable | [optional] [default to $false]
 **Materials** | **String[]** | A list of material strings for materials used in the product. | [optional] 
 **AutoRenew** | **Boolean** | When true, automatically renews a listing upon its expiration. | [optional] [default to $false]
+**OnSale** | **Boolean** | Set whether the product on sale | [optional] [default to $false]
 
 ## Examples
 
@@ -165,7 +166,8 @@ $ProductUpdate = Initialize-PSOpenAPIToolsProductUpdate  -Id 10 `
  -IsSupply false `
  -Downloadable true `
  -Materials materials[0]&#x3D;Aluminum&amp;materials[1]&#x3D;Brass `
- -AutoRenew false
+ -AutoRenew false `
+ -OnSale false
 ```
 
 - Convert the resource to JSON
