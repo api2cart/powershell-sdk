@@ -151,6 +151,8 @@ An array of Item Specific Name/Value pairs used by the seller to provide descrip
 Image Url
 .PARAMETER ImageName
 Defines image's name
+.PARAMETER AdditionalImageUrls
+Image Url
 .PARAMETER ReservePrice
 Defines reserve price value
 .PARAMETER BuyitnowPrice
@@ -159,6 +161,8 @@ Defines buy it now value
 Detailed description of the product condition.
 .PARAMETER AuctionConfidentialityLevel
 This allows buyers to remain anonymous when the bid or buy an item.
+.PARAMETER LogisticInfo
+Defines product's logistic channel settings
 .PARAMETER AvailFrom
 Allows to schedule a time in the future that the item becomes available. The value should be greater than the current date and time.
 .PARAMETER Tags
@@ -448,129 +452,135 @@ function Initialize-ProductAdd {
         [String]
         ${ImageName},
         [Parameter(Position = 68, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${ReservePrice},
+        [String[]]
+        ${AdditionalImageUrls},
         [Parameter(Position = 69, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${BuyitnowPrice},
+        ${ReservePrice},
         [Parameter(Position = 70, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${ConditionDescription},
+        [System.Nullable[Decimal]]
+        ${BuyitnowPrice},
         [Parameter(Position = 71, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${AuctionConfidentialityLevel},
+        ${ConditionDescription},
         [Parameter(Position = 72, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${AvailFrom},
+        ${AuctionConfidentialityLevel},
         [Parameter(Position = 73, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Tags},
+        [PSCustomObject[]]
+        ${LogisticInfo},
         [Parameter(Position = 74, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${ClearCache} = $true,
+        [String]
+        ${AvailFrom},
         [Parameter(Position = 75, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Asin},
+        ${Tags},
         [Parameter(Position = 76, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Gtin},
+        [System.Nullable[Boolean]]
+        ${ClearCache} = $true,
         [Parameter(Position = 77, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Mpn},
+        ${Asin},
         [Parameter(Position = 78, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${Taxable} = $true,
+        [String]
+        ${Gtin},
         [Parameter(Position = 79, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Visible},
+        ${Mpn},
         [Parameter(Position = 80, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Status},
+        [System.Nullable[Boolean]]
+        ${Taxable} = $true,
         [Parameter(Position = 81, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SeoUrl},
+        ${Visible},
         [Parameter(Position = 82, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ProductClass},
+        ${Status},
         [Parameter(Position = 83, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ProductType},
+        ${SeoUrl},
         [Parameter(Position = 84, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MarketplaceItemProperties},
+        ${ProductClass},
         [Parameter(Position = 85, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${ManageStock},
+        [String]
+        ${ProductType},
         [Parameter(Position = 86, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${HarmonizedSystemCode},
+        ${MarketplaceItemProperties},
         [Parameter(Position = 87, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${CountryOfOrigin},
+        [System.Nullable[Boolean]]
+        ${ManageStock},
         [Parameter(Position = 88, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject[]]
-        ${Files},
+        [String]
+        ${HarmonizedSystemCode},
         [Parameter(Position = 89, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SearchKeywords},
+        ${CountryOfOrigin},
         [Parameter(Position = 90, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${StoreId},
+        [PSCustomObject[]]
+        ${Files},
         [Parameter(Position = 91, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${BrandName},
+        ${SearchKeywords},
         [Parameter(Position = 92, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${IsVirtual} = $false,
+        [String]
+        ${StoreId},
         [Parameter(Position = 93, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${IsFreeShipping},
+        [String]
+        ${BrandName},
         [Parameter(Position = 94, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${InStock},
+        ${IsVirtual} = $false,
         [Parameter(Position = 95, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${DeliveryCode},
+        [System.Nullable[Boolean]]
+        ${IsFreeShipping},
         [Parameter(Position = 96, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${ProductReference},
+        [System.Nullable[Boolean]]
+        ${InStock},
         [Parameter(Position = 97, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${DeliveryType},
+        ${DeliveryCode},
         [Parameter(Position = 98, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${ProductReference},
+        [Parameter(Position = 99, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${DeliveryType},
+        [Parameter(Position = 100, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
         ${DeliveryTime},
-        [Parameter(Position = 99, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 101, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${SizeChart},
-        [Parameter(Position = 100, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 102, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Certifications},
-        [Parameter(Position = 101, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${DeliveryOptionIds},
-        [Parameter(Position = 102, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
-        ${ManufacturerInfo},
         [Parameter(Position = 103, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${WhenMade} = "made_to_order",
+        ${DeliveryOptionIds},
         [Parameter(Position = 104, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${IsSupply} = $true,
+        [PSCustomObject]
+        ${ManufacturerInfo},
         [Parameter(Position = 105, ValueFromPipelineByPropertyName = $true)]
-        [String[]]
-        ${Materials},
+        [String]
+        ${WhenMade} = "made_to_order",
         [Parameter(Position = 106, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${AutoRenew} = $false,
+        ${IsSupply} = $true,
         [Parameter(Position = 107, ValueFromPipelineByPropertyName = $true)]
+        [String[]]
+        ${Materials},
+        [Parameter(Position = 108, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${AutoRenew} = $false,
+        [Parameter(Position = 109, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${AllowDisplayCondition},
-        [Parameter(Position = 108, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 110, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${MinOrderQuantity},
-        [Parameter(Position = 109, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 111, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${MaxOrderQuantity}
     )
@@ -665,10 +675,12 @@ function Initialize-ProductAdd {
             "specifics" = ${Specifics}
             "image_url" = ${ImageUrl}
             "image_name" = ${ImageName}
+            "additional_image_urls" = ${AdditionalImageUrls}
             "reserve_price" = ${ReservePrice}
             "buyitnow_price" = ${BuyitnowPrice}
             "condition_description" = ${ConditionDescription}
             "auction_confidentiality_level" = ${AuctionConfidentialityLevel}
+            "logistic_info" = ${LogisticInfo}
             "avail_from" = ${AvailFrom}
             "tags" = ${Tags}
             "clear_cache" = ${ClearCache}
@@ -744,7 +756,7 @@ function ConvertFrom-JsonToProductAdd {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductAdd
-        $AllProperties = ("name", "model", "sku", "description", "price", "old_price", "special_price", "cost_price", "fixed_cost_shipping_price", "sprice_create", "sprice_modified", "sprice_expire", "tier_prices", "group_prices", "available_for_view", "available_for_sale", "weight", "width", "height", "length", "weight_unit", "dimensions_unit", "short_description", "warehouse_id", "backorder_status", "quantity", "downloadable", "wholesale_price", "created_at", "manufacturer", "manufacturer_id", "categories_ids", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "tax_class_id", "type", "meta_title", "meta_keywords", "meta_description", "url", "lang_id", "stores_ids", "category_id", "viewed_count", "ordered_count", "attribute_set_name", "attribute_name", "shipping_template_id", "production_partner_ids", "condition", "listing_duration", "listing_type", "payment_methods", "return_accepted", "shipping_details", "paypal_email", "seller_profiles", "package_details", "best_offer", "sales_tax", "barcode", "upc", "ean", "isbn", "specifics", "image_url", "image_name", "reserve_price", "buyitnow_price", "condition_description", "auction_confidentiality_level", "avail_from", "tags", "clear_cache", "asin", "gtin", "mpn", "taxable", "visible", "status", "seo_url", "product_class", "product_type", "marketplace_item_properties", "manage_stock", "harmonized_system_code", "country_of_origin", "files", "search_keywords", "store_id", "brand_name", "is_virtual", "is_free_shipping", "in_stock", "delivery_code", "product_reference", "delivery_type", "delivery_time", "size_chart", "certifications", "delivery_option_ids", "manufacturer_info", "when_made", "is_supply", "materials", "auto_renew", "allow_display_condition", "min_order_quantity", "max_order_quantity")
+        $AllProperties = ("name", "model", "sku", "description", "price", "old_price", "special_price", "cost_price", "fixed_cost_shipping_price", "sprice_create", "sprice_modified", "sprice_expire", "tier_prices", "group_prices", "available_for_view", "available_for_sale", "weight", "width", "height", "length", "weight_unit", "dimensions_unit", "short_description", "warehouse_id", "backorder_status", "quantity", "downloadable", "wholesale_price", "created_at", "manufacturer", "manufacturer_id", "categories_ids", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "tax_class_id", "type", "meta_title", "meta_keywords", "meta_description", "url", "lang_id", "stores_ids", "category_id", "viewed_count", "ordered_count", "attribute_set_name", "attribute_name", "shipping_template_id", "production_partner_ids", "condition", "listing_duration", "listing_type", "payment_methods", "return_accepted", "shipping_details", "paypal_email", "seller_profiles", "package_details", "best_offer", "sales_tax", "barcode", "upc", "ean", "isbn", "specifics", "image_url", "image_name", "additional_image_urls", "reserve_price", "buyitnow_price", "condition_description", "auction_confidentiality_level", "logistic_info", "avail_from", "tags", "clear_cache", "asin", "gtin", "mpn", "taxable", "visible", "status", "seo_url", "product_class", "product_type", "marketplace_item_properties", "manage_stock", "harmonized_system_code", "country_of_origin", "files", "search_keywords", "store_id", "brand_name", "is_virtual", "is_free_shipping", "in_stock", "delivery_code", "product_reference", "delivery_type", "delivery_time", "size_chart", "certifications", "delivery_option_ids", "manufacturer_info", "when_made", "is_supply", "materials", "auto_renew", "allow_display_condition", "min_order_quantity", "max_order_quantity")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -1163,6 +1175,12 @@ function ConvertFrom-JsonToProductAdd {
             $ImageName = $JsonParameters.PSobject.Properties["image_name"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "additional_image_urls"))) { #optional property not found
+            $AdditionalImageUrls = $null
+        } else {
+            $AdditionalImageUrls = $JsonParameters.PSobject.Properties["additional_image_urls"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "reserve_price"))) { #optional property not found
             $ReservePrice = $null
         } else {
@@ -1185,6 +1203,12 @@ function ConvertFrom-JsonToProductAdd {
             $AuctionConfidentialityLevel = $null
         } else {
             $AuctionConfidentialityLevel = $JsonParameters.PSobject.Properties["auction_confidentiality_level"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "logistic_info"))) { #optional property not found
+            $LogisticInfo = $null
+        } else {
+            $LogisticInfo = $JsonParameters.PSobject.Properties["logistic_info"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "avail_from"))) { #optional property not found
@@ -1484,10 +1508,12 @@ function ConvertFrom-JsonToProductAdd {
             "specifics" = ${Specifics}
             "image_url" = ${ImageUrl}
             "image_name" = ${ImageName}
+            "additional_image_urls" = ${AdditionalImageUrls}
             "reserve_price" = ${ReservePrice}
             "buyitnow_price" = ${BuyitnowPrice}
             "condition_description" = ${ConditionDescription}
             "auction_confidentiality_level" = ${AuctionConfidentialityLevel}
+            "logistic_info" = ${LogisticInfo}
             "avail_from" = ${AvailFrom}
             "tags" = ${Tags}
             "clear_cache" = ${ClearCache}

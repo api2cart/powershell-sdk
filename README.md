@@ -503,6 +503,7 @@ Class | Method | HTTP request | Description
  - [PSOpenAPITools\Model.ProductAddCertificationsInnerImagesInner](docs/ProductAddCertificationsInnerImagesInner.md)
  - [PSOpenAPITools\Model.ProductAddFilesInner](docs/ProductAddFilesInner.md)
  - [PSOpenAPITools\Model.ProductAddGroupPricesInner](docs/ProductAddGroupPricesInner.md)
+ - [PSOpenAPITools\Model.ProductAddLogisticInfoInner](docs/ProductAddLogisticInfoInner.md)
  - [PSOpenAPITools\Model.ProductAddManufacturerInfo](docs/ProductAddManufacturerInfo.md)
  - [PSOpenAPITools\Model.ProductAddPackageDetails](docs/ProductAddPackageDetails.md)
  - [PSOpenAPITools\Model.ProductAddSalesTax](docs/ProductAddSalesTax.md)

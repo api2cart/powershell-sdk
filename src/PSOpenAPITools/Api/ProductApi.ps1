@@ -772,6 +772,9 @@ Retrieves brands specified by brand ids
 .PARAMETER Exclude
 Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 
+.PARAMETER CategoryId
+Retrieves product brands specified by category id
+
 .PARAMETER StoreId
 Store Id
 
@@ -833,32 +836,35 @@ function Invoke-ProductBrandList {
         ${Exclude},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${CategoryId},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${LangId},
+        ${StoreId},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedFrom},
+        ${LangId},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedTo},
+        ${CreatedFrom},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedFrom},
+        ${CreatedTo},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedTo},
+        ${ModifiedFrom},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ParentId},
+        ${ModifiedTo},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${ParentId},
         [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${FindWhere},
+        ${ResponseFields},
         [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${FindWhere},
+        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${FindValue},
         [Switch]
@@ -906,6 +912,10 @@ function Invoke-ProductBrandList {
 
         if ($Exclude) {
             $LocalVarQueryParameters['exclude'] = $Exclude
+        }
+
+        if ($CategoryId) {
+            $LocalVarQueryParameters['category_id'] = $CategoryId
         }
 
         if ($StoreId) {

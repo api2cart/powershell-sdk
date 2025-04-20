@@ -71,10 +71,12 @@ Name | Type | Description | Notes
 **Specifics** | [**ProductAddSpecificsInner[]**](ProductAddSpecificsInner.md) | An array of Item Specific Name/Value pairs used by the seller to provide descriptive details of an item in a structured manner.         The list of possible specifications can be obtained using the category.info method (additional_fields-&gt;product_specifics).         &lt;b&gt;The structure of the parameter is different for specific platforms.&lt;/b&gt; | [optional] 
 **ImageUrl** | **String** | Image Url | [optional] 
 **ImageName** | **String** | Defines image&#39;s name | [optional] 
+**AdditionalImageUrls** | **String[]** | Image Url | [optional] 
 **ReservePrice** | **Decimal** | Defines reserve price value | [optional] 
 **BuyitnowPrice** | **Decimal** | Defines buy it now value | [optional] 
 **ConditionDescription** | **String** | Detailed description of the product condition. | [optional] 
 **AuctionConfidentialityLevel** | **String** | This allows buyers to remain anonymous when the bid or buy an item. | [optional] 
+**LogisticInfo** | [**ProductAddLogisticInfoInner[]**](ProductAddLogisticInfoInner.md) | Defines product&#39;s logistic channel settings | [optional] 
 **AvailFrom** | **String** | Allows to schedule a time in the future that the item becomes available. The value should be greater than the current date and time. | [optional] 
 **Tags** | **String** | Product tags | [optional] 
 **ClearCache** | **Boolean** | Is cache clear required | [optional] [default to $true]
@@ -186,10 +188,12 @@ $ProductAdd = Initialize-PSOpenAPIToolsProductAdd  -Name Bag `
  -Specifics null `
  -ImageUrl https://docs.api2cart.com/img/logo.png `
  -ImageName abibas.png `
+ -AdditionalImageUrls null `
  -ReservePrice 65.9 `
  -BuyitnowPrice 65.9 `
  -ConditionDescription Almost perfect condition, a few scratches `
  -AuctionConfidentialityLevel public `
+ -LogisticInfo null `
  -AvailFrom avail_from&#x3D;2029-10-25T15:54:37-0500 `
  -Tags tag1,tag2 `
  -ClearCache false `

@@ -49,7 +49,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
 
     Context 'Invoke-ProductBrandList' {
         It 'Test Invoke-ProductBrandList' {
-            #$TestResult = Invoke-ProductBrandList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -Params "TEST_VALUE" -BrandIds "TEST_VALUE" -Exclude "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -ParentId "TEST_VALUE" -ResponseFields "TEST_VALUE" -FindWhere "TEST_VALUE" -FindValue "TEST_VALUE"
+            #$TestResult = Invoke-ProductBrandList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -Params "TEST_VALUE" -BrandIds "TEST_VALUE" -Exclude "TEST_VALUE" -CategoryId "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -ParentId "TEST_VALUE" -ResponseFields "TEST_VALUE" -FindWhere "TEST_VALUE" -FindValue "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

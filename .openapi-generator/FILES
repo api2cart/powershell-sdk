@@ -282,6 +282,7 @@ docs/ProductAddCertificationsInnerFilesInner.md
 docs/ProductAddCertificationsInnerImagesInner.md
 docs/ProductAddFilesInner.md
 docs/ProductAddGroupPricesInner.md
+docs/ProductAddLogisticInfoInner.md
 docs/ProductAddManufacturerInfo.md
 docs/ProductAddPackageDetails.md
 docs/ProductAddSalesTax.md
@@ -740,6 +741,7 @@ src/PSOpenAPITools/Model/ProductAddCertificationsInnerFilesInner.ps1
 src/PSOpenAPITools/Model/ProductAddCertificationsInnerImagesInner.ps1
 src/PSOpenAPITools/Model/ProductAddFilesInner.ps1
 src/PSOpenAPITools/Model/ProductAddGroupPricesInner.ps1
+src/PSOpenAPITools/Model/ProductAddLogisticInfoInner.ps1
 src/PSOpenAPITools/Model/ProductAddManufacturerInfo.ps1
 src/PSOpenAPITools/Model/ProductAddPackageDetails.ps1
 src/PSOpenAPITools/Model/ProductAddSalesTax.ps1
@@ -1198,6 +1200,7 @@ tests/Model/ProductAddCertificationsInnerFilesInner.Tests.ps1
 tests/Model/ProductAddCertificationsInnerImagesInner.Tests.ps1
 tests/Model/ProductAddFilesInner.Tests.ps1
 tests/Model/ProductAddGroupPricesInner.Tests.ps1
+tests/Model/ProductAddLogisticInfoInner.Tests.ps1
 tests/Model/ProductAddManufacturerInfo.Tests.ps1
 tests/Model/ProductAddPackageDetails.Tests.ps1
 tests/Model/ProductAddSalesTax.Tests.ps1
