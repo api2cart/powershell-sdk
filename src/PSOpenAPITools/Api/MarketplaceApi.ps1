@@ -15,20 +15,20 @@ marketplace.product.find
 
 No description available.
 
-.PARAMETER StoreId
-Store Id
-
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
 
 .PARAMETER PageCursor
 Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
 
+.PARAMETER Keyword
+Defines search keyword
+
 .PARAMETER CategoriesIds
 Defines product add that is specified by comma-separated categories id
 
-.PARAMETER Keyword
-Defines search keyword
+.PARAMETER StoreId
+Store Id
 
 .PARAMETER Asin
 Amazon Standard Identification Number.
@@ -48,14 +48,14 @@ Manufacturer Part Number. A MPN is an identifier of a particular part design or 
 .PARAMETER Isbn
 International Standard Book Number. An ISBN is a unique identifier for books.
 
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
 .PARAMETER Params
 Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Exclude
 Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
-.PARAMETER ResponseFields
-Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER WithHttpInfo
 
@@ -69,20 +69,20 @@ function Invoke-MarketplaceProductFind {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${StoreId},
-        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Count},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${PageCursor},
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Keyword},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${CategoriesIds},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Keyword},
+        ${StoreId},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Asin},
@@ -103,13 +103,13 @@ function Invoke-MarketplaceProductFind {
         ${Isbn},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ResponseFields},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${Params},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -133,10 +133,6 @@ function Invoke-MarketplaceProductFind {
 
         $LocalVarUri = '/marketplace.product.find.json'
 
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
-        }
-
         if ($Count) {
             $LocalVarQueryParameters['count'] = $Count
         }
@@ -145,12 +141,16 @@ function Invoke-MarketplaceProductFind {
             $LocalVarQueryParameters['page_cursor'] = $PageCursor
         }
 
+        if ($Keyword) {
+            $LocalVarQueryParameters['keyword'] = $Keyword
+        }
+
         if ($CategoriesIds) {
             $LocalVarQueryParameters['categories_ids'] = $CategoriesIds
         }
 
-        if ($Keyword) {
-            $LocalVarQueryParameters['keyword'] = $Keyword
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
         if ($Asin) {
@@ -177,16 +177,16 @@ function Invoke-MarketplaceProductFind {
             $LocalVarQueryParameters['isbn'] = $Isbn
         }
 
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
         if ($Params) {
             $LocalVarQueryParameters['params'] = $Params
         }
 
         if ($Exclude) {
             $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {

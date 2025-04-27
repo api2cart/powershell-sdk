@@ -31,6 +31,8 @@ Defines orders specified by order item weight
 Ordered product variant. Where x is order item ID
 .PARAMETER OrderItemTax
 Percentage of tax for product order
+.PARAMETER OrderItemPriceIncludesTax
+Defines if item price includes tax
 .PARAMETER OrderItemParent
 Index of the parent grouped/bundle product
 .PARAMETER OrderItemParentOptionName
@@ -39,8 +41,6 @@ Option name of the parent grouped/bundle product
 Indicates whether subitems of the grouped/bundle product can be refunded separately
 .PARAMETER OrderItemAllowShipItemsSeparately
 Indicates whether subitems of the grouped/bundle product can be shipped separately
-.PARAMETER OrderItemPriceIncludesTax
-Defines if item price includes tax
 .PARAMETER OrderItemOption
 No description available.
 .PARAMETER OrderItemProperty
@@ -78,20 +78,20 @@ function Initialize-OrderAddOrderItemInner {
         [System.Nullable[Decimal]]
         ${OrderItemTax} = 0,
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Int32]]
-        ${OrderItemParent},
-        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${OrderItemParentOptionName},
-        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${OrderItemAllowRefundItemsSeparately},
-        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${OrderItemAllowShipItemsSeparately},
-        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${OrderItemPriceIncludesTax} = $false,
+        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Int32]]
+        ${OrderItemParent},
+        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${OrderItemParentOptionName},
+        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${OrderItemAllowRefundItemsSeparately},
+        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${OrderItemAllowShipItemsSeparately},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${OrderItemOption},
@@ -130,11 +130,11 @@ function Initialize-OrderAddOrderItemInner {
             "order_item_weight" = ${OrderItemWeight}
             "order_item_variant_id" = ${OrderItemVariantId}
             "order_item_tax" = ${OrderItemTax}
+            "order_item_price_includes_tax" = ${OrderItemPriceIncludesTax}
             "order_item_parent" = ${OrderItemParent}
             "order_item_parent_option_name" = ${OrderItemParentOptionName}
             "order_item_allow_refund_items_separately" = ${OrderItemAllowRefundItemsSeparately}
             "order_item_allow_ship_items_separately" = ${OrderItemAllowShipItemsSeparately}
-            "order_item_price_includes_tax" = ${OrderItemPriceIncludesTax}
             "order_item_option" = ${OrderItemOption}
             "order_item_property" = ${OrderItemProperty}
         }
@@ -174,7 +174,7 @@ function ConvertFrom-JsonToOrderAddOrderItemInner {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in OrderAddOrderItemInner
-        $AllProperties = ("order_item_id", "order_item_name", "order_item_model", "order_item_price", "order_item_quantity", "order_item_weight", "order_item_variant_id", "order_item_tax", "order_item_parent", "order_item_parent_option_name", "order_item_allow_refund_items_separately", "order_item_allow_ship_items_separately", "order_item_price_includes_tax", "order_item_option", "order_item_property")
+        $AllProperties = ("order_item_id", "order_item_name", "order_item_model", "order_item_price", "order_item_quantity", "order_item_weight", "order_item_variant_id", "order_item_tax", "order_item_price_includes_tax", "order_item_parent", "order_item_parent_option_name", "order_item_allow_refund_items_separately", "order_item_allow_ship_items_separately", "order_item_option", "order_item_property")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -233,6 +233,12 @@ function ConvertFrom-JsonToOrderAddOrderItemInner {
             $OrderItemTax = $JsonParameters.PSobject.Properties["order_item_tax"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "order_item_price_includes_tax"))) { #optional property not found
+            $OrderItemPriceIncludesTax = $null
+        } else {
+            $OrderItemPriceIncludesTax = $JsonParameters.PSobject.Properties["order_item_price_includes_tax"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "order_item_parent"))) { #optional property not found
             $OrderItemParent = $null
         } else {
@@ -257,12 +263,6 @@ function ConvertFrom-JsonToOrderAddOrderItemInner {
             $OrderItemAllowShipItemsSeparately = $JsonParameters.PSobject.Properties["order_item_allow_ship_items_separately"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "order_item_price_includes_tax"))) { #optional property not found
-            $OrderItemPriceIncludesTax = $null
-        } else {
-            $OrderItemPriceIncludesTax = $JsonParameters.PSobject.Properties["order_item_price_includes_tax"].value
-        }
-
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "order_item_option"))) { #optional property not found
             $OrderItemOption = $null
         } else {
@@ -284,11 +284,11 @@ function ConvertFrom-JsonToOrderAddOrderItemInner {
             "order_item_weight" = ${OrderItemWeight}
             "order_item_variant_id" = ${OrderItemVariantId}
             "order_item_tax" = ${OrderItemTax}
+            "order_item_price_includes_tax" = ${OrderItemPriceIncludesTax}
             "order_item_parent" = ${OrderItemParent}
             "order_item_parent_option_name" = ${OrderItemParentOptionName}
             "order_item_allow_refund_items_separately" = ${OrderItemAllowRefundItemsSeparately}
             "order_item_allow_ship_items_separately" = ${OrderItemAllowShipItemsSeparately}
-            "order_item_price_includes_tax" = ${OrderItemPriceIncludesTax}
             "order_item_option" = ${OrderItemOption}
             "order_item_property" = ${OrderItemProperty}
         }

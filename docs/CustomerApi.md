@@ -43,7 +43,7 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 
 $CustomerAddConsentsInner = Initialize-CustomerAddConsentsInner -Type "email" -Status "MyStatus" -OptInLevel "MyOptInLevel"
 $CustomerAddAddressInner = Initialize-CustomerAddAddressInner -AddressBookType "billing" -AddressBookFirstName "John" -AddressBookLastName "Smith" -AddressBookCompany "Samsung" -AddressBookFax "5758787" -AddressBookPhone "5758787" -AddressBookPhoneMobile "5758787" -AddressBookWebsite "http://api2cart.com" -AddressBookAddress1 "Green str. 35" -AddressBookAddress2 "Green str. 35" -AddressBookCity "Chicago" -AddressBookCountry "US" -AddressBookState "IL" -AddressBookPostcode "12345" -AddressBookGender "male" -AddressBookRegion "Alabama" -AddressBookDefault $true -AddressBookTaxId "`12345678`" -AddressBookIdentificationNumber "`123-456-7890`" -AddressBookAlias "Address alias"
-$CustomerAdd = Initialize-CustomerAdd -Email "mail@example.com" -FirstName "John" -LastName "Smith" -Password "fd5gfd5g75fd" -Group "Register" -GroupIds "1,2,3" -CreatedTime "2014-01-30 15:58:41" -ModifiedTime "2014-07-30 15:58:41" -Login "makaka" -LastLogin "2013-02-26 15:00:00" -BirthDay "2013-02-26 15:00:00" -Status "disabled" -NewsLetterSubscription $true -Consents $CustomerAddConsentsInner -Gender "male" -Website "http://api2cart.com" -StoreId "1" -Fax "54545787" -Company "Apple" -Phone "56686868654" -Note "Customer note" -Country "US" -Address $CustomerAddAddressInner # CustomerAdd | 
+$CustomerAdd = Initialize-CustomerAdd -Email "mail@example.com" -FirstName "John" -LastName "Smith" -Password "fd5gfd5g75fd" -Group "Register" -GroupIds "1,2,3" -Status "disabled" -CreatedTime "2014-01-30 15:58:41" -ModifiedTime "2014-07-30 15:58:41" -Login "makaka" -LastLogin "2013-02-26 15:00:00" -BirthDay "2013-02-26 15:00:00" -NewsLetterSubscription $true -Consents $CustomerAddConsentsInner -Gender "male" -Website "http://api2cart.com" -Fax "54545787" -Company "Apple" -Phone "56686868654" -Note "Customer note" -Country "US" -StoreId "1" -Address $CustomerAddAddressInner # CustomerAdd | 
 
 # customer.add
 try {
@@ -138,9 +138,9 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 
 customer.attribute.list
 
@@ -165,13 +165,13 @@ $Count = 20 # Int32 | This parameter sets the entity amount that has to be retri
 $PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
 $StoreId = "1" # String | Store Id (optional)
 $LangId = "3" # String | Language id (optional)
+$ResponseFields = "{return_code,return_message,pagination,result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
 $Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "force_all")
 $Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
-$ResponseFields = "{return_code,return_message,pagination,result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
 
 # customer.attribute.list
 try {
-    $Result = Invoke-CustomerAttributeList -CustomerId $CustomerId -Count $Count -PageCursor $PageCursor -StoreId $StoreId -LangId $LangId -Params $Params -Exclude $Exclude -ResponseFields $ResponseFields
+    $Result = Invoke-CustomerAttributeList -CustomerId $CustomerId -Count $Count -PageCursor $PageCursor -StoreId $StoreId -LangId $LangId -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CustomerAttributeList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -187,9 +187,9 @@ Name | Type | Description  | Notes
  **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
  **StoreId** | **String**| Store Id | [optional] 
  **LangId** | **String**| Language id | [optional] 
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
  **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;force_all&quot;]
  **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
- **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 
 ### Return type
 
@@ -209,18 +209,18 @@ Name | Type | Description  | Notes
 <a id="Invoke-CustomerCount"></a>
 # **Invoke-CustomerCount**
 > CustomerCount200Response Invoke-CustomerCount<br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Ids] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SinceId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CustomerListId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-GroupId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Avail] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindValue] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindWhere] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedTo] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedTo] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CustomerListId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Avail] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindValue] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindWhere] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Ids] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SinceId] <String><br>
 
 customer.count
 
@@ -240,22 +240,22 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
+$Ids = "24,25" # String | Counts customers specified by ids (optional)
+$SinceId = "56" # String | Retrieve entities starting from the specified id. (optional)
+$CustomerListId = "exampleListId" # String | The numeric ID of the customer list in Demandware. (optional)
 $GroupId = "3" # String | Customer group_id (optional)
+$StoreId = "1" # String | Counts customer specified by store id (optional)
+$Avail = $false # Boolean | Defines category's visibility status (optional) (default to $true)
+$FindValue = "mail@gmail.com" # String | Entity search that is specified by some value (optional)
+$FindWhere = "email" # String | Counts customers that are searched specified by field (optional)
 $CreatedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their creation date (optional)
 $CreatedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their creation date (optional)
 $ModifiedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their modification date (optional)
 $ModifiedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their modification date (optional)
-$StoreId = "1" # String | Counts customer specified by store id (optional)
-$CustomerListId = "exampleListId" # String | The numeric ID of the customer list in Demandware. (optional)
-$Avail = $false # Boolean | Defines category's visibility status (optional) (default to $true)
-$FindValue = "mail@gmail.com" # String | Entity search that is specified by some value (optional)
-$FindWhere = "email" # String | Counts customers that are searched specified by field (optional)
-$Ids = "24,25" # String | Counts customers specified by ids (optional)
-$SinceId = "56" # String | Retrieve entities starting from the specified id. (optional)
 
 # customer.count
 try {
-    $Result = Invoke-CustomerCount -GroupId $GroupId -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -StoreId $StoreId -CustomerListId $CustomerListId -Avail $Avail -FindValue $FindValue -FindWhere $FindWhere -Ids $Ids -SinceId $SinceId
+    $Result = Invoke-CustomerCount -Ids $Ids -SinceId $SinceId -CustomerListId $CustomerListId -GroupId $GroupId -StoreId $StoreId -Avail $Avail -FindValue $FindValue -FindWhere $FindWhere -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CustomerCount: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -266,18 +266,18 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **Ids** | **String**| Counts customers specified by ids | [optional] 
+ **SinceId** | **String**| Retrieve entities starting from the specified id. | [optional] 
+ **CustomerListId** | **String**| The numeric ID of the customer list in Demandware. | [optional] 
  **GroupId** | **String**| Customer group_id | [optional] 
+ **StoreId** | **String**| Counts customer specified by store id | [optional] 
+ **Avail** | **Boolean**| Defines category&#39;s visibility status | [optional] [default to $true]
+ **FindValue** | **String**| Entity search that is specified by some value | [optional] 
+ **FindWhere** | **String**| Counts customers that are searched specified by field | [optional] 
  **CreatedFrom** | **String**| Retrieve entities from their creation date | [optional] 
  **CreatedTo** | **String**| Retrieve entities to their creation date | [optional] 
  **ModifiedFrom** | **String**| Retrieve entities from their modification date | [optional] 
  **ModifiedTo** | **String**| Retrieve entities to their modification date | [optional] 
- **StoreId** | **String**| Counts customer specified by store id | [optional] 
- **CustomerListId** | **String**| The numeric ID of the customer list in Demandware. | [optional] 
- **Avail** | **Boolean**| Defines category&#39;s visibility status | [optional] [default to $true]
- **FindValue** | **String**| Entity search that is specified by some value | [optional] 
- **FindWhere** | **String**| Counts customers that are searched specified by field | [optional] 
- **Ids** | **String**| Counts customers specified by ids | [optional] 
- **SinceId** | **String**| Retrieve entities starting from the specified id. | [optional] 
 
 ### Return type
 
@@ -477,16 +477,16 @@ Name | Type | Description  | Notes
 <a id="Invoke-CustomerGroupList"></a>
 # **Invoke-CustomerGroupList**
 > ModelResponseCustomerGroupList Invoke-CustomerGroupList<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DisableCache] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-GroupIds] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-GroupIds] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DisableCache] <System.Nullable[Boolean]><br>
 
 customer.group.list
 
@@ -506,20 +506,20 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
-$DisableCache = $false # Boolean | Disable cache for current request (optional) (default to $false)
-$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
+$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
+$GroupIds = "1,2,3" # String | Groups that will be assigned to a customer (optional)
 $StoreId = "1" # String | Store Id (optional)
 $LangId = "3" # String | Language id (optional)
-$GroupIds = "1,2,3" # String | Groups that will be assigned to a customer (optional)
+$ResponseFields = "{return_code,return_message,pagination,result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
 $Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,additional_fields")
 $Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
-$ResponseFields = "{return_code,return_message,pagination,result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$DisableCache = $false # Boolean | Disable cache for current request (optional) (default to $false)
 
 # customer.group.list
 try {
-    $Result = Invoke-CustomerGroupList -DisableCache $DisableCache -PageCursor $PageCursor -Start $Start -Count $Count -StoreId $StoreId -LangId $LangId -GroupIds $GroupIds -Params $Params -Exclude $Exclude -ResponseFields $ResponseFields
+    $Result = Invoke-CustomerGroupList -Start $Start -Count $Count -PageCursor $PageCursor -GroupIds $GroupIds -StoreId $StoreId -LangId $LangId -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude -DisableCache $DisableCache
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CustomerGroupList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -530,16 +530,16 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **DisableCache** | **Boolean**| Disable cache for current request | [optional] [default to $false]
- **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+ **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
+ **GroupIds** | **String**| Groups that will be assigned to a customer | [optional] 
  **StoreId** | **String**| Store Id | [optional] 
  **LangId** | **String**| Language id | [optional] 
- **GroupIds** | **String**| Groups that will be assigned to a customer | [optional] 
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
  **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,additional_fields&quot;]
  **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
- **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **DisableCache** | **Boolean**| Disable cache for current request | [optional] [default to $false]
 
 ### Return type
 
@@ -560,10 +560,10 @@ Name | Type | Description  | Notes
 # **Invoke-CustomerInfo**
 > CustomerInfo200Response Invoke-CustomerInfo<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Id] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 
 customer.info
 
@@ -584,14 +584,14 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
 $Id = "10" # String | Retrieves customer's info specified by customer id
-$Params = "id,email" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,email,first_name,last_name")
-$ResponseFields = "{result{id,parent_id,sku,upc,images,combination}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
-$Exclude = "id,email" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 $StoreId = "1" # String | Retrieves customer info specified by store id (optional)
+$ResponseFields = "{result{id,parent_id,sku,upc,images,combination}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Params = "id,email" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,email,first_name,last_name")
+$Exclude = "id,email" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 
 # customer.info
 try {
-    $Result = Invoke-CustomerInfo -Id $Id -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude -StoreId $StoreId
+    $Result = Invoke-CustomerInfo -Id $Id -StoreId $StoreId -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CustomerInfo: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -603,10 +603,10 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **Id** | **String**| Retrieves customer&#39;s info specified by customer id | 
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,email,first_name,last_name&quot;]
- **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
- **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
  **StoreId** | **String**| Retrieves customer info specified by store id | [optional] 
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,email,first_name,last_name&quot;]
+ **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
 
@@ -626,26 +626,26 @@ Name | Type | Description  | Notes
 <a id="Invoke-CustomerList"></a>
 # **Invoke-CustomerList**
 > ModelResponseCustomerList Invoke-CustomerList<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Ids] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SinceId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CustomerListId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-GroupId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Avail] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindValue] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindWhere] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedTo] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedTo] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-GroupId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CustomerListId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Avail] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindValue] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindWhere] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SortBy] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SortDirection] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Ids] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SinceId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 
 customer.list
 
@@ -665,30 +665,30 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
-$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
+$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
+$Ids = "24,25" # String | Retrieves customers specified by ids (optional)
+$SinceId = "56" # String | Retrieve entities starting from the specified id. (optional)
+$CustomerListId = "exampleListId" # String | The numeric ID of the customer list in Demandware. (optional)
+$GroupId = "3" # String | Customer group_id (optional)
+$StoreId = "1" # String | Retrieves customers specified by store id (optional)
+$Avail = $false # Boolean | Defines category's visibility status (optional) (default to $true)
+$FindValue = "mail@gmail.com" # String | Entity search that is specified by some value (optional)
+$FindWhere = "email" # String | Customer search that is specified by field (optional)
 $CreatedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their creation date (optional)
 $CreatedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their creation date (optional)
 $ModifiedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their modification date (optional)
 $ModifiedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their modification date (optional)
-$Params = "id,email" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,email,first_name,last_name")
-$ResponseFields = "{result{customer}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
-$Exclude = "id,email" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
-$GroupId = "3" # String | Customer group_id (optional)
-$StoreId = "1" # String | Retrieves customers specified by store id (optional)
-$CustomerListId = "exampleListId" # String | The numeric ID of the customer list in Demandware. (optional)
-$Avail = $false # Boolean | Defines category's visibility status (optional) (default to $true)
-$FindValue = "mail@gmail.com" # String | Entity search that is specified by some value (optional)
-$FindWhere = "email" # String | Customer search that is specified by field (optional)
 $SortBy = "value_id" # String | Set field to sort by (optional) (default to "created_time")
 $SortDirection = "asc" # String | Set sorting direction (optional) (default to "asc")
-$Ids = "24,25" # String | Retrieves customers specified by ids (optional)
-$SinceId = "56" # String | Retrieve entities starting from the specified id. (optional)
+$ResponseFields = "{result{customer}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Params = "id,email" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,email,first_name,last_name")
+$Exclude = "id,email" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 
 # customer.list
 try {
-    $Result = Invoke-CustomerList -PageCursor $PageCursor -Start $Start -Count $Count -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude -GroupId $GroupId -StoreId $StoreId -CustomerListId $CustomerListId -Avail $Avail -FindValue $FindValue -FindWhere $FindWhere -SortBy $SortBy -SortDirection $SortDirection -Ids $Ids -SinceId $SinceId
+    $Result = Invoke-CustomerList -Start $Start -Count $Count -PageCursor $PageCursor -Ids $Ids -SinceId $SinceId -CustomerListId $CustomerListId -GroupId $GroupId -StoreId $StoreId -Avail $Avail -FindValue $FindValue -FindWhere $FindWhere -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -SortBy $SortBy -SortDirection $SortDirection -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CustomerList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -699,26 +699,26 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+ **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
+ **Ids** | **String**| Retrieves customers specified by ids | [optional] 
+ **SinceId** | **String**| Retrieve entities starting from the specified id. | [optional] 
+ **CustomerListId** | **String**| The numeric ID of the customer list in Demandware. | [optional] 
+ **GroupId** | **String**| Customer group_id | [optional] 
+ **StoreId** | **String**| Retrieves customers specified by store id | [optional] 
+ **Avail** | **Boolean**| Defines category&#39;s visibility status | [optional] [default to $true]
+ **FindValue** | **String**| Entity search that is specified by some value | [optional] 
+ **FindWhere** | **String**| Customer search that is specified by field | [optional] 
  **CreatedFrom** | **String**| Retrieve entities from their creation date | [optional] 
  **CreatedTo** | **String**| Retrieve entities to their creation date | [optional] 
  **ModifiedFrom** | **String**| Retrieve entities from their modification date | [optional] 
  **ModifiedTo** | **String**| Retrieve entities to their modification date | [optional] 
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,email,first_name,last_name&quot;]
- **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
- **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
- **GroupId** | **String**| Customer group_id | [optional] 
- **StoreId** | **String**| Retrieves customers specified by store id | [optional] 
- **CustomerListId** | **String**| The numeric ID of the customer list in Demandware. | [optional] 
- **Avail** | **Boolean**| Defines category&#39;s visibility status | [optional] [default to $true]
- **FindValue** | **String**| Entity search that is specified by some value | [optional] 
- **FindWhere** | **String**| Customer search that is specified by field | [optional] 
  **SortBy** | **String**| Set field to sort by | [optional] [default to &quot;created_time&quot;]
  **SortDirection** | **String**| Set sorting direction | [optional] [default to &quot;asc&quot;]
- **Ids** | **String**| Retrieves customers specified by ids | [optional] 
- **SinceId** | **String**| Retrieve entities starting from the specified id. | [optional] 
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,email,first_name,last_name&quot;]
+ **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
 
@@ -760,7 +760,7 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 
 $CustomerAddConsentsInner = Initialize-CustomerAddConsentsInner -Type "email" -Status "MyStatus" -OptInLevel "MyOptInLevel"
 $CustomerUpdateAddressInner = Initialize-CustomerUpdateAddressInner -AddressBookId "7805807034473" -AddressBookFirstName "John" -AddressBookLastName "Smith" -AddressBookCompany "Samsung" -AddressBookFax "5758787" -AddressBookPhone "5758787" -AddressBookPhoneMobile "5758787" -AddressBookAddress1 "Green str. 35" -AddressBookAddress2 "Green str. 35" -AddressBookCity "Chicago" -AddressBookCountry "US" -AddressBookState "IL" -AddressBookPostcode "12345" -AddressBookTaxId "`12345678`" -AddressBookIdentificationNumber "`123-456-7890`" -AddressBookGender "male" -AddressBookAlias "Address alias" -AddressBookType "billing" -AddressBookDefault $true
-$CustomerUpdate = Initialize-CustomerUpdate -Id "10" -GroupId "3" -GroupIds "1,2,3" -Group "Register" -Email "mail@example.com" -Phone "56686868654" -FirstName "John" -LastName "Smith" -BirthDay "2013-02-26 15:00:00" -NewsLetterSubscription $true -Consents $CustomerAddConsentsInner -Tags "tag1,tag2" -Gender "male" -StoreId "1" -Note "Customer note" -Status "disabled" -Address $CustomerUpdateAddressInner # CustomerUpdate | 
+$CustomerUpdate = Initialize-CustomerUpdate -Id "10" -GroupId "3" -GroupIds "1,2,3" -Group "Register" -Email "mail@example.com" -Phone "56686868654" -FirstName "John" -LastName "Smith" -BirthDay "2013-02-26 15:00:00" -NewsLetterSubscription $true -Consents $CustomerAddConsentsInner -Tags "tag1,tag2" -Gender "male" -Note "Customer note" -Status "disabled" -StoreId "1" -Address $CustomerUpdateAddressInner # CustomerUpdate | 
 
 # customer.update
 try {
@@ -796,11 +796,11 @@ Name | Type | Description  | Notes
 # **Invoke-CustomerWishlistList**
 > ModelResponseCustomerWishlistList Invoke-CustomerWishlistList<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CustomerId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Id] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Id] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 
 customer.wishlist.list
@@ -822,16 +822,16 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
 $CustomerId = "5" # String | Retrieves orders specified by customer id
-$Id = "10" # String | Entity id (optional)
-$StoreId = "1" # String | Store Id (optional)
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
 $PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
+$Id = "10" # String | Entity id (optional)
+$StoreId = "1" # String | Store Id (optional)
 $ResponseFields = "{return_code,return_message,pagination,result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "{return_code,return_message,pagination,result}")
 
 # customer.wishlist.list
 try {
-    $Result = Invoke-CustomerWishlistList -CustomerId $CustomerId -Id $Id -StoreId $StoreId -Start $Start -Count $Count -PageCursor $PageCursor -ResponseFields $ResponseFields
+    $Result = Invoke-CustomerWishlistList -CustomerId $CustomerId -Start $Start -Count $Count -PageCursor $PageCursor -Id $Id -StoreId $StoreId -ResponseFields $ResponseFields
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CustomerWishlistList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -843,11 +843,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **CustomerId** | **String**| Retrieves orders specified by customer id | 
- **Id** | **String**| Entity id | [optional] 
- **StoreId** | **String**| Store Id | [optional] 
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
  **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
+ **Id** | **String**| Entity id | [optional] 
+ **StoreId** | **String**| Store Id | [optional] 
  **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;{return_code,return_message,pagination,result}&quot;]
 
 ### Return type

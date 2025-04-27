@@ -10,7 +10,7 @@ Describe -tag 'PSOpenAPITools' -name 'OrderShipmentTrackingAdd' {
     Context 'OrderShipmentTrackingAdd' {
         It 'Initialize-OrderShipmentTrackingAdd' {
             # a simple test to create an object
-            #$NewObject = Initialize-OrderShipmentTrackingAdd -StoreId "TEST_VALUE" -OrderId "TEST_VALUE" -ShipmentId "TEST_VALUE" -CarrierId "TEST_VALUE" -TrackingProvider "TEST_VALUE" -TrackingNumber "TEST_VALUE" -TrackingLink "TEST_VALUE" -SendNotifications "TEST_VALUE"
+            #$NewObject = Initialize-OrderShipmentTrackingAdd -OrderId "TEST_VALUE" -ShipmentId "TEST_VALUE" -CarrierId "TEST_VALUE" -StoreId "TEST_VALUE" -TrackingProvider "TEST_VALUE" -TrackingNumber "TEST_VALUE" -TrackingLink "TEST_VALUE" -SendNotifications "TEST_VALUE"
             #$NewObject | Should -BeOfType OrderShipmentTrackingAdd
             #$NewObject.property | Should -Be 0
         }

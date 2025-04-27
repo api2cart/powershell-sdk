@@ -10,7 +10,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductImageAdd' {
     Context 'ProductImageAdd' {
         It 'Initialize-ProductImageAdd' {
             # a simple test to create an object
-            #$NewObject = Initialize-ProductImageAdd -ProductId "TEST_VALUE" -ImageName "TEST_VALUE" -Type "TEST_VALUE" -Url "TEST_VALUE" -Label "TEST_VALUE" -Mime "TEST_VALUE" -Position "TEST_VALUE" -Content "TEST_VALUE" -ProductVariantId "TEST_VALUE" -VariantIds "TEST_VALUE" -OptionValueIds "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -UseLatestApiVersion "TEST_VALUE"
+            #$NewObject = Initialize-ProductImageAdd -Type "TEST_VALUE" -ImageName "TEST_VALUE" -ProductId "TEST_VALUE" -ProductVariantId "TEST_VALUE" -VariantIds "TEST_VALUE" -OptionValueIds "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -Url "TEST_VALUE" -Content "TEST_VALUE" -Label "TEST_VALUE" -Mime "TEST_VALUE" -Position "TEST_VALUE" -UseLatestApiVersion "TEST_VALUE"
             #$NewObject | Should -BeOfType ProductImageAdd
             #$NewObject.property | Should -Be 0
         }

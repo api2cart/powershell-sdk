@@ -171,22 +171,22 @@ cart.catalog_price_rules.list
 
 No description available.
 
-.PARAMETER PageCursor
-Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
-
 .PARAMETER Start
 This parameter sets the number from which you want to get entities
 
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
 
+.PARAMETER PageCursor
+Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+
 .PARAMETER Ids
 Retrieves  catalog_price_rules by ids
 
-.PARAMETER Params
+.PARAMETER ResponseFields
 Set this parameter in order to choose which entity fields you want to retrieve
 
-.PARAMETER ResponseFields
+.PARAMETER Params
 Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Exclude
@@ -204,23 +204,23 @@ function Invoke-CartCatalogPriceRulesList {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${PageCursor},
-        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Start},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Count},
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${PageCursor},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Ids},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ResponseFields},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Params},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Exclude},
@@ -247,10 +247,6 @@ function Invoke-CartCatalogPriceRulesList {
 
         $LocalVarUri = '/cart.catalog_price_rules.list.json'
 
-        if ($PageCursor) {
-            $LocalVarQueryParameters['page_cursor'] = $PageCursor
-        }
-
         if ($Start) {
             $LocalVarQueryParameters['start'] = $Start
         }
@@ -259,16 +255,20 @@ function Invoke-CartCatalogPriceRulesList {
             $LocalVarQueryParameters['count'] = $Count
         }
 
+        if ($PageCursor) {
+            $LocalVarQueryParameters['page_cursor'] = $PageCursor
+        }
+
         if ($Ids) {
             $LocalVarQueryParameters['ids'] = $Ids
         }
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
-        }
-
         if ($ResponseFields) {
             $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
         }
 
         if ($Exclude) {
@@ -732,9 +732,6 @@ Defines condition operator
 .PARAMETER Value
 Defines condition value, can be comma separated according to the operator.
 
-.PARAMETER StoreId
-Store Id
-
 .PARAMETER Target
 Defines condition operator
 
@@ -743,6 +740,9 @@ Indicates whether to apply a discount for taxes.
 
 .PARAMETER IncludeShipping
 Indicates whether to apply a discount for shipping.
+
+.PARAMETER StoreId
+Store Id
 
 .PARAMETER WithHttpInfo
 
@@ -774,16 +774,16 @@ function Invoke-CartCouponConditionAdd {
         ${Value},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
-        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
         ${Target},
-        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${IncludeTax},
-        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${IncludeShipping},
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${StoreId},
         [Switch]
         $WithHttpInfo
     )
@@ -807,18 +807,10 @@ function Invoke-CartCouponConditionAdd {
 
         $LocalVarUri = '/cart.coupon.condition.add.json'
 
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
-        }
-
         if (!$CouponId) {
             throw "Error! The required parameter `CouponId` missing when calling cartCouponConditionAdd."
         }
         $LocalVarQueryParameters['coupon_id'] = $CouponId
-
-        if ($Target) {
-            $LocalVarQueryParameters['target'] = $Target
-        }
 
         if (!$Entity) {
             throw "Error! The required parameter `Entity` missing when calling cartCouponConditionAdd."
@@ -840,12 +832,20 @@ function Invoke-CartCouponConditionAdd {
         }
         $LocalVarQueryParameters['value'] = $Value
 
+        if ($Target) {
+            $LocalVarQueryParameters['target'] = $Target
+        }
+
         if ($IncludeTax) {
             $LocalVarQueryParameters['include_tax'] = $IncludeTax
         }
 
         if ($IncludeShipping) {
             $LocalVarQueryParameters['include_shipping'] = $IncludeShipping
+        }
+
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -900,6 +900,9 @@ No description available.
 .PARAMETER StoreId
 Store Id
 
+.PARAMETER Avail
+Defines category's visibility status
+
 .PARAMETER DateStartFrom
 Filter entity by date_start (greater or equal)
 
@@ -911,9 +914,6 @@ Filter entity by date_end (greater or equal)
 
 .PARAMETER DateEndTo
 Filter entity by date_end (less or equal)
-
-.PARAMETER Avail
-Defines category's visibility status
 
 .PARAMETER WithHttpInfo
 
@@ -930,20 +930,20 @@ function Invoke-CartCouponCount {
         [String]
         ${StoreId},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${DateStartFrom},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${DateStartTo},
-        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${DateEndFrom},
-        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${DateEndTo},
-        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${Avail},
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${DateStartFrom},
+        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${DateStartTo},
+        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${DateEndFrom},
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${DateEndTo},
         [Switch]
         $WithHttpInfo
     )
@@ -971,6 +971,10 @@ function Invoke-CartCouponCount {
             $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
+        if ($Avail) {
+            $LocalVarQueryParameters['avail'] = $Avail
+        }
+
         if ($DateStartFrom) {
             $LocalVarQueryParameters['date_start_from'] = $DateStartFrom
         }
@@ -985,10 +989,6 @@ function Invoke-CartCouponCount {
 
         if ($DateEndTo) {
             $LocalVarQueryParameters['date_end_to'] = $DateEndTo
-        }
-
-        if ($Avail) {
-            $LocalVarQueryParameters['avail'] = $Avail
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -1144,20 +1144,26 @@ cart.coupon.list
 
 No description available.
 
-.PARAMETER PageCursor
-Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
-
 .PARAMETER Start
 This parameter sets the number from which you want to get entities
 
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
 
+.PARAMETER PageCursor
+Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+
 .PARAMETER CouponsIds
 Filter coupons by ids
 
 .PARAMETER StoreId
 Filter coupons by store id
+
+.PARAMETER LangId
+Language id
+
+.PARAMETER Avail
+Filter coupons by avail status
 
 .PARAMETER DateStartFrom
 Filter entity by date_start (greater or equal)
@@ -1171,16 +1177,10 @@ Filter entity by date_end (greater or equal)
 .PARAMETER DateEndTo
 Filter entity by date_end (less or equal)
 
-.PARAMETER Avail
-Filter coupons by avail status
-
-.PARAMETER LangId
-Language id
-
-.PARAMETER Params
+.PARAMETER ResponseFields
 Set this parameter in order to choose which entity fields you want to retrieve
 
-.PARAMETER ResponseFields
+.PARAMETER Params
 Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Exclude
@@ -1198,14 +1198,14 @@ function Invoke-CartCouponList {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${PageCursor},
-        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Start},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Count},
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${PageCursor},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${CouponsIds},
@@ -1214,28 +1214,28 @@ function Invoke-CartCouponList {
         ${StoreId},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${DateStartFrom},
+        ${LangId},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${DateStartTo},
-        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${DateEndFrom},
-        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${DateEndTo},
-        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${Avail},
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${DateStartFrom},
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${DateStartTo},
+        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${DateEndFrom},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${LangId},
+        ${DateEndTo},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ResponseFields},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Params},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Exclude},
@@ -1262,10 +1262,6 @@ function Invoke-CartCouponList {
 
         $LocalVarUri = '/cart.coupon.list.json'
 
-        if ($PageCursor) {
-            $LocalVarQueryParameters['page_cursor'] = $PageCursor
-        }
-
         if ($Start) {
             $LocalVarQueryParameters['start'] = $Start
         }
@@ -1274,12 +1270,24 @@ function Invoke-CartCouponList {
             $LocalVarQueryParameters['count'] = $Count
         }
 
+        if ($PageCursor) {
+            $LocalVarQueryParameters['page_cursor'] = $PageCursor
+        }
+
         if ($CouponsIds) {
             $LocalVarQueryParameters['coupons_ids'] = $CouponsIds
         }
 
         if ($StoreId) {
             $LocalVarQueryParameters['store_id'] = $StoreId
+        }
+
+        if ($LangId) {
+            $LocalVarQueryParameters['lang_id'] = $LangId
+        }
+
+        if ($Avail) {
+            $LocalVarQueryParameters['avail'] = $Avail
         }
 
         if ($DateStartFrom) {
@@ -1298,20 +1306,12 @@ function Invoke-CartCouponList {
             $LocalVarQueryParameters['date_end_to'] = $DateEndTo
         }
 
-        if ($Avail) {
-            $LocalVarQueryParameters['avail'] = $Avail
-        }
-
-        if ($LangId) {
-            $LocalVarQueryParameters['lang_id'] = $LangId
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
         if ($Params) {
             $LocalVarQueryParameters['params'] = $Params
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
         if ($Exclude) {
@@ -1972,22 +1972,22 @@ cart.giftcard.list
 
 No description available.
 
-.PARAMETER PageCursor
-Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
-
 .PARAMETER Start
 This parameter sets the number from which you want to get entities
 
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
 
+.PARAMETER PageCursor
+Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+
 .PARAMETER StoreId
 Store Id
 
-.PARAMETER Params
+.PARAMETER ResponseFields
 Set this parameter in order to choose which entity fields you want to retrieve
 
-.PARAMETER ResponseFields
+.PARAMETER Params
 Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Exclude
@@ -2005,23 +2005,23 @@ function Invoke-CartGiftcardList {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${PageCursor},
-        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Start},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Count},
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${PageCursor},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${StoreId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ResponseFields},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Params},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Exclude},
@@ -2048,10 +2048,6 @@ function Invoke-CartGiftcardList {
 
         $LocalVarUri = '/cart.giftcard.list.json'
 
-        if ($PageCursor) {
-            $LocalVarQueryParameters['page_cursor'] = $PageCursor
-        }
-
         if ($Start) {
             $LocalVarQueryParameters['start'] = $Start
         }
@@ -2060,16 +2056,20 @@ function Invoke-CartGiftcardList {
             $LocalVarQueryParameters['count'] = $Count
         }
 
+        if ($PageCursor) {
+            $LocalVarQueryParameters['page_cursor'] = $PageCursor
+        }
+
         if ($StoreId) {
             $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
-        }
-
         if ($ResponseFields) {
             $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
         }
 
         if ($Exclude) {
@@ -2125,17 +2125,17 @@ cart.info
 
 No description available.
 
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
+.PARAMETER StoreId
+Store Id
 
 .PARAMETER ResponseFields
 Set this parameter in order to choose which entity fields you want to retrieve
 
+.PARAMETER Params
+Set this parameter in order to choose which entity fields you want to retrieve
+
 .PARAMETER Exclude
 Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
-.PARAMETER StoreId
-Store Id
 
 .PARAMETER WithHttpInfo
 
@@ -2150,16 +2150,16 @@ function Invoke-CartInfo {
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${StoreId},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${ResponseFields},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${Params},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -2183,20 +2183,20 @@ function Invoke-CartInfo {
 
         $LocalVarUri = '/cart.info.json'
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
         if ($ResponseFields) {
             $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
-        if ($Exclude) {
-            $LocalVarQueryParameters['exclude'] = $Exclude
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
         }
 
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
+        if ($Exclude) {
+            $LocalVarQueryParameters['exclude'] = $Exclude
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -2324,6 +2324,12 @@ No description available.
 .PARAMETER EntityId
 Entity Id
 
+.PARAMETER Count
+This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+
+.PARAMETER PageCursor
+Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+
 .PARAMETER Entity
 Entity
 
@@ -2336,16 +2342,10 @@ Language id
 .PARAMETER Key
 Key
 
-.PARAMETER Count
-This parameter sets the entity amount that has to be retrieved. Max allowed count=250
-
-.PARAMETER PageCursor
-Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
-
-.PARAMETER Params
+.PARAMETER ResponseFields
 Set this parameter in order to choose which entity fields you want to retrieve
 
-.PARAMETER ResponseFields
+.PARAMETER Params
 Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Exclude
@@ -2366,29 +2366,29 @@ function Invoke-CartMetaDataList {
         [String]
         ${EntityId},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Entity},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${StoreId},
-        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${LangId},
-        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Key},
-        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Count},
-        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${PageCursor},
+        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Entity},
+        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${StoreId},
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${LangId},
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Key},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ResponseFields},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Params},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Exclude},
@@ -2415,6 +2415,14 @@ function Invoke-CartMetaDataList {
 
         $LocalVarUri = '/cart.meta_data.list.json'
 
+        if ($Count) {
+            $LocalVarQueryParameters['count'] = $Count
+        }
+
+        if ($PageCursor) {
+            $LocalVarQueryParameters['page_cursor'] = $PageCursor
+        }
+
         if (!$EntityId) {
             throw "Error! The required parameter `EntityId` missing when calling cartMetaDataList."
         }
@@ -2436,20 +2444,12 @@ function Invoke-CartMetaDataList {
             $LocalVarQueryParameters['key'] = $Key
         }
 
-        if ($Count) {
-            $LocalVarQueryParameters['count'] = $Count
-        }
-
-        if ($PageCursor) {
-            $LocalVarQueryParameters['page_cursor'] = $PageCursor
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
         if ($Params) {
             $LocalVarQueryParameters['params'] = $Params
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
         if ($Exclude) {
@@ -2586,18 +2586,6 @@ function Invoke-CartMetaDataSet {
         }
         $LocalVarQueryParameters['entity_id'] = $EntityId
 
-        if ($Entity) {
-            $LocalVarQueryParameters['entity'] = $Entity
-        }
-
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
-        }
-
-        if ($LangId) {
-            $LocalVarQueryParameters['lang_id'] = $LangId
-        }
-
         if (!$Key) {
             throw "Error! The required parameter `Key` missing when calling cartMetaDataSet."
         }
@@ -2612,6 +2600,18 @@ function Invoke-CartMetaDataSet {
             throw "Error! The required parameter `Namespace` missing when calling cartMetaDataSet."
         }
         $LocalVarQueryParameters['namespace'] = $Namespace
+
+        if ($Entity) {
+            $LocalVarQueryParameters['entity'] = $Entity
+        }
+
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
+        }
+
+        if ($LangId) {
+            $LocalVarQueryParameters['lang_id'] = $LangId
+        }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
             $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["x-store-key"]
@@ -2731,14 +2731,6 @@ function Invoke-CartMetaDataUnset {
         }
         $LocalVarQueryParameters['entity_id'] = $EntityId
 
-        if ($Entity) {
-            $LocalVarQueryParameters['entity'] = $Entity
-        }
-
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
-        }
-
         if (!$Key) {
             throw "Error! The required parameter `Key` missing when calling cartMetaDataUnset."
         }
@@ -2748,6 +2740,14 @@ function Invoke-CartMetaDataUnset {
             throw "Error! The required parameter `Id` missing when calling cartMetaDataUnset."
         }
         $LocalVarQueryParameters['id'] = $Id
+
+        if ($Entity) {
+            $LocalVarQueryParameters['entity'] = $Entity
+        }
+
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
+        }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
             $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["x-store-key"]
@@ -2881,14 +2881,14 @@ cart.plugin.list
 
 No description available.
 
-.PARAMETER StoreId
-Store Id
-
 .PARAMETER Start
 This parameter sets the number from which you want to get entities
 
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+
+.PARAMETER StoreId
+Store Id
 
 .PARAMETER WithHttpInfo
 
@@ -2902,14 +2902,14 @@ function Invoke-CartPluginList {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${StoreId},
-        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Start},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Count},
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${StoreId},
         [Switch]
         $WithHttpInfo
     )
@@ -2933,16 +2933,16 @@ function Invoke-CartPluginList {
 
         $LocalVarUri = '/cart.plugin.list.json'
 
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
-        }
-
         if ($Start) {
             $LocalVarQueryParameters['start'] = $Start
         }
 
         if ($Count) {
             $LocalVarQueryParameters['count'] = $Count
+        }
+
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -3261,14 +3261,20 @@ cart.script.list
 
 No description available.
 
-.PARAMETER PageCursor
-Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
-
 .PARAMETER Start
 This parameter sets the number from which you want to get entities
 
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+
+.PARAMETER PageCursor
+Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+
+.PARAMETER ScriptIds
+Retrieves only scripts with specific ids
+
+.PARAMETER StoreId
+Store Id
 
 .PARAMETER CreatedFrom
 Retrieve entities from their creation date
@@ -3282,16 +3288,10 @@ Retrieve entities from their modification date
 .PARAMETER ModifiedTo
 Retrieve entities to their modification date
 
-.PARAMETER ScriptIds
-Retrieves only scripts with specific ids
-
-.PARAMETER StoreId
-Store Id
-
-.PARAMETER Params
+.PARAMETER ResponseFields
 Set this parameter in order to choose which entity fields you want to retrieve
 
-.PARAMETER ResponseFields
+.PARAMETER Params
 Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Exclude
@@ -3309,38 +3309,38 @@ function Invoke-CartScriptList {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${PageCursor},
-        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Start},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Count},
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${PageCursor},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedFrom},
+        ${ScriptIds},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedTo},
+        ${StoreId},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedFrom},
+        ${CreatedFrom},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedTo},
+        ${CreatedTo},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ScriptIds},
+        ${ModifiedFrom},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${ModifiedTo},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ResponseFields},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Params},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Exclude},
@@ -3367,16 +3367,24 @@ function Invoke-CartScriptList {
 
         $LocalVarUri = '/cart.script.list.json'
 
-        if ($PageCursor) {
-            $LocalVarQueryParameters['page_cursor'] = $PageCursor
-        }
-
         if ($Start) {
             $LocalVarQueryParameters['start'] = $Start
         }
 
         if ($Count) {
             $LocalVarQueryParameters['count'] = $Count
+        }
+
+        if ($PageCursor) {
+            $LocalVarQueryParameters['page_cursor'] = $PageCursor
+        }
+
+        if ($ScriptIds) {
+            $LocalVarQueryParameters['script_ids'] = $ScriptIds
+        }
+
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
         if ($CreatedFrom) {
@@ -3395,20 +3403,12 @@ function Invoke-CartScriptList {
             $LocalVarQueryParameters['modified_to'] = $ModifiedTo
         }
 
-        if ($ScriptIds) {
-            $LocalVarQueryParameters['script_ids'] = $ScriptIds
-        }
-
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
         if ($Params) {
             $LocalVarQueryParameters['params'] = $Params
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
         if ($Exclude) {
@@ -3464,19 +3464,19 @@ cart.shipping_zones.list
 
 No description available.
 
-.PARAMETER StoreId
-Store Id
-
 .PARAMETER Start
 This parameter sets the number from which you want to get entities
 
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
 
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
+.PARAMETER StoreId
+Store Id
 
 .PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Params
 Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Exclude
@@ -3494,20 +3494,20 @@ function Invoke-CartShippingZonesList {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${StoreId},
-        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Start},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Count},
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${StoreId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ResponseFields},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Params},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Exclude},
@@ -3534,10 +3534,6 @@ function Invoke-CartShippingZonesList {
 
         $LocalVarUri = '/cart.shipping_zones.list.json'
 
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
-        }
-
         if ($Start) {
             $LocalVarQueryParameters['start'] = $Start
         }
@@ -3546,12 +3542,16 @@ function Invoke-CartShippingZonesList {
             $LocalVarQueryParameters['count'] = $Count
         }
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
         if ($ResponseFields) {
             $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
         }
 
         if ($Exclude) {

@@ -13,11 +13,11 @@ Method | HTTP request | Description
 > ModelResponseBatchJobList Invoke-BatchJobList<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Ids] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedTo] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProcessedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProcessedTo] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Ids] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 
 batch.job.list
@@ -40,16 +40,16 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
 $PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
+$Ids = "24,25" # String | Filter batch jobs by ids (optional)
 $CreatedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their creation date (optional)
 $CreatedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their creation date (optional)
 $ProcessedFrom = "2100-08-29 13:45:52" # String | Retrieve entities according to their processing datetime (optional)
 $ProcessedTo = "2100-08-29 13:45:52" # String | Retrieve entities according to their processing datetime (optional)
-$Ids = "24,25" # String | Filter batch jobs by ids (optional)
 $ResponseFields = "{result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "{return_code,return_message,pagination,result}")
 
 # batch.job.list
 try {
-    $Result = Invoke-BatchJobList -Count $Count -PageCursor $PageCursor -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ProcessedFrom $ProcessedFrom -ProcessedTo $ProcessedTo -Ids $Ids -ResponseFields $ResponseFields
+    $Result = Invoke-BatchJobList -Count $Count -PageCursor $PageCursor -Ids $Ids -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ProcessedFrom $ProcessedFrom -ProcessedTo $ProcessedTo -ResponseFields $ResponseFields
 } catch {
     Write-Host ("Exception occurred when calling Invoke-BatchJobList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -62,11 +62,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
  **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
+ **Ids** | **String**| Filter batch jobs by ids | [optional] 
  **CreatedFrom** | **String**| Retrieve entities from their creation date | [optional] 
  **CreatedTo** | **String**| Retrieve entities to their creation date | [optional] 
  **ProcessedFrom** | **String**| Retrieve entities according to their processing datetime | [optional] 
  **ProcessedTo** | **String**| Retrieve entities according to their processing datetime | [optional] 
- **Ids** | **String**| Filter batch jobs by ids | [optional] 
  **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;{return_code,return_message,pagination,result}&quot;]
 
 ### Return type

@@ -16,9 +16,9 @@ Name | Type | Description | Notes
 **Consents** | [**CustomerAddConsentsInner[]**](CustomerAddConsentsInner.md) | Defines consents to notifications | [optional] 
 **Tags** | **String** | Customer tags | [optional] 
 **Gender** | **String** | Defines customer&#39;s gender | [optional] 
-**StoreId** | **String** | Store Id | [optional] 
 **Note** | **String** | The customer note. | [optional] 
 **Status** | **String** | Defines customer&#39;s status | [optional] 
+**StoreId** | **String** | Store Id | [optional] 
 **Address** | [**CustomerUpdateAddressInner[]**](CustomerUpdateAddressInner.md) |  | [optional] 
 
 ## Examples
@@ -38,9 +38,9 @@ $CustomerUpdate = Initialize-PSOpenAPIToolsCustomerUpdate  -Id 10 `
  -Consents null `
  -Tags tag1,tag2 `
  -Gender male `
- -StoreId 1 `
  -Note Customer note `
  -Status disabled `
+ -StoreId 1 `
  -Address null
 ```
 

@@ -19,6 +19,8 @@ No description available.
 Defines product id where the variant image has to be added
 .PARAMETER ProductVariantId
 Defines product's variants specified by variant id
+.PARAMETER StoreId
+Store Id
 .PARAMETER ImageName
 Defines image's name
 .PARAMETER Type
@@ -33,8 +35,6 @@ Defines alternative text that has to be attached to the picture
 Mime type of image http://en.wikipedia.org/wiki/Internet_media_type.
 .PARAMETER Position
 Defines image’s position in the list
-.PARAMETER StoreId
-Store Id
 .PARAMETER OptionId
 Defines option id of the product variant for which the image will be added
 .OUTPUTS
@@ -53,29 +53,29 @@ function Initialize-ProductVariantImageAdd {
         ${ProductVariantId},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ImageName},
+        ${StoreId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${ImageName},
+        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
         [ValidateSet("small", "base", "additional", "thumbnail")]
         [String]
         ${Type} = "base",
-        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Url},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Content},
+        ${Url},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Label},
+        ${Content},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Mime},
+        ${Label},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Mime},
+        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
         ${Position} = 0,
-        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${StoreId},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${OptionId}
@@ -101,6 +101,7 @@ function Initialize-ProductVariantImageAdd {
         $PSO = [PSCustomObject]@{
             "product_id" = ${ProductId}
             "product_variant_id" = ${ProductVariantId}
+            "store_id" = ${StoreId}
             "image_name" = ${ImageName}
             "type" = ${Type}
             "url" = ${Url}
@@ -108,7 +109,6 @@ function Initialize-ProductVariantImageAdd {
             "label" = ${Label}
             "mime" = ${Mime}
             "position" = ${Position}
-            "store_id" = ${StoreId}
             "option_id" = ${OptionId}
         }
 
@@ -147,7 +147,7 @@ function ConvertFrom-JsonToProductVariantImageAdd {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductVariantImageAdd
-        $AllProperties = ("product_id", "product_variant_id", "image_name", "type", "url", "content", "label", "mime", "position", "store_id", "option_id")
+        $AllProperties = ("product_id", "product_variant_id", "store_id", "image_name", "type", "url", "content", "label", "mime", "position", "option_id")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -182,6 +182,12 @@ function ConvertFrom-JsonToProductVariantImageAdd {
             $ProductId = $JsonParameters.PSobject.Properties["product_id"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_id"))) { #optional property not found
+            $StoreId = $null
+        } else {
+            $StoreId = $JsonParameters.PSobject.Properties["store_id"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "url"))) { #optional property not found
             $Url = $null
         } else {
@@ -212,12 +218,6 @@ function ConvertFrom-JsonToProductVariantImageAdd {
             $Position = $JsonParameters.PSobject.Properties["position"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_id"))) { #optional property not found
-            $StoreId = $null
-        } else {
-            $StoreId = $JsonParameters.PSobject.Properties["store_id"].value
-        }
-
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "option_id"))) { #optional property not found
             $OptionId = $null
         } else {
@@ -227,6 +227,7 @@ function ConvertFrom-JsonToProductVariantImageAdd {
         $PSO = [PSCustomObject]@{
             "product_id" = ${ProductId}
             "product_variant_id" = ${ProductVariantId}
+            "store_id" = ${StoreId}
             "image_name" = ${ImageName}
             "type" = ${Type}
             "url" = ${Url}
@@ -234,7 +235,6 @@ function ConvertFrom-JsonToProductVariantImageAdd {
             "label" = ${Label}
             "mime" = ${Mime}
             "position" = ${Position}
-            "store_id" = ${StoreId}
             "option_id" = ${OptionId}
         }
 

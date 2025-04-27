@@ -18,23 +18,17 @@ No description available.
 .PARAMETER Name
 Defines category's name that has to be added
 
+.PARAMETER Description
+Defines category's description
+
+.PARAMETER ShortDescription
+Defines short description
+
 .PARAMETER ParentId
 Adds categories specified by parent id
 
-.PARAMETER StoresIds
-Create category in the stores that is specified by comma-separated stores' id
-
-.PARAMETER StoreId
-Store Id
-
-.PARAMETER LangId
-Language id
-
 .PARAMETER Avail
 Defines category's visibility status
-
-.PARAMETER SortOrder
-Sort number in the list
 
 .PARAMETER CreatedTime
 Entity's date creation
@@ -42,11 +36,8 @@ Entity's date creation
 .PARAMETER ModifiedTime
 Entity's date modification
 
-.PARAMETER Description
-Defines category's description
-
-.PARAMETER ShortDescription
-Defines short description
+.PARAMETER SortOrder
+Sort number in the list
 
 .PARAMETER MetaTitle
 Defines unique meta title for each entity
@@ -59,6 +50,15 @@ Defines unique meta keywords for each entity
 
 .PARAMETER SeoUrl
 Defines unique category's URL for SEO
+
+.PARAMETER StoreId
+Store Id
+
+.PARAMETER StoresIds
+Create category in the stores that is specified by comma-separated stores' id
+
+.PARAMETER LangId
+Language id
 
 .PARAMETER WithHttpInfo
 
@@ -76,46 +76,46 @@ function Get-egoryAdd {
         ${Name},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ParentId},
+        ${Description},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoresIds},
+        ${ShortDescription},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${ParentId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${LangId},
-        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${Avail},
-        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Int32]]
-        ${SortOrder},
-        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${CreatedTime},
-        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${ModifiedTime},
-        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Description},
-        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ShortDescription},
-        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Int32]]
+        ${SortOrder},
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${MetaTitle},
-        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${MetaDescription},
-        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${MetaKeywords},
-        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${SeoUrl},
+        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${StoreId},
+        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${StoresIds},
+        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${LangId},
         [Switch]
         $WithHttpInfo
     )
@@ -144,28 +144,20 @@ function Get-egoryAdd {
         }
         $LocalVarQueryParameters['name'] = $Name
 
+        if ($Description) {
+            $LocalVarQueryParameters['description'] = $Description
+        }
+
+        if ($ShortDescription) {
+            $LocalVarQueryParameters['short_description'] = $ShortDescription
+        }
+
         if ($ParentId) {
             $LocalVarQueryParameters['parent_id'] = $ParentId
         }
 
-        if ($StoresIds) {
-            $LocalVarQueryParameters['stores_ids'] = $StoresIds
-        }
-
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
-        }
-
-        if ($LangId) {
-            $LocalVarQueryParameters['lang_id'] = $LangId
-        }
-
         if ($Avail) {
             $LocalVarQueryParameters['avail'] = $Avail
-        }
-
-        if ($SortOrder) {
-            $LocalVarQueryParameters['sort_order'] = $SortOrder
         }
 
         if ($CreatedTime) {
@@ -176,12 +168,8 @@ function Get-egoryAdd {
             $LocalVarQueryParameters['modified_time'] = $ModifiedTime
         }
 
-        if ($Description) {
-            $LocalVarQueryParameters['description'] = $Description
-        }
-
-        if ($ShortDescription) {
-            $LocalVarQueryParameters['short_description'] = $ShortDescription
+        if ($SortOrder) {
+            $LocalVarQueryParameters['sort_order'] = $SortOrder
         }
 
         if ($MetaTitle) {
@@ -198,6 +186,18 @@ function Get-egoryAdd {
 
         if ($SeoUrl) {
             $LocalVarQueryParameters['seo_url'] = $SeoUrl
+        }
+
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
+        }
+
+        if ($StoresIds) {
+            $LocalVarQueryParameters['stores_ids'] = $StoresIds
+        }
+
+        if ($LangId) {
+            $LocalVarQueryParameters['lang_id'] = $LangId
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -347,11 +347,11 @@ category.assign
 
 No description available.
 
-.PARAMETER ProductId
-Defines category assign to the product, specified by product id
-
 .PARAMETER CategoryId
 Defines category assign, specified by category id
+
+.PARAMETER ProductId
+Defines category assign to the product, specified by product id
 
 .PARAMETER StoreId
 Store Id
@@ -369,10 +369,10 @@ function Get-egoryAssign {
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ProductId},
+        ${CategoryId},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CategoryId},
+        ${ProductId},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${StoreId},
@@ -399,15 +399,15 @@ function Get-egoryAssign {
 
         $LocalVarUri = '/category.assign.json'
 
-        if (!$ProductId) {
-            throw "Error! The required parameter `ProductId` missing when calling categoryAssign."
-        }
-        $LocalVarQueryParameters['product_id'] = $ProductId
-
         if (!$CategoryId) {
             throw "Error! The required parameter `CategoryId` missing when calling categoryAssign."
         }
         $LocalVarQueryParameters['category_id'] = $CategoryId
+
+        if (!$ProductId) {
+            throw "Error! The required parameter `ProductId` missing when calling categoryAssign."
+        }
+        $LocalVarQueryParameters['product_id'] = $ProductId
 
         if ($StoreId) {
             $LocalVarQueryParameters['store_id'] = $StoreId
@@ -471,6 +471,9 @@ Counts category specified by store id
 .PARAMETER LangId
 Counts category specified by language id
 
+.PARAMETER Avail
+Defines category's visibility status
+
 .PARAMETER CreatedFrom
 Retrieve entities from their creation date
 
@@ -482,9 +485,6 @@ Retrieve entities from their modification date
 
 .PARAMETER ModifiedTo
 Retrieve entities to their modification date
-
-.PARAMETER Avail
-Defines category's visibility status
 
 .PARAMETER ProductType
 A categorization for the product
@@ -522,20 +522,20 @@ function Get-egoryCount {
         [String]
         ${LangId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CreatedFrom},
-        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CreatedTo},
-        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ModifiedFrom},
-        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ModifiedTo},
-        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${Avail},
+        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CreatedFrom},
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CreatedTo},
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ModifiedFrom},
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ModifiedTo},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${ProductType},
@@ -586,6 +586,10 @@ function Get-egoryCount {
             $LocalVarQueryParameters['lang_id'] = $LangId
         }
 
+        if ($Avail) {
+            $LocalVarQueryParameters['avail'] = $Avail
+        }
+
         if ($CreatedFrom) {
             $LocalVarQueryParameters['created_from'] = $CreatedFrom
         }
@@ -600,10 +604,6 @@ function Get-egoryCount {
 
         if ($ModifiedTo) {
             $LocalVarQueryParameters['modified_to'] = $ModifiedTo
-        }
-
-        if ($Avail) {
-            $LocalVarQueryParameters['avail'] = $Avail
         }
 
         if ($ProductType) {
@@ -925,6 +925,9 @@ Defines URL of the image that has to be added
 .PARAMETER Type
 Defines image's types that are specified by comma-separated list
 
+.PARAMETER StoreId
+Store Id
+
 .PARAMETER Label
 Defines alternative text that has to be attached to the picture
 
@@ -933,9 +936,6 @@ Mime type of image http://en.wikipedia.org/wiki/Internet_media_type.
 
 .PARAMETER Position
 Defines image’s position in the list
-
-.PARAMETER StoreId
-Store Id
 
 .PARAMETER WithHttpInfo
 
@@ -963,16 +963,16 @@ function Get-egoryImageAdd {
         ${Type},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Label},
+        ${StoreId},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Mime},
+        ${Label},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Mime},
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Position},
-        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${StoreId},
         [Switch]
         $WithHttpInfo
     )
@@ -1011,6 +1011,15 @@ function Get-egoryImageAdd {
         }
         $LocalVarQueryParameters['url'] = $Url
 
+        if (!$Type) {
+            throw "Error! The required parameter `Type` missing when calling categoryImageAdd."
+        }
+        $LocalVarQueryParameters['type'] = $Type
+
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
+        }
+
         if ($Label) {
             $LocalVarQueryParameters['label'] = $Label
         }
@@ -1019,17 +1028,8 @@ function Get-egoryImageAdd {
             $LocalVarQueryParameters['mime'] = $Mime
         }
 
-        if (!$Type) {
-            throw "Error! The required parameter `Type` missing when calling categoryImageAdd."
-        }
-        $LocalVarQueryParameters['type'] = $Type
-
         if ($Position) {
             $LocalVarQueryParameters['position'] = $Position
-        }
-
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -1199,15 +1199,6 @@ No description available.
 .PARAMETER Id
 Retrieves category's info specified by category id
 
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
-
-.PARAMETER ResponseFields
-Set this parameter in order to choose which entity fields you want to retrieve
-
-.PARAMETER Exclude
-Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
 .PARAMETER StoreId
 Retrieves category info  specified by store id
 
@@ -1216,6 +1207,15 @@ Retrieves category info  specified by language id
 
 .PARAMETER SchemaType
 The name of the requirements set for the provided schema.
+
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Params
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Exclude
+Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 
 .PARAMETER ReportRequestId
 Report request id
@@ -1239,22 +1239,22 @@ function Get-egoryInfo {
         ${Id},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${StoreId},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${LangId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${SchemaType},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${ResponseFields},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${LangId},
+        ${Params},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SchemaType},
+        ${Exclude},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${ReportRequestId},
@@ -1289,18 +1289,6 @@ function Get-egoryInfo {
         }
         $LocalVarQueryParameters['id'] = $Id
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
-        }
-
-        if ($Exclude) {
-            $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
         if ($StoreId) {
             $LocalVarQueryParameters['store_id'] = $StoreId
         }
@@ -1311,6 +1299,18 @@ function Get-egoryInfo {
 
         if ($SchemaType) {
             $LocalVarQueryParameters['schema_type'] = $SchemaType
+        }
+
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
+        }
+
+        if ($Exclude) {
+            $LocalVarQueryParameters['exclude'] = $Exclude
         }
 
         if ($ReportRequestId) {
@@ -1379,23 +1379,20 @@ This parameter sets the entity amount that has to be retrieved. Max allowed coun
 .PARAMETER PageCursor
 Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
 
-.PARAMETER ParentId
-Retrieves categories specified by parent id
-
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
-
-.PARAMETER ResponseFields
-Set this parameter in order to choose which entity fields you want to retrieve
-
-.PARAMETER Exclude
-Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
 .PARAMETER StoreId
 Retrieves categories specified by store id
 
 .PARAMETER LangId
 Retrieves categorys specified by language id
+
+.PARAMETER ParentId
+Retrieves categories specified by parent id
+
+.PARAMETER Avail
+Defines category's visibility status
+
+.PARAMETER ProductType
+A categorization for the product
 
 .PARAMETER CreatedFrom
 Retrieve entities from their creation date
@@ -1409,17 +1406,20 @@ Retrieve entities from their modification date
 .PARAMETER ModifiedTo
 Retrieve entities to their modification date
 
-.PARAMETER Avail
-Defines category's visibility status
-
-.PARAMETER ProductType
-A categorization for the product
-
 .PARAMETER FindValue
 Entity search that is specified by some value
 
 .PARAMETER FindWhere
 Category search that is specified by field
+
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Params
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Exclude
+Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 
 .PARAMETER ReportRequestId
 Report request id
@@ -1452,46 +1452,46 @@ function Get-egoryList {
         ${PageCursor},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ParentId},
+        ${StoreId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${LangId},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${ParentId},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Exclude},
-        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${StoreId},
-        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${LangId},
-        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CreatedFrom},
-        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CreatedTo},
-        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ModifiedFrom},
-        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ModifiedTo},
-        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${Avail},
-        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${ProductType},
-        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CreatedFrom},
+        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CreatedTo},
+        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ModifiedFrom},
+        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ModifiedTo},
+        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${FindValue},
-        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${FindWhere},
+        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ResponseFields},
+        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Params},
+        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Exclude},
         [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${ReportRequestId},
@@ -1536,28 +1536,24 @@ function Get-egoryList {
             $LocalVarQueryParameters['page_cursor'] = $PageCursor
         }
 
-        if ($ParentId) {
-            $LocalVarQueryParameters['parent_id'] = $ParentId
-        }
-
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
-        }
-
-        if ($Exclude) {
-            $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
         if ($StoreId) {
             $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
         if ($LangId) {
             $LocalVarQueryParameters['lang_id'] = $LangId
+        }
+
+        if ($ParentId) {
+            $LocalVarQueryParameters['parent_id'] = $ParentId
+        }
+
+        if ($Avail) {
+            $LocalVarQueryParameters['avail'] = $Avail
+        }
+
+        if ($ProductType) {
+            $LocalVarQueryParameters['product_type'] = $ProductType
         }
 
         if ($CreatedFrom) {
@@ -1576,20 +1572,24 @@ function Get-egoryList {
             $LocalVarQueryParameters['modified_to'] = $ModifiedTo
         }
 
-        if ($Avail) {
-            $LocalVarQueryParameters['avail'] = $Avail
-        }
-
-        if ($ProductType) {
-            $LocalVarQueryParameters['product_type'] = $ProductType
-        }
-
         if ($FindValue) {
             $LocalVarQueryParameters['find_value'] = $FindValue
         }
 
         if ($FindWhere) {
             $LocalVarQueryParameters['find_where'] = $FindWhere
+        }
+
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
+        }
+
+        if ($Exclude) {
+            $LocalVarQueryParameters['exclude'] = $Exclude
         }
 
         if ($ReportRequestId) {
@@ -1774,11 +1774,14 @@ Defines category update specified by category id
 .PARAMETER Name
 Defines new category’s name
 
+.PARAMETER Description
+Defines new category's description
+
+.PARAMETER ShortDescription
+Defines short description
+
 .PARAMETER ParentId
 Defines new parent category id
-
-.PARAMETER StoresIds
-Update category in the stores that is specified by comma-separated stores' id
 
 .PARAMETER Avail
 Defines category's visibility status
@@ -1788,12 +1791,6 @@ Sort number in the list
 
 .PARAMETER ModifiedTime
 Entity's date modification
-
-.PARAMETER Description
-Defines new category's description
-
-.PARAMETER ShortDescription
-Defines short description
 
 .PARAMETER MetaTitle
 Defines unique meta title for each entity
@@ -1807,11 +1804,14 @@ Defines unique meta keywords for each entity
 .PARAMETER SeoUrl
 Defines unique category's URL for SEO
 
-.PARAMETER LangId
-Language id
-
 .PARAMETER StoreId
 Store Id
+
+.PARAMETER StoresIds
+Update category in the stores that is specified by comma-separated stores' id
+
+.PARAMETER LangId
+Language id
 
 .PARAMETER WithHttpInfo
 
@@ -1832,43 +1832,43 @@ function Get-egoryUpdate {
         ${Name},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ParentId},
+        ${Description},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoresIds},
+        ${ShortDescription},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ParentId},
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${Avail},
-        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${SortOrder},
-        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ModifiedTime},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Description},
+        ${ModifiedTime},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ShortDescription},
+        ${MetaTitle},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${MetaTitle},
+        ${MetaDescription},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${MetaDescription},
+        ${MetaKeywords},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${MetaKeywords},
+        ${SeoUrl},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SeoUrl},
+        ${StoreId},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${LangId},
+        ${StoresIds},
         [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${LangId},
         [Switch]
         $WithHttpInfo
     )
@@ -1901,12 +1901,16 @@ function Get-egoryUpdate {
             $LocalVarQueryParameters['name'] = $Name
         }
 
-        if ($ParentId) {
-            $LocalVarQueryParameters['parent_id'] = $ParentId
+        if ($Description) {
+            $LocalVarQueryParameters['description'] = $Description
         }
 
-        if ($StoresIds) {
-            $LocalVarQueryParameters['stores_ids'] = $StoresIds
+        if ($ShortDescription) {
+            $LocalVarQueryParameters['short_description'] = $ShortDescription
+        }
+
+        if ($ParentId) {
+            $LocalVarQueryParameters['parent_id'] = $ParentId
         }
 
         if ($Avail) {
@@ -1919,14 +1923,6 @@ function Get-egoryUpdate {
 
         if ($ModifiedTime) {
             $LocalVarQueryParameters['modified_time'] = $ModifiedTime
-        }
-
-        if ($Description) {
-            $LocalVarQueryParameters['description'] = $Description
-        }
-
-        if ($ShortDescription) {
-            $LocalVarQueryParameters['short_description'] = $ShortDescription
         }
 
         if ($MetaTitle) {
@@ -1945,12 +1941,16 @@ function Get-egoryUpdate {
             $LocalVarQueryParameters['seo_url'] = $SeoUrl
         }
 
-        if ($LangId) {
-            $LocalVarQueryParameters['lang_id'] = $LangId
-        }
-
         if ($StoreId) {
             $LocalVarQueryParameters['store_id'] = $StoreId
+        }
+
+        if ($StoresIds) {
+            $LocalVarQueryParameters['stores_ids'] = $StoresIds
+        }
+
+        if ($LangId) {
+            $LocalVarQueryParameters['lang_id'] = $LangId
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {

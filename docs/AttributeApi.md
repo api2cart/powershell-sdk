@@ -264,9 +264,9 @@ Name | Type | Description  | Notes
 > ModelResponseAttributeAttributesetList Invoke-AttributeAttributesetList<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 
 attribute.attributeset.list
 
@@ -288,13 +288,13 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
+$ResponseFields = "{result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
 $Params = "id,name" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name")
 $Exclude = "id,name" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
-$ResponseFields = "{result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
 
 # attribute.attributeset.list
 try {
-    $Result = Invoke-AttributeAttributesetList -Start $Start -Count $Count -Params $Params -Exclude $Exclude -ResponseFields $ResponseFields
+    $Result = Invoke-AttributeAttributesetList -Start $Start -Count $Count -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-AttributeAttributesetList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -307,9 +307,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
  **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name&quot;]
  **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
- **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 
 ### Return type
 
@@ -462,11 +462,11 @@ Name | Type | Description  | Notes
 > ModelResponseAttributeGroupList Invoke-AttributeGroupList<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AttributeSetId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AttributeSetId] <String><br>
 
 attribute.group.list
 
@@ -488,15 +488,15 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
+$AttributeSetId = "4" # String | Attribute set id (optional)
 $LangId = "3" # String | Language id (optional)
+$ResponseFields = "{result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
 $Params = "id,name" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name")
 $Exclude = "id,name" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
-$ResponseFields = "{result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
-$AttributeSetId = "4" # String | Attribute set id (optional)
 
 # attribute.group.list
 try {
-    $Result = Invoke-AttributeGroupList -Start $Start -Count $Count -LangId $LangId -Params $Params -Exclude $Exclude -ResponseFields $ResponseFields -AttributeSetId $AttributeSetId
+    $Result = Invoke-AttributeGroupList -Start $Start -Count $Count -AttributeSetId $AttributeSetId -LangId $LangId -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-AttributeGroupList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -509,11 +509,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+ **AttributeSetId** | **String**| Attribute set id | [optional] 
  **LangId** | **String**| Language id | [optional] 
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
  **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name&quot;]
  **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
- **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
- **AttributeSetId** | **String**| Attribute set id | [optional] 
 
 ### Return type
 
@@ -537,9 +537,9 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AttributeSetId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 
 attribute.info
 
@@ -563,13 +563,13 @@ $Id = "10" # String | Entity id
 $AttributeSetId = "4" # String | Attribute set id (optional)
 $StoreId = "1" # String | Store Id (optional)
 $LangId = "3" # String | Language id (optional)
+$ResponseFields = "{result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
 $Params = "force_all" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "force_all")
 $Exclude = "name" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
-$ResponseFields = "{result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
 
 # attribute.info
 try {
-    $Result = Invoke-AttributeInfo -Id $Id -AttributeSetId $AttributeSetId -StoreId $StoreId -LangId $LangId -Params $Params -Exclude $Exclude -ResponseFields $ResponseFields
+    $Result = Invoke-AttributeInfo -Id $Id -AttributeSetId $AttributeSetId -StoreId $StoreId -LangId $LangId -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-AttributeInfo: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -584,9 +584,9 @@ Name | Type | Description  | Notes
  **AttributeSetId** | **String**| Attribute set id | [optional] 
  **StoreId** | **String**| Store Id | [optional] 
  **LangId** | **String**| Language id | [optional] 
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
  **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;force_all&quot;]
  **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
- **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 
 ### Return type
 
@@ -608,17 +608,17 @@ Name | Type | Description  | Notes
 > ModelResponseAttributeList Invoke-AttributeList<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Type] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AttributeIds] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AttributeSetId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Type] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Visible] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Required] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-System] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 
 attribute.list
 
@@ -640,21 +640,21 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
-$Type = "text" # String | Defines attribute's type (optional)
 $AttributeIds = "1,2,3" # String | Filter attributes by ids (optional)
 $AttributeSetId = "4" # String | Filter items by attribute set id (optional)
 $StoreId = "1" # String | Store Id (optional)
 $LangId = "3" # String | Retrieves attributes on specified language id (optional)
-$Params = "id,name" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,code,type")
-$Exclude = "id,name" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
-$ResponseFields = "{return_code,return_message,pagination,result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Type = "text" # String | Defines attribute's type (optional)
 $Visible = $true # Boolean | Filter items by visibility status (optional)
 $Required = $true # Boolean | Defines if the option is required (optional)
 $System = $false # Boolean | True if attribute is system (optional)
+$ResponseFields = "{return_code,return_message,pagination,result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Params = "id,name" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,code,type")
+$Exclude = "id,name" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 
 # attribute.list
 try {
-    $Result = Invoke-AttributeList -Start $Start -Count $Count -Type $Type -AttributeIds $AttributeIds -AttributeSetId $AttributeSetId -StoreId $StoreId -LangId $LangId -Params $Params -Exclude $Exclude -ResponseFields $ResponseFields -Visible $Visible -Required $Required -System $System
+    $Result = Invoke-AttributeList -Start $Start -Count $Count -AttributeIds $AttributeIds -AttributeSetId $AttributeSetId -StoreId $StoreId -LangId $LangId -Type $Type -Visible $Visible -Required $Required -System $System -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-AttributeList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -667,17 +667,17 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
- **Type** | **String**| Defines attribute&#39;s type | [optional] 
  **AttributeIds** | **String**| Filter attributes by ids | [optional] 
  **AttributeSetId** | **String**| Filter items by attribute set id | [optional] 
  **StoreId** | **String**| Store Id | [optional] 
  **LangId** | **String**| Retrieves attributes on specified language id | [optional] 
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,code,type&quot;]
- **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
- **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Type** | **String**| Defines attribute&#39;s type | [optional] 
  **Visible** | **Boolean**| Filter items by visibility status | [optional] 
  **Required** | **Boolean**| Defines if the option is required | [optional] 
  **System** | **Boolean**| True if attribute is system | [optional] 
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,code,type&quot;]
+ **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
 

@@ -15,24 +15,24 @@ No summary available.
 
 No description available.
 
-.PARAMETER StoreId
-Store Id
 .PARAMETER ShipmentId
 Shipment id indicates the number of delivery
 .PARAMETER OrderId
 Defines the order that will be updated
-.PARAMETER TrackingNumbers
-Defines shipment's tracking numbers that have to be added</br> How set tracking numbers to appropriate carrier:<ul><li>tracking_numbers[]=a2c.demo1,a2c.demo2 - set default carrier</li><li>tracking_numbers[<b>carrier_id</b>]=a2c.demo - set appropriate carrier</li></ul>To get the list of carriers IDs that are available in your store, use the <a href = ""https://api2cart.com/docs/#/cart/CartInfo"">cart.info</a > method
-.PARAMETER Replace
-Allows rewrite tracking numbers
-.PARAMETER IsShipped
-Defines shipment's status
-.PARAMETER TrackingLink
-Defines custom tracking link
-.PARAMETER DeliveredAt
-Defines the date of delivery
+.PARAMETER StoreId
+Store Id
 .PARAMETER ShipmentProvider
 Defines company name that provide tracking of shipment
+.PARAMETER TrackingNumbers
+Defines shipment's tracking numbers that have to be added</br> How set tracking numbers to appropriate carrier:<ul><li>tracking_numbers[]=a2c.demo1,a2c.demo2 - set default carrier</li><li>tracking_numbers[<b>carrier_id</b>]=a2c.demo - set appropriate carrier</li></ul>To get the list of carriers IDs that are available in your store, use the <a href = ""https://api2cart.com/docs/#/cart/CartInfo"">cart.info</a > method
+.PARAMETER TrackingLink
+Defines custom tracking link
+.PARAMETER IsShipped
+Defines shipment's status
+.PARAMETER DeliveredAt
+Defines the date of delivery
+.PARAMETER Replace
+Allows rewrite tracking numbers
 .OUTPUTS
 
 OrderShipmentUpdate<PSCustomObject>
@@ -43,31 +43,31 @@ function Initialize-OrderShipmentUpdate {
     Param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${StoreId},
+        ${ShipmentId},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShipmentId},
+        ${OrderId},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${OrderId},
+        ${StoreId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${ShipmentProvider},
+        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${TrackingNumbers},
-        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${Replace} = $true,
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${IsShipped} = $true,
-        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${TrackingLink},
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${IsShipped} = $true,
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${DeliveredAt},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${ShipmentProvider}
+        [System.Nullable[Boolean]]
+        ${Replace} = $true
     )
 
     Process {
@@ -80,15 +80,15 @@ function Initialize-OrderShipmentUpdate {
 
 
         $PSO = [PSCustomObject]@{
-            "store_id" = ${StoreId}
             "shipment_id" = ${ShipmentId}
             "order_id" = ${OrderId}
-            "tracking_numbers" = ${TrackingNumbers}
-            "replace" = ${Replace}
-            "is_shipped" = ${IsShipped}
-            "tracking_link" = ${TrackingLink}
-            "delivered_at" = ${DeliveredAt}
+            "store_id" = ${StoreId}
             "shipment_provider" = ${ShipmentProvider}
+            "tracking_numbers" = ${TrackingNumbers}
+            "tracking_link" = ${TrackingLink}
+            "is_shipped" = ${IsShipped}
+            "delivered_at" = ${DeliveredAt}
+            "replace" = ${Replace}
         }
 
 
@@ -126,7 +126,7 @@ function ConvertFrom-JsonToOrderShipmentUpdate {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in OrderShipmentUpdate
-        $AllProperties = ("store_id", "shipment_id", "order_id", "tracking_numbers", "replace", "is_shipped", "tracking_link", "delivered_at", "shipment_provider")
+        $AllProperties = ("shipment_id", "order_id", "store_id", "shipment_provider", "tracking_numbers", "tracking_link", "is_shipped", "delivered_at", "replace")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -143,46 +143,16 @@ function ConvertFrom-JsonToOrderShipmentUpdate {
             $ShipmentId = $JsonParameters.PSobject.Properties["shipment_id"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_id"))) { #optional property not found
-            $StoreId = $null
-        } else {
-            $StoreId = $JsonParameters.PSobject.Properties["store_id"].value
-        }
-
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "order_id"))) { #optional property not found
             $OrderId = $null
         } else {
             $OrderId = $JsonParameters.PSobject.Properties["order_id"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "tracking_numbers"))) { #optional property not found
-            $TrackingNumbers = $null
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_id"))) { #optional property not found
+            $StoreId = $null
         } else {
-            $TrackingNumbers = $JsonParameters.PSobject.Properties["tracking_numbers"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "replace"))) { #optional property not found
-            $Replace = $null
-        } else {
-            $Replace = $JsonParameters.PSobject.Properties["replace"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "is_shipped"))) { #optional property not found
-            $IsShipped = $null
-        } else {
-            $IsShipped = $JsonParameters.PSobject.Properties["is_shipped"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "tracking_link"))) { #optional property not found
-            $TrackingLink = $null
-        } else {
-            $TrackingLink = $JsonParameters.PSobject.Properties["tracking_link"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "delivered_at"))) { #optional property not found
-            $DeliveredAt = $null
-        } else {
-            $DeliveredAt = $JsonParameters.PSobject.Properties["delivered_at"].value
+            $StoreId = $JsonParameters.PSobject.Properties["store_id"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipment_provider"))) { #optional property not found
@@ -191,16 +161,46 @@ function ConvertFrom-JsonToOrderShipmentUpdate {
             $ShipmentProvider = $JsonParameters.PSobject.Properties["shipment_provider"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "tracking_numbers"))) { #optional property not found
+            $TrackingNumbers = $null
+        } else {
+            $TrackingNumbers = $JsonParameters.PSobject.Properties["tracking_numbers"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "tracking_link"))) { #optional property not found
+            $TrackingLink = $null
+        } else {
+            $TrackingLink = $JsonParameters.PSobject.Properties["tracking_link"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "is_shipped"))) { #optional property not found
+            $IsShipped = $null
+        } else {
+            $IsShipped = $JsonParameters.PSobject.Properties["is_shipped"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "delivered_at"))) { #optional property not found
+            $DeliveredAt = $null
+        } else {
+            $DeliveredAt = $JsonParameters.PSobject.Properties["delivered_at"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "replace"))) { #optional property not found
+            $Replace = $null
+        } else {
+            $Replace = $JsonParameters.PSobject.Properties["replace"].value
+        }
+
         $PSO = [PSCustomObject]@{
-            "store_id" = ${StoreId}
             "shipment_id" = ${ShipmentId}
             "order_id" = ${OrderId}
-            "tracking_numbers" = ${TrackingNumbers}
-            "replace" = ${Replace}
-            "is_shipped" = ${IsShipped}
-            "tracking_link" = ${TrackingLink}
-            "delivered_at" = ${DeliveredAt}
+            "store_id" = ${StoreId}
             "shipment_provider" = ${ShipmentProvider}
+            "tracking_numbers" = ${TrackingNumbers}
+            "tracking_link" = ${TrackingLink}
+            "is_shipped" = ${IsShipped}
+            "delivered_at" = ${DeliveredAt}
+            "replace" = ${Replace}
         }
 
         return $PSO

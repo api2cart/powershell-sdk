@@ -9,7 +9,7 @@
 Describe -tag 'PSOpenAPITools' -name 'BasketApi' {
     Context 'Invoke-BasketInfo' {
         It 'Test Invoke-BasketInfo' {
-            #$TestResult = Invoke-BasketInfo -Id "TEST_VALUE" -StoreId "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -ResponseFields "TEST_VALUE"
+            #$TestResult = Invoke-BasketInfo -Id "TEST_VALUE" -StoreId "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -41,7 +41,7 @@ Describe -tag 'PSOpenAPITools' -name 'BasketApi' {
 
     Context 'Invoke-BasketLiveShippingServiceList' {
         It 'Test Invoke-BasketLiveShippingServiceList' {
-            #$TestResult = Invoke-BasketLiveShippingServiceList -StoreId "TEST_VALUE" -Start "TEST_VALUE" -Count "TEST_VALUE"
+            #$TestResult = Invoke-BasketLiveShippingServiceList -Start "TEST_VALUE" -Count "TEST_VALUE" -StoreId "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

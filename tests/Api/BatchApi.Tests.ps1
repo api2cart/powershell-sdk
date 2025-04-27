@@ -9,7 +9,7 @@
 Describe -tag 'PSOpenAPITools' -name 'BatchApi' {
     Context 'Invoke-BatchJobList' {
         It 'Test Invoke-BatchJobList' {
-            #$TestResult = Invoke-BatchJobList -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ProcessedFrom "TEST_VALUE" -ProcessedTo "TEST_VALUE" -Ids "TEST_VALUE" -ResponseFields "TEST_VALUE"
+            #$TestResult = Invoke-BatchJobList -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -Ids "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ProcessedFrom "TEST_VALUE" -ProcessedTo "TEST_VALUE" -ResponseFields "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

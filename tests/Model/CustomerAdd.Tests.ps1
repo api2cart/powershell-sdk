@@ -10,7 +10,7 @@ Describe -tag 'PSOpenAPITools' -name 'CustomerAdd' {
     Context 'CustomerAdd' {
         It 'Initialize-CustomerAdd' {
             # a simple test to create an object
-            #$NewObject = Initialize-CustomerAdd -Email "TEST_VALUE" -FirstName "TEST_VALUE" -LastName "TEST_VALUE" -Password "TEST_VALUE" -Group "TEST_VALUE" -GroupIds "TEST_VALUE" -CreatedTime "TEST_VALUE" -ModifiedTime "TEST_VALUE" -Login "TEST_VALUE" -LastLogin "TEST_VALUE" -BirthDay "TEST_VALUE" -Status "TEST_VALUE" -NewsLetterSubscription "TEST_VALUE" -Consents "TEST_VALUE" -Gender "TEST_VALUE" -Website "TEST_VALUE" -StoreId "TEST_VALUE" -Fax "TEST_VALUE" -Company "TEST_VALUE" -Phone "TEST_VALUE" -Note "TEST_VALUE" -Country "TEST_VALUE" -Address "TEST_VALUE"
+            #$NewObject = Initialize-CustomerAdd -Email "TEST_VALUE" -FirstName "TEST_VALUE" -LastName "TEST_VALUE" -Password "TEST_VALUE" -Group "TEST_VALUE" -GroupIds "TEST_VALUE" -Status "TEST_VALUE" -CreatedTime "TEST_VALUE" -ModifiedTime "TEST_VALUE" -Login "TEST_VALUE" -LastLogin "TEST_VALUE" -BirthDay "TEST_VALUE" -NewsLetterSubscription "TEST_VALUE" -Consents "TEST_VALUE" -Gender "TEST_VALUE" -Website "TEST_VALUE" -Fax "TEST_VALUE" -Company "TEST_VALUE" -Phone "TEST_VALUE" -Note "TEST_VALUE" -Country "TEST_VALUE" -StoreId "TEST_VALUE" -Address "TEST_VALUE"
             #$NewObject | Should -BeOfType CustomerAdd
             #$NewObject.property | Should -Be 0
         }

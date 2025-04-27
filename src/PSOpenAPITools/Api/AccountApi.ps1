@@ -103,11 +103,11 @@ account.cart.list
 
 No description available.
 
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
+.PARAMETER StoreUrl
+A web address of a store
 
-.PARAMETER Exclude
-Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+.PARAMETER StoreKey
+Find store by store key
 
 .PARAMETER RequestFromDate
 Retrieve entities from their creation date
@@ -115,11 +115,11 @@ Retrieve entities from their creation date
 .PARAMETER RequestToDate
 Retrieve entities to their creation date
 
-.PARAMETER StoreUrl
-A web address of a store
+.PARAMETER Params
+Set this parameter in order to choose which entity fields you want to retrieve
 
-.PARAMETER StoreKey
-Find store by store key
+.PARAMETER Exclude
+Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 
 .PARAMETER WithHttpInfo
 
@@ -134,10 +134,10 @@ function Invoke-AccountCartList {
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${StoreUrl},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${StoreKey},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${RequestFromDate},
@@ -146,10 +146,10 @@ function Invoke-AccountCartList {
         ${RequestToDate},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreUrl},
+        ${Params},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreKey},
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -173,12 +173,12 @@ function Invoke-AccountCartList {
 
         $LocalVarUri = '/account.cart.list.json'
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
+        if ($StoreUrl) {
+            $LocalVarQueryParameters['store_url'] = $StoreUrl
         }
 
-        if ($Exclude) {
-            $LocalVarQueryParameters['exclude'] = $Exclude
+        if ($StoreKey) {
+            $LocalVarQueryParameters['store_key'] = $StoreKey
         }
 
         if ($RequestFromDate) {
@@ -189,12 +189,12 @@ function Invoke-AccountCartList {
             $LocalVarQueryParameters['request_to_date'] = $RequestToDate
         }
 
-        if ($StoreUrl) {
-            $LocalVarQueryParameters['store_url'] = $StoreUrl
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
         }
 
-        if ($StoreKey) {
-            $LocalVarQueryParameters['store_key'] = $StoreKey
+        if ($Exclude) {
+            $LocalVarQueryParameters['exclude'] = $Exclude
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-api-key"]) {
@@ -412,6 +412,9 @@ Shopline APP Key
 
 .PARAMETER ShoplineAppSecret
 Shopline App Secret
+
+.PARAMETER ShoplineSharedSecret
+Shopline Shared Secret
 
 .PARAMETER ShopifyAccessToken
 Access token authorizing the app to access resources on behalf of a user
@@ -849,248 +852,251 @@ function Invoke-AccountConfigUpdate {
         ${ShoplineAppSecret},
         [Parameter(Position = 59, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ShopifyAccessToken},
+        ${ShoplineSharedSecret},
         [Parameter(Position = 60, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ShopifyApiKey},
+        ${ShopifyAccessToken},
         [Parameter(Position = 61, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ShopifyApiPassword},
+        ${ShopifyApiKey},
         [Parameter(Position = 62, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ShopifySharedSecret},
+        ${ShopifyApiPassword},
         [Parameter(Position = 63, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ShoplazzaAccessToken},
+        ${ShopifySharedSecret},
         [Parameter(Position = 64, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ShoplazzaSharedSecret},
+        ${ShoplazzaAccessToken},
         [Parameter(Position = 65, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${MivaAccessToken},
+        ${ShoplazzaSharedSecret},
         [Parameter(Position = 66, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${MivaSignature},
+        ${MivaAccessToken},
         [Parameter(Position = 67, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ShopwareAccessKey},
+        ${MivaSignature},
         [Parameter(Position = 68, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ShopwareApiKey},
+        ${ShopwareAccessKey},
         [Parameter(Position = 69, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ShopwareApiSecret},
+        ${ShopwareApiKey},
         [Parameter(Position = 70, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${VolusionLogin},
+        ${ShopwareApiSecret},
         [Parameter(Position = 71, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${VolusionPassword},
+        ${VolusionLogin},
         [Parameter(Position = 72, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${WalmartClientId},
+        ${VolusionPassword},
         [Parameter(Position = 73, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${WalmartClientSecret},
+        ${WalmartClientId},
         [Parameter(Position = 74, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${WalmartEnvironment},
+        ${WalmartClientSecret},
         [Parameter(Position = 75, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${WalmartChannelType},
+        ${WalmartEnvironment},
         [Parameter(Position = 76, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${WalmartRegion},
+        ${WalmartChannelType},
         [Parameter(Position = 77, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SquareClientId},
+        ${WalmartRegion},
         [Parameter(Position = 78, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SquareClientSecret},
+        ${SquareClientId},
         [Parameter(Position = 79, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SquareRefreshToken},
+        ${SquareClientSecret},
         [Parameter(Position = 80, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SquarespaceApiKey},
+        ${SquareRefreshToken},
         [Parameter(Position = 81, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SquarespaceClientId},
+        ${SquarespaceApiKey},
         [Parameter(Position = 82, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SquarespaceClientSecret},
+        ${SquarespaceClientId},
         [Parameter(Position = 83, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SquarespaceAccessToken},
+        ${SquarespaceClientSecret},
         [Parameter(Position = 84, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SquarespaceRefreshToken},
+        ${SquarespaceAccessToken},
         [Parameter(Position = 85, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${HybrisClientId},
+        ${SquarespaceRefreshToken},
         [Parameter(Position = 86, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${HybrisClientSecret},
+        ${HybrisClientId},
         [Parameter(Position = 87, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${HybrisUsername},
+        ${HybrisClientSecret},
         [Parameter(Position = 88, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${HybrisPassword},
+        ${HybrisUsername},
         [Parameter(Position = 89, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${HybrisPassword},
+        [Parameter(Position = 90, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String[]]
         ${HybrisWebsites},
-        [Parameter(Position = 90, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${LightspeedApiKey},
         [Parameter(Position = 91, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${LightspeedApiSecret},
+        ${LightspeedApiKey},
         [Parameter(Position = 92, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CommercehqApiKey},
+        ${LightspeedApiSecret},
         [Parameter(Position = 93, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CommercehqApiPassword},
+        ${CommercehqApiKey},
         [Parameter(Position = 94, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${WcConsumerKey},
+        ${CommercehqApiPassword},
         [Parameter(Position = 95, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${WcConsumerSecret},
+        ${WcConsumerKey},
         [Parameter(Position = 96, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${MagentoConsumerKey},
+        ${WcConsumerSecret},
         [Parameter(Position = 97, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${MagentoConsumerSecret},
+        ${MagentoConsumerKey},
         [Parameter(Position = 98, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${MagentoAccessToken},
+        ${MagentoConsumerSecret},
         [Parameter(Position = 99, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${MagentoTokenSecret},
+        ${MagentoAccessToken},
         [Parameter(Position = 100, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${PrestashopWebserviceKey},
+        ${MagentoTokenSecret},
         [Parameter(Position = 101, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${WixAppId},
+        ${PrestashopWebserviceKey},
         [Parameter(Position = 102, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${WixAppSecretKey},
+        ${WixAppId},
         [Parameter(Position = 103, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${WixInstanceId},
+        ${WixAppSecretKey},
         [Parameter(Position = 104, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${WixRefreshToken},
+        ${WixInstanceId},
         [Parameter(Position = 105, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${MercadoLibreAppId},
+        ${WixRefreshToken},
         [Parameter(Position = 106, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${MercadoLibreAppSecretKey},
+        ${MercadoLibreAppId},
         [Parameter(Position = 107, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${MercadoLibreRefreshToken},
+        ${MercadoLibreAppSecretKey},
         [Parameter(Position = 108, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${MercadoLibreRefreshToken},
+        [Parameter(Position = 109, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${ZidClientId},
-        [Parameter(Position = 109, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ZidClientSecret},
         [Parameter(Position = 110, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ZidAccessToken},
+        ${ZidClientSecret},
         [Parameter(Position = 111, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ZidAuthorization},
+        ${ZidAccessToken},
         [Parameter(Position = 112, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ZidRefreshToken},
+        ${ZidAuthorization},
         [Parameter(Position = 113, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${FlipkartClientId},
+        ${ZidRefreshToken},
         [Parameter(Position = 114, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${FlipkartClientSecret},
+        ${FlipkartClientId},
         [Parameter(Position = 115, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${AllegroClientId},
+        ${FlipkartClientSecret},
         [Parameter(Position = 116, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${AllegroClientSecret},
+        ${AllegroClientId},
         [Parameter(Position = 117, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${AllegroAccessToken},
+        ${AllegroClientSecret},
         [Parameter(Position = 118, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${AllegroRefreshToken},
+        ${AllegroAccessToken},
         [Parameter(Position = 119, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${AllegroEnvironment},
+        ${AllegroRefreshToken},
         [Parameter(Position = 120, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ZohoClientId},
+        ${AllegroEnvironment},
         [Parameter(Position = 121, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ZohoClientSecret},
+        ${ZohoClientId},
         [Parameter(Position = 122, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ZohoRefreshToken},
+        ${ZohoClientSecret},
         [Parameter(Position = 123, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ZohoRegion},
+        ${ZohoRefreshToken},
         [Parameter(Position = 124, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ZohoRegion},
+        [Parameter(Position = 125, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${TiendanubeUserId},
-        [Parameter(Position = 125, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${TiendanubeAccessToken},
         [Parameter(Position = 126, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${TiendanubeClientSecret},
+        ${TiendanubeAccessToken},
         [Parameter(Position = 127, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${OttoClientId},
+        ${TiendanubeClientSecret},
         [Parameter(Position = 128, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${OttoClientSecret},
+        ${OttoClientId},
         [Parameter(Position = 129, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${OttoAppId},
+        ${OttoClientSecret},
         [Parameter(Position = 130, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${OttoRefreshToken},
+        ${OttoAppId},
         [Parameter(Position = 131, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${OttoEnvironment},
+        ${OttoRefreshToken},
         [Parameter(Position = 132, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${OttoAccessToken},
+        ${OttoEnvironment},
         [Parameter(Position = 133, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${TiktokshopAppKey},
+        ${OttoAccessToken},
         [Parameter(Position = 134, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${TiktokshopAppSecret},
+        ${TiktokshopAppKey},
         [Parameter(Position = 135, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${TiktokshopRefreshToken},
+        ${TiktokshopAppSecret},
         [Parameter(Position = 136, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${TiktokshopAccessToken},
+        ${TiktokshopRefreshToken},
         [Parameter(Position = 137, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SallaClientId},
+        ${TiktokshopAccessToken},
         [Parameter(Position = 138, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SallaClientSecret},
+        ${SallaClientId},
         [Parameter(Position = 139, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SallaRefreshToken},
+        ${SallaClientSecret},
         [Parameter(Position = 140, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${SallaRefreshToken},
+        [Parameter(Position = 141, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${SallaAccessToken},
         [Switch]
@@ -1350,6 +1356,10 @@ function Invoke-AccountConfigUpdate {
 
         if ($ShoplineAppSecret) {
             $LocalVarQueryParameters['shopline_app_secret'] = $ShoplineAppSecret
+        }
+
+        if ($ShoplineSharedSecret) {
+            $LocalVarQueryParameters['shopline_shared_secret'] = $ShoplineSharedSecret
         }
 
         if ($ShopifyAccessToken) {
@@ -1729,11 +1739,11 @@ account.failed_webhooks
 
 No description available.
 
-.PARAMETER Count
-This parameter sets the entity amount that has to be retrieved. Max allowed count=250
-
 .PARAMETER Start
 This parameter sets the number from which you want to get entities
+
+.PARAMETER Count
+This parameter sets the entity amount that has to be retrieved. Max allowed count=250
 
 .PARAMETER Ids
 List of сomma-separated webhook ids
@@ -1751,10 +1761,10 @@ function Invoke-AccountFailedWebhooks {
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
-        ${Count},
+        ${Start},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
-        ${Start},
+        ${Count},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Ids},
@@ -1781,12 +1791,12 @@ function Invoke-AccountFailedWebhooks {
 
         $LocalVarUri = '/account.failed_webhooks.json'
 
-        if ($Count) {
-            $LocalVarQueryParameters['count'] = $Count
-        }
-
         if ($Start) {
             $LocalVarQueryParameters['start'] = $Start
+        }
+
+        if ($Count) {
+            $LocalVarQueryParameters['count'] = $Count
         }
 
         if ($Ids) {

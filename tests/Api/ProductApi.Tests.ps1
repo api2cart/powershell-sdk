@@ -25,7 +25,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
 
     Context 'Invoke-ProductAttributeList' {
         It 'Test Invoke-ProductAttributeList' {
-            #$TestResult = Invoke-ProductAttributeList -ProductId "TEST_VALUE" -AttributeId "TEST_VALUE" -VariantId "TEST_VALUE" -PageCursor "TEST_VALUE" -Start "TEST_VALUE" -Count "TEST_VALUE" -AttributeGroupId "TEST_VALUE" -SetName "TEST_VALUE" -LangId "TEST_VALUE" -StoreId "TEST_VALUE" -SortBy "TEST_VALUE" -SortDirection "TEST_VALUE" -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE"
+            #$TestResult = Invoke-ProductAttributeList -ProductId "TEST_VALUE" -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -AttributeId "TEST_VALUE" -VariantId "TEST_VALUE" -AttributeGroupId "TEST_VALUE" -LangId "TEST_VALUE" -StoreId "TEST_VALUE" -SetName "TEST_VALUE" -SortBy "TEST_VALUE" -SortDirection "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -49,7 +49,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
 
     Context 'Invoke-ProductBrandList' {
         It 'Test Invoke-ProductBrandList' {
-            #$TestResult = Invoke-ProductBrandList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -Params "TEST_VALUE" -BrandIds "TEST_VALUE" -Exclude "TEST_VALUE" -CategoryId "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -ParentId "TEST_VALUE" -ResponseFields "TEST_VALUE" -FindWhere "TEST_VALUE" -FindValue "TEST_VALUE"
+            #$TestResult = Invoke-ProductBrandList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -BrandIds "TEST_VALUE" -CategoryId "TEST_VALUE" -ParentId "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -FindWhere "TEST_VALUE" -FindValue "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -65,7 +65,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
 
     Context 'Invoke-ProductChildItemInfo' {
         It 'Test Invoke-ProductChildItemInfo' {
-            #$TestResult = Invoke-ProductChildItemInfo -ProductId "TEST_VALUE" -Id "TEST_VALUE" -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -CurrencyId "TEST_VALUE" -UseLatestApiVersion "TEST_VALUE"
+            #$TestResult = Invoke-ProductChildItemInfo -ProductId "TEST_VALUE" -Id "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -CurrencyId "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -UseLatestApiVersion "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -73,7 +73,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
 
     Context 'Invoke-ProductChildItemList' {
         It 'Test Invoke-ProductChildItemList' {
-            #$TestResult = Invoke-ProductChildItemList -PageCursor "TEST_VALUE" -Start "TEST_VALUE" -Count "TEST_VALUE" -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -ProductId "TEST_VALUE" -ProductIds "TEST_VALUE" -Sku "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -CurrencyId "TEST_VALUE" -AvailSale "TEST_VALUE" -FindValue "TEST_VALUE" -FindWhere "TEST_VALUE" -ReportRequestId "TEST_VALUE" -DisableReportCache "TEST_VALUE" -UseLatestApiVersion "TEST_VALUE" -ReturnGlobal "TEST_VALUE"
+            #$TestResult = Invoke-ProductChildItemList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -ProductId "TEST_VALUE" -ProductIds "TEST_VALUE" -Sku "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -CurrencyId "TEST_VALUE" -AvailSale "TEST_VALUE" -FindValue "TEST_VALUE" -FindWhere "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -ReturnGlobal "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -ReportRequestId "TEST_VALUE" -DisableReportCache "TEST_VALUE" -UseLatestApiVersion "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -81,7 +81,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
 
     Context 'Invoke-ProductCount' {
         It 'Test Invoke-ProductCount' {
-            #$TestResult = Invoke-ProductCount -CategoryId "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -AvailView "TEST_VALUE" -AvailSale "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -ProductIds "TEST_VALUE" -SinceId "TEST_VALUE" -ReportRequestId "TEST_VALUE" -DisableReportCache "TEST_VALUE" -BrandName "TEST_VALUE" -ProductAttributes "TEST_VALUE" -Status "TEST_VALUE" -Type "TEST_VALUE" -FindValue "TEST_VALUE" -FindWhere "TEST_VALUE" -UseLatestApiVersion "TEST_VALUE" -ReturnGlobal "TEST_VALUE" -CategoriesIds "TEST_VALUE"
+            #$TestResult = Invoke-ProductCount -ProductIds "TEST_VALUE" -SinceId "TEST_VALUE" -CategoriesIds "TEST_VALUE" -CategoryId "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -AvailView "TEST_VALUE" -AvailSale "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -BrandName "TEST_VALUE" -ProductAttributes "TEST_VALUE" -Status "TEST_VALUE" -Type "TEST_VALUE" -FindValue "TEST_VALUE" -FindWhere "TEST_VALUE" -ReportRequestId "TEST_VALUE" -ReturnGlobal "TEST_VALUE" -DisableReportCache "TEST_VALUE" -UseLatestApiVersion "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -97,7 +97,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
 
     Context 'Invoke-ProductCurrencyList' {
         It 'Test Invoke-ProductCurrencyList' {
-            #$TestResult = Invoke-ProductCurrencyList -Start "TEST_VALUE" -Count "TEST_VALUE" -Params "TEST_VALUE" -PageCursor "TEST_VALUE" -Exclude "TEST_VALUE" -ResponseFields "TEST_VALUE" -Default "TEST_VALUE" -Avail "TEST_VALUE"
+            #$TestResult = Invoke-ProductCurrencyList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -Default "TEST_VALUE" -Avail "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -153,7 +153,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
 
     Context 'Invoke-ProductImageUpdate' {
         It 'Test Invoke-ProductImageUpdate' {
-            #$TestResult = Invoke-ProductImageUpdate -ProductId "TEST_VALUE" -Id "TEST_VALUE" -VariantIds "TEST_VALUE" -ImageName "TEST_VALUE" -Type "TEST_VALUE" -Label "TEST_VALUE" -Position "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -Hidden "TEST_VALUE"
+            #$TestResult = Invoke-ProductImageUpdate -ProductId "TEST_VALUE" -Id "TEST_VALUE" -VariantIds "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -ImageName "TEST_VALUE" -Type "TEST_VALUE" -Label "TEST_VALUE" -Position "TEST_VALUE" -Hidden "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -161,7 +161,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
 
     Context 'Invoke-ProductInfo' {
         It 'Test Invoke-ProductInfo' {
-            #$TestResult = Invoke-ProductInfo -Id "TEST_VALUE" -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -CurrencyId "TEST_VALUE" -ReportRequestId "TEST_VALUE" -DisableReportCache "TEST_VALUE" -UseLatestApiVersion "TEST_VALUE"
+            #$TestResult = Invoke-ProductInfo -Id "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -CurrencyId "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -ReportRequestId "TEST_VALUE" -DisableReportCache "TEST_VALUE" -UseLatestApiVersion "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -169,7 +169,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
 
     Context 'Invoke-ProductList' {
         It 'Test Invoke-ProductList' {
-            #$TestResult = Invoke-ProductList -PageCursor "TEST_VALUE" -Start "TEST_VALUE" -Count "TEST_VALUE" -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE" -CategoryId "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -AvailView "TEST_VALUE" -AvailSale "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -CurrencyId "TEST_VALUE" -ProductIds "TEST_VALUE" -SinceId "TEST_VALUE" -ReportRequestId "TEST_VALUE" -DisableReportCache "TEST_VALUE" -SortBy "TEST_VALUE" -SortDirection "TEST_VALUE" -Sku "TEST_VALUE" -DisableCache "TEST_VALUE" -BrandName "TEST_VALUE" -ProductAttributes "TEST_VALUE" -Status "TEST_VALUE" -Type "TEST_VALUE" -FindValue "TEST_VALUE" -FindWhere "TEST_VALUE" -UseLatestApiVersion "TEST_VALUE" -ReturnGlobal "TEST_VALUE" -CategoriesIds "TEST_VALUE"
+            #$TestResult = Invoke-ProductList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -ProductIds "TEST_VALUE" -SinceId "TEST_VALUE" -CategoriesIds "TEST_VALUE" -CategoryId "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -CurrencyId "TEST_VALUE" -AvailView "TEST_VALUE" -AvailSale "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -Sku "TEST_VALUE" -BrandName "TEST_VALUE" -ProductAttributes "TEST_VALUE" -Status "TEST_VALUE" -Type "TEST_VALUE" -FindValue "TEST_VALUE" -FindWhere "TEST_VALUE" -ReturnGlobal "TEST_VALUE" -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE" -SortBy "TEST_VALUE" -SortDirection "TEST_VALUE" -ReportRequestId "TEST_VALUE" -DisableCache "TEST_VALUE" -DisableReportCache "TEST_VALUE" -UseLatestApiVersion "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -209,7 +209,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
 
     Context 'Invoke-ProductOptionList' {
         It 'Test Invoke-ProductOptionList' {
-            #$TestResult = Invoke-ProductOptionList -Start "TEST_VALUE" -Count "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -ResponseFields "TEST_VALUE" -ProductId "TEST_VALUE" -LangId "TEST_VALUE" -StoreId "TEST_VALUE"
+            #$TestResult = Invoke-ProductOptionList -Start "TEST_VALUE" -Count "TEST_VALUE" -ProductId "TEST_VALUE" -LangId "TEST_VALUE" -StoreId "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -273,7 +273,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
 
     Context 'Invoke-ProductReviewList' {
         It 'Test Invoke-ProductReviewList' {
-            #$TestResult = Invoke-ProductReviewList -ProductId "TEST_VALUE" -Start "TEST_VALUE" -PageCursor "TEST_VALUE" -Count "TEST_VALUE" -Ids "TEST_VALUE" -StoreId "TEST_VALUE" -Status "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -ResponseFields "TEST_VALUE"
+            #$TestResult = Invoke-ProductReviewList -ProductId "TEST_VALUE" -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -Ids "TEST_VALUE" -StoreId "TEST_VALUE" -Status "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -329,7 +329,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
 
     Context 'Invoke-ProductVariantCount' {
         It 'Test Invoke-ProductVariantCount' {
-            #$TestResult = Invoke-ProductVariantCount -ProductId "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -CategoryId "TEST_VALUE" -StoreId "TEST_VALUE"
+            #$TestResult = Invoke-ProductVariantCount -ProductId "TEST_VALUE" -CategoryId "TEST_VALUE" -StoreId "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -369,7 +369,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
 
     Context 'Invoke-ProductVariantInfo' {
         It 'Test Invoke-ProductVariantInfo' {
-            #$TestResult = Invoke-ProductVariantInfo -Id "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -StoreId "TEST_VALUE"
+            #$TestResult = Invoke-ProductVariantInfo -Id "TEST_VALUE" -StoreId "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -377,7 +377,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
 
     Context 'Invoke-ProductVariantList' {
         It 'Test Invoke-ProductVariantList' {
-            #$TestResult = Invoke-ProductVariantList -Start "TEST_VALUE" -Count "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -CategoryId "TEST_VALUE" -ProductId "TEST_VALUE" -StoreId "TEST_VALUE"
+            #$TestResult = Invoke-ProductVariantList -Start "TEST_VALUE" -Count "TEST_VALUE" -ProductId "TEST_VALUE" -CategoryId "TEST_VALUE" -StoreId "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

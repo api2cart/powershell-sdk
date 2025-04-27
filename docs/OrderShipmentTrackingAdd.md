@@ -3,10 +3,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**StoreId** | **String** | Store Id | [optional] 
 **OrderId** | **String** | Defines the order id | [optional] 
 **ShipmentId** | **String** | Shipment id indicates the number of delivery | 
 **CarrierId** | **String** | Defines tracking carrier id | [optional] 
+**StoreId** | **String** | Store Id | [optional] 
 **TrackingProvider** | **String** | Defines name of the company which provides shipment tracking | [optional] 
 **TrackingNumber** | **String** | Defines tracking number | 
 **TrackingLink** | **String** | Defines custom tracking link | [optional] 
@@ -16,10 +16,10 @@ Name | Type | Description | Notes
 
 - Prepare the resource
 ```powershell
-$OrderShipmentTrackingAdd = Initialize-PSOpenAPIToolsOrderShipmentTrackingAdd  -StoreId 1 `
- -OrderId 25 `
+$OrderShipmentTrackingAdd = Initialize-PSOpenAPIToolsOrderShipmentTrackingAdd  -OrderId 25 `
  -ShipmentId 200000002 `
  -CarrierId USPS `
+ -StoreId 1 `
  -TrackingProvider Custom tracker `
  -TrackingNumber 1А6745 `
  -TrackingLink http://example.com?someParam&#x3D;value `

@@ -25,66 +25,12 @@ Defines store id where the order should be assigned
 Channel ID
 .PARAMETER OrderStatus
 Defines order status.
-.PARAMETER SendNotifications
-Send notifications to customer after order was created
-.PARAMETER SendAdminNotifications
-Notify admin when new order was created.
+.PARAMETER FulfillmentStatus
+Create order with fulfillment status
+.PARAMETER FinancialStatus
+Create order with financial status
 .PARAMETER CustomerEmail
 Defines the customer specified by email for whom order has to be created
-.PARAMETER BillFirstName
-Specifies billing first name
-.PARAMETER BillLastName
-Specifies billing last name
-.PARAMETER BillAddress1
-Specifies first billing address
-.PARAMETER BillCity
-Specifies billing city
-.PARAMETER BillPostcode
-Specifies billing postcode
-.PARAMETER BillState
-Specifies billing state code
-.PARAMETER BillCountry
-Specifies billing country code
-.PARAMETER ShippFirstName
-Specifies shipping first name
-.PARAMETER ShippLastName
-Specifies shipping last name
-.PARAMETER ShippAddress1
-Specifies first shipping address
-.PARAMETER ShippCity
-Specifies shipping city
-.PARAMETER ShippPostcode
-Specifies shipping postcode
-.PARAMETER ShippState
-Specifies shipping state code
-.PARAMETER ShippCountry
-Specifies shipping country code
-.PARAMETER TotalPrice
-Defines order's total price
-.PARAMETER Date
-Specifies an order creation date in format Y-m-d H:i:s
-.PARAMETER OrderPaymentMethod
-Defines order payment method.<br/>Setting order_payment_method on Shopify will also change financial_status field value to 'paid'
-.PARAMETER TransactionId
-Payment transaction id
-.PARAMETER OrderShippingMethod
-Defines order shipping method
-.PARAMETER Currency
-Currency code of order
-.PARAMETER BillAddress2
-Specifies second billing address
-.PARAMETER BillCompany
-Specifies billing company
-.PARAMETER BillPhone
-Specifies billing phone
-.PARAMETER BillFax
-Specifies billing fax
-.PARAMETER Comment
-Specifies order comment
-.PARAMETER AdminComment
-Specifies admin's order comment
-.PARAMETER AdminPrivateComment
-Specifies private admin's order comment
 .PARAMETER CustomerFirstName
 Specifies customer's first name
 .PARAMETER CustomerLastName
@@ -97,58 +43,112 @@ Specifies customer's address ISO code or name of country
 Specifies customer’s birthday
 .PARAMETER CustomerFax
 Specifies customer’s fax
+.PARAMETER OrderPaymentMethod
+Defines order payment method.<br/>Setting order_payment_method on Shopify will also change financial_status field value to 'paid'
+.PARAMETER TransactionId
+Payment transaction id
+.PARAMETER Currency
+Currency code of order
+.PARAMETER Date
+Specifies an order creation date in format Y-m-d H:i:s
+.PARAMETER DateModified
+Specifies order's  modification date
+.PARAMETER DateFinished
+Specifies order's  finished date
+.PARAMETER BillFirstName
+Specifies billing first name
+.PARAMETER BillLastName
+Specifies billing last name
+.PARAMETER BillAddress1
+Specifies first billing address
+.PARAMETER BillAddress2
+Specifies second billing address
+.PARAMETER BillCity
+Specifies billing city
+.PARAMETER BillPostcode
+Specifies billing postcode
+.PARAMETER BillState
+Specifies billing state code
+.PARAMETER BillCountry
+Specifies billing country code
+.PARAMETER BillCompany
+Specifies billing company
+.PARAMETER BillPhone
+Specifies billing phone
+.PARAMETER BillFax
+Specifies billing fax
+.PARAMETER ShippFirstName
+Specifies shipping first name
+.PARAMETER ShippLastName
+Specifies shipping last name
+.PARAMETER ShippAddress1
+Specifies first shipping address
 .PARAMETER ShippAddress2
 Specifies second address line of a shipping street address
+.PARAMETER ShippCity
+Specifies shipping city
+.PARAMETER ShippPostcode
+Specifies shipping postcode
+.PARAMETER ShippState
+Specifies shipping state code
+.PARAMETER ShippCountry
+Specifies shipping country code
 .PARAMETER ShippCompany
 Specifies shipping company
 .PARAMETER ShippPhone
 Specifies shipping phone
 .PARAMETER ShippFax
 Specifies shipping fax
-.PARAMETER DateModified
-Specifies order's  modification date
-.PARAMETER DateFinished
-Specifies order's  finished date
 .PARAMETER SubtotalPrice
 Total price of all ordered products multiplied by their number, excluding tax, shipping price and discounts
 .PARAMETER TaxPrice
 The value of tax cost for order
+.PARAMETER TotalPrice
+Defines order's total price
+.PARAMETER TotalPaid
+Defines total paid amount for the order
+.PARAMETER TotalWeight
+Defines the sum of all line item weights in grams for the order
 .PARAMETER PricesIncTax
 Indicates whether prices and subtotal includes tax.
 .PARAMETER ShippingPrice
 Specifies order's shipping price
 .PARAMETER ShippingTax
 Specifies order's shipping price tax
-.PARAMETER CarrierId
-Defines tracking carrier id
-.PARAMETER WarehouseId
-This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
 .PARAMETER Discount
 Specifies order's discount
 .PARAMETER CouponDiscount
 Specifies order's coupon discount
-.PARAMETER Coupons
-Coupons that will be applied to order
 .PARAMETER GiftCertificateDiscount
 Discounts for order with gift certificates
-.PARAMETER FulfillmentStatus
-Create order with fulfillment status
-.PARAMETER FinancialStatus
-Create order with financial status
-.PARAMETER TotalPaid
-Defines total paid amount for the order
-.PARAMETER ExternalSource
-Identifying the system used to generate the order
+.PARAMETER OrderShippingMethod
+Defines order shipping method
+.PARAMETER CarrierId
+Defines tracking carrier id
+.PARAMETER WarehouseId
+This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
+.PARAMETER Coupons
+Coupons that will be applied to order
 .PARAMETER Tags
 Order tags
+.PARAMETER Comment
+Specifies order comment
+.PARAMETER AdminComment
+Specifies admin's order comment
+.PARAMETER AdminPrivateComment
+Specifies private admin's order comment
+.PARAMETER SendNotifications
+Send notifications to customer after order was created
+.PARAMETER SendAdminNotifications
+Notify admin when new order was created.
+.PARAMETER ExternalSource
+Identifying the system used to generate the order
 .PARAMETER InventoryBehaviour
 The behaviour to use when updating inventory.<hr><div style=""font-style:normal"">Values description:<div style=""margin-left: 2%; padding-top: 2%""><div style=""font-size:85%""><b>bypass</b> = Do not claim inventory </br></br><b>decrement_ignoring_policy</b> = Ignore the product's </br> inventory policy and claim amounts</br></br><b>decrement_obeying_policy</b> =  Obey the product's </br> inventory policy.</br></br></div></div></div>
 .PARAMETER CreateInvoice
 Defines whether the invoice is created automatically along with the order
 .PARAMETER NoteAttributes
 Defines note attributes
-.PARAMETER TotalWeight
-Defines the sum of all line item weights in grams for the order
 .PARAMETER ClearCache
 Is cache clear required
 .PARAMETER Origin
@@ -179,191 +179,191 @@ function Initialize-OrderAdd {
         [String]
         ${OrderStatus},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${SendNotifications} = $false,
+        [String]
+        ${FulfillmentStatus},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${SendAdminNotifications} = $false,
+        [String]
+        ${FinancialStatus},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${CustomerEmail},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${BillFirstName},
+        ${CustomerFirstName},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${BillLastName},
+        ${CustomerLastName},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${BillAddress1},
+        ${CustomerPhone},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${BillCity},
+        ${CustomerCountry},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${BillPostcode},
+        ${CustomerBirthday},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${BillState},
+        ${CustomerFax},
         [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${BillCountry},
+        ${OrderPaymentMethod},
         [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShippFirstName},
+        ${TransactionId},
         [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShippLastName},
+        ${Currency},
         [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShippAddress1},
+        ${Date},
         [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShippCity},
+        ${DateModified},
         [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShippPostcode},
+        ${DateFinished},
         [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShippState},
+        ${BillFirstName},
         [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShippCountry},
+        ${BillLastName},
         [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${TotalPrice},
+        [String]
+        ${BillAddress1},
         [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Date},
+        ${BillAddress2},
         [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${OrderPaymentMethod},
+        ${BillCity},
         [Parameter(Position = 25, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${TransactionId},
+        ${BillPostcode},
         [Parameter(Position = 26, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${OrderShippingMethod},
+        ${BillState},
         [Parameter(Position = 27, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Currency},
+        ${BillCountry},
         [Parameter(Position = 28, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${BillAddress2},
+        ${BillCompany},
         [Parameter(Position = 29, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${BillCompany},
+        ${BillPhone},
         [Parameter(Position = 30, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${BillPhone},
+        ${BillFax},
         [Parameter(Position = 31, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${BillFax},
+        ${ShippFirstName},
         [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Comment},
+        ${ShippLastName},
         [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${AdminComment},
+        ${ShippAddress1},
         [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${AdminPrivateComment},
+        ${ShippAddress2},
         [Parameter(Position = 35, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CustomerFirstName},
+        ${ShippCity},
         [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CustomerLastName},
+        ${ShippPostcode},
         [Parameter(Position = 37, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CustomerPhone},
+        ${ShippState},
         [Parameter(Position = 38, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CustomerCountry},
+        ${ShippCountry},
         [Parameter(Position = 39, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CustomerBirthday},
+        ${ShippCompany},
         [Parameter(Position = 40, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CustomerFax},
+        ${ShippPhone},
         [Parameter(Position = 41, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShippAddress2},
-        [Parameter(Position = 42, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${ShippCompany},
-        [Parameter(Position = 43, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${ShippPhone},
-        [Parameter(Position = 44, ValueFromPipelineByPropertyName = $true)]
-        [String]
         ${ShippFax},
-        [Parameter(Position = 45, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${DateModified},
-        [Parameter(Position = 46, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${DateFinished},
-        [Parameter(Position = 47, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 42, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${SubtotalPrice},
-        [Parameter(Position = 48, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 43, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${TaxPrice} = 0,
-        [Parameter(Position = 49, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 44, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${TotalPrice},
+        [Parameter(Position = 45, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${TotalPaid},
+        [Parameter(Position = 46, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Int32]]
+        ${TotalWeight},
+        [Parameter(Position = 47, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${PricesIncTax} = $false,
-        [Parameter(Position = 50, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 48, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${ShippingPrice} = 0,
-        [Parameter(Position = 51, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 49, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${ShippingTax},
-        [Parameter(Position = 52, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${CarrierId},
-        [Parameter(Position = 53, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${WarehouseId},
-        [Parameter(Position = 54, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 50, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${Discount},
-        [Parameter(Position = 55, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 51, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${CouponDiscount},
+        [Parameter(Position = 52, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${GiftCertificateDiscount},
+        [Parameter(Position = 53, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${OrderShippingMethod},
+        [Parameter(Position = 54, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${CarrierId},
+        [Parameter(Position = 55, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${WarehouseId},
         [Parameter(Position = 56, ValueFromPipelineByPropertyName = $true)]
         [String[]]
         ${Coupons},
         [Parameter(Position = 57, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${GiftCertificateDiscount},
-        [Parameter(Position = 58, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${FulfillmentStatus},
-        [Parameter(Position = 59, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${FinancialStatus},
-        [Parameter(Position = 60, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${TotalPaid},
-        [Parameter(Position = 61, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${ExternalSource},
-        [Parameter(Position = 62, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Tags},
+        [Parameter(Position = 58, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Comment},
+        [Parameter(Position = 59, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${AdminComment},
+        [Parameter(Position = 60, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${AdminPrivateComment},
+        [Parameter(Position = 61, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${SendNotifications} = $false,
+        [Parameter(Position = 62, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${SendAdminNotifications} = $false,
         [Parameter(Position = 63, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${InventoryBehaviour} = "bypass",
+        ${ExternalSource},
         [Parameter(Position = 64, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${InventoryBehaviour} = "bypass",
+        [Parameter(Position = 65, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${CreateInvoice} = $false,
-        [Parameter(Position = 65, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 66, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${NoteAttributes},
-        [Parameter(Position = 66, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Int32]]
-        ${TotalWeight},
         [Parameter(Position = 67, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${ClearCache} = $true,
@@ -430,68 +430,68 @@ function Initialize-OrderAdd {
             "store_id" = ${StoreId}
             "channel_id" = ${ChannelId}
             "order_status" = ${OrderStatus}
-            "send_notifications" = ${SendNotifications}
-            "send_admin_notifications" = ${SendAdminNotifications}
+            "fulfillment_status" = ${FulfillmentStatus}
+            "financial_status" = ${FinancialStatus}
             "customer_email" = ${CustomerEmail}
-            "bill_first_name" = ${BillFirstName}
-            "bill_last_name" = ${BillLastName}
-            "bill_address_1" = ${BillAddress1}
-            "bill_city" = ${BillCity}
-            "bill_postcode" = ${BillPostcode}
-            "bill_state" = ${BillState}
-            "bill_country" = ${BillCountry}
-            "shipp_first_name" = ${ShippFirstName}
-            "shipp_last_name" = ${ShippLastName}
-            "shipp_address_1" = ${ShippAddress1}
-            "shipp_city" = ${ShippCity}
-            "shipp_postcode" = ${ShippPostcode}
-            "shipp_state" = ${ShippState}
-            "shipp_country" = ${ShippCountry}
-            "total_price" = ${TotalPrice}
-            "date" = ${Date}
-            "order_payment_method" = ${OrderPaymentMethod}
-            "transaction_id" = ${TransactionId}
-            "order_shipping_method" = ${OrderShippingMethod}
-            "currency" = ${Currency}
-            "bill_address_2" = ${BillAddress2}
-            "bill_company" = ${BillCompany}
-            "bill_phone" = ${BillPhone}
-            "bill_fax" = ${BillFax}
-            "comment" = ${Comment}
-            "admin_comment" = ${AdminComment}
-            "admin_private_comment" = ${AdminPrivateComment}
             "customer_first_name" = ${CustomerFirstName}
             "customer_last_name" = ${CustomerLastName}
             "customer_phone" = ${CustomerPhone}
             "customer_country" = ${CustomerCountry}
             "customer_birthday" = ${CustomerBirthday}
             "customer_fax" = ${CustomerFax}
+            "order_payment_method" = ${OrderPaymentMethod}
+            "transaction_id" = ${TransactionId}
+            "currency" = ${Currency}
+            "date" = ${Date}
+            "date_modified" = ${DateModified}
+            "date_finished" = ${DateFinished}
+            "bill_first_name" = ${BillFirstName}
+            "bill_last_name" = ${BillLastName}
+            "bill_address_1" = ${BillAddress1}
+            "bill_address_2" = ${BillAddress2}
+            "bill_city" = ${BillCity}
+            "bill_postcode" = ${BillPostcode}
+            "bill_state" = ${BillState}
+            "bill_country" = ${BillCountry}
+            "bill_company" = ${BillCompany}
+            "bill_phone" = ${BillPhone}
+            "bill_fax" = ${BillFax}
+            "shipp_first_name" = ${ShippFirstName}
+            "shipp_last_name" = ${ShippLastName}
+            "shipp_address_1" = ${ShippAddress1}
             "shipp_address_2" = ${ShippAddress2}
+            "shipp_city" = ${ShippCity}
+            "shipp_postcode" = ${ShippPostcode}
+            "shipp_state" = ${ShippState}
+            "shipp_country" = ${ShippCountry}
             "shipp_company" = ${ShippCompany}
             "shipp_phone" = ${ShippPhone}
             "shipp_fax" = ${ShippFax}
-            "date_modified" = ${DateModified}
-            "date_finished" = ${DateFinished}
             "subtotal_price" = ${SubtotalPrice}
             "tax_price" = ${TaxPrice}
+            "total_price" = ${TotalPrice}
+            "total_paid" = ${TotalPaid}
+            "total_weight" = ${TotalWeight}
             "prices_inc_tax" = ${PricesIncTax}
             "shipping_price" = ${ShippingPrice}
             "shipping_tax" = ${ShippingTax}
-            "carrier_id" = ${CarrierId}
-            "warehouse_id" = ${WarehouseId}
             "discount" = ${Discount}
             "coupon_discount" = ${CouponDiscount}
-            "coupons" = ${Coupons}
             "gift_certificate_discount" = ${GiftCertificateDiscount}
-            "fulfillment_status" = ${FulfillmentStatus}
-            "financial_status" = ${FinancialStatus}
-            "total_paid" = ${TotalPaid}
-            "external_source" = ${ExternalSource}
+            "order_shipping_method" = ${OrderShippingMethod}
+            "carrier_id" = ${CarrierId}
+            "warehouse_id" = ${WarehouseId}
+            "coupons" = ${Coupons}
             "tags" = ${Tags}
+            "comment" = ${Comment}
+            "admin_comment" = ${AdminComment}
+            "admin_private_comment" = ${AdminPrivateComment}
+            "send_notifications" = ${SendNotifications}
+            "send_admin_notifications" = ${SendAdminNotifications}
+            "external_source" = ${ExternalSource}
             "inventory_behaviour" = ${InventoryBehaviour}
             "create_invoice" = ${CreateInvoice}
             "note_attributes" = ${NoteAttributes}
-            "total_weight" = ${TotalWeight}
             "clear_cache" = ${ClearCache}
             "origin" = ${Origin}
             "order_item" = ${OrderItem}
@@ -532,7 +532,7 @@ function ConvertFrom-JsonToOrderAdd {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in OrderAdd
-        $AllProperties = ("id", "order_id", "store_id", "channel_id", "order_status", "send_notifications", "send_admin_notifications", "customer_email", "bill_first_name", "bill_last_name", "bill_address_1", "bill_city", "bill_postcode", "bill_state", "bill_country", "shipp_first_name", "shipp_last_name", "shipp_address_1", "shipp_city", "shipp_postcode", "shipp_state", "shipp_country", "total_price", "date", "order_payment_method", "transaction_id", "order_shipping_method", "currency", "bill_address_2", "bill_company", "bill_phone", "bill_fax", "comment", "admin_comment", "admin_private_comment", "customer_first_name", "customer_last_name", "customer_phone", "customer_country", "customer_birthday", "customer_fax", "shipp_address_2", "shipp_company", "shipp_phone", "shipp_fax", "date_modified", "date_finished", "subtotal_price", "tax_price", "prices_inc_tax", "shipping_price", "shipping_tax", "carrier_id", "warehouse_id", "discount", "coupon_discount", "coupons", "gift_certificate_discount", "fulfillment_status", "financial_status", "total_paid", "external_source", "tags", "inventory_behaviour", "create_invoice", "note_attributes", "total_weight", "clear_cache", "origin", "order_item")
+        $AllProperties = ("id", "order_id", "store_id", "channel_id", "order_status", "fulfillment_status", "financial_status", "customer_email", "customer_first_name", "customer_last_name", "customer_phone", "customer_country", "customer_birthday", "customer_fax", "order_payment_method", "transaction_id", "currency", "date", "date_modified", "date_finished", "bill_first_name", "bill_last_name", "bill_address_1", "bill_address_2", "bill_city", "bill_postcode", "bill_state", "bill_country", "bill_company", "bill_phone", "bill_fax", "shipp_first_name", "shipp_last_name", "shipp_address_1", "shipp_address_2", "shipp_city", "shipp_postcode", "shipp_state", "shipp_country", "shipp_company", "shipp_phone", "shipp_fax", "subtotal_price", "tax_price", "total_price", "total_paid", "total_weight", "prices_inc_tax", "shipping_price", "shipping_tax", "discount", "coupon_discount", "gift_certificate_discount", "order_shipping_method", "carrier_id", "warehouse_id", "coupons", "tags", "comment", "admin_comment", "admin_private_comment", "send_notifications", "send_admin_notifications", "external_source", "inventory_behaviour", "create_invoice", "note_attributes", "clear_cache", "origin", "order_item")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -627,136 +627,16 @@ function ConvertFrom-JsonToOrderAdd {
             $ChannelId = $JsonParameters.PSobject.Properties["channel_id"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "send_notifications"))) { #optional property not found
-            $SendNotifications = $null
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "fulfillment_status"))) { #optional property not found
+            $FulfillmentStatus = $null
         } else {
-            $SendNotifications = $JsonParameters.PSobject.Properties["send_notifications"].value
+            $FulfillmentStatus = $JsonParameters.PSobject.Properties["fulfillment_status"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "send_admin_notifications"))) { #optional property not found
-            $SendAdminNotifications = $null
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "financial_status"))) { #optional property not found
+            $FinancialStatus = $null
         } else {
-            $SendAdminNotifications = $JsonParameters.PSobject.Properties["send_admin_notifications"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipp_first_name"))) { #optional property not found
-            $ShippFirstName = $null
-        } else {
-            $ShippFirstName = $JsonParameters.PSobject.Properties["shipp_first_name"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipp_last_name"))) { #optional property not found
-            $ShippLastName = $null
-        } else {
-            $ShippLastName = $JsonParameters.PSobject.Properties["shipp_last_name"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipp_address_1"))) { #optional property not found
-            $ShippAddress1 = $null
-        } else {
-            $ShippAddress1 = $JsonParameters.PSobject.Properties["shipp_address_1"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipp_city"))) { #optional property not found
-            $ShippCity = $null
-        } else {
-            $ShippCity = $JsonParameters.PSobject.Properties["shipp_city"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipp_postcode"))) { #optional property not found
-            $ShippPostcode = $null
-        } else {
-            $ShippPostcode = $JsonParameters.PSobject.Properties["shipp_postcode"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipp_state"))) { #optional property not found
-            $ShippState = $null
-        } else {
-            $ShippState = $JsonParameters.PSobject.Properties["shipp_state"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipp_country"))) { #optional property not found
-            $ShippCountry = $null
-        } else {
-            $ShippCountry = $JsonParameters.PSobject.Properties["shipp_country"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "total_price"))) { #optional property not found
-            $TotalPrice = $null
-        } else {
-            $TotalPrice = $JsonParameters.PSobject.Properties["total_price"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "date"))) { #optional property not found
-            $Date = $null
-        } else {
-            $Date = $JsonParameters.PSobject.Properties["date"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "order_payment_method"))) { #optional property not found
-            $OrderPaymentMethod = $null
-        } else {
-            $OrderPaymentMethod = $JsonParameters.PSobject.Properties["order_payment_method"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "transaction_id"))) { #optional property not found
-            $TransactionId = $null
-        } else {
-            $TransactionId = $JsonParameters.PSobject.Properties["transaction_id"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "order_shipping_method"))) { #optional property not found
-            $OrderShippingMethod = $null
-        } else {
-            $OrderShippingMethod = $JsonParameters.PSobject.Properties["order_shipping_method"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "currency"))) { #optional property not found
-            $Currency = $null
-        } else {
-            $Currency = $JsonParameters.PSobject.Properties["currency"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bill_address_2"))) { #optional property not found
-            $BillAddress2 = $null
-        } else {
-            $BillAddress2 = $JsonParameters.PSobject.Properties["bill_address_2"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bill_company"))) { #optional property not found
-            $BillCompany = $null
-        } else {
-            $BillCompany = $JsonParameters.PSobject.Properties["bill_company"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bill_phone"))) { #optional property not found
-            $BillPhone = $null
-        } else {
-            $BillPhone = $JsonParameters.PSobject.Properties["bill_phone"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bill_fax"))) { #optional property not found
-            $BillFax = $null
-        } else {
-            $BillFax = $JsonParameters.PSobject.Properties["bill_fax"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "comment"))) { #optional property not found
-            $Comment = $null
-        } else {
-            $Comment = $JsonParameters.PSobject.Properties["comment"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "admin_comment"))) { #optional property not found
-            $AdminComment = $null
-        } else {
-            $AdminComment = $JsonParameters.PSobject.Properties["admin_comment"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "admin_private_comment"))) { #optional property not found
-            $AdminPrivateComment = $null
-        } else {
-            $AdminPrivateComment = $JsonParameters.PSobject.Properties["admin_private_comment"].value
+            $FinancialStatus = $JsonParameters.PSobject.Properties["financial_status"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "customer_first_name"))) { #optional property not found
@@ -795,10 +675,112 @@ function ConvertFrom-JsonToOrderAdd {
             $CustomerFax = $JsonParameters.PSobject.Properties["customer_fax"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "order_payment_method"))) { #optional property not found
+            $OrderPaymentMethod = $null
+        } else {
+            $OrderPaymentMethod = $JsonParameters.PSobject.Properties["order_payment_method"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "transaction_id"))) { #optional property not found
+            $TransactionId = $null
+        } else {
+            $TransactionId = $JsonParameters.PSobject.Properties["transaction_id"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "currency"))) { #optional property not found
+            $Currency = $null
+        } else {
+            $Currency = $JsonParameters.PSobject.Properties["currency"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "date"))) { #optional property not found
+            $Date = $null
+        } else {
+            $Date = $JsonParameters.PSobject.Properties["date"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "date_modified"))) { #optional property not found
+            $DateModified = $null
+        } else {
+            $DateModified = $JsonParameters.PSobject.Properties["date_modified"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "date_finished"))) { #optional property not found
+            $DateFinished = $null
+        } else {
+            $DateFinished = $JsonParameters.PSobject.Properties["date_finished"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bill_address_2"))) { #optional property not found
+            $BillAddress2 = $null
+        } else {
+            $BillAddress2 = $JsonParameters.PSobject.Properties["bill_address_2"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bill_company"))) { #optional property not found
+            $BillCompany = $null
+        } else {
+            $BillCompany = $JsonParameters.PSobject.Properties["bill_company"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bill_phone"))) { #optional property not found
+            $BillPhone = $null
+        } else {
+            $BillPhone = $JsonParameters.PSobject.Properties["bill_phone"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bill_fax"))) { #optional property not found
+            $BillFax = $null
+        } else {
+            $BillFax = $JsonParameters.PSobject.Properties["bill_fax"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipp_first_name"))) { #optional property not found
+            $ShippFirstName = $null
+        } else {
+            $ShippFirstName = $JsonParameters.PSobject.Properties["shipp_first_name"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipp_last_name"))) { #optional property not found
+            $ShippLastName = $null
+        } else {
+            $ShippLastName = $JsonParameters.PSobject.Properties["shipp_last_name"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipp_address_1"))) { #optional property not found
+            $ShippAddress1 = $null
+        } else {
+            $ShippAddress1 = $JsonParameters.PSobject.Properties["shipp_address_1"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipp_address_2"))) { #optional property not found
             $ShippAddress2 = $null
         } else {
             $ShippAddress2 = $JsonParameters.PSobject.Properties["shipp_address_2"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipp_city"))) { #optional property not found
+            $ShippCity = $null
+        } else {
+            $ShippCity = $JsonParameters.PSobject.Properties["shipp_city"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipp_postcode"))) { #optional property not found
+            $ShippPostcode = $null
+        } else {
+            $ShippPostcode = $JsonParameters.PSobject.Properties["shipp_postcode"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipp_state"))) { #optional property not found
+            $ShippState = $null
+        } else {
+            $ShippState = $JsonParameters.PSobject.Properties["shipp_state"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipp_country"))) { #optional property not found
+            $ShippCountry = $null
+        } else {
+            $ShippCountry = $JsonParameters.PSobject.Properties["shipp_country"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipp_company"))) { #optional property not found
@@ -819,18 +801,6 @@ function ConvertFrom-JsonToOrderAdd {
             $ShippFax = $JsonParameters.PSobject.Properties["shipp_fax"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "date_modified"))) { #optional property not found
-            $DateModified = $null
-        } else {
-            $DateModified = $JsonParameters.PSobject.Properties["date_modified"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "date_finished"))) { #optional property not found
-            $DateFinished = $null
-        } else {
-            $DateFinished = $JsonParameters.PSobject.Properties["date_finished"].value
-        }
-
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "subtotal_price"))) { #optional property not found
             $SubtotalPrice = $null
         } else {
@@ -841,6 +811,24 @@ function ConvertFrom-JsonToOrderAdd {
             $TaxPrice = $null
         } else {
             $TaxPrice = $JsonParameters.PSobject.Properties["tax_price"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "total_price"))) { #optional property not found
+            $TotalPrice = $null
+        } else {
+            $TotalPrice = $JsonParameters.PSobject.Properties["total_price"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "total_paid"))) { #optional property not found
+            $TotalPaid = $null
+        } else {
+            $TotalPaid = $JsonParameters.PSobject.Properties["total_paid"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "total_weight"))) { #optional property not found
+            $TotalWeight = $null
+        } else {
+            $TotalWeight = $JsonParameters.PSobject.Properties["total_weight"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "prices_inc_tax"))) { #optional property not found
@@ -861,18 +849,6 @@ function ConvertFrom-JsonToOrderAdd {
             $ShippingTax = $JsonParameters.PSobject.Properties["shipping_tax"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "carrier_id"))) { #optional property not found
-            $CarrierId = $null
-        } else {
-            $CarrierId = $JsonParameters.PSobject.Properties["carrier_id"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "warehouse_id"))) { #optional property not found
-            $WarehouseId = $null
-        } else {
-            $WarehouseId = $JsonParameters.PSobject.Properties["warehouse_id"].value
-        }
-
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "discount"))) { #optional property not found
             $Discount = $null
         } else {
@@ -885,46 +861,76 @@ function ConvertFrom-JsonToOrderAdd {
             $CouponDiscount = $JsonParameters.PSobject.Properties["coupon_discount"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "coupons"))) { #optional property not found
-            $Coupons = $null
-        } else {
-            $Coupons = $JsonParameters.PSobject.Properties["coupons"].value
-        }
-
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "gift_certificate_discount"))) { #optional property not found
             $GiftCertificateDiscount = $null
         } else {
             $GiftCertificateDiscount = $JsonParameters.PSobject.Properties["gift_certificate_discount"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "fulfillment_status"))) { #optional property not found
-            $FulfillmentStatus = $null
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "order_shipping_method"))) { #optional property not found
+            $OrderShippingMethod = $null
         } else {
-            $FulfillmentStatus = $JsonParameters.PSobject.Properties["fulfillment_status"].value
+            $OrderShippingMethod = $JsonParameters.PSobject.Properties["order_shipping_method"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "financial_status"))) { #optional property not found
-            $FinancialStatus = $null
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "carrier_id"))) { #optional property not found
+            $CarrierId = $null
         } else {
-            $FinancialStatus = $JsonParameters.PSobject.Properties["financial_status"].value
+            $CarrierId = $JsonParameters.PSobject.Properties["carrier_id"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "total_paid"))) { #optional property not found
-            $TotalPaid = $null
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "warehouse_id"))) { #optional property not found
+            $WarehouseId = $null
         } else {
-            $TotalPaid = $JsonParameters.PSobject.Properties["total_paid"].value
+            $WarehouseId = $JsonParameters.PSobject.Properties["warehouse_id"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "external_source"))) { #optional property not found
-            $ExternalSource = $null
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "coupons"))) { #optional property not found
+            $Coupons = $null
         } else {
-            $ExternalSource = $JsonParameters.PSobject.Properties["external_source"].value
+            $Coupons = $JsonParameters.PSobject.Properties["coupons"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "tags"))) { #optional property not found
             $Tags = $null
         } else {
             $Tags = $JsonParameters.PSobject.Properties["tags"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "comment"))) { #optional property not found
+            $Comment = $null
+        } else {
+            $Comment = $JsonParameters.PSobject.Properties["comment"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "admin_comment"))) { #optional property not found
+            $AdminComment = $null
+        } else {
+            $AdminComment = $JsonParameters.PSobject.Properties["admin_comment"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "admin_private_comment"))) { #optional property not found
+            $AdminPrivateComment = $null
+        } else {
+            $AdminPrivateComment = $JsonParameters.PSobject.Properties["admin_private_comment"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "send_notifications"))) { #optional property not found
+            $SendNotifications = $null
+        } else {
+            $SendNotifications = $JsonParameters.PSobject.Properties["send_notifications"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "send_admin_notifications"))) { #optional property not found
+            $SendAdminNotifications = $null
+        } else {
+            $SendAdminNotifications = $JsonParameters.PSobject.Properties["send_admin_notifications"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "external_source"))) { #optional property not found
+            $ExternalSource = $null
+        } else {
+            $ExternalSource = $JsonParameters.PSobject.Properties["external_source"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "inventory_behaviour"))) { #optional property not found
@@ -945,12 +951,6 @@ function ConvertFrom-JsonToOrderAdd {
             $NoteAttributes = $JsonParameters.PSobject.Properties["note_attributes"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "total_weight"))) { #optional property not found
-            $TotalWeight = $null
-        } else {
-            $TotalWeight = $JsonParameters.PSobject.Properties["total_weight"].value
-        }
-
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "clear_cache"))) { #optional property not found
             $ClearCache = $null
         } else {
@@ -969,68 +969,68 @@ function ConvertFrom-JsonToOrderAdd {
             "store_id" = ${StoreId}
             "channel_id" = ${ChannelId}
             "order_status" = ${OrderStatus}
-            "send_notifications" = ${SendNotifications}
-            "send_admin_notifications" = ${SendAdminNotifications}
+            "fulfillment_status" = ${FulfillmentStatus}
+            "financial_status" = ${FinancialStatus}
             "customer_email" = ${CustomerEmail}
-            "bill_first_name" = ${BillFirstName}
-            "bill_last_name" = ${BillLastName}
-            "bill_address_1" = ${BillAddress1}
-            "bill_city" = ${BillCity}
-            "bill_postcode" = ${BillPostcode}
-            "bill_state" = ${BillState}
-            "bill_country" = ${BillCountry}
-            "shipp_first_name" = ${ShippFirstName}
-            "shipp_last_name" = ${ShippLastName}
-            "shipp_address_1" = ${ShippAddress1}
-            "shipp_city" = ${ShippCity}
-            "shipp_postcode" = ${ShippPostcode}
-            "shipp_state" = ${ShippState}
-            "shipp_country" = ${ShippCountry}
-            "total_price" = ${TotalPrice}
-            "date" = ${Date}
-            "order_payment_method" = ${OrderPaymentMethod}
-            "transaction_id" = ${TransactionId}
-            "order_shipping_method" = ${OrderShippingMethod}
-            "currency" = ${Currency}
-            "bill_address_2" = ${BillAddress2}
-            "bill_company" = ${BillCompany}
-            "bill_phone" = ${BillPhone}
-            "bill_fax" = ${BillFax}
-            "comment" = ${Comment}
-            "admin_comment" = ${AdminComment}
-            "admin_private_comment" = ${AdminPrivateComment}
             "customer_first_name" = ${CustomerFirstName}
             "customer_last_name" = ${CustomerLastName}
             "customer_phone" = ${CustomerPhone}
             "customer_country" = ${CustomerCountry}
             "customer_birthday" = ${CustomerBirthday}
             "customer_fax" = ${CustomerFax}
+            "order_payment_method" = ${OrderPaymentMethod}
+            "transaction_id" = ${TransactionId}
+            "currency" = ${Currency}
+            "date" = ${Date}
+            "date_modified" = ${DateModified}
+            "date_finished" = ${DateFinished}
+            "bill_first_name" = ${BillFirstName}
+            "bill_last_name" = ${BillLastName}
+            "bill_address_1" = ${BillAddress1}
+            "bill_address_2" = ${BillAddress2}
+            "bill_city" = ${BillCity}
+            "bill_postcode" = ${BillPostcode}
+            "bill_state" = ${BillState}
+            "bill_country" = ${BillCountry}
+            "bill_company" = ${BillCompany}
+            "bill_phone" = ${BillPhone}
+            "bill_fax" = ${BillFax}
+            "shipp_first_name" = ${ShippFirstName}
+            "shipp_last_name" = ${ShippLastName}
+            "shipp_address_1" = ${ShippAddress1}
             "shipp_address_2" = ${ShippAddress2}
+            "shipp_city" = ${ShippCity}
+            "shipp_postcode" = ${ShippPostcode}
+            "shipp_state" = ${ShippState}
+            "shipp_country" = ${ShippCountry}
             "shipp_company" = ${ShippCompany}
             "shipp_phone" = ${ShippPhone}
             "shipp_fax" = ${ShippFax}
-            "date_modified" = ${DateModified}
-            "date_finished" = ${DateFinished}
             "subtotal_price" = ${SubtotalPrice}
             "tax_price" = ${TaxPrice}
+            "total_price" = ${TotalPrice}
+            "total_paid" = ${TotalPaid}
+            "total_weight" = ${TotalWeight}
             "prices_inc_tax" = ${PricesIncTax}
             "shipping_price" = ${ShippingPrice}
             "shipping_tax" = ${ShippingTax}
-            "carrier_id" = ${CarrierId}
-            "warehouse_id" = ${WarehouseId}
             "discount" = ${Discount}
             "coupon_discount" = ${CouponDiscount}
-            "coupons" = ${Coupons}
             "gift_certificate_discount" = ${GiftCertificateDiscount}
-            "fulfillment_status" = ${FulfillmentStatus}
-            "financial_status" = ${FinancialStatus}
-            "total_paid" = ${TotalPaid}
-            "external_source" = ${ExternalSource}
+            "order_shipping_method" = ${OrderShippingMethod}
+            "carrier_id" = ${CarrierId}
+            "warehouse_id" = ${WarehouseId}
+            "coupons" = ${Coupons}
             "tags" = ${Tags}
+            "comment" = ${Comment}
+            "admin_comment" = ${AdminComment}
+            "admin_private_comment" = ${AdminPrivateComment}
+            "send_notifications" = ${SendNotifications}
+            "send_admin_notifications" = ${SendAdminNotifications}
+            "external_source" = ${ExternalSource}
             "inventory_behaviour" = ${InventoryBehaviour}
             "create_invoice" = ${CreateInvoice}
             "note_attributes" = ${NoteAttributes}
-            "total_weight" = ${TotalWeight}
             "clear_cache" = ${ClearCache}
             "origin" = ${Origin}
             "order_item" = ${OrderItem}

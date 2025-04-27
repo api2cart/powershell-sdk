@@ -15,12 +15,50 @@ No summary available.
 
 No description available.
 
-.PARAMETER StoreId
-Defines store id where the variant should be found
 .PARAMETER Id
 Defines variant update specified by variant id
 .PARAMETER ProductId
 Defines product's id where the variant has to be updated
+.PARAMETER StoreId
+Defines store id where the variant should be found
+.PARAMETER LangId
+Language id
+.PARAMETER Options
+Defines variant's options list
+.PARAMETER Name
+Defines variant's name that has to be updated
+.PARAMETER Description
+Specifies variant's description
+.PARAMETER ShortDescription
+Defines short description
+.PARAMETER Model
+Specifies variant's model that has to be added
+.PARAMETER Sku
+Defines new product's variant sku
+.PARAMETER Visible
+Set visibility status
+.PARAMETER Status
+Defines product variant's status
+.PARAMETER BackorderStatus
+Set backorder status
+.PARAMETER AvailableForSale
+Specifies the set of visible/invisible product's variants for sale
+.PARAMETER Avail
+Defines category's visibility status
+.PARAMETER IsDefault
+Defines as a default variant
+.PARAMETER IsFreeShipping
+Specifies variant's free shipping flag that has to be added
+.PARAMETER Taxable
+Specifies whether a tax is charged
+.PARAMETER TaxClassId
+Defines tax classes where entity has to be added
+.PARAMETER IsVirtual
+Defines whether the product is virtual
+.PARAMETER ManageStock
+Defines inventory tracking for product variant
+.PARAMETER InStock
+Set stock status
 .PARAMETER WarehouseId
 This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
 .PARAMETER ReserveQuantity
@@ -47,44 +85,10 @@ Specifies fixed cost shipping price
 Defines the date of special price creation
 .PARAMETER SpriceExpire
 Defines the term of special price offer duration
-.PARAMETER ManageStock
-Defines inventory tracking for product variant
-.PARAMETER InStock
-Set stock status
-.PARAMETER Name
-Defines variant's name that has to be updated
-.PARAMETER Description
-Specifies variant's description
-.PARAMETER Sku
-Defines new product's variant sku
-.PARAMETER MetaTitle
-Defines unique meta title for each entity
-.PARAMETER MetaDescription
-Defines unique meta description of a entity
-.PARAMETER MetaKeywords
-Defines unique meta keywords for each entity
-.PARAMETER ShortDescription
-Defines short description
-.PARAMETER Visible
-Set visibility status
-.PARAMETER Status
-Defines product variant's status
-.PARAMETER BackorderStatus
-Set backorder status
 .PARAMETER Weight
 Weight
 .PARAMETER Barcode
 A barcode is a unique code composed of numbers used as a product identifier.
-.PARAMETER Reindex
-Is reindex required
-.PARAMETER Taxable
-Specifies whether a tax is charged
-.PARAMETER Options
-Defines variant's options list
-.PARAMETER HarmonizedSystemCode
-Harmonized System Code. An HSC is a 6-digit identifier that allows participating countries to classify traded goods on a common basis for customs purposes
-.PARAMETER CountryOfOrigin
-The country where the inventory item was made
 .PARAMETER Width
 Defines product's width
 .PARAMETER WeightUnit
@@ -95,14 +99,6 @@ Defines product's height
 Defines product's length
 .PARAMETER Gtin
 Global Trade Item Number. An GTIN is an identifier for trade items.
-.PARAMETER ClearCache
-Is cache clear required
-.PARAMETER LangId
-Language id
-.PARAMETER Model
-Specifies variant's model that has to be added
-.PARAMETER AvailableForSale
-Specifies the set of visible/invisible product's variants for sale
 .PARAMETER Upc
 Universal Product Code. A UPC (UPC-A) is a commonly used identifer for many different products.
 .PARAMETER Mpn
@@ -111,16 +107,20 @@ Manufacturer Part Number. A MPN is an identifier of a particular part design or 
 European Article Number. An EAN is a unique 8 or 13-digit identifier that many industries (such as book publishers) use to identify products.
 .PARAMETER Isbn
 International Standard Book Number. An ISBN is a unique identifier for books.
-.PARAMETER Avail
-Defines category's visibility status
-.PARAMETER IsDefault
-Defines as a default variant
-.PARAMETER IsFreeShipping
-Specifies variant's free shipping flag that has to be added
-.PARAMETER TaxClassId
-Defines tax classes where entity has to be added
-.PARAMETER IsVirtual
-Defines whether the product is virtual
+.PARAMETER HarmonizedSystemCode
+Harmonized System Code. An HSC is a 6-digit identifier that allows participating countries to classify traded goods on a common basis for customs purposes
+.PARAMETER CountryOfOrigin
+The country where the inventory item was made
+.PARAMETER MetaTitle
+Defines unique meta title for each entity
+.PARAMETER MetaDescription
+Defines unique meta description of a entity
+.PARAMETER MetaKeywords
+Defines unique meta keywords for each entity
+.PARAMETER Reindex
+Is reindex required
+.PARAMETER ClearCache
+Is cache clear required
 .OUTPUTS
 
 ProductVariantUpdate<PSCustomObject>
@@ -131,163 +131,163 @@ function Initialize-ProductVariantUpdate {
     Param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${StoreId},
+        ${Id},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Id},
+        ${ProductId},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ProductId},
+        ${StoreId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${WarehouseId},
+        ${LangId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${ReserveQuantity},
-        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${Quantity},
-        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${IncreaseQuantity} = 0,
-        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${ReduceQuantity} = 0,
-        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${Price},
-        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${SpecialPrice},
-        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${RetailPrice},
-        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${OldPrice},
-        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${CostPrice},
-        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${FixedCostShippingPrice},
-        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${SpriceCreate},
-        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${SpriceExpire},
-        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${ManageStock},
-        [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${InStock},
-        [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Name},
-        [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Description},
-        [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Sku},
-        [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${MetaTitle},
-        [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${MetaDescription},
-        [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${MetaKeywords},
-        [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${ShortDescription},
-        [Parameter(Position = 25, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Visible},
-        [Parameter(Position = 26, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Status},
-        [Parameter(Position = 27, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${BackorderStatus},
-        [Parameter(Position = 28, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${Weight} = 0,
-        [Parameter(Position = 29, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Barcode},
-        [Parameter(Position = 30, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${Reindex} = $true,
-        [Parameter(Position = 31, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${Taxable} = $true,
-        [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Options},
-        [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${HarmonizedSystemCode},
-        [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true)]
+        ${Name},
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CountryOfOrigin},
-        [Parameter(Position = 35, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${Width},
-        [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true)]
+        ${Description},
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${WeightUnit},
-        [Parameter(Position = 37, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${Height},
-        [Parameter(Position = 38, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${Length},
-        [Parameter(Position = 39, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Gtin},
-        [Parameter(Position = 40, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${ClearCache} = $true,
-        [Parameter(Position = 41, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${LangId},
-        [Parameter(Position = 42, ValueFromPipelineByPropertyName = $true)]
+        ${ShortDescription},
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Model},
-        [Parameter(Position = 43, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Sku},
+        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Visible},
+        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Status},
+        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${BackorderStatus},
+        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${AvailableForSale} = $true,
-        [Parameter(Position = 44, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Upc},
-        [Parameter(Position = 45, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Mpn},
-        [Parameter(Position = 46, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Ean},
-        [Parameter(Position = 47, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Isbn},
-        [Parameter(Position = 48, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${Avail} = $true,
-        [Parameter(Position = 49, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${IsDefault},
-        [Parameter(Position = 50, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${IsFreeShipping},
-        [Parameter(Position = 51, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${Taxable} = $true,
+        [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${TaxClassId},
+        [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${IsVirtual} = $false,
+        [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${ManageStock},
+        [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${InStock},
+        [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${WarehouseId},
+        [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${ReserveQuantity},
+        [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${Quantity},
+        [Parameter(Position = 25, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${IncreaseQuantity} = 0,
+        [Parameter(Position = 26, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${ReduceQuantity} = 0,
+        [Parameter(Position = 27, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${Price},
+        [Parameter(Position = 28, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${SpecialPrice},
+        [Parameter(Position = 29, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${RetailPrice},
+        [Parameter(Position = 30, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${OldPrice},
+        [Parameter(Position = 31, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${CostPrice},
+        [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${FixedCostShippingPrice},
+        [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${SpriceCreate},
+        [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${SpriceExpire},
+        [Parameter(Position = 35, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${Weight} = 0,
+        [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Barcode},
+        [Parameter(Position = 37, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${Width},
+        [Parameter(Position = 38, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${WeightUnit},
+        [Parameter(Position = 39, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${Height},
+        [Parameter(Position = 40, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${Length},
+        [Parameter(Position = 41, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Gtin},
+        [Parameter(Position = 42, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Upc},
+        [Parameter(Position = 43, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Mpn},
+        [Parameter(Position = 44, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Ean},
+        [Parameter(Position = 45, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Isbn},
+        [Parameter(Position = 46, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${HarmonizedSystemCode},
+        [Parameter(Position = 47, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${CountryOfOrigin},
+        [Parameter(Position = 48, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${MetaTitle},
+        [Parameter(Position = 49, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${MetaDescription},
+        [Parameter(Position = 50, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${MetaKeywords},
+        [Parameter(Position = 51, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${Reindex} = $true,
         [Parameter(Position = 52, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${IsVirtual} = $false
+        ${ClearCache} = $true
     )
 
     Process {
@@ -296,9 +296,28 @@ function Initialize-ProductVariantUpdate {
 
 
         $PSO = [PSCustomObject]@{
-            "store_id" = ${StoreId}
             "id" = ${Id}
             "product_id" = ${ProductId}
+            "store_id" = ${StoreId}
+            "lang_id" = ${LangId}
+            "options" = ${Options}
+            "name" = ${Name}
+            "description" = ${Description}
+            "short_description" = ${ShortDescription}
+            "model" = ${Model}
+            "sku" = ${Sku}
+            "visible" = ${Visible}
+            "status" = ${Status}
+            "backorder_status" = ${BackorderStatus}
+            "available_for_sale" = ${AvailableForSale}
+            "avail" = ${Avail}
+            "is_default" = ${IsDefault}
+            "is_free_shipping" = ${IsFreeShipping}
+            "taxable" = ${Taxable}
+            "tax_class_id" = ${TaxClassId}
+            "is_virtual" = ${IsVirtual}
+            "manage_stock" = ${ManageStock}
+            "in_stock" = ${InStock}
             "warehouse_id" = ${WarehouseId}
             "reserve_quantity" = ${ReserveQuantity}
             "quantity" = ${Quantity}
@@ -312,43 +331,24 @@ function Initialize-ProductVariantUpdate {
             "fixed_cost_shipping_price" = ${FixedCostShippingPrice}
             "sprice_create" = ${SpriceCreate}
             "sprice_expire" = ${SpriceExpire}
-            "manage_stock" = ${ManageStock}
-            "in_stock" = ${InStock}
-            "name" = ${Name}
-            "description" = ${Description}
-            "sku" = ${Sku}
-            "meta_title" = ${MetaTitle}
-            "meta_description" = ${MetaDescription}
-            "meta_keywords" = ${MetaKeywords}
-            "short_description" = ${ShortDescription}
-            "visible" = ${Visible}
-            "status" = ${Status}
-            "backorder_status" = ${BackorderStatus}
             "weight" = ${Weight}
             "barcode" = ${Barcode}
-            "reindex" = ${Reindex}
-            "taxable" = ${Taxable}
-            "options" = ${Options}
-            "harmonized_system_code" = ${HarmonizedSystemCode}
-            "country_of_origin" = ${CountryOfOrigin}
             "width" = ${Width}
             "weight_unit" = ${WeightUnit}
             "height" = ${Height}
             "length" = ${Length}
             "gtin" = ${Gtin}
-            "clear_cache" = ${ClearCache}
-            "lang_id" = ${LangId}
-            "model" = ${Model}
-            "available_for_sale" = ${AvailableForSale}
             "upc" = ${Upc}
             "mpn" = ${Mpn}
             "ean" = ${Ean}
             "isbn" = ${Isbn}
-            "avail" = ${Avail}
-            "is_default" = ${IsDefault}
-            "is_free_shipping" = ${IsFreeShipping}
-            "tax_class_id" = ${TaxClassId}
-            "is_virtual" = ${IsVirtual}
+            "harmonized_system_code" = ${HarmonizedSystemCode}
+            "country_of_origin" = ${CountryOfOrigin}
+            "meta_title" = ${MetaTitle}
+            "meta_description" = ${MetaDescription}
+            "meta_keywords" = ${MetaKeywords}
+            "reindex" = ${Reindex}
+            "clear_cache" = ${ClearCache}
         }
 
 
@@ -386,17 +386,11 @@ function ConvertFrom-JsonToProductVariantUpdate {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductVariantUpdate
-        $AllProperties = ("store_id", "id", "product_id", "warehouse_id", "reserve_quantity", "quantity", "increase_quantity", "reduce_quantity", "price", "special_price", "retail_price", "old_price", "cost_price", "fixed_cost_shipping_price", "sprice_create", "sprice_expire", "manage_stock", "in_stock", "name", "description", "sku", "meta_title", "meta_description", "meta_keywords", "short_description", "visible", "status", "backorder_status", "weight", "barcode", "reindex", "taxable", "options", "harmonized_system_code", "country_of_origin", "width", "weight_unit", "height", "length", "gtin", "clear_cache", "lang_id", "model", "available_for_sale", "upc", "mpn", "ean", "isbn", "avail", "is_default", "is_free_shipping", "tax_class_id", "is_virtual")
+        $AllProperties = ("id", "product_id", "store_id", "lang_id", "options", "name", "description", "short_description", "model", "sku", "visible", "status", "backorder_status", "available_for_sale", "avail", "is_default", "is_free_shipping", "taxable", "tax_class_id", "is_virtual", "manage_stock", "in_stock", "warehouse_id", "reserve_quantity", "quantity", "increase_quantity", "reduce_quantity", "price", "special_price", "retail_price", "old_price", "cost_price", "fixed_cost_shipping_price", "sprice_create", "sprice_expire", "weight", "barcode", "width", "weight_unit", "height", "length", "gtin", "upc", "mpn", "ean", "isbn", "harmonized_system_code", "country_of_origin", "meta_title", "meta_description", "meta_keywords", "reindex", "clear_cache")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
             }
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_id"))) { #optional property not found
-            $StoreId = $null
-        } else {
-            $StoreId = $JsonParameters.PSobject.Properties["store_id"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "id"))) { #optional property not found
@@ -409,6 +403,126 @@ function ConvertFrom-JsonToProductVariantUpdate {
             $ProductId = $null
         } else {
             $ProductId = $JsonParameters.PSobject.Properties["product_id"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_id"))) { #optional property not found
+            $StoreId = $null
+        } else {
+            $StoreId = $JsonParameters.PSobject.Properties["store_id"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "lang_id"))) { #optional property not found
+            $LangId = $null
+        } else {
+            $LangId = $JsonParameters.PSobject.Properties["lang_id"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "options"))) { #optional property not found
+            $Options = $null
+        } else {
+            $Options = $JsonParameters.PSobject.Properties["options"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "name"))) { #optional property not found
+            $Name = $null
+        } else {
+            $Name = $JsonParameters.PSobject.Properties["name"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "description"))) { #optional property not found
+            $Description = $null
+        } else {
+            $Description = $JsonParameters.PSobject.Properties["description"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "short_description"))) { #optional property not found
+            $ShortDescription = $null
+        } else {
+            $ShortDescription = $JsonParameters.PSobject.Properties["short_description"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "model"))) { #optional property not found
+            $Model = $null
+        } else {
+            $Model = $JsonParameters.PSobject.Properties["model"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "sku"))) { #optional property not found
+            $Sku = $null
+        } else {
+            $Sku = $JsonParameters.PSobject.Properties["sku"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "visible"))) { #optional property not found
+            $Visible = $null
+        } else {
+            $Visible = $JsonParameters.PSobject.Properties["visible"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "status"))) { #optional property not found
+            $Status = $null
+        } else {
+            $Status = $JsonParameters.PSobject.Properties["status"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "backorder_status"))) { #optional property not found
+            $BackorderStatus = $null
+        } else {
+            $BackorderStatus = $JsonParameters.PSobject.Properties["backorder_status"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "available_for_sale"))) { #optional property not found
+            $AvailableForSale = $null
+        } else {
+            $AvailableForSale = $JsonParameters.PSobject.Properties["available_for_sale"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "avail"))) { #optional property not found
+            $Avail = $null
+        } else {
+            $Avail = $JsonParameters.PSobject.Properties["avail"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "is_default"))) { #optional property not found
+            $IsDefault = $null
+        } else {
+            $IsDefault = $JsonParameters.PSobject.Properties["is_default"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "is_free_shipping"))) { #optional property not found
+            $IsFreeShipping = $null
+        } else {
+            $IsFreeShipping = $JsonParameters.PSobject.Properties["is_free_shipping"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "taxable"))) { #optional property not found
+            $Taxable = $null
+        } else {
+            $Taxable = $JsonParameters.PSobject.Properties["taxable"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "tax_class_id"))) { #optional property not found
+            $TaxClassId = $null
+        } else {
+            $TaxClassId = $JsonParameters.PSobject.Properties["tax_class_id"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "is_virtual"))) { #optional property not found
+            $IsVirtual = $null
+        } else {
+            $IsVirtual = $JsonParameters.PSobject.Properties["is_virtual"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "manage_stock"))) { #optional property not found
+            $ManageStock = $null
+        } else {
+            $ManageStock = $JsonParameters.PSobject.Properties["manage_stock"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "in_stock"))) { #optional property not found
+            $InStock = $null
+        } else {
+            $InStock = $JsonParameters.PSobject.Properties["in_stock"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "warehouse_id"))) { #optional property not found
@@ -489,78 +603,6 @@ function ConvertFrom-JsonToProductVariantUpdate {
             $SpriceExpire = $JsonParameters.PSobject.Properties["sprice_expire"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "manage_stock"))) { #optional property not found
-            $ManageStock = $null
-        } else {
-            $ManageStock = $JsonParameters.PSobject.Properties["manage_stock"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "in_stock"))) { #optional property not found
-            $InStock = $null
-        } else {
-            $InStock = $JsonParameters.PSobject.Properties["in_stock"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "name"))) { #optional property not found
-            $Name = $null
-        } else {
-            $Name = $JsonParameters.PSobject.Properties["name"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "description"))) { #optional property not found
-            $Description = $null
-        } else {
-            $Description = $JsonParameters.PSobject.Properties["description"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "sku"))) { #optional property not found
-            $Sku = $null
-        } else {
-            $Sku = $JsonParameters.PSobject.Properties["sku"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "meta_title"))) { #optional property not found
-            $MetaTitle = $null
-        } else {
-            $MetaTitle = $JsonParameters.PSobject.Properties["meta_title"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "meta_description"))) { #optional property not found
-            $MetaDescription = $null
-        } else {
-            $MetaDescription = $JsonParameters.PSobject.Properties["meta_description"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "meta_keywords"))) { #optional property not found
-            $MetaKeywords = $null
-        } else {
-            $MetaKeywords = $JsonParameters.PSobject.Properties["meta_keywords"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "short_description"))) { #optional property not found
-            $ShortDescription = $null
-        } else {
-            $ShortDescription = $JsonParameters.PSobject.Properties["short_description"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "visible"))) { #optional property not found
-            $Visible = $null
-        } else {
-            $Visible = $JsonParameters.PSobject.Properties["visible"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "status"))) { #optional property not found
-            $Status = $null
-        } else {
-            $Status = $JsonParameters.PSobject.Properties["status"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "backorder_status"))) { #optional property not found
-            $BackorderStatus = $null
-        } else {
-            $BackorderStatus = $JsonParameters.PSobject.Properties["backorder_status"].value
-        }
-
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "weight"))) { #optional property not found
             $Weight = $null
         } else {
@@ -571,36 +613,6 @@ function ConvertFrom-JsonToProductVariantUpdate {
             $Barcode = $null
         } else {
             $Barcode = $JsonParameters.PSobject.Properties["barcode"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "reindex"))) { #optional property not found
-            $Reindex = $null
-        } else {
-            $Reindex = $JsonParameters.PSobject.Properties["reindex"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "taxable"))) { #optional property not found
-            $Taxable = $null
-        } else {
-            $Taxable = $JsonParameters.PSobject.Properties["taxable"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "options"))) { #optional property not found
-            $Options = $null
-        } else {
-            $Options = $JsonParameters.PSobject.Properties["options"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "harmonized_system_code"))) { #optional property not found
-            $HarmonizedSystemCode = $null
-        } else {
-            $HarmonizedSystemCode = $JsonParameters.PSobject.Properties["harmonized_system_code"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "country_of_origin"))) { #optional property not found
-            $CountryOfOrigin = $null
-        } else {
-            $CountryOfOrigin = $JsonParameters.PSobject.Properties["country_of_origin"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "width"))) { #optional property not found
@@ -633,30 +645,6 @@ function ConvertFrom-JsonToProductVariantUpdate {
             $Gtin = $JsonParameters.PSobject.Properties["gtin"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "clear_cache"))) { #optional property not found
-            $ClearCache = $null
-        } else {
-            $ClearCache = $JsonParameters.PSobject.Properties["clear_cache"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "lang_id"))) { #optional property not found
-            $LangId = $null
-        } else {
-            $LangId = $JsonParameters.PSobject.Properties["lang_id"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "model"))) { #optional property not found
-            $Model = $null
-        } else {
-            $Model = $JsonParameters.PSobject.Properties["model"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "available_for_sale"))) { #optional property not found
-            $AvailableForSale = $null
-        } else {
-            $AvailableForSale = $JsonParameters.PSobject.Properties["available_for_sale"].value
-        }
-
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "upc"))) { #optional property not found
             $Upc = $null
         } else {
@@ -681,40 +669,71 @@ function ConvertFrom-JsonToProductVariantUpdate {
             $Isbn = $JsonParameters.PSobject.Properties["isbn"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "avail"))) { #optional property not found
-            $Avail = $null
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "harmonized_system_code"))) { #optional property not found
+            $HarmonizedSystemCode = $null
         } else {
-            $Avail = $JsonParameters.PSobject.Properties["avail"].value
+            $HarmonizedSystemCode = $JsonParameters.PSobject.Properties["harmonized_system_code"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "is_default"))) { #optional property not found
-            $IsDefault = $null
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "country_of_origin"))) { #optional property not found
+            $CountryOfOrigin = $null
         } else {
-            $IsDefault = $JsonParameters.PSobject.Properties["is_default"].value
+            $CountryOfOrigin = $JsonParameters.PSobject.Properties["country_of_origin"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "is_free_shipping"))) { #optional property not found
-            $IsFreeShipping = $null
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "meta_title"))) { #optional property not found
+            $MetaTitle = $null
         } else {
-            $IsFreeShipping = $JsonParameters.PSobject.Properties["is_free_shipping"].value
+            $MetaTitle = $JsonParameters.PSobject.Properties["meta_title"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "tax_class_id"))) { #optional property not found
-            $TaxClassId = $null
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "meta_description"))) { #optional property not found
+            $MetaDescription = $null
         } else {
-            $TaxClassId = $JsonParameters.PSobject.Properties["tax_class_id"].value
+            $MetaDescription = $JsonParameters.PSobject.Properties["meta_description"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "is_virtual"))) { #optional property not found
-            $IsVirtual = $null
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "meta_keywords"))) { #optional property not found
+            $MetaKeywords = $null
         } else {
-            $IsVirtual = $JsonParameters.PSobject.Properties["is_virtual"].value
+            $MetaKeywords = $JsonParameters.PSobject.Properties["meta_keywords"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "reindex"))) { #optional property not found
+            $Reindex = $null
+        } else {
+            $Reindex = $JsonParameters.PSobject.Properties["reindex"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "clear_cache"))) { #optional property not found
+            $ClearCache = $null
+        } else {
+            $ClearCache = $JsonParameters.PSobject.Properties["clear_cache"].value
         }
 
         $PSO = [PSCustomObject]@{
-            "store_id" = ${StoreId}
             "id" = ${Id}
             "product_id" = ${ProductId}
+            "store_id" = ${StoreId}
+            "lang_id" = ${LangId}
+            "options" = ${Options}
+            "name" = ${Name}
+            "description" = ${Description}
+            "short_description" = ${ShortDescription}
+            "model" = ${Model}
+            "sku" = ${Sku}
+            "visible" = ${Visible}
+            "status" = ${Status}
+            "backorder_status" = ${BackorderStatus}
+            "available_for_sale" = ${AvailableForSale}
+            "avail" = ${Avail}
+            "is_default" = ${IsDefault}
+            "is_free_shipping" = ${IsFreeShipping}
+            "taxable" = ${Taxable}
+            "tax_class_id" = ${TaxClassId}
+            "is_virtual" = ${IsVirtual}
+            "manage_stock" = ${ManageStock}
+            "in_stock" = ${InStock}
             "warehouse_id" = ${WarehouseId}
             "reserve_quantity" = ${ReserveQuantity}
             "quantity" = ${Quantity}
@@ -728,43 +747,24 @@ function ConvertFrom-JsonToProductVariantUpdate {
             "fixed_cost_shipping_price" = ${FixedCostShippingPrice}
             "sprice_create" = ${SpriceCreate}
             "sprice_expire" = ${SpriceExpire}
-            "manage_stock" = ${ManageStock}
-            "in_stock" = ${InStock}
-            "name" = ${Name}
-            "description" = ${Description}
-            "sku" = ${Sku}
-            "meta_title" = ${MetaTitle}
-            "meta_description" = ${MetaDescription}
-            "meta_keywords" = ${MetaKeywords}
-            "short_description" = ${ShortDescription}
-            "visible" = ${Visible}
-            "status" = ${Status}
-            "backorder_status" = ${BackorderStatus}
             "weight" = ${Weight}
             "barcode" = ${Barcode}
-            "reindex" = ${Reindex}
-            "taxable" = ${Taxable}
-            "options" = ${Options}
-            "harmonized_system_code" = ${HarmonizedSystemCode}
-            "country_of_origin" = ${CountryOfOrigin}
             "width" = ${Width}
             "weight_unit" = ${WeightUnit}
             "height" = ${Height}
             "length" = ${Length}
             "gtin" = ${Gtin}
-            "clear_cache" = ${ClearCache}
-            "lang_id" = ${LangId}
-            "model" = ${Model}
-            "available_for_sale" = ${AvailableForSale}
             "upc" = ${Upc}
             "mpn" = ${Mpn}
             "ean" = ${Ean}
             "isbn" = ${Isbn}
-            "avail" = ${Avail}
-            "is_default" = ${IsDefault}
-            "is_free_shipping" = ${IsFreeShipping}
-            "tax_class_id" = ${TaxClassId}
-            "is_virtual" = ${IsVirtual}
+            "harmonized_system_code" = ${HarmonizedSystemCode}
+            "country_of_origin" = ${CountryOfOrigin}
+            "meta_title" = ${MetaTitle}
+            "meta_description" = ${MetaDescription}
+            "meta_keywords" = ${MetaKeywords}
+            "reindex" = ${Reindex}
+            "clear_cache" = ${ClearCache}
         }
 
         return $PSO

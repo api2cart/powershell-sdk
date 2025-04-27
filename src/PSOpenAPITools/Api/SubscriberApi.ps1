@@ -21,6 +21,9 @@ This parameter sets the number from which you want to get entities
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
 
+.PARAMETER PageCursor
+Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+
 .PARAMETER Subscribed
 Filter by subscription status
 
@@ -29,12 +32,6 @@ Store Id
 
 .PARAMETER Email
 Filter subscribers by email
-
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
-
-.PARAMETER Exclude
-Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 
 .PARAMETER CreatedFrom
 Retrieve entities from their creation date
@@ -48,11 +45,14 @@ Retrieve entities from their modification date
 .PARAMETER ModifiedTo
 Retrieve entities to their modification date
 
-.PARAMETER PageCursor
-Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
-
 .PARAMETER ResponseFields
 Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Params
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Exclude
+Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 
 .PARAMETER WithHttpInfo
 
@@ -72,38 +72,38 @@ function Invoke-SubscriberList {
         [System.Nullable[Int32]]
         ${Count},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Boolean]]
-        ${Subscribed},
-        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${StoreId},
-        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Email},
-        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Params},
-        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Exclude},
-        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CreatedFrom},
-        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CreatedTo},
-        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ModifiedFrom},
-        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ModifiedTo},
-        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${PageCursor},
-        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Boolean]]
+        ${Subscribed},
+        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${StoreId},
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Email},
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CreatedFrom},
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CreatedTo},
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ModifiedFrom},
+        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ModifiedTo},
+        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${ResponseFields},
+        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Params},
+        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -135,6 +135,10 @@ function Invoke-SubscriberList {
             $LocalVarQueryParameters['count'] = $Count
         }
 
+        if ($PageCursor) {
+            $LocalVarQueryParameters['page_cursor'] = $PageCursor
+        }
+
         if ($Subscribed) {
             $LocalVarQueryParameters['subscribed'] = $Subscribed
         }
@@ -145,14 +149,6 @@ function Invoke-SubscriberList {
 
         if ($Email) {
             $LocalVarQueryParameters['email'] = $Email
-        }
-
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
-        }
-
-        if ($Exclude) {
-            $LocalVarQueryParameters['exclude'] = $Exclude
         }
 
         if ($CreatedFrom) {
@@ -171,12 +167,16 @@ function Invoke-SubscriberList {
             $LocalVarQueryParameters['modified_to'] = $ModifiedTo
         }
 
-        if ($PageCursor) {
-            $LocalVarQueryParameters['page_cursor'] = $PageCursor
-        }
-
         if ($ResponseFields) {
             $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
+        }
+
+        if ($Exclude) {
+            $LocalVarQueryParameters['exclude'] = $Exclude
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {

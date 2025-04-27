@@ -27,6 +27,8 @@ Defines customer's unique password
 Defines the group where the customer
 .PARAMETER GroupIds
 Groups that will be assigned to a customer
+.PARAMETER Status
+Defines customer's status
 .PARAMETER CreatedTime
 Entity's date creation
 .PARAMETER ModifiedTime
@@ -37,8 +39,6 @@ Specifies customer's login name
 Defines customer's last login time
 .PARAMETER BirthDay
 Defines customer's birthday
-.PARAMETER Status
-Defines customer's status
 .PARAMETER NewsLetterSubscription
 Defines whether the newsletter subscription is available for the user
 .PARAMETER Consents
@@ -47,8 +47,6 @@ Defines consents to notifications
 Defines customer's gender
 .PARAMETER Website
 Link to customer website
-.PARAMETER StoreId
-Store Id
 .PARAMETER Fax
 Defines customer's fax
 .PARAMETER Company
@@ -59,6 +57,8 @@ Defines customer's phone number
 The customer note.
 .PARAMETER Country
 Specifies ISO code or name of country
+.PARAMETER StoreId
+Store Id
 .PARAMETER Address
 No description available.
 .OUTPUTS
@@ -89,25 +89,25 @@ function Initialize-CustomerAdd {
         ${GroupIds},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CreatedTime},
+        ${Status} = "enabled",
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ModifiedTime},
+        ${CreatedTime},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Login},
+        ${ModifiedTime},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${LastLogin},
+        ${Login},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${BirthDay},
+        ${LastLogin},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Status} = "enabled",
+        ${BirthDay},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${NewsLetterSubscription} = $false,
+        ${NewsLetterSubscription},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Consents},
@@ -119,22 +119,22 @@ function Initialize-CustomerAdd {
         ${Website},
         [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${StoreId},
+        ${Fax},
         [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Fax},
+        ${Company},
         [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Company},
+        ${Phone},
         [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Phone},
+        ${Note},
         [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Note},
+        ${Country},
         [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Country},
+        ${StoreId},
         [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Address}
@@ -146,14 +146,6 @@ function Initialize-CustomerAdd {
 
         if ($null -eq $Email) {
             throw "invalid value for 'Email', 'Email' cannot be null."
-        }
-
-        if ($null -eq $FirstName) {
-            throw "invalid value for 'FirstName', 'FirstName' cannot be null."
-        }
-
-        if ($null -eq $LastName) {
-            throw "invalid value for 'LastName', 'LastName' cannot be null."
         }
 
         if (!$Consents -and $Consents.length -lt 1) {
@@ -168,22 +160,22 @@ function Initialize-CustomerAdd {
             "password" = ${Password}
             "group" = ${Group}
             "group_ids" = ${GroupIds}
+            "status" = ${Status}
             "created_time" = ${CreatedTime}
             "modified_time" = ${ModifiedTime}
             "login" = ${Login}
             "last_login" = ${LastLogin}
             "birth_day" = ${BirthDay}
-            "status" = ${Status}
             "news_letter_subscription" = ${NewsLetterSubscription}
             "consents" = ${Consents}
             "gender" = ${Gender}
             "website" = ${Website}
-            "store_id" = ${StoreId}
             "fax" = ${Fax}
             "company" = ${Company}
             "phone" = ${Phone}
             "note" = ${Note}
             "country" = ${Country}
+            "store_id" = ${StoreId}
             "address" = ${Address}
         }
 
@@ -222,7 +214,7 @@ function ConvertFrom-JsonToCustomerAdd {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in CustomerAdd
-        $AllProperties = ("email", "first_name", "last_name", "password", "group", "group_ids", "created_time", "modified_time", "login", "last_login", "birth_day", "status", "news_letter_subscription", "consents", "gender", "website", "store_id", "fax", "company", "phone", "note", "country", "address")
+        $AllProperties = ("email", "first_name", "last_name", "password", "group", "group_ids", "status", "created_time", "modified_time", "login", "last_login", "birth_day", "news_letter_subscription", "consents", "gender", "website", "fax", "company", "phone", "note", "country", "store_id", "address")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -239,14 +231,14 @@ function ConvertFrom-JsonToCustomerAdd {
             $Email = $JsonParameters.PSobject.Properties["email"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "first_name"))) {
-            throw "Error! JSON cannot be serialized due to the required property 'first_name' missing."
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "first_name"))) { #optional property not found
+            $FirstName = $null
         } else {
             $FirstName = $JsonParameters.PSobject.Properties["first_name"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "last_name"))) {
-            throw "Error! JSON cannot be serialized due to the required property 'last_name' missing."
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "last_name"))) { #optional property not found
+            $LastName = $null
         } else {
             $LastName = $JsonParameters.PSobject.Properties["last_name"].value
         }
@@ -267,6 +259,12 @@ function ConvertFrom-JsonToCustomerAdd {
             $GroupIds = $null
         } else {
             $GroupIds = $JsonParameters.PSobject.Properties["group_ids"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "status"))) { #optional property not found
+            $Status = $null
+        } else {
+            $Status = $JsonParameters.PSobject.Properties["status"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "created_time"))) { #optional property not found
@@ -299,12 +297,6 @@ function ConvertFrom-JsonToCustomerAdd {
             $BirthDay = $JsonParameters.PSobject.Properties["birth_day"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "status"))) { #optional property not found
-            $Status = $null
-        } else {
-            $Status = $JsonParameters.PSobject.Properties["status"].value
-        }
-
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "news_letter_subscription"))) { #optional property not found
             $NewsLetterSubscription = $null
         } else {
@@ -327,12 +319,6 @@ function ConvertFrom-JsonToCustomerAdd {
             $Website = $null
         } else {
             $Website = $JsonParameters.PSobject.Properties["website"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_id"))) { #optional property not found
-            $StoreId = $null
-        } else {
-            $StoreId = $JsonParameters.PSobject.Properties["store_id"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "fax"))) { #optional property not found
@@ -365,6 +351,12 @@ function ConvertFrom-JsonToCustomerAdd {
             $Country = $JsonParameters.PSobject.Properties["country"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_id"))) { #optional property not found
+            $StoreId = $null
+        } else {
+            $StoreId = $JsonParameters.PSobject.Properties["store_id"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "address"))) { #optional property not found
             $Address = $null
         } else {
@@ -378,22 +370,22 @@ function ConvertFrom-JsonToCustomerAdd {
             "password" = ${Password}
             "group" = ${Group}
             "group_ids" = ${GroupIds}
+            "status" = ${Status}
             "created_time" = ${CreatedTime}
             "modified_time" = ${ModifiedTime}
             "login" = ${Login}
             "last_login" = ${LastLogin}
             "birth_day" = ${BirthDay}
-            "status" = ${Status}
             "news_letter_subscription" = ${NewsLetterSubscription}
             "consents" = ${Consents}
             "gender" = ${Gender}
             "website" = ${Website}
-            "store_id" = ${StoreId}
             "fax" = ${Fax}
             "company" = ${Company}
             "phone" = ${Phone}
             "note" = ${Note}
             "country" = ${Country}
+            "store_id" = ${StoreId}
             "address" = ${Address}
         }
 

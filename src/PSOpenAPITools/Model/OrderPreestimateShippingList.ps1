@@ -15,14 +15,14 @@ No summary available.
 
 No description available.
 
-.PARAMETER StoreId
-Store Id
 .PARAMETER WarehouseId
 This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
-.PARAMETER CustomerEmail
-Retrieves orders specified by customer email
 .PARAMETER CustomerId
 Retrieves orders specified by customer id
+.PARAMETER CustomerEmail
+Retrieves orders specified by customer email
+.PARAMETER StoreId
+Store Id
 .PARAMETER ShippAddress1
 Specifies first shipping address
 .PARAMETER ShippCity
@@ -49,16 +49,16 @@ function Initialize-OrderPreestimateShippingList {
     Param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${StoreId},
+        ${WarehouseId},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${WarehouseId},
+        ${CustomerId},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${CustomerEmail},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CustomerId},
+        ${StoreId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${ShippAddress1},
@@ -99,10 +99,10 @@ function Initialize-OrderPreestimateShippingList {
 
 
         $PSO = [PSCustomObject]@{
-            "store_id" = ${StoreId}
             "warehouse_id" = ${WarehouseId}
-            "customer_email" = ${CustomerEmail}
             "customer_id" = ${CustomerId}
+            "customer_email" = ${CustomerEmail}
+            "store_id" = ${StoreId}
             "shipp_address_1" = ${ShippAddress1}
             "shipp_city" = ${ShippCity}
             "shipp_postcode" = ${ShippPostcode}
@@ -148,7 +148,7 @@ function ConvertFrom-JsonToOrderPreestimateShippingList {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in OrderPreestimateShippingList
-        $AllProperties = ("store_id", "warehouse_id", "customer_email", "customer_id", "shipp_address_1", "shipp_city", "shipp_postcode", "shipp_state", "shipp_country", "params", "exclude", "order_item")
+        $AllProperties = ("warehouse_id", "customer_id", "customer_email", "store_id", "shipp_address_1", "shipp_city", "shipp_postcode", "shipp_state", "shipp_country", "params", "exclude", "order_item")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -171,16 +171,16 @@ function ConvertFrom-JsonToOrderPreestimateShippingList {
             $OrderItem = $JsonParameters.PSobject.Properties["order_item"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_id"))) { #optional property not found
-            $StoreId = $null
-        } else {
-            $StoreId = $JsonParameters.PSobject.Properties["store_id"].value
-        }
-
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "warehouse_id"))) { #optional property not found
             $WarehouseId = $null
         } else {
             $WarehouseId = $JsonParameters.PSobject.Properties["warehouse_id"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "customer_id"))) { #optional property not found
+            $CustomerId = $null
+        } else {
+            $CustomerId = $JsonParameters.PSobject.Properties["customer_id"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "customer_email"))) { #optional property not found
@@ -189,10 +189,10 @@ function ConvertFrom-JsonToOrderPreestimateShippingList {
             $CustomerEmail = $JsonParameters.PSobject.Properties["customer_email"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "customer_id"))) { #optional property not found
-            $CustomerId = $null
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_id"))) { #optional property not found
+            $StoreId = $null
         } else {
-            $CustomerId = $JsonParameters.PSobject.Properties["customer_id"].value
+            $StoreId = $JsonParameters.PSobject.Properties["store_id"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipp_address_1"))) { #optional property not found
@@ -232,10 +232,10 @@ function ConvertFrom-JsonToOrderPreestimateShippingList {
         }
 
         $PSO = [PSCustomObject]@{
-            "store_id" = ${StoreId}
             "warehouse_id" = ${WarehouseId}
-            "customer_email" = ${CustomerEmail}
             "customer_id" = ${CustomerId}
+            "customer_email" = ${CustomerEmail}
+            "store_id" = ${StoreId}
             "shipp_address_1" = ${ShippAddress1}
             "shipp_city" = ${ShippCity}
             "shipp_postcode" = ${ShippPostcode}

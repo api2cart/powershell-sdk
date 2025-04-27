@@ -15,43 +15,43 @@ order.abandoned.list
 
 No description available.
 
+.PARAMETER Start
+This parameter sets the number from which you want to get entities
+
+.PARAMETER Count
+This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+
+.PARAMETER PageCursor
+Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+
 .PARAMETER CustomerId
 Retrieves orders specified by customer id
 
 .PARAMETER CustomerEmail
 Retrieves orders specified by customer email
 
-.PARAMETER CreatedTo
-Retrieve entities to their creation date
+.PARAMETER StoreId
+Store Id
 
 .PARAMETER CreatedFrom
 Retrieve entities from their creation date
 
-.PARAMETER ModifiedTo
-Retrieve entities to their modification date
+.PARAMETER CreatedTo
+Retrieve entities to their creation date
 
 .PARAMETER ModifiedFrom
 Retrieve entities from their modification date
 
+.PARAMETER ModifiedTo
+Retrieve entities to their modification date
+
 .PARAMETER SkipEmptyEmail
 Filter empty emails
 
-.PARAMETER StoreId
-Store Id
-
-.PARAMETER PageCursor
-Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
-
-.PARAMETER Count
-This parameter sets the entity amount that has to be retrieved. Max allowed count=250
-
-.PARAMETER Start
-This parameter sets the number from which you want to get entities
-
-.PARAMETER Params
+.PARAMETER ResponseFields
 Set this parameter in order to choose which entity fields you want to retrieve
 
-.PARAMETER ResponseFields
+.PARAMETER Params
 Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Exclude
@@ -69,44 +69,44 @@ function Invoke-OrderAbandonedList {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CustomerId},
-        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CustomerEmail},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CreatedTo},
-        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CreatedFrom},
-        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ModifiedTo},
-        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ModifiedFrom},
-        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Boolean]]
-        ${SkipEmptyEmail},
-        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${StoreId},
-        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${PageCursor},
-        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Int32]]
-        ${Count},
-        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Start},
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Int32]]
+        ${Count},
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${PageCursor},
+        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CustomerId},
+        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CustomerEmail},
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${StoreId},
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CreatedFrom},
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CreatedTo},
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ModifiedFrom},
+        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ModifiedTo},
+        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Boolean]]
+        ${SkipEmptyEmail},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ResponseFields},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Params},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Exclude},
@@ -133,6 +133,18 @@ function Invoke-OrderAbandonedList {
 
         $LocalVarUri = '/order.abandoned.list.json'
 
+        if ($Start) {
+            $LocalVarQueryParameters['start'] = $Start
+        }
+
+        if ($Count) {
+            $LocalVarQueryParameters['count'] = $Count
+        }
+
+        if ($PageCursor) {
+            $LocalVarQueryParameters['page_cursor'] = $PageCursor
+        }
+
         if ($CustomerId) {
             $LocalVarQueryParameters['customer_id'] = $CustomerId
         }
@@ -141,48 +153,36 @@ function Invoke-OrderAbandonedList {
             $LocalVarQueryParameters['customer_email'] = $CustomerEmail
         }
 
-        if ($CreatedTo) {
-            $LocalVarQueryParameters['created_to'] = $CreatedTo
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
         if ($CreatedFrom) {
             $LocalVarQueryParameters['created_from'] = $CreatedFrom
         }
 
-        if ($ModifiedTo) {
-            $LocalVarQueryParameters['modified_to'] = $ModifiedTo
+        if ($CreatedTo) {
+            $LocalVarQueryParameters['created_to'] = $CreatedTo
         }
 
         if ($ModifiedFrom) {
             $LocalVarQueryParameters['modified_from'] = $ModifiedFrom
         }
 
+        if ($ModifiedTo) {
+            $LocalVarQueryParameters['modified_to'] = $ModifiedTo
+        }
+
         if ($SkipEmptyEmail) {
             $LocalVarQueryParameters['skip_empty_email'] = $SkipEmptyEmail
         }
 
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
-        }
-
-        if ($PageCursor) {
-            $LocalVarQueryParameters['page_cursor'] = $PageCursor
-        }
-
-        if ($Count) {
-            $LocalVarQueryParameters['count'] = $Count
-        }
-
-        if ($Start) {
-            $LocalVarQueryParameters['start'] = $Start
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
         if ($Params) {
             $LocalVarQueryParameters['params'] = $Params
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
         if ($Exclude) {
@@ -336,8 +336,17 @@ order.count
 
 No description available.
 
+.PARAMETER OrderIds
+Counts orders specified by order ids
+
+.PARAMETER Ids
+Counts orders specified by ids
+
 .PARAMETER CustomerId
 Counts orders quantity specified by customer id
+
+.PARAMETER StoreId
+Counts orders quantity specified by store id
 
 .PARAMETER CustomerEmail
 Counts orders quantity specified by customer email
@@ -347,27 +356,6 @@ Counts orders quantity specified by order status
 
 .PARAMETER OrderStatusIds
 Retrieves orders specified by order statuses
-
-.PARAMETER CreatedTo
-Retrieve entities to their creation date
-
-.PARAMETER CreatedFrom
-Retrieve entities from their creation date
-
-.PARAMETER ModifiedTo
-Retrieve entities to their modification date
-
-.PARAMETER ModifiedFrom
-Retrieve entities from their modification date
-
-.PARAMETER StoreId
-Counts orders quantity specified by store id
-
-.PARAMETER Ids
-Counts orders specified by ids
-
-.PARAMETER OrderIds
-Counts orders specified by order ids
 
 .PARAMETER EbayOrderStatus
 Counts orders quantity specified by order status
@@ -396,6 +384,18 @@ Order tags
 .PARAMETER ShipNodeType
 Retrieves order with ship node type
 
+.PARAMETER CreatedFrom
+Retrieve entities from their creation date
+
+.PARAMETER CreatedTo
+Retrieve entities to their creation date
+
+.PARAMETER ModifiedFrom
+Retrieve entities from their modification date
+
+.PARAMETER ModifiedTo
+Retrieve entities to their modification date
+
 .PARAMETER WithHttpInfo
 
 A switch when turned on will return a hash table of Response, StatusCode and Headers instead of just the Response
@@ -409,64 +409,64 @@ function Invoke-OrderCount {
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CustomerId},
+        ${OrderIds},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CustomerEmail},
+        ${Ids},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${OrderStatus},
+        ${CustomerId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String[]]
-        ${OrderStatusIds},
-        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CreatedTo},
-        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CreatedFrom},
-        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ModifiedTo},
-        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ModifiedFrom},
-        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${StoreId},
-        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Ids},
-        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        ${CustomerEmail},
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${OrderIds},
-        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        ${OrderStatus},
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String[]]
+        ${OrderStatusIds},
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${EbayOrderStatus},
-        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${FinancialStatus},
-        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String[]]
         ${FinancialStatusIds},
-        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${FulfillmentChannel},
-        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${FulfillmentStatus},
-        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${ShippingMethod},
-        [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${DeliveryMethod},
-        [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Tags},
-        [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${ShipNodeType},
+        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CreatedFrom},
+        [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CreatedTo},
+        [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ModifiedFrom},
+        [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ModifiedTo},
         [Switch]
         $WithHttpInfo
     )
@@ -490,8 +490,20 @@ function Invoke-OrderCount {
 
         $LocalVarUri = '/order.count.json'
 
+        if ($OrderIds) {
+            $LocalVarQueryParameters['order_ids'] = $OrderIds
+        }
+
+        if ($Ids) {
+            $LocalVarQueryParameters['ids'] = $Ids
+        }
+
         if ($CustomerId) {
             $LocalVarQueryParameters['customer_id'] = $CustomerId
+        }
+
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
         if ($CustomerEmail) {
@@ -504,34 +516,6 @@ function Invoke-OrderCount {
 
         if ($OrderStatusIds) {
             $LocalVarQueryParameters['order_status_ids'] = $OrderStatusIds
-        }
-
-        if ($CreatedTo) {
-            $LocalVarQueryParameters['created_to'] = $CreatedTo
-        }
-
-        if ($CreatedFrom) {
-            $LocalVarQueryParameters['created_from'] = $CreatedFrom
-        }
-
-        if ($ModifiedTo) {
-            $LocalVarQueryParameters['modified_to'] = $ModifiedTo
-        }
-
-        if ($ModifiedFrom) {
-            $LocalVarQueryParameters['modified_from'] = $ModifiedFrom
-        }
-
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
-        }
-
-        if ($Ids) {
-            $LocalVarQueryParameters['ids'] = $Ids
-        }
-
-        if ($OrderIds) {
-            $LocalVarQueryParameters['order_ids'] = $OrderIds
         }
 
         if ($EbayOrderStatus) {
@@ -568,6 +552,22 @@ function Invoke-OrderCount {
 
         if ($ShipNodeType) {
             $LocalVarQueryParameters['ship_node_type'] = $ShipNodeType
+        }
+
+        if ($CreatedFrom) {
+            $LocalVarQueryParameters['created_from'] = $CreatedFrom
+        }
+
+        if ($CreatedTo) {
+            $LocalVarQueryParameters['created_to'] = $CreatedTo
+        }
+
+        if ($ModifiedFrom) {
+            $LocalVarQueryParameters['modified_from'] = $ModifiedFrom
+        }
+
+        if ($ModifiedTo) {
+            $LocalVarQueryParameters['modified_to'] = $ModifiedTo
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -702,6 +702,12 @@ order.find
 
 No description available.
 
+.PARAMETER Start
+This parameter sets the number from which you want to get entities
+
+.PARAMETER Count
+This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+
 .PARAMETER CustomerId
 Retrieves orders specified by customer id
 
@@ -711,17 +717,8 @@ Retrieves orders specified by customer email
 .PARAMETER OrderStatus
 Retrieves orders specified by order status
 
-.PARAMETER Start
-This parameter sets the number from which you want to get entities
-
-.PARAMETER Count
-This parameter sets the entity amount that has to be retrieved. Max allowed count=250
-
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
-
-.PARAMETER Exclude
-Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+.PARAMETER FinancialStatus
+Retrieves orders specified by financial status
 
 .PARAMETER CreatedTo
 Retrieve entities to their creation date
@@ -735,8 +732,11 @@ Retrieve entities to their modification date
 .PARAMETER ModifiedFrom
 Retrieve entities from their modification date
 
-.PARAMETER FinancialStatus
-Retrieves orders specified by financial status
+.PARAMETER Params
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Exclude
+Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 
 .PARAMETER WithHttpInfo
 
@@ -750,41 +750,41 @@ function Invoke-OrderFind {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CustomerId},
-        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CustomerEmail},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${OrderStatus},
-        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Start},
-        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Count},
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CustomerId},
+        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CustomerEmail},
+        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${OrderStatus},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${FinancialStatus},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${CreatedTo},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedTo},
+        ${CreatedFrom},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedFrom},
+        ${ModifiedTo},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedTo},
+        ${ModifiedFrom},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedFrom},
+        ${Params},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${FinancialStatus},
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -808,6 +808,14 @@ function Invoke-OrderFind {
 
         $LocalVarUri = '/order.find.json'
 
+        if ($Start) {
+            $LocalVarQueryParameters['start'] = $Start
+        }
+
+        if ($Count) {
+            $LocalVarQueryParameters['count'] = $Count
+        }
+
         if ($CustomerId) {
             $LocalVarQueryParameters['customer_id'] = $CustomerId
         }
@@ -820,20 +828,8 @@ function Invoke-OrderFind {
             $LocalVarQueryParameters['order_status'] = $OrderStatus
         }
 
-        if ($Start) {
-            $LocalVarQueryParameters['start'] = $Start
-        }
-
-        if ($Count) {
-            $LocalVarQueryParameters['count'] = $Count
-        }
-
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
-        }
-
-        if ($Exclude) {
-            $LocalVarQueryParameters['exclude'] = $Exclude
+        if ($FinancialStatus) {
+            $LocalVarQueryParameters['financial_status'] = $FinancialStatus
         }
 
         if ($CreatedTo) {
@@ -852,8 +848,12 @@ function Invoke-OrderFind {
             $LocalVarQueryParameters['modified_from'] = $ModifiedFrom
         }
 
-        if ($FinancialStatus) {
-            $LocalVarQueryParameters['financial_status'] = $FinancialStatus
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
+        }
+
+        if ($Exclude) {
+            $LocalVarQueryParameters['exclude'] = $Exclude
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -998,11 +998,14 @@ order.info
 
 No description available.
 
+.PARAMETER Id
+Retrieves order info specified by id
+
 .PARAMETER OrderId
 Retrieves order’s info specified by order id
 
-.PARAMETER Id
-Retrieves order info specified by id
+.PARAMETER StoreId
+Defines store id where the order should be found
 
 .PARAMETER Params
 Set this parameter in order to choose which entity fields you want to retrieve
@@ -1012,9 +1015,6 @@ Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Exclude
 Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
-.PARAMETER StoreId
-Defines store id where the order should be found
 
 .PARAMETER EnableCache
 If the value is 'true' and order exist in our cache, we will return order.info response from cache
@@ -1035,22 +1035,22 @@ function Invoke-OrderInfo {
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${OrderId},
+        ${Id},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Id},
+        ${OrderId},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${StoreId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Params},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${ResponseFields},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${Exclude},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${EnableCache},
@@ -1080,12 +1080,16 @@ function Invoke-OrderInfo {
 
         $LocalVarUri = '/order.info.json'
 
+        if ($Id) {
+            $LocalVarQueryParameters['id'] = $Id
+        }
+
         if ($OrderId) {
             $LocalVarQueryParameters['order_id'] = $OrderId
         }
 
-        if ($Id) {
-            $LocalVarQueryParameters['id'] = $Id
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
         if ($Params) {
@@ -1098,10 +1102,6 @@ function Invoke-OrderInfo {
 
         if ($Exclude) {
             $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
         if ($EnableCache) {
@@ -1161,11 +1161,38 @@ order.list
 
 No description available.
 
+.PARAMETER Start
+This parameter sets the number from which you want to get entities
+
+.PARAMETER Count
+This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+
+.PARAMETER PageCursor
+Used to retrieve orders via cursor-based pagination (it can't be used with any other filtering parameter)
+
+.PARAMETER Ids
+Retrieves orders specified by ids
+
+.PARAMETER OrderIds
+Retrieves orders specified by order ids
+
+.PARAMETER SinceId
+Retrieve entities starting from the specified id.
+
+.PARAMETER StoreId
+Store Id
+
 .PARAMETER CustomerId
 Retrieves orders specified by customer id
 
 .PARAMETER CustomerEmail
 Retrieves orders specified by customer email
+
+.PARAMETER BasketId
+Retrieves order’s info specified by basket id.
+
+.PARAMETER CurrencyId
+Currency Id
 
 .PARAMETER Phone
 Filter orders by customer's phone number
@@ -1176,14 +1203,56 @@ Retrieves orders specified by order status
 .PARAMETER OrderStatusIds
 Retrieves orders specified by order statuses
 
-.PARAMETER Start
-This parameter sets the number from which you want to get entities
+.PARAMETER EbayOrderStatus
+Retrieves orders specified by order status
 
-.PARAMETER Count
-This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+.PARAMETER FinancialStatus
+Retrieves orders specified by financial status
 
-.PARAMETER PageCursor
-Used to retrieve orders via cursor-based pagination (it can't be used with any other filtering parameter)
+.PARAMETER FinancialStatusIds
+Retrieves orders specified by financial status ids
+
+.PARAMETER FulfillmentStatus
+Create order with fulfillment status
+
+.PARAMETER ReturnStatus
+Retrieves orders specified by return status
+
+.PARAMETER FulfillmentChannel
+Retrieves order with a fulfillment channel
+
+.PARAMETER ShippingMethod
+Retrieve entities according to shipping method
+
+.PARAMETER SkipOrderIds
+Skipped orders by ids
+
+.PARAMETER IsDeleted
+Filter deleted orders
+
+.PARAMETER ShippingCountryIso3
+Retrieve entities according to shipping country
+
+.PARAMETER DeliveryMethod
+Retrieves order with delivery method
+
+.PARAMETER ShipNodeType
+Retrieves order with ship node type
+
+.PARAMETER CreatedTo
+Retrieve entities to their creation date
+
+.PARAMETER CreatedFrom
+Retrieve entities from their creation date
+
+.PARAMETER ModifiedTo
+Retrieve entities to their modification date
+
+.PARAMETER ModifiedFrom
+Retrieve entities from their modification date
+
+.PARAMETER Tags
+Order tags
 
 .PARAMETER SortBy
 Set field to sort by
@@ -1200,77 +1269,8 @@ Set this parameter in order to choose which entity fields you want to retrieve
 .PARAMETER Exclude
 Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 
-.PARAMETER CreatedTo
-Retrieve entities to their creation date
-
-.PARAMETER CreatedFrom
-Retrieve entities from their creation date
-
-.PARAMETER ModifiedTo
-Retrieve entities to their modification date
-
-.PARAMETER ModifiedFrom
-Retrieve entities from their modification date
-
-.PARAMETER StoreId
-Store Id
-
-.PARAMETER Ids
-Retrieves orders specified by ids
-
-.PARAMETER OrderIds
-Retrieves orders specified by order ids
-
-.PARAMETER EbayOrderStatus
-Retrieves orders specified by order status
-
-.PARAMETER BasketId
-Retrieves order’s info specified by basket id.
-
-.PARAMETER FinancialStatus
-Retrieves orders specified by financial status
-
-.PARAMETER FinancialStatusIds
-Retrieves orders specified by financial status ids
-
-.PARAMETER FulfillmentStatus
-Create order with fulfillment status
-
-.PARAMETER FulfillmentChannel
-Retrieves order with a fulfillment channel
-
-.PARAMETER ShippingMethod
-Retrieve entities according to shipping method
-
-.PARAMETER SkipOrderIds
-Skipped orders by ids
-
-.PARAMETER SinceId
-Retrieve entities starting from the specified id.
-
-.PARAMETER IsDeleted
-Filter deleted orders
-
-.PARAMETER ShippingCountryIso3
-Retrieve entities according to shipping country
-
 .PARAMETER EnableCache
 If the value is 'true', we will cache orders for a 15 minutes in order to increase speed and reduce requests throttling for some methods and shoping platforms (for example order.shipment.add)
-
-.PARAMETER DeliveryMethod
-Retrieves order with delivery method
-
-.PARAMETER Tags
-Order tags
-
-.PARAMETER ShipNodeType
-Retrieves order with ship node type
-
-.PARAMETER CurrencyId
-Currency Id
-
-.PARAMETER ReturnStatus
-Retrieves orders specified by return status
 
 .PARAMETER UseLatestApiVersion
 Use the latest platform API version
@@ -1287,116 +1287,116 @@ function Invoke-OrderList {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CustomerId},
-        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CustomerEmail},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Phone},
-        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${OrderStatus},
-        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String[]]
-        ${OrderStatusIds},
-        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Start},
-        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Count},
-        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${PageCursor},
-        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${SortBy},
-        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${SortDirection},
-        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Params},
-        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ResponseFields},
-        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Exclude},
-        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CreatedTo},
-        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CreatedFrom},
-        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ModifiedTo},
-        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ModifiedFrom},
-        [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${StoreId},
-        [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Ids},
-        [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${OrderIds},
-        [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${EbayOrderStatus},
-        [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${BasketId},
-        [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${FinancialStatus},
-        [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String[]]
-        ${FinancialStatusIds},
-        [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${FulfillmentStatus},
-        [Parameter(Position = 25, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${FulfillmentChannel},
-        [Parameter(Position = 26, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ShippingMethod},
-        [Parameter(Position = 27, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${SkipOrderIds},
-        [Parameter(Position = 28, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${SinceId},
-        [Parameter(Position = 29, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Boolean]]
-        ${IsDeleted},
-        [Parameter(Position = 30, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ShippingCountryIso3},
-        [Parameter(Position = 31, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Boolean]]
-        ${EnableCache},
-        [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        ${StoreId},
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${DeliveryMethod},
-        [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        ${CustomerId},
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Tags},
-        [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        ${CustomerEmail},
+        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ShipNodeType},
-        [Parameter(Position = 35, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        ${BasketId},
+        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${CurrencyId},
-        [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Phone},
+        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${OrderStatus},
+        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String[]]
+        ${OrderStatusIds},
+        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${EbayOrderStatus},
+        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${FinancialStatus},
+        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String[]]
+        ${FinancialStatusIds},
+        [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${FulfillmentStatus},
+        [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${ReturnStatus},
+        [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${FulfillmentChannel},
+        [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ShippingMethod},
+        [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${SkipOrderIds},
+        [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Boolean]]
+        ${IsDeleted},
+        [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ShippingCountryIso3},
+        [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${DeliveryMethod},
+        [Parameter(Position = 25, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ShipNodeType},
+        [Parameter(Position = 26, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CreatedTo},
+        [Parameter(Position = 27, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CreatedFrom},
+        [Parameter(Position = 28, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ModifiedTo},
+        [Parameter(Position = 29, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ModifiedFrom},
+        [Parameter(Position = 30, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Tags},
+        [Parameter(Position = 31, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${SortBy},
+        [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${SortDirection},
+        [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Params},
+        [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ResponseFields},
+        [Parameter(Position = 35, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Exclude},
+        [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Boolean]]
+        ${EnableCache},
         [Parameter(Position = 37, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${UseLatestApiVersion},
@@ -1423,12 +1423,48 @@ function Invoke-OrderList {
 
         $LocalVarUri = '/order.list.json'
 
+        if ($Start) {
+            $LocalVarQueryParameters['start'] = $Start
+        }
+
+        if ($Count) {
+            $LocalVarQueryParameters['count'] = $Count
+        }
+
+        if ($PageCursor) {
+            $LocalVarQueryParameters['page_cursor'] = $PageCursor
+        }
+
+        if ($Ids) {
+            $LocalVarQueryParameters['ids'] = $Ids
+        }
+
+        if ($OrderIds) {
+            $LocalVarQueryParameters['order_ids'] = $OrderIds
+        }
+
+        if ($SinceId) {
+            $LocalVarQueryParameters['since_id'] = $SinceId
+        }
+
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
+        }
+
         if ($CustomerId) {
             $LocalVarQueryParameters['customer_id'] = $CustomerId
         }
 
         if ($CustomerEmail) {
             $LocalVarQueryParameters['customer_email'] = $CustomerEmail
+        }
+
+        if ($BasketId) {
+            $LocalVarQueryParameters['basket_id'] = $BasketId
+        }
+
+        if ($CurrencyId) {
+            $LocalVarQueryParameters['currency_id'] = $CurrencyId
         }
 
         if ($Phone) {
@@ -1443,16 +1479,72 @@ function Invoke-OrderList {
             $LocalVarQueryParameters['order_status_ids'] = $OrderStatusIds
         }
 
-        if ($Start) {
-            $LocalVarQueryParameters['start'] = $Start
+        if ($EbayOrderStatus) {
+            $LocalVarQueryParameters['ebay_order_status'] = $EbayOrderStatus
         }
 
-        if ($Count) {
-            $LocalVarQueryParameters['count'] = $Count
+        if ($FinancialStatus) {
+            $LocalVarQueryParameters['financial_status'] = $FinancialStatus
         }
 
-        if ($PageCursor) {
-            $LocalVarQueryParameters['page_cursor'] = $PageCursor
+        if ($FinancialStatusIds) {
+            $LocalVarQueryParameters['financial_status_ids'] = $FinancialStatusIds
+        }
+
+        if ($FulfillmentStatus) {
+            $LocalVarQueryParameters['fulfillment_status'] = $FulfillmentStatus
+        }
+
+        if ($ReturnStatus) {
+            $LocalVarQueryParameters['return_status'] = $ReturnStatus
+        }
+
+        if ($FulfillmentChannel) {
+            $LocalVarQueryParameters['fulfillment_channel'] = $FulfillmentChannel
+        }
+
+        if ($ShippingMethod) {
+            $LocalVarQueryParameters['shipping_method'] = $ShippingMethod
+        }
+
+        if ($SkipOrderIds) {
+            $LocalVarQueryParameters['skip_order_ids'] = $SkipOrderIds
+        }
+
+        if ($IsDeleted) {
+            $LocalVarQueryParameters['is_deleted'] = $IsDeleted
+        }
+
+        if ($ShippingCountryIso3) {
+            $LocalVarQueryParameters['shipping_country_iso3'] = $ShippingCountryIso3
+        }
+
+        if ($DeliveryMethod) {
+            $LocalVarQueryParameters['delivery_method'] = $DeliveryMethod
+        }
+
+        if ($ShipNodeType) {
+            $LocalVarQueryParameters['ship_node_type'] = $ShipNodeType
+        }
+
+        if ($CreatedTo) {
+            $LocalVarQueryParameters['created_to'] = $CreatedTo
+        }
+
+        if ($CreatedFrom) {
+            $LocalVarQueryParameters['created_from'] = $CreatedFrom
+        }
+
+        if ($ModifiedTo) {
+            $LocalVarQueryParameters['modified_to'] = $ModifiedTo
+        }
+
+        if ($ModifiedFrom) {
+            $LocalVarQueryParameters['modified_from'] = $ModifiedFrom
+        }
+
+        if ($Tags) {
+            $LocalVarQueryParameters['tags'] = $Tags
         }
 
         if ($SortBy) {
@@ -1475,100 +1567,8 @@ function Invoke-OrderList {
             $LocalVarQueryParameters['exclude'] = $Exclude
         }
 
-        if ($CreatedTo) {
-            $LocalVarQueryParameters['created_to'] = $CreatedTo
-        }
-
-        if ($CreatedFrom) {
-            $LocalVarQueryParameters['created_from'] = $CreatedFrom
-        }
-
-        if ($ModifiedTo) {
-            $LocalVarQueryParameters['modified_to'] = $ModifiedTo
-        }
-
-        if ($ModifiedFrom) {
-            $LocalVarQueryParameters['modified_from'] = $ModifiedFrom
-        }
-
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
-        }
-
-        if ($Ids) {
-            $LocalVarQueryParameters['ids'] = $Ids
-        }
-
-        if ($OrderIds) {
-            $LocalVarQueryParameters['order_ids'] = $OrderIds
-        }
-
-        if ($EbayOrderStatus) {
-            $LocalVarQueryParameters['ebay_order_status'] = $EbayOrderStatus
-        }
-
-        if ($BasketId) {
-            $LocalVarQueryParameters['basket_id'] = $BasketId
-        }
-
-        if ($FinancialStatus) {
-            $LocalVarQueryParameters['financial_status'] = $FinancialStatus
-        }
-
-        if ($FinancialStatusIds) {
-            $LocalVarQueryParameters['financial_status_ids'] = $FinancialStatusIds
-        }
-
-        if ($FulfillmentStatus) {
-            $LocalVarQueryParameters['fulfillment_status'] = $FulfillmentStatus
-        }
-
-        if ($FulfillmentChannel) {
-            $LocalVarQueryParameters['fulfillment_channel'] = $FulfillmentChannel
-        }
-
-        if ($ShippingMethod) {
-            $LocalVarQueryParameters['shipping_method'] = $ShippingMethod
-        }
-
-        if ($SkipOrderIds) {
-            $LocalVarQueryParameters['skip_order_ids'] = $SkipOrderIds
-        }
-
-        if ($SinceId) {
-            $LocalVarQueryParameters['since_id'] = $SinceId
-        }
-
-        if ($IsDeleted) {
-            $LocalVarQueryParameters['is_deleted'] = $IsDeleted
-        }
-
-        if ($ShippingCountryIso3) {
-            $LocalVarQueryParameters['shipping_country_iso3'] = $ShippingCountryIso3
-        }
-
         if ($EnableCache) {
             $LocalVarQueryParameters['enable_cache'] = $EnableCache
-        }
-
-        if ($DeliveryMethod) {
-            $LocalVarQueryParameters['delivery_method'] = $DeliveryMethod
-        }
-
-        if ($Tags) {
-            $LocalVarQueryParameters['tags'] = $Tags
-        }
-
-        if ($ShipNodeType) {
-            $LocalVarQueryParameters['ship_node_type'] = $ShipNodeType
-        }
-
-        if ($CurrencyId) {
-            $LocalVarQueryParameters['currency_id'] = $CurrencyId
-        }
-
-        if ($ReturnStatus) {
-            $LocalVarQueryParameters['return_status'] = $ReturnStatus
         }
 
         if ($UseLatestApiVersion) {
@@ -2451,17 +2451,17 @@ Defines the order id
 .PARAMETER Start
 This parameter sets the number from which you want to get entities
 
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
+.PARAMETER StoreId
+Store Id
 
 .PARAMETER ResponseFields
 Set this parameter in order to choose which entity fields you want to retrieve
 
+.PARAMETER Params
+Set this parameter in order to choose which entity fields you want to retrieve
+
 .PARAMETER Exclude
 Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
-.PARAMETER StoreId
-Store Id
 
 .PARAMETER WithHttpInfo
 
@@ -2485,16 +2485,16 @@ function Invoke-OrderShipmentInfo {
         ${Start},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${StoreId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${ResponseFields},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${Params},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -2518,6 +2518,10 @@ function Invoke-OrderShipmentInfo {
 
         $LocalVarUri = '/order.shipment.info.json'
 
+        if ($Start) {
+            $LocalVarQueryParameters['start'] = $Start
+        }
+
         if (!$Id) {
             throw "Error! The required parameter `Id` missing when calling orderShipmentInfo."
         }
@@ -2528,24 +2532,20 @@ function Invoke-OrderShipmentInfo {
         }
         $LocalVarQueryParameters['order_id'] = $OrderId
 
-        if ($Start) {
-            $LocalVarQueryParameters['start'] = $Start
-        }
-
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
         if ($ResponseFields) {
             $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
-        if ($Exclude) {
-            $LocalVarQueryParameters['exclude'] = $Exclude
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
         }
 
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
+        if ($Exclude) {
+            $LocalVarQueryParameters['exclude'] = $Exclude
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -2600,23 +2600,17 @@ No description available.
 .PARAMETER OrderId
 Retrieves shipments specified by order id
 
-.PARAMETER PageCursor
-Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
-
 .PARAMETER Start
 This parameter sets the number from which you want to get entities
 
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
 
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
+.PARAMETER PageCursor
+Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
 
-.PARAMETER ResponseFields
-Set this parameter in order to choose which entity fields you want to retrieve
-
-.PARAMETER Exclude
-Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+.PARAMETER StoreId
+Store Id
 
 .PARAMETER CreatedFrom
 Retrieve entities from their creation date
@@ -2630,8 +2624,14 @@ Retrieve entities from their modification date
 .PARAMETER ModifiedTo
 Retrieve entities to their modification date
 
-.PARAMETER StoreId
-Store Id
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Params
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Exclude
+Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 
 .PARAMETER WithHttpInfo
 
@@ -2648,38 +2648,38 @@ function Invoke-OrderShipmentList {
         [String]
         ${OrderId},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${PageCursor},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Start},
-        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Count},
+        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${PageCursor},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${StoreId},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${CreatedFrom},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${CreatedTo},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedFrom},
+        ${ModifiedFrom},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedTo},
+        ${ModifiedTo},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedFrom},
+        ${ResponseFields},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedTo},
+        ${Params},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -2703,15 +2703,6 @@ function Invoke-OrderShipmentList {
 
         $LocalVarUri = '/order.shipment.list.json'
 
-        if (!$OrderId) {
-            throw "Error! The required parameter `OrderId` missing when calling orderShipmentList."
-        }
-        $LocalVarQueryParameters['order_id'] = $OrderId
-
-        if ($PageCursor) {
-            $LocalVarQueryParameters['page_cursor'] = $PageCursor
-        }
-
         if ($Start) {
             $LocalVarQueryParameters['start'] = $Start
         }
@@ -2720,16 +2711,17 @@ function Invoke-OrderShipmentList {
             $LocalVarQueryParameters['count'] = $Count
         }
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
+        if ($PageCursor) {
+            $LocalVarQueryParameters['page_cursor'] = $PageCursor
         }
 
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        if (!$OrderId) {
+            throw "Error! The required parameter `OrderId` missing when calling orderShipmentList."
         }
+        $LocalVarQueryParameters['order_id'] = $OrderId
 
-        if ($Exclude) {
-            $LocalVarQueryParameters['exclude'] = $Exclude
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
         if ($CreatedFrom) {
@@ -2748,8 +2740,16 @@ function Invoke-OrderShipmentList {
             $LocalVarQueryParameters['modified_to'] = $ModifiedTo
         }
 
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
+        }
+
+        if ($Exclude) {
+            $LocalVarQueryParameters['exclude'] = $Exclude
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -3116,6 +3116,9 @@ Retrieves order transactions specified by order ids
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
 
+.PARAMETER PageCursor
+Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+
 .PARAMETER StoreId
 Store Id
 
@@ -3127,9 +3130,6 @@ Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Exclude
 Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
-.PARAMETER PageCursor
-Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
 
 .PARAMETER WithHttpInfo
 
@@ -3150,19 +3150,19 @@ function Invoke-OrderTransactionList {
         ${Count},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${PageCursor},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${StoreId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Params},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${ResponseFields},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${PageCursor},
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -3190,6 +3190,10 @@ function Invoke-OrderTransactionList {
             $LocalVarQueryParameters['count'] = $Count
         }
 
+        if ($PageCursor) {
+            $LocalVarQueryParameters['page_cursor'] = $PageCursor
+        }
+
         if (!$OrderIds) {
             throw "Error! The required parameter `OrderIds` missing when calling orderTransactionList."
         }
@@ -3209,10 +3213,6 @@ function Invoke-OrderTransactionList {
 
         if ($Exclude) {
             $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
-        if ($PageCursor) {
-            $LocalVarQueryParameters['page_cursor'] = $PageCursor
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -3273,8 +3273,17 @@ Defines store id where the order should be found
 .PARAMETER OrderStatus
 Defines new order's status
 
+.PARAMETER FinancialStatus
+Update order financial status to specified
+
+.PARAMETER FulfillmentStatus
+Create order with fulfillment status
+
 .PARAMETER CancellationReason
 Defines the cancellation reason when the order will be canceled
+
+.PARAMETER OrderPaymentMethod
+Defines order payment method.<br/>Setting order_payment_method on Shopify will also change financial_status field value to 'paid'
 
 .PARAMETER Comment
 Specifies order comment
@@ -3285,32 +3294,23 @@ Specifies admin's order comment
 .PARAMETER AdminPrivateComment
 Specifies private admin's order comment
 
+.PARAMETER InvoiceAdminComment
+Specifies admin's order invoice comment
+
 .PARAMETER DateModified
 Specifies order's  modification date
 
 .PARAMETER DateFinished
 Specifies order's  finished date
 
-.PARAMETER FinancialStatus
-Update order financial status to specified
-
-.PARAMETER FulfillmentStatus
-Create order with fulfillment status
-
-.PARAMETER OrderPaymentMethod
-Defines order payment method.<br/>Setting order_payment_method on Shopify will also change financial_status field value to 'paid'
-
 .PARAMETER SendNotifications
 Send notifications to customer after order was created
-
-.PARAMETER Origin
-The source of the order
 
 .PARAMETER CreateInvoice
 Determines whether an invoice should be created if it has not already been created
 
-.PARAMETER InvoiceAdminComment
-Specifies admin's order invoice comment
+.PARAMETER Origin
+The source of the order
 
 .PARAMETER WithHttpInfo
 
@@ -3334,43 +3334,43 @@ function Invoke-OrderUpdate {
         ${OrderStatus},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CancellationReason},
+        ${FinancialStatus},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Comment},
+        ${FulfillmentStatus},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${AdminComment},
+        ${CancellationReason},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${AdminPrivateComment},
+        ${OrderPaymentMethod},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${DateModified},
+        ${Comment},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${DateFinished},
+        ${AdminComment},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${FinancialStatus},
+        ${AdminPrivateComment},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${FulfillmentStatus},
+        ${InvoiceAdminComment},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${OrderPaymentMethod},
+        ${DateModified},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${DateFinished},
+        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${SendNotifications},
-        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Origin},
         [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${CreateInvoice},
         [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${InvoiceAdminComment},
+        ${Origin},
         [Switch]
         $WithHttpInfo
     )
@@ -3407,8 +3407,20 @@ function Invoke-OrderUpdate {
             $LocalVarQueryParameters['order_status'] = $OrderStatus
         }
 
+        if ($FinancialStatus) {
+            $LocalVarQueryParameters['financial_status'] = $FinancialStatus
+        }
+
+        if ($FulfillmentStatus) {
+            $LocalVarQueryParameters['fulfillment_status'] = $FulfillmentStatus
+        }
+
         if ($CancellationReason) {
             $LocalVarQueryParameters['cancellation_reason'] = $CancellationReason
+        }
+
+        if ($OrderPaymentMethod) {
+            $LocalVarQueryParameters['order_payment_method'] = $OrderPaymentMethod
         }
 
         if ($Comment) {
@@ -3423,6 +3435,10 @@ function Invoke-OrderUpdate {
             $LocalVarQueryParameters['admin_private_comment'] = $AdminPrivateComment
         }
 
+        if ($InvoiceAdminComment) {
+            $LocalVarQueryParameters['invoice_admin_comment'] = $InvoiceAdminComment
+        }
+
         if ($DateModified) {
             $LocalVarQueryParameters['date_modified'] = $DateModified
         }
@@ -3431,32 +3447,16 @@ function Invoke-OrderUpdate {
             $LocalVarQueryParameters['date_finished'] = $DateFinished
         }
 
-        if ($FinancialStatus) {
-            $LocalVarQueryParameters['financial_status'] = $FinancialStatus
-        }
-
-        if ($FulfillmentStatus) {
-            $LocalVarQueryParameters['fulfillment_status'] = $FulfillmentStatus
-        }
-
-        if ($OrderPaymentMethod) {
-            $LocalVarQueryParameters['order_payment_method'] = $OrderPaymentMethod
-        }
-
         if ($SendNotifications) {
             $LocalVarQueryParameters['send_notifications'] = $SendNotifications
-        }
-
-        if ($Origin) {
-            $LocalVarQueryParameters['origin'] = $Origin
         }
 
         if ($CreateInvoice) {
             $LocalVarQueryParameters['create_invoice'] = $CreateInvoice
         }
 
-        if ($InvoiceAdminComment) {
-            $LocalVarQueryParameters['invoice_admin_comment'] = $InvoiceAdminComment
+        if ($Origin) {
+            $LocalVarQueryParameters['origin'] = $Origin
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {

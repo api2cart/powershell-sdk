@@ -9,7 +9,7 @@
 Describe -tag 'PSOpenAPITools' -name 'TaxApi' {
     Context 'Invoke-TaxClassInfo' {
         It 'Test Invoke-TaxClassInfo' {
-            #$TestResult = Invoke-TaxClassInfo -TaxClassId "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE"
+            #$TestResult = Invoke-TaxClassInfo -TaxClassId "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -17,7 +17,7 @@ Describe -tag 'PSOpenAPITools' -name 'TaxApi' {
 
     Context 'Invoke-TaxClassList' {
         It 'Test Invoke-TaxClassList' {
-            #$TestResult = Invoke-TaxClassList -CreatedTo "TEST_VALUE" -CreatedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -FindValue "TEST_VALUE" -FindWhere "TEST_VALUE" -StoreId "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -ResponseFields "TEST_VALUE"
+            #$TestResult = Invoke-TaxClassList -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -StoreId "TEST_VALUE" -FindValue "TEST_VALUE" -FindWhere "TEST_VALUE" -CreatedTo "TEST_VALUE" -CreatedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ResponseFields "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

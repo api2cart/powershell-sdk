@@ -21,14 +21,14 @@ Entity id
 .PARAMETER StoreId
 Store Id
 
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
 .PARAMETER Params
 Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Exclude
 Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
-.PARAMETER ResponseFields
-Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER WithHttpInfo
 
@@ -49,13 +49,13 @@ function Invoke-BasketInfo {
         ${StoreId},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ResponseFields},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${Params},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -88,16 +88,16 @@ function Invoke-BasketInfo {
             $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
         if ($Params) {
             $LocalVarQueryParameters['params'] = $Params
         }
 
         if ($Exclude) {
             $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -336,10 +336,6 @@ function Invoke-BasketLiveShippingServiceCreate {
 
         $LocalVarUri = '/basket.live_shipping_service.create.json'
 
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
-        }
-
         if (!$Name) {
             throw "Error! The required parameter `Name` missing when calling basketLiveShippingServiceCreate."
         }
@@ -349,6 +345,10 @@ function Invoke-BasketLiveShippingServiceCreate {
             throw "Error! The required parameter `Callback` missing when calling basketLiveShippingServiceCreate."
         }
         $LocalVarQueryParameters['callback'] = $Callback
+
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
+        }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
             $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["x-store-key"]
@@ -493,14 +493,14 @@ basket.live_shipping_service.list
 
 No description available.
 
-.PARAMETER StoreId
-Store Id
-
 .PARAMETER Start
 This parameter sets the number from which you want to get entities
 
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+
+.PARAMETER StoreId
+Store Id
 
 .PARAMETER WithHttpInfo
 
@@ -514,14 +514,14 @@ function Invoke-BasketLiveShippingServiceList {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${StoreId},
-        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Start},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Count},
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${StoreId},
         [Switch]
         $WithHttpInfo
     )
@@ -545,16 +545,16 @@ function Invoke-BasketLiveShippingServiceList {
 
         $LocalVarUri = '/basket.live_shipping_service.list.json'
 
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
-        }
-
         if ($Start) {
             $LocalVarQueryParameters['start'] = $Start
         }
 
         if ($Count) {
             $LocalVarQueryParameters['count'] = $Count
+        }
+
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {

@@ -10,7 +10,7 @@ Describe -tag 'PSOpenAPITools' -name 'OrderPreestimateShippingList' {
     Context 'OrderPreestimateShippingList' {
         It 'Initialize-OrderPreestimateShippingList' {
             # a simple test to create an object
-            #$NewObject = Initialize-OrderPreestimateShippingList -StoreId "TEST_VALUE" -WarehouseId "TEST_VALUE" -CustomerEmail "TEST_VALUE" -CustomerId "TEST_VALUE" -ShippAddress1 "TEST_VALUE" -ShippCity "TEST_VALUE" -ShippPostcode "TEST_VALUE" -ShippState "TEST_VALUE" -ShippCountry "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -OrderItem "TEST_VALUE"
+            #$NewObject = Initialize-OrderPreestimateShippingList -WarehouseId "TEST_VALUE" -CustomerId "TEST_VALUE" -CustomerEmail "TEST_VALUE" -StoreId "TEST_VALUE" -ShippAddress1 "TEST_VALUE" -ShippCity "TEST_VALUE" -ShippPostcode "TEST_VALUE" -ShippState "TEST_VALUE" -ShippCountry "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -OrderItem "TEST_VALUE"
             #$NewObject | Should -BeOfType OrderPreestimateShippingList
             #$NewObject.property | Should -Be 0
         }

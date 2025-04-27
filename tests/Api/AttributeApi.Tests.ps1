@@ -33,7 +33,7 @@ Describe -tag 'PSOpenAPITools' -name 'AttributeApi' {
 
     Context 'Invoke-AttributeAttributesetList' {
         It 'Test Invoke-AttributeAttributesetList' {
-            #$TestResult = Invoke-AttributeAttributesetList -Start "TEST_VALUE" -Count "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -ResponseFields "TEST_VALUE"
+            #$TestResult = Invoke-AttributeAttributesetList -Start "TEST_VALUE" -Count "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -57,7 +57,7 @@ Describe -tag 'PSOpenAPITools' -name 'AttributeApi' {
 
     Context 'Invoke-AttributeGroupList' {
         It 'Test Invoke-AttributeGroupList' {
-            #$TestResult = Invoke-AttributeGroupList -Start "TEST_VALUE" -Count "TEST_VALUE" -LangId "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -ResponseFields "TEST_VALUE" -AttributeSetId "TEST_VALUE"
+            #$TestResult = Invoke-AttributeGroupList -Start "TEST_VALUE" -Count "TEST_VALUE" -AttributeSetId "TEST_VALUE" -LangId "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -65,7 +65,7 @@ Describe -tag 'PSOpenAPITools' -name 'AttributeApi' {
 
     Context 'Invoke-AttributeInfo' {
         It 'Test Invoke-AttributeInfo' {
-            #$TestResult = Invoke-AttributeInfo -Id "TEST_VALUE" -AttributeSetId "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -ResponseFields "TEST_VALUE"
+            #$TestResult = Invoke-AttributeInfo -Id "TEST_VALUE" -AttributeSetId "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -73,7 +73,7 @@ Describe -tag 'PSOpenAPITools' -name 'AttributeApi' {
 
     Context 'Invoke-AttributeList' {
         It 'Test Invoke-AttributeList' {
-            #$TestResult = Invoke-AttributeList -Start "TEST_VALUE" -Count "TEST_VALUE" -Type "TEST_VALUE" -AttributeIds "TEST_VALUE" -AttributeSetId "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -ResponseFields "TEST_VALUE" -Visible "TEST_VALUE" -Required "TEST_VALUE" -System "TEST_VALUE"
+            #$TestResult = Invoke-AttributeList -Start "TEST_VALUE" -Count "TEST_VALUE" -AttributeIds "TEST_VALUE" -AttributeSetId "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -Type "TEST_VALUE" -Visible "TEST_VALUE" -Required "TEST_VALUE" -System "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

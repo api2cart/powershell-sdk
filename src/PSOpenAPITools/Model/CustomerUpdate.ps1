@@ -41,12 +41,12 @@ Defines consents to notifications
 Customer tags
 .PARAMETER Gender
 Defines customer's gender
-.PARAMETER StoreId
-Store Id
 .PARAMETER Note
 The customer note.
 .PARAMETER Status
 Defines customer's status
+.PARAMETER StoreId
+Store Id
 .PARAMETER Address
 No description available.
 .OUTPUTS
@@ -98,13 +98,13 @@ function Initialize-CustomerUpdate {
         ${Gender},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${StoreId},
+        ${Note},
         [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Note},
+        ${Status},
         [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Status},
+        ${StoreId},
         [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Address}
@@ -133,9 +133,9 @@ function Initialize-CustomerUpdate {
             "consents" = ${Consents}
             "tags" = ${Tags}
             "gender" = ${Gender}
-            "store_id" = ${StoreId}
             "note" = ${Note}
             "status" = ${Status}
+            "store_id" = ${StoreId}
             "address" = ${Address}
         }
 
@@ -174,7 +174,7 @@ function ConvertFrom-JsonToCustomerUpdate {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in CustomerUpdate
-        $AllProperties = ("id", "group_id", "group_ids", "group", "email", "phone", "first_name", "last_name", "birth_day", "news_letter_subscription", "consents", "tags", "gender", "store_id", "note", "status", "address")
+        $AllProperties = ("id", "group_id", "group_ids", "group", "email", "phone", "first_name", "last_name", "birth_day", "news_letter_subscription", "consents", "tags", "gender", "note", "status", "store_id", "address")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -259,12 +259,6 @@ function ConvertFrom-JsonToCustomerUpdate {
             $Gender = $JsonParameters.PSobject.Properties["gender"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_id"))) { #optional property not found
-            $StoreId = $null
-        } else {
-            $StoreId = $JsonParameters.PSobject.Properties["store_id"].value
-        }
-
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "note"))) { #optional property not found
             $Note = $null
         } else {
@@ -275,6 +269,12 @@ function ConvertFrom-JsonToCustomerUpdate {
             $Status = $null
         } else {
             $Status = $JsonParameters.PSobject.Properties["status"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_id"))) { #optional property not found
+            $StoreId = $null
+        } else {
+            $StoreId = $JsonParameters.PSobject.Properties["store_id"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "address"))) { #optional property not found
@@ -297,9 +297,9 @@ function ConvertFrom-JsonToCustomerUpdate {
             "consents" = ${Consents}
             "tags" = ${Tags}
             "gender" = ${Gender}
-            "store_id" = ${StoreId}
             "note" = ${Note}
             "status" = ${Status}
+            "store_id" = ${StoreId}
             "address" = ${Address}
         }
 

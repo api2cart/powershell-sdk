@@ -300,14 +300,14 @@ Defines the order id
 .PARAMETER StoreId
 Store Id
 
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
 .PARAMETER Params
 Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Exclude
 Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
-.PARAMETER ResponseFields
-Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER WithHttpInfo
 
@@ -331,13 +331,13 @@ function Invoke-ReturnInfo {
         ${StoreId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ResponseFields},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${Params},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -374,16 +374,16 @@ function Invoke-ReturnInfo {
             $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
         if ($Params) {
             $LocalVarQueryParameters['params'] = $Params
         }
 
         if ($Exclude) {
             $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -444,15 +444,6 @@ This parameter sets the entity amount that has to be retrieved. Max allowed coun
 .PARAMETER PageCursor
 Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
 
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
-
-.PARAMETER Exclude
-Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
-.PARAMETER ResponseFields
-Set this parameter in order to choose which entity fields you want to retrieve
-
 .PARAMETER OrderId
 Defines the order id
 
@@ -483,6 +474,15 @@ Retrieve entities from their modification date
 .PARAMETER ModifiedTo
 Retrieve entities to their modification date
 
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Params
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Exclude
+Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+
 .PARAMETER ReportRequestId
 Report request id
 
@@ -511,43 +511,43 @@ function Invoke-ReturnList {
         ${PageCursor},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${OrderId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${OrderIds},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${CustomerId},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${OrderId},
+        ${StoreId},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${OrderIds},
+        ${Status},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CustomerId},
+        ${ReturnType},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${CreatedFrom},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Status},
+        ${CreatedTo},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ReturnType},
+        ${ModifiedFrom},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedFrom},
+        ${ModifiedTo},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedTo},
+        ${ResponseFields},
         [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedFrom},
+        ${Params},
         [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedTo},
+        ${Exclude},
         [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${ReportRequestId},
@@ -589,18 +589,6 @@ function Invoke-ReturnList {
             $LocalVarQueryParameters['page_cursor'] = $PageCursor
         }
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
-        }
-
-        if ($Exclude) {
-            $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
-        }
-
         if ($OrderId) {
             $LocalVarQueryParameters['order_id'] = $OrderId
         }
@@ -639,6 +627,18 @@ function Invoke-ReturnList {
 
         if ($ModifiedTo) {
             $LocalVarQueryParameters['modified_to'] = $ModifiedTo
+        }
+
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
+        }
+
+        if ($Exclude) {
+            $LocalVarQueryParameters['exclude'] = $Exclude
         }
 
         if ($ReportRequestId) {

@@ -10,7 +10,7 @@ Describe -tag 'PSOpenAPITools' -name 'CustomerUpdate' {
     Context 'CustomerUpdate' {
         It 'Initialize-CustomerUpdate' {
             # a simple test to create an object
-            #$NewObject = Initialize-CustomerUpdate -Id "TEST_VALUE" -GroupId "TEST_VALUE" -GroupIds "TEST_VALUE" -Group "TEST_VALUE" -Email "TEST_VALUE" -Phone "TEST_VALUE" -FirstName "TEST_VALUE" -LastName "TEST_VALUE" -BirthDay "TEST_VALUE" -NewsLetterSubscription "TEST_VALUE" -Consents "TEST_VALUE" -Tags "TEST_VALUE" -Gender "TEST_VALUE" -StoreId "TEST_VALUE" -Note "TEST_VALUE" -Status "TEST_VALUE" -Address "TEST_VALUE"
+            #$NewObject = Initialize-CustomerUpdate -Id "TEST_VALUE" -GroupId "TEST_VALUE" -GroupIds "TEST_VALUE" -Group "TEST_VALUE" -Email "TEST_VALUE" -Phone "TEST_VALUE" -FirstName "TEST_VALUE" -LastName "TEST_VALUE" -BirthDay "TEST_VALUE" -NewsLetterSubscription "TEST_VALUE" -Consents "TEST_VALUE" -Tags "TEST_VALUE" -Gender "TEST_VALUE" -Note "TEST_VALUE" -Status "TEST_VALUE" -StoreId "TEST_VALUE" -Address "TEST_VALUE"
             #$NewObject | Should -BeOfType CustomerUpdate
             #$NewObject.property | Should -Be 0
         }

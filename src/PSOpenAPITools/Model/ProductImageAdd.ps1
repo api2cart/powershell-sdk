@@ -15,22 +15,12 @@ No summary available.
 
 No description available.
 
-.PARAMETER ProductId
-Defines product id where the image should be added
-.PARAMETER ImageName
-Defines image's name
 .PARAMETER Type
 Defines image's types that are specified by comma-separated list
-.PARAMETER Url
-Defines URL of the image that has to be added
-.PARAMETER Label
-Defines alternative text that has to be attached to the picture
-.PARAMETER Mime
-Mime type of image http://en.wikipedia.org/wiki/Internet_media_type.
-.PARAMETER Position
-Defines image’s position in the list
-.PARAMETER Content
-Content(body) encoded in base64 of image file
+.PARAMETER ImageName
+Defines image's name
+.PARAMETER ProductId
+Defines product id where the image should be added
 .PARAMETER ProductVariantId
 Defines product's variants specified by variant id
 .PARAMETER VariantIds
@@ -41,6 +31,16 @@ Defines product's option values ids
 Store Id
 .PARAMETER LangId
 Add product image on specified language id
+.PARAMETER Url
+Defines URL of the image that has to be added
+.PARAMETER Content
+Content(body) encoded in base64 of image file
+.PARAMETER Label
+Defines alternative text that has to be attached to the picture
+.PARAMETER Mime
+Mime type of image http://en.wikipedia.org/wiki/Internet_media_type.
+.PARAMETER Position
+Defines image’s position in the list
 .PARAMETER UseLatestApiVersion
 Use the latest platform API version
 .OUTPUTS
@@ -52,45 +52,45 @@ function Initialize-ProductImageAdd {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [ValidateSet("small", "base", "additional", "thumbnail")]
         [String]
-        ${ProductId},
+        ${Type},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${ImageName},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true)]
-        [ValidateSet("small", "base", "additional", "thumbnail")]
         [String]
-        ${Type},
+        ${ProductId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Url},
+        ${ProductVariantId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Label},
+        ${VariantIds},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Mime},
-        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Int32]]
-        ${Position} = 0,
-        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Content},
-        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${ProductVariantId},
-        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${VariantIds},
-        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
-        [String]
         ${OptionValueIds},
-        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${StoreId},
-        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${LangId},
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Url},
+        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Content},
+        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Label},
+        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Mime},
+        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Int32]]
+        ${Position} = 0,
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${UseLatestApiVersion} = $false
@@ -100,29 +100,29 @@ function Initialize-ProductImageAdd {
         'Creating PSCustomObject: PSOpenAPITools => ProductImageAdd' | Write-Debug
         $PSBoundParameters | Out-DebugParameter | Write-Debug
 
-        if ($null -eq $ImageName) {
-            throw "invalid value for 'ImageName', 'ImageName' cannot be null."
-        }
-
         if ($null -eq $Type) {
             throw "invalid value for 'Type', 'Type' cannot be null."
         }
 
+        if ($null -eq $ImageName) {
+            throw "invalid value for 'ImageName', 'ImageName' cannot be null."
+        }
+
 
         $PSO = [PSCustomObject]@{
-            "product_id" = ${ProductId}
-            "image_name" = ${ImageName}
             "type" = ${Type}
-            "url" = ${Url}
-            "label" = ${Label}
-            "mime" = ${Mime}
-            "position" = ${Position}
-            "content" = ${Content}
+            "image_name" = ${ImageName}
+            "product_id" = ${ProductId}
             "product_variant_id" = ${ProductVariantId}
             "variant_ids" = ${VariantIds}
             "option_value_ids" = ${OptionValueIds}
             "store_id" = ${StoreId}
             "lang_id" = ${LangId}
+            "url" = ${Url}
+            "content" = ${Content}
+            "label" = ${Label}
+            "mime" = ${Mime}
+            "position" = ${Position}
             "use_latest_api_version" = ${UseLatestApiVersion}
         }
 
@@ -161,7 +161,7 @@ function ConvertFrom-JsonToProductImageAdd {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductImageAdd
-        $AllProperties = ("product_id", "image_name", "type", "url", "label", "mime", "position", "content", "product_variant_id", "variant_ids", "option_value_ids", "store_id", "lang_id", "use_latest_api_version")
+        $AllProperties = ("type", "image_name", "product_id", "product_variant_id", "variant_ids", "option_value_ids", "store_id", "lang_id", "url", "content", "label", "mime", "position", "use_latest_api_version")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -169,13 +169,7 @@ function ConvertFrom-JsonToProductImageAdd {
         }
 
         If ([string]::IsNullOrEmpty($Json) -or $Json -eq "{}") { # empty json
-            throw "Error! Empty JSON cannot be serialized due to the required property 'image_name' missing."
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "image_name"))) {
-            throw "Error! JSON cannot be serialized due to the required property 'image_name' missing."
-        } else {
-            $ImageName = $JsonParameters.PSobject.Properties["image_name"].value
+            throw "Error! Empty JSON cannot be serialized due to the required property 'type' missing."
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "type"))) {
@@ -184,40 +178,16 @@ function ConvertFrom-JsonToProductImageAdd {
             $Type = $JsonParameters.PSobject.Properties["type"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "image_name"))) {
+            throw "Error! JSON cannot be serialized due to the required property 'image_name' missing."
+        } else {
+            $ImageName = $JsonParameters.PSobject.Properties["image_name"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "product_id"))) { #optional property not found
             $ProductId = $null
         } else {
             $ProductId = $JsonParameters.PSobject.Properties["product_id"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "url"))) { #optional property not found
-            $Url = $null
-        } else {
-            $Url = $JsonParameters.PSobject.Properties["url"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "label"))) { #optional property not found
-            $Label = $null
-        } else {
-            $Label = $JsonParameters.PSobject.Properties["label"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "mime"))) { #optional property not found
-            $Mime = $null
-        } else {
-            $Mime = $JsonParameters.PSobject.Properties["mime"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "position"))) { #optional property not found
-            $Position = $null
-        } else {
-            $Position = $JsonParameters.PSobject.Properties["position"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "content"))) { #optional property not found
-            $Content = $null
-        } else {
-            $Content = $JsonParameters.PSobject.Properties["content"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "product_variant_id"))) { #optional property not found
@@ -250,6 +220,36 @@ function ConvertFrom-JsonToProductImageAdd {
             $LangId = $JsonParameters.PSobject.Properties["lang_id"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "url"))) { #optional property not found
+            $Url = $null
+        } else {
+            $Url = $JsonParameters.PSobject.Properties["url"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "content"))) { #optional property not found
+            $Content = $null
+        } else {
+            $Content = $JsonParameters.PSobject.Properties["content"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "label"))) { #optional property not found
+            $Label = $null
+        } else {
+            $Label = $JsonParameters.PSobject.Properties["label"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "mime"))) { #optional property not found
+            $Mime = $null
+        } else {
+            $Mime = $JsonParameters.PSobject.Properties["mime"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "position"))) { #optional property not found
+            $Position = $null
+        } else {
+            $Position = $JsonParameters.PSobject.Properties["position"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "use_latest_api_version"))) { #optional property not found
             $UseLatestApiVersion = $null
         } else {
@@ -257,19 +257,19 @@ function ConvertFrom-JsonToProductImageAdd {
         }
 
         $PSO = [PSCustomObject]@{
-            "product_id" = ${ProductId}
-            "image_name" = ${ImageName}
             "type" = ${Type}
-            "url" = ${Url}
-            "label" = ${Label}
-            "mime" = ${Mime}
-            "position" = ${Position}
-            "content" = ${Content}
+            "image_name" = ${ImageName}
+            "product_id" = ${ProductId}
             "product_variant_id" = ${ProductVariantId}
             "variant_ids" = ${VariantIds}
             "option_value_ids" = ${OptionValueIds}
             "store_id" = ${StoreId}
             "lang_id" = ${LangId}
+            "url" = ${Url}
+            "content" = ${Content}
+            "label" = ${Label}
+            "mime" = ${Mime}
+            "position" = ${Position}
             "use_latest_api_version" = ${UseLatestApiVersion}
         }
 

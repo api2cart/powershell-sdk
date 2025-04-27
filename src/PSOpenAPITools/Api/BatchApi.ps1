@@ -21,6 +21,9 @@ This parameter sets the entity amount that has to be retrieved. Max allowed coun
 .PARAMETER PageCursor
 Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
 
+.PARAMETER Ids
+Filter batch jobs by ids
+
 .PARAMETER CreatedFrom
 Retrieve entities from their creation date
 
@@ -32,9 +35,6 @@ Retrieve entities according to their processing datetime
 
 .PARAMETER ProcessedTo
 Retrieve entities according to their processing datetime
-
-.PARAMETER Ids
-Filter batch jobs by ids
 
 .PARAMETER ResponseFields
 Set this parameter in order to choose which entity fields you want to retrieve
@@ -58,19 +58,19 @@ function Invoke-BatchJobList {
         ${PageCursor},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedFrom},
+        ${Ids},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedTo},
+        ${CreatedFrom},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ProcessedFrom},
+        ${CreatedTo},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ProcessedTo},
+        ${ProcessedFrom},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Ids},
+        ${ProcessedTo},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${ResponseFields},
@@ -105,6 +105,10 @@ function Invoke-BatchJobList {
             $LocalVarQueryParameters['page_cursor'] = $PageCursor
         }
 
+        if ($Ids) {
+            $LocalVarQueryParameters['ids'] = $Ids
+        }
+
         if ($CreatedFrom) {
             $LocalVarQueryParameters['created_from'] = $CreatedFrom
         }
@@ -119,10 +123,6 @@ function Invoke-BatchJobList {
 
         if ($ProcessedTo) {
             $LocalVarQueryParameters['processed_to'] = $ProcessedTo
-        }
-
-        if ($Ids) {
-            $LocalVarQueryParameters['ids'] = $Ids
         }
 
         if ($ResponseFields) {

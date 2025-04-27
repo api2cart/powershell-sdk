@@ -14,8 +14,8 @@ Method | HTTP request | Description
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-TaxClassId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 
 tax.class.info
@@ -39,13 +39,13 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 $TaxClassId = "9" # String | Retrieves taxes specified by class id
 $StoreId = "1" # String | Store Id (optional)
 $LangId = "3" # String | Language id (optional)
-$Params = "tax_class_id,tax" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "tax_class_id,name,avail")
 $ResponseFields = "{result{id,name,tax,tax_rates{id,countries{id,name,states},cities,address,zip_codes{is_range,range,fields}}}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Params = "tax_class_id,tax" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "tax_class_id,name,avail")
 $Exclude = "tax_class_id,tax" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 
 # tax.class.info
 try {
-    $Result = Invoke-TaxClassInfo -TaxClassId $TaxClassId -StoreId $StoreId -LangId $LangId -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude
+    $Result = Invoke-TaxClassInfo -TaxClassId $TaxClassId -StoreId $StoreId -LangId $LangId -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-TaxClassInfo: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -59,8 +59,8 @@ Name | Type | Description  | Notes
  **TaxClassId** | **String**| Retrieves taxes specified by class id | 
  **StoreId** | **String**| Store Id | [optional] 
  **LangId** | **String**| Language id | [optional] 
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;tax_class_id,name,avail&quot;]
  **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;tax_class_id,name,avail&quot;]
  **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
@@ -81,15 +81,15 @@ Name | Type | Description  | Notes
 <a id="Invoke-TaxClassList"></a>
 # **Invoke-TaxClassList**
 > ModelResponseTaxClassList Invoke-TaxClassList<br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindValue] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindWhere] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedTo] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedTo] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedFrom] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindValue] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindWhere] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 
 tax.class.list
@@ -110,20 +110,20 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
+$Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
+$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
+$StoreId = "1" # String | Store Id (optional)
+$FindValue = "tax" # String | Entity search that is specified by some value (optional)
+$FindWhere = "name" # String | Tax class search that is specified by field (optional)
 $CreatedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their creation date (optional)
 $CreatedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their creation date (optional)
 $ModifiedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their modification date (optional)
 $ModifiedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their modification date (optional)
-$FindValue = "tax" # String | Entity search that is specified by some value (optional)
-$FindWhere = "name" # String | Tax class search that is specified by field (optional)
-$StoreId = "1" # String | Store Id (optional)
-$Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
-$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
 $ResponseFields = "{result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "{return_code,return_message,pagination,result}")
 
 # tax.class.list
 try {
-    $Result = Invoke-TaxClassList -CreatedTo $CreatedTo -CreatedFrom $CreatedFrom -ModifiedTo $ModifiedTo -ModifiedFrom $ModifiedFrom -FindValue $FindValue -FindWhere $FindWhere -StoreId $StoreId -Count $Count -PageCursor $PageCursor -ResponseFields $ResponseFields
+    $Result = Invoke-TaxClassList -Count $Count -PageCursor $PageCursor -StoreId $StoreId -FindValue $FindValue -FindWhere $FindWhere -CreatedTo $CreatedTo -CreatedFrom $CreatedFrom -ModifiedTo $ModifiedTo -ModifiedFrom $ModifiedFrom -ResponseFields $ResponseFields
 } catch {
     Write-Host ("Exception occurred when calling Invoke-TaxClassList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -134,15 +134,15 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+ **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
+ **StoreId** | **String**| Store Id | [optional] 
+ **FindValue** | **String**| Entity search that is specified by some value | [optional] 
+ **FindWhere** | **String**| Tax class search that is specified by field | [optional] 
  **CreatedTo** | **String**| Retrieve entities to their creation date | [optional] 
  **CreatedFrom** | **String**| Retrieve entities from their creation date | [optional] 
  **ModifiedTo** | **String**| Retrieve entities to their modification date | [optional] 
  **ModifiedFrom** | **String**| Retrieve entities from their modification date | [optional] 
- **FindValue** | **String**| Entity search that is specified by some value | [optional] 
- **FindWhere** | **String**| Tax class search that is specified by field | [optional] 
- **StoreId** | **String**| Store Id | [optional] 
- **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
- **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
  **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;{return_code,return_message,pagination,result}&quot;]
 
 ### Return type

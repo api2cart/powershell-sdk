@@ -181,14 +181,14 @@ function Invoke-AttributeAdd {
         }
         $LocalVarQueryParameters['type'] = $Type
 
-        if ($Code) {
-            $LocalVarQueryParameters['code'] = $Code
-        }
-
         if (!$Name) {
             throw "Error! The required parameter `Name` missing when calling attributeAdd."
         }
         $LocalVarQueryParameters['name'] = $Name
+
+        if ($Code) {
+            $LocalVarQueryParameters['code'] = $Code
+        }
 
         if ($StoreId) {
             $LocalVarQueryParameters['store_id'] = $StoreId
@@ -547,14 +547,14 @@ This parameter sets the number from which you want to get entities
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
 
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
 .PARAMETER Params
 Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Exclude
 Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
-.PARAMETER ResponseFields
-Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER WithHttpInfo
 
@@ -575,13 +575,13 @@ function Invoke-AttributeAttributesetList {
         ${Count},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ResponseFields},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${Params},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -613,16 +613,16 @@ function Invoke-AttributeAttributesetList {
             $LocalVarQueryParameters['count'] = $Count
         }
 
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
         if ($Params) {
             $LocalVarQueryParameters['params'] = $Params
         }
 
         if ($Exclude) {
             $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -873,14 +873,14 @@ function Invoke-AttributeDelete {
 
         $LocalVarUri = '/attribute.delete.json'
 
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
-        }
-
         if (!$Id) {
             throw "Error! The required parameter `Id` missing when calling attributeDelete."
         }
         $LocalVarQueryParameters['id'] = $Id
+
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
+        }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
             $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["x-store-key"]
@@ -937,20 +937,20 @@ This parameter sets the number from which you want to get entities
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
 
+.PARAMETER AttributeSetId
+Attribute set id
+
 .PARAMETER LangId
 Language id
+
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Params
 Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Exclude
 Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
-.PARAMETER ResponseFields
-Set this parameter in order to choose which entity fields you want to retrieve
-
-.PARAMETER AttributeSetId
-Attribute set id
 
 .PARAMETER WithHttpInfo
 
@@ -971,19 +971,19 @@ function Invoke-AttributeGroupList {
         ${Count},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${LangId},
+        ${AttributeSetId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${LangId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${ResponseFields},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Params},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${AttributeSetId},
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -1015,8 +1015,16 @@ function Invoke-AttributeGroupList {
             $LocalVarQueryParameters['count'] = $Count
         }
 
+        if ($AttributeSetId) {
+            $LocalVarQueryParameters['attribute_set_id'] = $AttributeSetId
+        }
+
         if ($LangId) {
             $LocalVarQueryParameters['lang_id'] = $LangId
+        }
+
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
         if ($Params) {
@@ -1025,14 +1033,6 @@ function Invoke-AttributeGroupList {
 
         if ($Exclude) {
             $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
-        }
-
-        if ($AttributeSetId) {
-            $LocalVarQueryParameters['attribute_set_id'] = $AttributeSetId
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -1096,14 +1096,14 @@ Store Id
 .PARAMETER LangId
 Language id
 
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
 .PARAMETER Params
 Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Exclude
 Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
-.PARAMETER ResponseFields
-Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER WithHttpInfo
 
@@ -1130,13 +1130,13 @@ function Invoke-AttributeInfo {
         ${LangId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ResponseFields},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${Params},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -1177,16 +1177,16 @@ function Invoke-AttributeInfo {
             $LocalVarQueryParameters['lang_id'] = $LangId
         }
 
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
         if ($Params) {
             $LocalVarQueryParameters['params'] = $Params
         }
 
         if ($Exclude) {
             $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -1244,9 +1244,6 @@ This parameter sets the number from which you want to get entities
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
 
-.PARAMETER Type
-Defines attribute's type
-
 .PARAMETER AttributeIds
 Filter attributes by ids
 
@@ -1259,14 +1256,8 @@ Store Id
 .PARAMETER LangId
 Retrieves attributes on specified language id
 
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
-
-.PARAMETER Exclude
-Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
-.PARAMETER ResponseFields
-Set this parameter in order to choose which entity fields you want to retrieve
+.PARAMETER Type
+Defines attribute's type
 
 .PARAMETER Visible
 Filter items by visibility status
@@ -1276,6 +1267,15 @@ Defines if the option is required
 
 .PARAMETER System
 True if attribute is system
+
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Params
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Exclude
+Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 
 .PARAMETER WithHttpInfo
 
@@ -1296,37 +1296,37 @@ function Invoke-AttributeList {
         ${Count},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Type},
+        ${AttributeIds},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${AttributeIds},
+        ${AttributeSetId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${AttributeSetId},
+        ${StoreId},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${LangId},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${LangId},
+        ${Type},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Params},
-        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Exclude},
-        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ResponseFields},
-        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${Visible},
-        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${Required},
-        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${System},
+        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ResponseFields},
+        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Params},
+        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -1358,10 +1358,6 @@ function Invoke-AttributeList {
             $LocalVarQueryParameters['count'] = $Count
         }
 
-        if ($Type) {
-            $LocalVarQueryParameters['type'] = $Type
-        }
-
         if ($AttributeIds) {
             $LocalVarQueryParameters['attribute_ids'] = $AttributeIds
         }
@@ -1378,16 +1374,8 @@ function Invoke-AttributeList {
             $LocalVarQueryParameters['lang_id'] = $LangId
         }
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
-        }
-
-        if ($Exclude) {
-            $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        if ($Type) {
+            $LocalVarQueryParameters['type'] = $Type
         }
 
         if ($Visible) {
@@ -1400,6 +1388,18 @@ function Invoke-AttributeList {
 
         if ($System) {
             $LocalVarQueryParameters['system'] = $System
+        }
+
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
+        }
+
+        if ($Exclude) {
+            $LocalVarQueryParameters['exclude'] = $Exclude
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {

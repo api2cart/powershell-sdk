@@ -15,14 +15,14 @@ No summary available.
 
 No description available.
 
-.PARAMETER StoreId
-Store Id
 .PARAMETER OrderId
 Defines the order id
 .PARAMETER ShipmentId
 Shipment id indicates the number of delivery
 .PARAMETER CarrierId
 Defines tracking carrier id
+.PARAMETER StoreId
+Store Id
 .PARAMETER TrackingProvider
 Defines name of the company which provides shipment tracking
 .PARAMETER TrackingNumber
@@ -41,16 +41,16 @@ function Initialize-OrderShipmentTrackingAdd {
     Param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${StoreId},
+        ${OrderId},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${OrderId},
+        ${ShipmentId},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShipmentId},
+        ${CarrierId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CarrierId},
+        ${StoreId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${TrackingProvider},
@@ -79,10 +79,10 @@ function Initialize-OrderShipmentTrackingAdd {
 
 
         $PSO = [PSCustomObject]@{
-            "store_id" = ${StoreId}
             "order_id" = ${OrderId}
             "shipment_id" = ${ShipmentId}
             "carrier_id" = ${CarrierId}
+            "store_id" = ${StoreId}
             "tracking_provider" = ${TrackingProvider}
             "tracking_number" = ${TrackingNumber}
             "tracking_link" = ${TrackingLink}
@@ -124,7 +124,7 @@ function ConvertFrom-JsonToOrderShipmentTrackingAdd {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in OrderShipmentTrackingAdd
-        $AllProperties = ("store_id", "order_id", "shipment_id", "carrier_id", "tracking_provider", "tracking_number", "tracking_link", "send_notifications")
+        $AllProperties = ("order_id", "shipment_id", "carrier_id", "store_id", "tracking_provider", "tracking_number", "tracking_link", "send_notifications")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -147,12 +147,6 @@ function ConvertFrom-JsonToOrderShipmentTrackingAdd {
             $TrackingNumber = $JsonParameters.PSobject.Properties["tracking_number"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_id"))) { #optional property not found
-            $StoreId = $null
-        } else {
-            $StoreId = $JsonParameters.PSobject.Properties["store_id"].value
-        }
-
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "order_id"))) { #optional property not found
             $OrderId = $null
         } else {
@@ -163,6 +157,12 @@ function ConvertFrom-JsonToOrderShipmentTrackingAdd {
             $CarrierId = $null
         } else {
             $CarrierId = $JsonParameters.PSobject.Properties["carrier_id"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_id"))) { #optional property not found
+            $StoreId = $null
+        } else {
+            $StoreId = $JsonParameters.PSobject.Properties["store_id"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "tracking_provider"))) { #optional property not found
@@ -184,10 +184,10 @@ function ConvertFrom-JsonToOrderShipmentTrackingAdd {
         }
 
         $PSO = [PSCustomObject]@{
-            "store_id" = ${StoreId}
             "order_id" = ${OrderId}
             "shipment_id" = ${ShipmentId}
             "carrier_id" = ${CarrierId}
+            "store_id" = ${StoreId}
             "tracking_provider" = ${TrackingProvider}
             "tracking_number" = ${TrackingNumber}
             "tracking_link" = ${TrackingLink}

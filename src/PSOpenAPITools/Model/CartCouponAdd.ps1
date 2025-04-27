@@ -15,14 +15,8 @@ No summary available.
 
 No description available.
 
-.PARAMETER StoreId
-Store Id
 .PARAMETER Code
 Coupon code
-.PARAMETER Name
-Coupon name
-.PARAMETER Codes
-Entity codes
 .PARAMETER ActionType
 Coupon discount type
 .PARAMETER ActionApplyTo
@@ -31,6 +25,10 @@ Defines where discount should be applied
 Specify how discount should be applied. If scope=matching_items, then discount will be applied to each of the items that match action conditions. Scope order means that discount will be applied once.
 .PARAMETER ActionAmount
 Defines the discount amount value.
+.PARAMETER Codes
+Entity codes
+.PARAMETER Name
+Coupon name
 .PARAMETER DateStart
 Date start
 .PARAMETER DateEnd
@@ -49,6 +47,8 @@ Defines condition operator.
 Defines condition attribute value/s. Can be comma separated string.
 .PARAMETER IncludeTax
 Indicates whether to apply a discount for taxes.
+.PARAMETER StoreId
+Store Id
 .OUTPUTS
 
 CartCouponAdd<PSCustomObject>
@@ -59,58 +59,58 @@ function Initialize-CartCouponAdd {
     Param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${StoreId},
-        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
-        [String]
         ${Code},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Name},
-        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true)]
-        [String[]]
-        ${Codes},
-        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
         [ValidateSet("percent", "fixed")]
         [String]
         ${ActionType},
-        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true)]
         [ValidateSet("order_total", "item_price", "shipping")]
         [String]
         ${ActionApplyTo},
-        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true)]
         [ValidateSet("order", "matching_items")]
         [String]
         ${ActionScope},
-        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
         [Decimal]
         ${ActionAmount},
-        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true)]
+        [String[]]
+        ${Codes},
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Name},
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${DateStart} = "now",
-        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${DateEnd},
-        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
         ${UsageLimit},
-        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
         ${UsageLimitPerCustomer},
-        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${ActionConditionEntity},
-        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${ActionConditionKey},
-        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${ActionConditionOperator},
-        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${ActionConditionValue},
-        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${IncludeTax} = $false
+        ${IncludeTax} = $false,
+        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${StoreId}
     )
 
     Process {
@@ -139,14 +139,13 @@ function Initialize-CartCouponAdd {
 
 
         $PSO = [PSCustomObject]@{
-            "store_id" = ${StoreId}
             "code" = ${Code}
-            "name" = ${Name}
-            "codes" = ${Codes}
             "action_type" = ${ActionType}
             "action_apply_to" = ${ActionApplyTo}
             "action_scope" = ${ActionScope}
             "action_amount" = ${ActionAmount}
+            "codes" = ${Codes}
+            "name" = ${Name}
             "date_start" = ${DateStart}
             "date_end" = ${DateEnd}
             "usage_limit" = ${UsageLimit}
@@ -156,6 +155,7 @@ function Initialize-CartCouponAdd {
             "action_condition_operator" = ${ActionConditionOperator}
             "action_condition_value" = ${ActionConditionValue}
             "include_tax" = ${IncludeTax}
+            "store_id" = ${StoreId}
         }
 
 
@@ -193,7 +193,7 @@ function ConvertFrom-JsonToCartCouponAdd {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in CartCouponAdd
-        $AllProperties = ("store_id", "code", "name", "codes", "action_type", "action_apply_to", "action_scope", "action_amount", "date_start", "date_end", "usage_limit", "usage_limit_per_customer", "action_condition_entity", "action_condition_key", "action_condition_operator", "action_condition_value", "include_tax")
+        $AllProperties = ("code", "action_type", "action_apply_to", "action_scope", "action_amount", "codes", "name", "date_start", "date_end", "usage_limit", "usage_limit_per_customer", "action_condition_entity", "action_condition_key", "action_condition_operator", "action_condition_value", "include_tax", "store_id")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -234,22 +234,16 @@ function ConvertFrom-JsonToCartCouponAdd {
             $ActionAmount = $JsonParameters.PSobject.Properties["action_amount"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_id"))) { #optional property not found
-            $StoreId = $null
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "codes"))) { #optional property not found
+            $Codes = $null
         } else {
-            $StoreId = $JsonParameters.PSobject.Properties["store_id"].value
+            $Codes = $JsonParameters.PSobject.Properties["codes"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "name"))) { #optional property not found
             $Name = $null
         } else {
             $Name = $JsonParameters.PSobject.Properties["name"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "codes"))) { #optional property not found
-            $Codes = $null
-        } else {
-            $Codes = $JsonParameters.PSobject.Properties["codes"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "date_start"))) { #optional property not found
@@ -306,15 +300,20 @@ function ConvertFrom-JsonToCartCouponAdd {
             $IncludeTax = $JsonParameters.PSobject.Properties["include_tax"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_id"))) { #optional property not found
+            $StoreId = $null
+        } else {
+            $StoreId = $JsonParameters.PSobject.Properties["store_id"].value
+        }
+
         $PSO = [PSCustomObject]@{
-            "store_id" = ${StoreId}
             "code" = ${Code}
-            "name" = ${Name}
-            "codes" = ${Codes}
             "action_type" = ${ActionType}
             "action_apply_to" = ${ActionApplyTo}
             "action_scope" = ${ActionScope}
             "action_amount" = ${ActionAmount}
+            "codes" = ${Codes}
+            "name" = ${Name}
             "date_start" = ${DateStart}
             "date_end" = ${DateEnd}
             "usage_limit" = ${UsageLimit}
@@ -324,6 +323,7 @@ function ConvertFrom-JsonToCartCouponAdd {
             "action_condition_operator" = ${ActionConditionOperator}
             "action_condition_value" = ${ActionConditionValue}
             "include_tax" = ${IncludeTax}
+            "store_id" = ${StoreId}
         }
 
         return $PSO

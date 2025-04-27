@@ -24,10 +24,10 @@ Store Id
 .PARAMETER LangId
 Language id
 
-.PARAMETER Params
+.PARAMETER ResponseFields
 Set this parameter in order to choose which entity fields you want to retrieve
 
-.PARAMETER ResponseFields
+.PARAMETER Params
 Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Exclude
@@ -55,10 +55,10 @@ function Invoke-TaxClassInfo {
         ${LangId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ResponseFields},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Params},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Exclude},
@@ -98,12 +98,12 @@ function Invoke-TaxClassInfo {
             $LocalVarQueryParameters['lang_id'] = $LangId
         }
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
-        }
-
         if ($ResponseFields) {
             $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
         }
 
         if ($Exclude) {
@@ -159,6 +159,21 @@ tax.class.list
 
 No description available.
 
+.PARAMETER Count
+This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+
+.PARAMETER PageCursor
+Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+
+.PARAMETER StoreId
+Store Id
+
+.PARAMETER FindValue
+Entity search that is specified by some value
+
+.PARAMETER FindWhere
+Tax class search that is specified by field
+
 .PARAMETER CreatedTo
 Retrieve entities to their creation date
 
@@ -170,21 +185,6 @@ Retrieve entities to their modification date
 
 .PARAMETER ModifiedFrom
 Retrieve entities from their modification date
-
-.PARAMETER FindValue
-Entity search that is specified by some value
-
-.PARAMETER FindWhere
-Tax class search that is specified by field
-
-.PARAMETER StoreId
-Store Id
-
-.PARAMETER Count
-This parameter sets the entity amount that has to be retrieved. Max allowed count=250
-
-.PARAMETER PageCursor
-Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
 
 .PARAMETER ResponseFields
 Set this parameter in order to choose which entity fields you want to retrieve
@@ -201,32 +201,32 @@ function Invoke-TaxClassList {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CreatedTo},
-        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CreatedFrom},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ModifiedTo},
-        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ModifiedFrom},
-        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${FindValue},
-        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${FindWhere},
-        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${StoreId},
-        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Count},
-        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${PageCursor},
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${StoreId},
+        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${FindValue},
+        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${FindWhere},
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CreatedTo},
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CreatedFrom},
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ModifiedTo},
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ModifiedFrom},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${ResponseFields},
@@ -253,6 +253,26 @@ function Invoke-TaxClassList {
 
         $LocalVarUri = '/tax.class.list.json'
 
+        if ($Count) {
+            $LocalVarQueryParameters['count'] = $Count
+        }
+
+        if ($PageCursor) {
+            $LocalVarQueryParameters['page_cursor'] = $PageCursor
+        }
+
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
+        }
+
+        if ($FindValue) {
+            $LocalVarQueryParameters['find_value'] = $FindValue
+        }
+
+        if ($FindWhere) {
+            $LocalVarQueryParameters['find_where'] = $FindWhere
+        }
+
         if ($CreatedTo) {
             $LocalVarQueryParameters['created_to'] = $CreatedTo
         }
@@ -267,26 +287,6 @@ function Invoke-TaxClassList {
 
         if ($ModifiedFrom) {
             $LocalVarQueryParameters['modified_from'] = $ModifiedFrom
-        }
-
-        if ($FindValue) {
-            $LocalVarQueryParameters['find_value'] = $FindValue
-        }
-
-        if ($FindWhere) {
-            $LocalVarQueryParameters['find_where'] = $FindWhere
-        }
-
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
-        }
-
-        if ($Count) {
-            $LocalVarQueryParameters['count'] = $Count
-        }
-
-        if ($PageCursor) {
-            $LocalVarQueryParameters['page_cursor'] = $PageCursor
         }
 
         if ($ResponseFields) {

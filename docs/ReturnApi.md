@@ -153,9 +153,9 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Id] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-OrderId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 
 return.info
 
@@ -178,13 +178,13 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 $Id = "10" # String | Entity id
 $OrderId = "25" # String | Defines the order id (optional)
 $StoreId = "1" # String | Store Id (optional)
+$ResponseFields = "{return_code,return_message,result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
 $Params = "id,order_products" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,order_products")
 $Exclude = "id,order_id" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
-$ResponseFields = "{return_code,return_message,result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
 
 # return.info
 try {
-    $Result = Invoke-ReturnInfo -Id $Id -OrderId $OrderId -StoreId $StoreId -Params $Params -Exclude $Exclude -ResponseFields $ResponseFields
+    $Result = Invoke-ReturnInfo -Id $Id -OrderId $OrderId -StoreId $StoreId -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ReturnInfo: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -198,9 +198,9 @@ Name | Type | Description  | Notes
  **Id** | **String**| Entity id | 
  **OrderId** | **String**| Defines the order id | [optional] 
  **StoreId** | **String**| Store Id | [optional] 
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
  **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,order_products&quot;]
  **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
- **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 
 ### Return type
 
@@ -223,9 +223,6 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-OrderId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-OrderIds] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CustomerId] <String><br>
@@ -236,6 +233,9 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedTo] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedTo] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ReportRequestId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DisableReportCache] <System.Nullable[Boolean]><br>
 
@@ -260,9 +260,6 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
 $PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
-$Params = "id,order_products" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,order_products")
-$Exclude = "id,order_id" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
-$ResponseFields = "{return_code,return_message,pagination,result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
 $OrderId = "25" # String | Defines the order id (optional)
 $OrderIds = "24,25" # String | Retrieves return requests specified by order ids (optional)
 $CustomerId = "5" # String | Retrieves return requests specified by customer id (optional)
@@ -273,12 +270,15 @@ $CreatedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their cre
 $CreatedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their creation date (optional)
 $ModifiedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their modification date (optional)
 $ModifiedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their modification date (optional)
+$ResponseFields = "{return_code,return_message,pagination,result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Params = "id,order_products" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,order_products")
+$Exclude = "id,order_id" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 $ReportRequestId = "105245017661" # String | Report request id (optional)
 $DisableReportCache = $false # Boolean | Disable report cache for current request (optional) (default to $false)
 
 # return.list
 try {
-    $Result = Invoke-ReturnList -Start $Start -Count $Count -PageCursor $PageCursor -Params $Params -Exclude $Exclude -ResponseFields $ResponseFields -OrderId $OrderId -OrderIds $OrderIds -CustomerId $CustomerId -StoreId $StoreId -Status $Status -ReturnType $ReturnType -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -ReportRequestId $ReportRequestId -DisableReportCache $DisableReportCache
+    $Result = Invoke-ReturnList -Start $Start -Count $Count -PageCursor $PageCursor -OrderId $OrderId -OrderIds $OrderIds -CustomerId $CustomerId -StoreId $StoreId -Status $Status -ReturnType $ReturnType -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude -ReportRequestId $ReportRequestId -DisableReportCache $DisableReportCache
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ReturnList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -292,9 +292,6 @@ Name | Type | Description  | Notes
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
  **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,order_products&quot;]
- **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
- **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
  **OrderId** | **String**| Defines the order id | [optional] 
  **OrderIds** | **String**| Retrieves return requests specified by order ids | [optional] 
  **CustomerId** | **String**| Retrieves return requests specified by customer id | [optional] 
@@ -305,6 +302,9 @@ Name | Type | Description  | Notes
  **CreatedTo** | **String**| Retrieve entities to their creation date | [optional] 
  **ModifiedFrom** | **String**| Retrieve entities from their modification date | [optional] 
  **ModifiedTo** | **String**| Retrieve entities to their modification date | [optional] 
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,order_products&quot;]
+ **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
  **ReportRequestId** | **String**| Report request id | [optional] 
  **DisableReportCache** | **Boolean**| Disable report cache for current request | [optional] [default to $false]
 

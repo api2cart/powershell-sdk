@@ -83,11 +83,13 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 
 $ProductAddTierPricesInner = Initialize-ProductAddTierPricesInner -Quantity 0 -Price 0
 $ProductAddGroupPricesInner = Initialize-ProductAddGroupPricesInner -GroupId "MyGroupId" -Price 0
-$ProductAddShippingDetailsInner = Initialize-ProductAddShippingDetailsInner -ShippingType "MyShippingType" -ShippingService "MyShippingService" -ShippingCost 0
-$ProductAddSellerProfiles = Initialize-ProductAddSellerProfiles -ShippingProfileId "MyShippingProfileId" -PaymentProfileId "MyPaymentProfileId" -ReturnProfileId "MyReturnProfileId"
-$ProductAddPackageDetails = Initialize-ProductAddPackageDetails -MeasureUnit "MyMeasureUnit" -WeighUnit "MyWeighUnit" -PackageDepth 0 -PackageLength 0 -PackageWidth 0 -WeightMajor 0 -WeightMinor 0 -ShippingPackage "MyShippingPackage"
-$ProductAddBestOffer = Initialize-ProductAddBestOffer -MinimumOfferPrice 0 -AutoAcceptPrice 0
-$ProductAddSalesTax = Initialize-ProductAddSalesTax -TaxPercent 0 -TaxState "MyTaxState" -ShippingIncInTax $false
+$ProductAddManufacturerInfo = Initialize-ProductAddManufacturerInfo -Name "MyName" -Address "MyAddress" -Phone "MyPhone" -Email "MyEmail"
+$ProductAddFilesInner = Initialize-ProductAddFilesInner -Name "MyName" -Url "MyUrl"
+$ProductAddSizeChart = Initialize-ProductAddSizeChart -Id "MyId" -Url "MyUrl"
+
+$ProductAddCertificationsInnerImagesInner = Initialize-ProductAddCertificationsInnerImagesInner -Url "MyUrl"
+$ProductAddCertificationsInnerFilesInner = Initialize-ProductAddCertificationsInnerFilesInner -Url "MyUrl"
+$ProductAddCertificationsInner = Initialize-ProductAddCertificationsInner -Id "MyId" -Images $ProductAddCertificationsInnerImagesInner -Files $ProductAddCertificationsInnerFilesInner
 
 $ProductAddSpecificsInnerFoodDetails = Initialize-ProductAddSpecificsInnerFoodDetails -Calories 0
 $ProductAddSpecificsInnerGroupProductsDetailsInner = Initialize-ProductAddSpecificsInnerGroupProductsDetailsInner -Id "MyId" -Quantity 0
@@ -100,16 +102,13 @@ $ProductAddSpecificsInnerBookingDetails = Initialize-ProductAddSpecificsInnerBoo
 
 $ProductAddSpecificsInner = Initialize-ProductAddSpecificsInner -Name "MyName" -Value "MyValue" -Values "MyValues" -UsedForVariations $false -ScaleId 0 -FoodDetails $ProductAddSpecificsInnerFoodDetails -GroupProductsDetails $ProductAddSpecificsInnerGroupProductsDetailsInner -BookingDetails $ProductAddSpecificsInnerBookingDetails
 
+$ProductAddSalesTax = Initialize-ProductAddSalesTax -TaxPercent 0 -TaxState "MyTaxState" -ShippingIncInTax $false
+$ProductAddShippingDetailsInner = Initialize-ProductAddShippingDetailsInner -ShippingType "MyShippingType" -ShippingService "MyShippingService" -ShippingCost 0
+$ProductAddPackageDetails = Initialize-ProductAddPackageDetails -MeasureUnit "MyMeasureUnit" -WeighUnit "MyWeighUnit" -PackageDepth 0 -PackageLength 0 -PackageWidth 0 -WeightMajor 0 -WeightMinor 0 -ShippingPackage "MyShippingPackage"
 $ProductAddLogisticInfoInner = Initialize-ProductAddLogisticInfoInner -LogisticId 0 -IsFree $false -ShippingFee 0 -SizeId 0
-$ProductAddFilesInner = Initialize-ProductAddFilesInner -Name "MyName" -Url "MyUrl"
-$ProductAddSizeChart = Initialize-ProductAddSizeChart -Id "MyId" -Url "MyUrl"
-
-$ProductAddCertificationsInnerImagesInner = Initialize-ProductAddCertificationsInnerImagesInner -Url "MyUrl"
-$ProductAddCertificationsInnerFilesInner = Initialize-ProductAddCertificationsInnerFilesInner -Url "MyUrl"
-$ProductAddCertificationsInner = Initialize-ProductAddCertificationsInner -Id "MyId" -Images $ProductAddCertificationsInnerImagesInner -Files $ProductAddCertificationsInnerFilesInner
-
-$ProductAddManufacturerInfo = Initialize-ProductAddManufacturerInfo -Name "MyName" -Address "MyAddress" -Phone "MyPhone" -Email "MyEmail"
-$ProductAdd = Initialize-ProductAdd -Name "Bag" -Model "bag_01" -Sku "bag_01" -Description "Product description" -Price 99.9 -OldPrice 99.9 -SpecialPrice 56.9 -CostPrice 65.9 -FixedCostShippingPrice 5.5 -SpriceCreate "2018-08-25 23:56:12" -SpriceModified "2018-12-05 13:46:20" -SpriceExpire "2018-08-25 23:56:12" -TierPrices $ProductAddTierPricesInner -GroupPrices $ProductAddGroupPricesInner -AvailableForView $false -AvailableForSale $false -Weight 23.69 -Width 56.12 -Height 56.12 -Length 56.12 -WeightUnit "lb" -DimensionsUnit "cm" -ShortDescription "Short description. This is very short description" -WarehouseId "1" -BackorderStatus "true" -Quantity 6 -Downloadable $true -WholesalePrice 56.12 -CreatedAt "2014-08-09 13:13:13" -Manufacturer "Samsung" -ManufacturerId "1" -CategoriesIds "23,56" -RelatedProductsIds "4,5" -UpSellProductsIds "4,5" -CrossSellProductsIds "4,5" -TaxClassId "9" -Type "configurable" -MetaTitle "category,test" -MetaKeywords "category,test" -MetaDescription "category,test" -Url "/product_slug" -LangId "3" -StoresIds "1,2" -CategoryId "6" -ViewedCount 9 -OrderedCount 15 -AttributeSetName "Shoes" -AttributeName "Color,Manufacturer" -ShippingTemplateId 40256592690 -ProductionPartnerIds "4,5" -Condition "Like New" -ListingDuration "Days_3" -ListingType "Auction" -PaymentMethods "MyPaymentMethods" -ReturnAccepted $true -ShippingDetails $ProductAddShippingDetailsInner -PaypalEmail "paypall@mail.com" -SellerProfiles $ProductAddSellerProfiles -PackageDetails $ProductAddPackageDetails -BestOffer $ProductAddBestOffer -SalesTax $ProductAddSalesTax -Barcode "9770317847001" -Upc "9770317847001" -Ean "5901234123457" -Isbn "9783161484100" -Specifics $ProductAddSpecificsInner -ImageUrl "https://docs.api2cart.com/img/logo.png" -ImageName "abibas.png" -AdditionalImageUrls "MyAdditionalImageUrls" -ReservePrice 65.9 -BuyitnowPrice 65.9 -ConditionDescription "Almost perfect condition, a few scratches" -AuctionConfidentialityLevel "public" -LogisticInfo $ProductAddLogisticInfoInner -AvailFrom "avail_from=2029-10-25T15:54:37-0500" -Tags "tag1,tag2" -ClearCache $false -Asin "97703178470" -Gtin "12345678912345" -Mpn "9770317847001" -Taxable $false -Visible "search" -Status "disabled" -SeoUrl "some seo url" -ProductClass "Shirts" -ProductType "BICYCLE" -MarketplaceItemProperties "{"color":["Silver"],"manufacturer":"Philips","features":["3 way"],"countPerPack":1,"watts":{"unit":"W","measure":40}}" -ManageStock $false -HarmonizedSystemCode "123456" -CountryOfOrigin "123456" -Files $ProductAddFilesInner -SearchKeywords "key1,key2,key3" -StoreId "1" -BrandName "Abidas" -IsVirtual $false -IsFreeShipping $true -InStock $true -DeliveryCode "24uurs-23" -ProductReference "5901234123457" -DeliveryType "PARCEL" -DeliveryTime 1 -SizeChart $ProductAddSizeChart -Certifications $ProductAddCertificationsInner -DeliveryOptionIds "6956548250505111111,6956548250505111112" -ManufacturerInfo $ProductAddManufacturerInfo -WhenMade "2020_2025" -IsSupply $false -Materials "MyMaterials" -AutoRenew $false -AllowDisplayCondition $false -MinOrderQuantity 1 -MaxOrderQuantity 1 # ProductAdd | 
+$ProductAddSellerProfiles = Initialize-ProductAddSellerProfiles -ShippingProfileId "MyShippingProfileId" -PaymentProfileId "MyPaymentProfileId" -ReturnProfileId "MyReturnProfileId"
+$ProductAddBestOffer = Initialize-ProductAddBestOffer -MinimumOfferPrice 0 -AutoAcceptPrice 0
+$ProductAdd = Initialize-ProductAdd -Name "Bag" -Model "bag_01" -Description "Product description" -Price 99.9 -Sku "bag_01" -ShortDescription "Short description. This is very short description" -Type "configurable" -Status "disabled" -Visible "search" -CategoryId "6" -CategoriesIds "23,56" -ProductClass "Shirts" -ProductType "BICYCLE" -IsVirtual $false -Downloadable $true -IsSupply $false -AvailableForView $false -AvailableForSale $false -StoreId "1" -StoresIds "1,2" -LangId "3" -OldPrice 99.9 -SpecialPrice 56.9 -WholesalePrice 56.12 -CostPrice 65.9 -FixedCostShippingPrice 5.5 -TierPrices $ProductAddTierPricesInner -GroupPrices $ProductAddGroupPricesInner -BuyitnowPrice 65.9 -ReservePrice 65.9 -Quantity 6 -InStock $true -ManageStock $false -WarehouseId "1" -BackorderStatus "true" -MinOrderQuantity 1 -MaxOrderQuantity 1 -Weight 23.69 -WeightUnit "lb" -Width 56.12 -Height 56.12 -Length 56.12 -DimensionsUnit "cm" -Barcode "9770317847001" -Upc "9770317847001" -Ean "5901234123457" -Isbn "9783161484100" -Gtin "12345678912345" -Mpn "9770317847001" -Asin "97703178470" -ProductReference "5901234123457" -HarmonizedSystemCode "123456" -CountryOfOrigin "123456" -Manufacturer "Samsung" -ManufacturerId "1" -ManufacturerInfo $ProductAddManufacturerInfo -BrandName "Abidas" -ImageUrl "https://docs.api2cart.com/img/logo.png" -ImageName "abibas.png" -AdditionalImageUrls "MyAdditionalImageUrls" -Files $ProductAddFilesInner -SizeChart $ProductAddSizeChart -RelatedProductsIds "4,5" -UpSellProductsIds "4,5" -CrossSellProductsIds "4,5" -AttributeSetName "Shoes" -AttributeName "Color,Manufacturer" -SearchKeywords "key1,key2,key3" -Tags "tag1,tag2" -Materials "MyMaterials" -Certifications $ProductAddCertificationsInner -Specifics $ProductAddSpecificsInner -AvailFrom "avail_from=2029-10-25T15:54:37-0500" -SpriceCreate "2018-08-25 23:56:12" -SpriceModified "2018-12-05 13:46:20" -SpriceExpire "2018-08-25 23:56:12" -CreatedAt "2014-08-09 13:13:13" -AutoRenew $false -WhenMade "2020_2025" -MetaTitle "category,test" -MetaKeywords "category,test" -MetaDescription "category,test" -Url "/product_slug" -SeoUrl "some seo url" -TaxClassId "9" -Taxable $false -SalesTax $ProductAddSalesTax -Condition "Like New" -ConditionDescription "Almost perfect condition, a few scratches" -AllowDisplayCondition $false -PaymentMethods "MyPaymentMethods" -PaypalEmail "paypall@mail.com" -ShippingTemplateId 40256592690 -ShippingDetails $ProductAddShippingDetailsInner -IsFreeShipping $true -DeliveryCode "24uurs-23" -DeliveryType "PARCEL" -DeliveryTime 1 -DeliveryOptionIds "6956548250505111111,6956548250505111112" -PackageDetails $ProductAddPackageDetails -LogisticInfo $ProductAddLogisticInfoInner -ListingDuration "Days_3" -ListingType "Auction" -ReturnAccepted $true -SellerProfiles $ProductAddSellerProfiles -AuctionConfidentialityLevel "public" -BestOffer $ProductAddBestOffer -ProductionPartnerIds "4,5" -MarketplaceItemProperties "{"color":["Silver"],"manufacturer":"Philips","features":["3 way"],"countPerPack":1,"watts":{"unit":"W","measure":40}}" -ClearCache $false -ViewedCount 9 -OrderedCount 15 # ProductAdd | 
 
 # product.add
 try {
@@ -205,19 +204,19 @@ Name | Type | Description  | Notes
 # **Invoke-ProductAttributeList**
 > ModelResponseProductAttributeList Invoke-ProductAttributeList<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AttributeId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-VariantId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AttributeId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-VariantId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AttributeGroupId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SetName] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SetName] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SortBy] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SortDirection] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 
 product.attribute.list
@@ -239,24 +238,24 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
 $ProductId = "10" # String | Retrieves attributes specified by product id
-$AttributeId = "156" # String | Retrieves info for specified attribute_id (optional)
-$VariantId = "45" # String | Defines product's variants specified by variant id (optional)
-$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
+$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
+$AttributeId = "156" # String | Retrieves info for specified attribute_id (optional)
+$VariantId = "45" # String | Defines product's variants specified by variant id (optional)
 $AttributeGroupId = "202" # String | Filter by attribute_group_id (optional)
-$SetName = "Shoes" # String | Retrieves attributes specified by set_name in Magento (optional)
 $LangId = "3" # String | Retrieves attributes specified by language id (optional)
 $StoreId = "1" # String | Retrieves attributes specified by store id (optional)
+$SetName = "Shoes" # String | Retrieves attributes specified by set_name in Magento (optional)
 $SortBy = "value" # String | Set field to sort by (optional) (default to "attribute_id")
 $SortDirection = "asc" # String | Set sorting direction (optional) (default to "asc")
-$Params = "attribute_id,name" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "attribute_id,name")
 $ResponseFields = "{pagination,result{attribute}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Params = "attribute_id,name" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "attribute_id,name")
 $Exclude = "attribute_id,name" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 
 # product.attribute.list
 try {
-    $Result = Invoke-ProductAttributeList -ProductId $ProductId -AttributeId $AttributeId -VariantId $VariantId -PageCursor $PageCursor -Start $Start -Count $Count -AttributeGroupId $AttributeGroupId -SetName $SetName -LangId $LangId -StoreId $StoreId -SortBy $SortBy -SortDirection $SortDirection -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude
+    $Result = Invoke-ProductAttributeList -ProductId $ProductId -Start $Start -Count $Count -PageCursor $PageCursor -AttributeId $AttributeId -VariantId $VariantId -AttributeGroupId $AttributeGroupId -LangId $LangId -StoreId $StoreId -SetName $SetName -SortBy $SortBy -SortDirection $SortDirection -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ProductAttributeList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -268,19 +267,19 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ProductId** | **String**| Retrieves attributes specified by product id | 
- **AttributeId** | **String**| Retrieves info for specified attribute_id | [optional] 
- **VariantId** | **String**| Defines product&#39;s variants specified by variant id | [optional] 
- **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+ **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
+ **AttributeId** | **String**| Retrieves info for specified attribute_id | [optional] 
+ **VariantId** | **String**| Defines product&#39;s variants specified by variant id | [optional] 
  **AttributeGroupId** | **String**| Filter by attribute_group_id | [optional] 
- **SetName** | **String**| Retrieves attributes specified by set_name in Magento | [optional] 
  **LangId** | **String**| Retrieves attributes specified by language id | [optional] 
  **StoreId** | **String**| Retrieves attributes specified by store id | [optional] 
+ **SetName** | **String**| Retrieves attributes specified by set_name in Magento | [optional] 
  **SortBy** | **String**| Set field to sort by | [optional] [default to &quot;attribute_id&quot;]
  **SortDirection** | **String**| Set sorting direction | [optional] [default to &quot;asc&quot;]
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;attribute_id,name&quot;]
  **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;attribute_id,name&quot;]
  **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
@@ -450,20 +449,20 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-BrandIds] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CategoryId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ParentId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindWhere] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindValue] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedTo] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedTo] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ParentId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindWhere] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindValue] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 
 product.brand.list
 
@@ -486,24 +485,24 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
 $PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
-$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,short_description,active,url")
 $BrandIds = "4,5" # String | Retrieves brands specified by brand ids (optional)
-$Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 $CategoryId = "6" # String | Retrieves product brands specified by category id (optional)
+$ParentId = "6" # String | Retrieves brands specified by parent id (optional)
 $StoreId = "1" # String | Store Id (optional)
 $LangId = "3" # String | Language id (optional)
+$FindWhere = "name" # String | Entity search that is specified by the comma-separated unique fields (optional)
+$FindValue = "Phone" # String | Entity search that is specified by some value (optional)
 $CreatedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their creation date (optional)
 $CreatedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their creation date (optional)
 $ModifiedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their modification date (optional)
 $ModifiedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their modification date (optional)
-$ParentId = "6" # String | Retrieves brands specified by parent id (optional)
 $ResponseFields = "{return_code,return_message,pagination,result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
-$FindWhere = "name" # String | Entity search that is specified by the comma-separated unique fields (optional)
-$FindValue = "Phone" # String | Entity search that is specified by some value (optional)
+$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,short_description,active,url")
+$Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 
 # product.brand.list
 try {
-    $Result = Invoke-ProductBrandList -Start $Start -Count $Count -PageCursor $PageCursor -Params $Params -BrandIds $BrandIds -Exclude $Exclude -CategoryId $CategoryId -StoreId $StoreId -LangId $LangId -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -ParentId $ParentId -ResponseFields $ResponseFields -FindWhere $FindWhere -FindValue $FindValue
+    $Result = Invoke-ProductBrandList -Start $Start -Count $Count -PageCursor $PageCursor -BrandIds $BrandIds -CategoryId $CategoryId -ParentId $ParentId -StoreId $StoreId -LangId $LangId -FindWhere $FindWhere -FindValue $FindValue -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ProductBrandList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -517,20 +516,20 @@ Name | Type | Description  | Notes
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
  **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,short_description,active,url&quot;]
  **BrandIds** | **String**| Retrieves brands specified by brand ids | [optional] 
- **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
  **CategoryId** | **String**| Retrieves product brands specified by category id | [optional] 
+ **ParentId** | **String**| Retrieves brands specified by parent id | [optional] 
  **StoreId** | **String**| Store Id | [optional] 
  **LangId** | **String**| Language id | [optional] 
+ **FindWhere** | **String**| Entity search that is specified by the comma-separated unique fields | [optional] 
+ **FindValue** | **String**| Entity search that is specified by some value | [optional] 
  **CreatedFrom** | **String**| Retrieve entities from their creation date | [optional] 
  **CreatedTo** | **String**| Retrieve entities to their creation date | [optional] 
  **ModifiedFrom** | **String**| Retrieve entities from their modification date | [optional] 
  **ModifiedTo** | **String**| Retrieve entities to their modification date | [optional] 
- **ParentId** | **String**| Retrieves brands specified by parent id | [optional] 
  **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
- **FindWhere** | **String**| Entity search that is specified by the comma-separated unique fields | [optional] 
- **FindValue** | **String**| Entity search that is specified by some value | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,short_description,active,url&quot;]
+ **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
 
@@ -616,12 +615,12 @@ Name | Type | Description  | Notes
 > ProductChildItemInfo200Response Invoke-ProductChildItemInfo<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Id] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CurrencyId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-UseLatestApiVersion] <System.Nullable[Boolean]><br>
 
 product.child_item.info
@@ -644,17 +643,17 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 
 $ProductId = "10" # String | Filter by parent product id
 $Id = "10" # String | Entity id
-$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "force_all")
-$ResponseFields = "{result{id,parent_id,sku,upc,images,combination}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
-$Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 $StoreId = "1" # String | Store Id (optional)
 $LangId = "3" # String | Language id (optional)
 $CurrencyId = "usd" # String | Currency Id (optional)
+$ResponseFields = "{result{id,parent_id,sku,upc,images,combination}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "force_all")
+$Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 $UseLatestApiVersion = $true # Boolean | Use the latest platform API version (optional) (default to $false)
 
 # product.child_item.info
 try {
-    $Result = Invoke-ProductChildItemInfo -ProductId $ProductId -Id $Id -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude -StoreId $StoreId -LangId $LangId -CurrencyId $CurrencyId -UseLatestApiVersion $UseLatestApiVersion
+    $Result = Invoke-ProductChildItemInfo -ProductId $ProductId -Id $Id -StoreId $StoreId -LangId $LangId -CurrencyId $CurrencyId -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude -UseLatestApiVersion $UseLatestApiVersion
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ProductChildItemInfo: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -667,12 +666,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ProductId** | **String**| Filter by parent product id | 
  **Id** | **String**| Entity id | 
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;force_all&quot;]
- **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
- **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
  **StoreId** | **String**| Store Id | [optional] 
  **LangId** | **String**| Language id | [optional] 
  **CurrencyId** | **String**| Currency Id | [optional] 
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;force_all&quot;]
+ **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
  **UseLatestApiVersion** | **Boolean**| Use the latest platform API version | [optional] [default to $false]
 
 ### Return type
@@ -693,16 +692,9 @@ Name | Type | Description  | Notes
 <a id="Invoke-ProductChildItemList"></a>
 # **Invoke-ProductChildItemList**
 > ModelResponseProductChildItemList Invoke-ProductChildItemList<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedFrom] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedTo] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedFrom] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedTo] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductIds] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Sku] <String><br>
@@ -712,10 +704,17 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AvailSale] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindValue] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindWhere] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedFrom] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedTo] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedFrom] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedTo] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ReturnGlobal] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ReportRequestId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DisableReportCache] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-UseLatestApiVersion] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ReturnGlobal] <System.Nullable[Boolean]><br>
 
 product.child_item.list
 
@@ -735,16 +734,9 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
-$PageCursor = "MyPageCursor" # String | Used to retrieve products child items via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
-$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "force_all")
-$ResponseFields = "{result{children{id,parent_id,sku,upc,images,combination}}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
-$Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
-$CreatedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their creation date (optional)
-$CreatedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their creation date (optional)
-$ModifiedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their modification date (optional)
-$ModifiedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their modification date (optional)
+$PageCursor = "MyPageCursor" # String | Used to retrieve products child items via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
 $ProductId = "10" # String | Filter by parent product id (optional)
 $ProductIds = "4,5" # String | Filter by parent product ids (optional)
 $Sku = "bag_01" # String | Filter by products variant's sku (optional)
@@ -754,14 +746,21 @@ $CurrencyId = "usd" # String | Currency Id (optional)
 $AvailSale = $false # Boolean | Specifies the set of available/not available products for sale (optional)
 $FindValue = "bundled-item-123-" # String | Entity search that is specified by some value (optional)
 $FindWhere = "sku" # String | Child products search that is specified by field (optional)
+$CreatedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their creation date (optional)
+$CreatedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their creation date (optional)
+$ModifiedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their modification date (optional)
+$ModifiedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their modification date (optional)
+$ReturnGlobal = $false # Boolean | Determines the type of products to be returned. If set to 'true', only global products will be returned; if set to 'false', only local products will be returned. (optional) (default to $false)
+$ResponseFields = "{result{children{id,parent_id,sku,upc,images,combination}}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "force_all")
+$Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 $ReportRequestId = "105245017661" # String | Report request id (optional)
 $DisableReportCache = $false # Boolean | Disable report cache for current request (optional) (default to $false)
 $UseLatestApiVersion = $true # Boolean | Use the latest platform API version (optional) (default to $false)
-$ReturnGlobal = $false # Boolean | Determines the type of products to be returned. If set to 'true', only global products will be returned; if set to 'false', only local products will be returned. (optional) (default to $false)
 
 # product.child_item.list
 try {
-    $Result = Invoke-ProductChildItemList -PageCursor $PageCursor -Start $Start -Count $Count -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -ProductId $ProductId -ProductIds $ProductIds -Sku $Sku -StoreId $StoreId -LangId $LangId -CurrencyId $CurrencyId -AvailSale $AvailSale -FindValue $FindValue -FindWhere $FindWhere -ReportRequestId $ReportRequestId -DisableReportCache $DisableReportCache -UseLatestApiVersion $UseLatestApiVersion -ReturnGlobal $ReturnGlobal
+    $Result = Invoke-ProductChildItemList -Start $Start -Count $Count -PageCursor $PageCursor -ProductId $ProductId -ProductIds $ProductIds -Sku $Sku -StoreId $StoreId -LangId $LangId -CurrencyId $CurrencyId -AvailSale $AvailSale -FindValue $FindValue -FindWhere $FindWhere -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -ReturnGlobal $ReturnGlobal -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude -ReportRequestId $ReportRequestId -DisableReportCache $DisableReportCache -UseLatestApiVersion $UseLatestApiVersion
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ProductChildItemList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -772,16 +771,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **PageCursor** | **String**| Used to retrieve products child items via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;force_all&quot;]
- **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
- **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
- **CreatedFrom** | **String**| Retrieve entities from their creation date | [optional] 
- **CreatedTo** | **String**| Retrieve entities to their creation date | [optional] 
- **ModifiedFrom** | **String**| Retrieve entities from their modification date | [optional] 
- **ModifiedTo** | **String**| Retrieve entities to their modification date | [optional] 
+ **PageCursor** | **String**| Used to retrieve products child items via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
  **ProductId** | **String**| Filter by parent product id | [optional] 
  **ProductIds** | **String**| Filter by parent product ids | [optional] 
  **Sku** | **String**| Filter by products variant&#39;s sku | [optional] 
@@ -791,10 +783,17 @@ Name | Type | Description  | Notes
  **AvailSale** | **Boolean**| Specifies the set of available/not available products for sale | [optional] 
  **FindValue** | **String**| Entity search that is specified by some value | [optional] 
  **FindWhere** | **String**| Child products search that is specified by field | [optional] 
+ **CreatedFrom** | **String**| Retrieve entities from their creation date | [optional] 
+ **CreatedTo** | **String**| Retrieve entities to their creation date | [optional] 
+ **ModifiedFrom** | **String**| Retrieve entities from their modification date | [optional] 
+ **ModifiedTo** | **String**| Retrieve entities to their modification date | [optional] 
+ **ReturnGlobal** | **Boolean**| Determines the type of products to be returned. If set to &#39;true&#39;, only global products will be returned; if set to &#39;false&#39;, only local products will be returned. | [optional] [default to $false]
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;force_all&quot;]
+ **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
  **ReportRequestId** | **String**| Report request id | [optional] 
  **DisableReportCache** | **Boolean**| Disable report cache for current request | [optional] [default to $false]
  **UseLatestApiVersion** | **Boolean**| Use the latest platform API version | [optional] [default to $false]
- **ReturnGlobal** | **Boolean**| Determines the type of products to be returned. If set to &#39;true&#39;, only global products will be returned; if set to &#39;false&#39;, only local products will be returned. | [optional] [default to $false]
 
 ### Return type
 
@@ -814,28 +813,28 @@ Name | Type | Description  | Notes
 <a id="Invoke-ProductCount"></a>
 # **Invoke-ProductCount**
 > ProductCount200Response Invoke-ProductCount<br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductIds] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SinceId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CategoriesIds] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CategoryId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AvailView] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AvailSale] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedTo] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedTo] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AvailView] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AvailSale] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductIds] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SinceId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ReportRequestId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DisableReportCache] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-BrandName] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductAttributes] <String[]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Status] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Type] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindValue] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindWhere] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-UseLatestApiVersion] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ReportRequestId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ReturnGlobal] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CategoriesIds] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DisableReportCache] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-UseLatestApiVersion] <System.Nullable[Boolean]><br>
 
 product.count
 
@@ -855,32 +854,32 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
+$ProductIds = "4,5" # String | Counts products specified by product ids (optional)
+$SinceId = "56" # String | Retrieve entities starting from the specified id. (optional)
+$CategoriesIds = "23,56" # String | Defines product add that is specified by comma-separated categories id (optional)
 $CategoryId = "6" # String | Counts products specified by category id (optional)
+$StoreId = "1" # String | Counts products specified by store id (optional)
+$LangId = "3" # String | Counts products specified by language id (optional)
+$AvailView = $true # Boolean | Specifies the set of visible/invisible products (optional)
+$AvailSale = $false # Boolean | Specifies the set of available/not available products for sale (optional)
 $CreatedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their creation date (optional)
 $CreatedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their creation date (optional)
 $ModifiedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their modification date (optional)
 $ModifiedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their modification date (optional)
-$AvailView = $true # Boolean | Specifies the set of visible/invisible products (optional)
-$AvailSale = $false # Boolean | Specifies the set of available/not available products for sale (optional)
-$StoreId = "1" # String | Counts products specified by store id (optional)
-$LangId = "3" # String | Counts products specified by language id (optional)
-$ProductIds = "4,5" # String | Counts products specified by product ids (optional)
-$SinceId = "56" # String | Retrieve entities starting from the specified id. (optional)
-$ReportRequestId = "105245017661" # String | Report request id (optional)
-$DisableReportCache = $false # Boolean | Disable report cache for current request (optional) (default to $false)
 $BrandName = "Abidas" # String | Retrieves brands specified by brand name (optional)
 $ProductAttributes = "MyProductAttributes" # String[] | Defines product attributes (optional)
 $Status = "disabled" # String | Defines product's status (optional)
 $Type = "simple" # String | Defines products's type (optional)
 $FindValue = "Phone" # String | Entity search that is specified by some value (optional)
 $FindWhere = "name" # String | Counts products that are searched specified by field (optional)
-$UseLatestApiVersion = $true # Boolean | Use the latest platform API version (optional) (default to $false)
+$ReportRequestId = "105245017661" # String | Report request id (optional)
 $ReturnGlobal = $false # Boolean | Determines the type of products to be returned. If set to 'true', only global products will be returned; if set to 'false', only local products will be returned. (optional) (default to $false)
-$CategoriesIds = "23,56" # String | Defines product add that is specified by comma-separated categories id (optional)
+$DisableReportCache = $false # Boolean | Disable report cache for current request (optional) (default to $false)
+$UseLatestApiVersion = $true # Boolean | Use the latest platform API version (optional) (default to $false)
 
 # product.count
 try {
-    $Result = Invoke-ProductCount -CategoryId $CategoryId -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -AvailView $AvailView -AvailSale $AvailSale -StoreId $StoreId -LangId $LangId -ProductIds $ProductIds -SinceId $SinceId -ReportRequestId $ReportRequestId -DisableReportCache $DisableReportCache -BrandName $BrandName -ProductAttributes $ProductAttributes -Status $Status -Type $Type -FindValue $FindValue -FindWhere $FindWhere -UseLatestApiVersion $UseLatestApiVersion -ReturnGlobal $ReturnGlobal -CategoriesIds $CategoriesIds
+    $Result = Invoke-ProductCount -ProductIds $ProductIds -SinceId $SinceId -CategoriesIds $CategoriesIds -CategoryId $CategoryId -StoreId $StoreId -LangId $LangId -AvailView $AvailView -AvailSale $AvailSale -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -BrandName $BrandName -ProductAttributes $ProductAttributes -Status $Status -Type $Type -FindValue $FindValue -FindWhere $FindWhere -ReportRequestId $ReportRequestId -ReturnGlobal $ReturnGlobal -DisableReportCache $DisableReportCache -UseLatestApiVersion $UseLatestApiVersion
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ProductCount: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -891,28 +890,28 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ProductIds** | **String**| Counts products specified by product ids | [optional] 
+ **SinceId** | **String**| Retrieve entities starting from the specified id. | [optional] 
+ **CategoriesIds** | **String**| Defines product add that is specified by comma-separated categories id | [optional] 
  **CategoryId** | **String**| Counts products specified by category id | [optional] 
+ **StoreId** | **String**| Counts products specified by store id | [optional] 
+ **LangId** | **String**| Counts products specified by language id | [optional] 
+ **AvailView** | **Boolean**| Specifies the set of visible/invisible products | [optional] 
+ **AvailSale** | **Boolean**| Specifies the set of available/not available products for sale | [optional] 
  **CreatedFrom** | **String**| Retrieve entities from their creation date | [optional] 
  **CreatedTo** | **String**| Retrieve entities to their creation date | [optional] 
  **ModifiedFrom** | **String**| Retrieve entities from their modification date | [optional] 
  **ModifiedTo** | **String**| Retrieve entities to their modification date | [optional] 
- **AvailView** | **Boolean**| Specifies the set of visible/invisible products | [optional] 
- **AvailSale** | **Boolean**| Specifies the set of available/not available products for sale | [optional] 
- **StoreId** | **String**| Counts products specified by store id | [optional] 
- **LangId** | **String**| Counts products specified by language id | [optional] 
- **ProductIds** | **String**| Counts products specified by product ids | [optional] 
- **SinceId** | **String**| Retrieve entities starting from the specified id. | [optional] 
- **ReportRequestId** | **String**| Report request id | [optional] 
- **DisableReportCache** | **Boolean**| Disable report cache for current request | [optional] [default to $false]
  **BrandName** | **String**| Retrieves brands specified by brand name | [optional] 
  **ProductAttributes** | [**String[]**](String.md)| Defines product attributes | [optional] 
  **Status** | **String**| Defines product&#39;s status | [optional] 
  **Type** | **String**| Defines products&#39;s type | [optional] 
  **FindValue** | **String**| Entity search that is specified by some value | [optional] 
  **FindWhere** | **String**| Counts products that are searched specified by field | [optional] 
- **UseLatestApiVersion** | **Boolean**| Use the latest platform API version | [optional] [default to $false]
+ **ReportRequestId** | **String**| Report request id | [optional] 
  **ReturnGlobal** | **Boolean**| Determines the type of products to be returned. If set to &#39;true&#39;, only global products will be returned; if set to &#39;false&#39;, only local products will be returned. | [optional] [default to $false]
- **CategoriesIds** | **String**| Defines product add that is specified by comma-separated categories id | [optional] 
+ **DisableReportCache** | **Boolean**| Disable report cache for current request | [optional] [default to $false]
+ **UseLatestApiVersion** | **Boolean**| Use the latest platform API version | [optional] [default to $false]
 
 ### Return type
 
@@ -1007,12 +1006,12 @@ Name | Type | Description  | Notes
 > ModelResponseProductCurrencyList Invoke-ProductCurrencyList<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Default] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Avail] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 
 product.currency.list
 
@@ -1034,16 +1033,16 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
-$Params = "name,iso3,default,avail" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "name,iso3,default,avail")
 $PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
-$Exclude = "name,iso3,default,avail" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
-$ResponseFields = "{return_message,pagination,result{currency}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
 $Default = $true # Boolean | Specifies the set of default/not default currencies (optional)
 $Avail = $false # Boolean | Specifies the set of available/not available currencies (optional)
+$ResponseFields = "{return_message,pagination,result{currency}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Params = "name,iso3,default,avail" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "name,iso3,default,avail")
+$Exclude = "name,iso3,default,avail" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 
 # product.currency.list
 try {
-    $Result = Invoke-ProductCurrencyList -Start $Start -Count $Count -Params $Params -PageCursor $PageCursor -Exclude $Exclude -ResponseFields $ResponseFields -Default $Default -Avail $Avail
+    $Result = Invoke-ProductCurrencyList -Start $Start -Count $Count -PageCursor $PageCursor -Default $Default -Avail $Avail -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ProductCurrencyList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -1056,12 +1055,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;name,iso3,default,avail&quot;]
  **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
- **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
- **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
  **Default** | **Boolean**| Specifies the set of default/not default currencies | [optional] 
  **Avail** | **Boolean**| Specifies the set of available/not available currencies | [optional] 
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;name,iso3,default,avail&quot;]
+ **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
 
@@ -1335,7 +1334,7 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
-$ProductImageAdd = Initialize-ProductImageAdd -ProductId "10" -ImageName "bag-gray.png" -Type "small" -Url "http://docs.api2cart.com/img/logo.png" -Label "This cool image" -Mime "image/jpeg" -Position 5 -Content "/9j/4AAQSkZ...gD/2Q==" -ProductVariantId "45" -VariantIds "1,2,3,4,5" -OptionValueIds "1,2,3,4,5" -StoreId "1" -LangId "3" -UseLatestApiVersion $true # ProductImageAdd | 
+$ProductImageAdd = Initialize-ProductImageAdd -Type "small" -ImageName "bag-gray.png" -ProductId "10" -ProductVariantId "45" -VariantIds "1,2,3,4,5" -OptionValueIds "1,2,3,4,5" -StoreId "1" -LangId "3" -Url "http://docs.api2cart.com/img/logo.png" -Content "/9j/4AAQSkZ...gD/2Q==" -Label "This cool image" -Mime "image/jpeg" -Position 5 -UseLatestApiVersion $true # ProductImageAdd | 
 
 # product.image.add
 try {
@@ -1434,12 +1433,12 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Id] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-VariantIds] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ImageName] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Type] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Label] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Position] <System.Nullable[Int32]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Hidden] <System.Nullable[Boolean]><br>
 
 product.image.update
@@ -1463,17 +1462,17 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 $ProductId = "10" # String | Defines product id where the image should be updated
 $Id = "10" # String | Defines image update specified by image id
 $VariantIds = "1,2,3,4,5" # String | Defines product's variants ids (optional)
+$StoreId = "1" # String | Store Id (optional)
+$LangId = "3" # String | Language id (optional)
 $ImageName = "data/product/main/product_69_bag-gray.png" # String | Defines image's name (optional)
 $Type = "thumbnail" # String | Defines image's types that are specified by comma-separated list (optional) (default to "additional")
 $Label = "This cool image" # String | Defines alternative text that has to be attached to the picture (optional)
 $Position = 5 # Int32 | Defines image’s position in the list (optional)
-$StoreId = "1" # String | Store Id (optional)
-$LangId = "3" # String | Language id (optional)
 $Hidden = $true # Boolean | Define is hide image (optional)
 
 # product.image.update
 try {
-    $Result = Invoke-ProductImageUpdate -ProductId $ProductId -Id $Id -VariantIds $VariantIds -ImageName $ImageName -Type $Type -Label $Label -Position $Position -StoreId $StoreId -LangId $LangId -Hidden $Hidden
+    $Result = Invoke-ProductImageUpdate -ProductId $ProductId -Id $Id -VariantIds $VariantIds -StoreId $StoreId -LangId $LangId -ImageName $ImageName -Type $Type -Label $Label -Position $Position -Hidden $Hidden
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ProductImageUpdate: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -1487,12 +1486,12 @@ Name | Type | Description  | Notes
  **ProductId** | **String**| Defines product id where the image should be updated | 
  **Id** | **String**| Defines image update specified by image id | 
  **VariantIds** | **String**| Defines product&#39;s variants ids | [optional] 
+ **StoreId** | **String**| Store Id | [optional] 
+ **LangId** | **String**| Language id | [optional] 
  **ImageName** | **String**| Defines image&#39;s name | [optional] 
  **Type** | **String**| Defines image&#39;s types that are specified by comma-separated list | [optional] [default to &quot;additional&quot;]
  **Label** | **String**| Defines alternative text that has to be attached to the picture | [optional] 
  **Position** | **Int32**| Defines image’s position in the list | [optional] 
- **StoreId** | **String**| Store Id | [optional] 
- **LangId** | **String**| Language id | [optional] 
  **Hidden** | **Boolean**| Define is hide image | [optional] 
 
 ### Return type
@@ -1514,12 +1513,12 @@ Name | Type | Description  | Notes
 # **Invoke-ProductInfo**
 > ProductInfo200Response Invoke-ProductInfo<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Id] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CurrencyId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ReportRequestId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DisableReportCache] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-UseLatestApiVersion] <System.Nullable[Boolean]><br>
@@ -1543,19 +1542,19 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
 $Id = "10" # String | Retrieves product's info specified by product id
-$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,description,price,categories_ids")
-$ResponseFields = "{result{id,name,price,images}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
-$Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 $StoreId = "1" # String | Retrieves product info specified by store id (optional)
 $LangId = "3" # String | Retrieves product info specified by language id (optional)
 $CurrencyId = "usd" # String | Currency Id (optional)
+$ResponseFields = "{result{id,name,price,images}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,description,price,categories_ids")
+$Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 $ReportRequestId = "105245017661" # String | Report request id (optional)
 $DisableReportCache = $false # Boolean | Disable report cache for current request (optional) (default to $false)
 $UseLatestApiVersion = $true # Boolean | Use the latest platform API version (optional) (default to $false)
 
 # product.info
 try {
-    $Result = Invoke-ProductInfo -Id $Id -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude -StoreId $StoreId -LangId $LangId -CurrencyId $CurrencyId -ReportRequestId $ReportRequestId -DisableReportCache $DisableReportCache -UseLatestApiVersion $UseLatestApiVersion
+    $Result = Invoke-ProductInfo -Id $Id -StoreId $StoreId -LangId $LangId -CurrencyId $CurrencyId -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude -ReportRequestId $ReportRequestId -DisableReportCache $DisableReportCache -UseLatestApiVersion $UseLatestApiVersion
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ProductInfo: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -1567,12 +1566,12 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **Id** | **String**| Retrieves product&#39;s info specified by product id | 
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,description,price,categories_ids&quot;]
- **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
- **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
  **StoreId** | **String**| Retrieves product info specified by store id | [optional] 
  **LangId** | **String**| Retrieves product info specified by language id | [optional] 
  **CurrencyId** | **String**| Currency Id | [optional] 
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,description,price,categories_ids&quot;]
+ **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
  **ReportRequestId** | **String**| Report request id | [optional] 
  **DisableReportCache** | **Boolean**| Disable report cache for current request | [optional] [default to $false]
  **UseLatestApiVersion** | **Boolean**| Use the latest platform API version | [optional] [default to $false]
@@ -1595,39 +1594,39 @@ Name | Type | Description  | Notes
 <a id="Invoke-ProductList"></a>
 # **Invoke-ProductList**
 > ModelResponseProductList Invoke-ProductList<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductIds] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SinceId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CategoriesIds] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CategoryId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CurrencyId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AvailView] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AvailSale] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedTo] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedTo] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AvailView] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-AvailSale] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CurrencyId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductIds] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SinceId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ReportRequestId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DisableReportCache] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SortBy] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SortDirection] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Sku] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DisableCache] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-BrandName] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductAttributes] <String[]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Status] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Type] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindValue] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindWhere] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-UseLatestApiVersion] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ReturnGlobal] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CategoriesIds] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SortBy] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SortDirection] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ReportRequestId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DisableCache] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DisableReportCache] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-UseLatestApiVersion] <System.Nullable[Boolean]><br>
 
 product.list
 
@@ -1647,43 +1646,43 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
-$PageCursor = "MyPageCursor" # String | Used to retrieve products via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
-$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,description,price,categories_ids")
-$ResponseFields = "{return_code,pagination,result{product{id,name,price,images}}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
-$Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
+$PageCursor = "MyPageCursor" # String | Used to retrieve products via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
+$ProductIds = "4,5" # String | Retrieves products specified by product ids (optional)
+$SinceId = "56" # String | Retrieve entities starting from the specified id. (optional)
+$CategoriesIds = "23,56" # String | Retrieves products specified by categories ids (optional)
 $CategoryId = "6" # String | Retrieves products specified by category id (optional)
+$StoreId = "1" # String | Retrieves products specified by store id (optional)
+$LangId = "3" # String | Retrieves products specified by language id (optional)
+$CurrencyId = "usd" # String | Currency Id (optional)
+$AvailView = $true # Boolean | Specifies the set of visible/invisible products (optional)
+$AvailSale = $false # Boolean | Specifies the set of available/not available products for sale (optional)
 $CreatedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their creation date (optional)
 $CreatedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their creation date (optional)
 $ModifiedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their modification date (optional)
 $ModifiedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their modification date (optional)
-$AvailView = $true # Boolean | Specifies the set of visible/invisible products (optional)
-$AvailSale = $false # Boolean | Specifies the set of available/not available products for sale (optional)
-$StoreId = "1" # String | Retrieves products specified by store id (optional)
-$LangId = "3" # String | Retrieves products specified by language id (optional)
-$CurrencyId = "usd" # String | Currency Id (optional)
-$ProductIds = "4,5" # String | Retrieves products specified by product ids (optional)
-$SinceId = "56" # String | Retrieve entities starting from the specified id. (optional)
-$ReportRequestId = "105245017661" # String | Report request id (optional)
-$DisableReportCache = $false # Boolean | Disable report cache for current request (optional) (default to $false)
-$SortBy = "value_id" # String | Set field to sort by (optional) (default to "id")
-$SortDirection = "asc" # String | Set sorting direction (optional) (default to "asc")
 $Sku = "bag_01" # String | Filter by product's sku (optional)
-$DisableCache = $false # Boolean | Disable cache for current request (optional) (default to $false)
 $BrandName = "Abidas" # String | Retrieves brands specified by brand name (optional)
 $ProductAttributes = "MyProductAttributes" # String[] | Defines product attributes (optional)
 $Status = "disabled" # String | Defines product's status (optional)
 $Type = "simple" # String | Defines products's type (optional)
 $FindValue = "Phone" # String | Entity search that is specified by some value (optional)
 $FindWhere = "name" # String | Product search that is specified by field (optional)
-$UseLatestApiVersion = $true # Boolean | Use the latest platform API version (optional) (default to $false)
 $ReturnGlobal = $false # Boolean | Determines the type of products to be returned. If set to 'true', only global products will be returned; if set to 'false', only local products will be returned. (optional) (default to $false)
-$CategoriesIds = "23,56" # String | Retrieves products specified by categories ids (optional)
+$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,description,price,categories_ids")
+$ResponseFields = "{return_code,pagination,result{product{id,name,price,images}}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
+$SortBy = "value_id" # String | Set field to sort by (optional) (default to "id")
+$SortDirection = "asc" # String | Set sorting direction (optional) (default to "asc")
+$ReportRequestId = "105245017661" # String | Report request id (optional)
+$DisableCache = $false # Boolean | Disable cache for current request (optional) (default to $false)
+$DisableReportCache = $false # Boolean | Disable report cache for current request (optional) (default to $false)
+$UseLatestApiVersion = $true # Boolean | Use the latest platform API version (optional) (default to $false)
 
 # product.list
 try {
-    $Result = Invoke-ProductList -PageCursor $PageCursor -Start $Start -Count $Count -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude -CategoryId $CategoryId -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -AvailView $AvailView -AvailSale $AvailSale -StoreId $StoreId -LangId $LangId -CurrencyId $CurrencyId -ProductIds $ProductIds -SinceId $SinceId -ReportRequestId $ReportRequestId -DisableReportCache $DisableReportCache -SortBy $SortBy -SortDirection $SortDirection -Sku $Sku -DisableCache $DisableCache -BrandName $BrandName -ProductAttributes $ProductAttributes -Status $Status -Type $Type -FindValue $FindValue -FindWhere $FindWhere -UseLatestApiVersion $UseLatestApiVersion -ReturnGlobal $ReturnGlobal -CategoriesIds $CategoriesIds
+    $Result = Invoke-ProductList -Start $Start -Count $Count -PageCursor $PageCursor -ProductIds $ProductIds -SinceId $SinceId -CategoriesIds $CategoriesIds -CategoryId $CategoryId -StoreId $StoreId -LangId $LangId -CurrencyId $CurrencyId -AvailView $AvailView -AvailSale $AvailSale -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -Sku $Sku -BrandName $BrandName -ProductAttributes $ProductAttributes -Status $Status -Type $Type -FindValue $FindValue -FindWhere $FindWhere -ReturnGlobal $ReturnGlobal -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude -SortBy $SortBy -SortDirection $SortDirection -ReportRequestId $ReportRequestId -DisableCache $DisableCache -DisableReportCache $DisableReportCache -UseLatestApiVersion $UseLatestApiVersion
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ProductList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -1694,39 +1693,39 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **PageCursor** | **String**| Used to retrieve products via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,description,price,categories_ids&quot;]
- **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
- **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
+ **PageCursor** | **String**| Used to retrieve products via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
+ **ProductIds** | **String**| Retrieves products specified by product ids | [optional] 
+ **SinceId** | **String**| Retrieve entities starting from the specified id. | [optional] 
+ **CategoriesIds** | **String**| Retrieves products specified by categories ids | [optional] 
  **CategoryId** | **String**| Retrieves products specified by category id | [optional] 
+ **StoreId** | **String**| Retrieves products specified by store id | [optional] 
+ **LangId** | **String**| Retrieves products specified by language id | [optional] 
+ **CurrencyId** | **String**| Currency Id | [optional] 
+ **AvailView** | **Boolean**| Specifies the set of visible/invisible products | [optional] 
+ **AvailSale** | **Boolean**| Specifies the set of available/not available products for sale | [optional] 
  **CreatedFrom** | **String**| Retrieve entities from their creation date | [optional] 
  **CreatedTo** | **String**| Retrieve entities to their creation date | [optional] 
  **ModifiedFrom** | **String**| Retrieve entities from their modification date | [optional] 
  **ModifiedTo** | **String**| Retrieve entities to their modification date | [optional] 
- **AvailView** | **Boolean**| Specifies the set of visible/invisible products | [optional] 
- **AvailSale** | **Boolean**| Specifies the set of available/not available products for sale | [optional] 
- **StoreId** | **String**| Retrieves products specified by store id | [optional] 
- **LangId** | **String**| Retrieves products specified by language id | [optional] 
- **CurrencyId** | **String**| Currency Id | [optional] 
- **ProductIds** | **String**| Retrieves products specified by product ids | [optional] 
- **SinceId** | **String**| Retrieve entities starting from the specified id. | [optional] 
- **ReportRequestId** | **String**| Report request id | [optional] 
- **DisableReportCache** | **Boolean**| Disable report cache for current request | [optional] [default to $false]
- **SortBy** | **String**| Set field to sort by | [optional] [default to &quot;id&quot;]
- **SortDirection** | **String**| Set sorting direction | [optional] [default to &quot;asc&quot;]
  **Sku** | **String**| Filter by product&#39;s sku | [optional] 
- **DisableCache** | **Boolean**| Disable cache for current request | [optional] [default to $false]
  **BrandName** | **String**| Retrieves brands specified by brand name | [optional] 
  **ProductAttributes** | [**String[]**](String.md)| Defines product attributes | [optional] 
  **Status** | **String**| Defines product&#39;s status | [optional] 
  **Type** | **String**| Defines products&#39;s type | [optional] 
  **FindValue** | **String**| Entity search that is specified by some value | [optional] 
  **FindWhere** | **String**| Product search that is specified by field | [optional] 
- **UseLatestApiVersion** | **Boolean**| Use the latest platform API version | [optional] [default to $false]
  **ReturnGlobal** | **Boolean**| Determines the type of products to be returned. If set to &#39;true&#39;, only global products will be returned; if set to &#39;false&#39;, only local products will be returned. | [optional] [default to $false]
- **CategoriesIds** | **String**| Retrieves products specified by categories ids | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,description,price,categories_ids&quot;]
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
+ **SortBy** | **String**| Set field to sort by | [optional] [default to &quot;id&quot;]
+ **SortDirection** | **String**| Set sorting direction | [optional] [default to &quot;asc&quot;]
+ **ReportRequestId** | **String**| Report request id | [optional] 
+ **DisableCache** | **Boolean**| Disable cache for current request | [optional] [default to $false]
+ **DisableReportCache** | **Boolean**| Disable report cache for current request | [optional] [default to $false]
+ **UseLatestApiVersion** | **Boolean**| Use the latest platform API version | [optional] [default to $false]
 
 ### Return type
 
@@ -1996,12 +1995,12 @@ Name | Type | Description  | Notes
 > ModelResponseProductOptionList Invoke-ProductOptionList<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 
 product.option.list
 
@@ -2023,16 +2022,16 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
-$Params = "id,name,sort_order" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,description")
-$Exclude = "id,name,sort_order" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
-$ResponseFields = "{return_code,return_message,pagination,result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
 $ProductId = "10" # String | Retrieves products' options specified by product id (optional)
 $LangId = "3" # String | Language id (optional)
 $StoreId = "1" # String | Store Id (optional)
+$ResponseFields = "{return_code,return_message,pagination,result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Params = "id,name,sort_order" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,description")
+$Exclude = "id,name,sort_order" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 
 # product.option.list
 try {
-    $Result = Invoke-ProductOptionList -Start $Start -Count $Count -Params $Params -Exclude $Exclude -ResponseFields $ResponseFields -ProductId $ProductId -LangId $LangId -StoreId $StoreId
+    $Result = Invoke-ProductOptionList -Start $Start -Count $Count -ProductId $ProductId -LangId $LangId -StoreId $StoreId -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ProductOptionList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -2045,12 +2044,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,description&quot;]
- **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
- **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
  **ProductId** | **String**| Retrieves products&#39; options specified by product id | [optional] 
  **LangId** | **String**| Language id | [optional] 
  **StoreId** | **String**| Store Id | [optional] 
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,description&quot;]
+ **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
 
@@ -2519,14 +2518,14 @@ Name | Type | Description  | Notes
 > ModelResponseProductReviewList Invoke-ProductReviewList<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Ids] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Status] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 
 product.review.list
 
@@ -2548,18 +2547,18 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 
 $ProductId = "10" # String | Product id
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
-$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
+$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
 $Ids = "24,25" # String | Retrieves reviews specified by ids (optional)
 $StoreId = "1" # String | Store Id (optional)
 $Status = "disabled" # String | Defines status (optional)
+$ResponseFields = "{return_code,return_message,pagination,result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
 $Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,customer_id,email,message,status,product_id,nick_name,summary,rating,ratings,status,created_time")
 $Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
-$ResponseFields = "{return_code,return_message,pagination,result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
 
 # product.review.list
 try {
-    $Result = Invoke-ProductReviewList -ProductId $ProductId -Start $Start -PageCursor $PageCursor -Count $Count -Ids $Ids -StoreId $StoreId -Status $Status -Params $Params -Exclude $Exclude -ResponseFields $ResponseFields
+    $Result = Invoke-ProductReviewList -ProductId $ProductId -Start $Start -Count $Count -PageCursor $PageCursor -Ids $Ids -StoreId $StoreId -Status $Status -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ProductReviewList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -2572,14 +2571,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ProductId** | **String**| Product id | 
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
- **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+ **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
  **Ids** | **String**| Retrieves reviews specified by ids | [optional] 
  **StoreId** | **String**| Store Id | [optional] 
  **Status** | **String**| Defines status | [optional] 
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
  **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,customer_id,email,message,status,product_id,nick_name,summary,rating,ratings,status,created_time&quot;]
  **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
- **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
 
 ### Return type
 
@@ -2733,9 +2732,10 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
+$ProductAddTierPricesInner = Initialize-ProductAddTierPricesInner -Quantity 0 -Price 0
 $ProductAddPackageDetails = Initialize-ProductAddPackageDetails -MeasureUnit "MyMeasureUnit" -WeighUnit "MyWeighUnit" -PackageDepth 0 -PackageLength 0 -PackageWidth 0 -WeightMajor 0 -WeightMinor 0 -ShippingPackage "MyShippingPackage"
 $ProductAddManufacturerInfo = Initialize-ProductAddManufacturerInfo -Name "MyName" -Address "MyAddress" -Phone "MyPhone" -Email "MyEmail"
-$ProductUpdate = Initialize-ProductUpdate -Id "10" -Model "bag_01" -OldPrice 99.9 -Price 99.9 -SpecialPrice 56.9 -SpriceCreate "2018-08-25 23:56:12" -SpriceExpire "2018-08-25 23:56:12" -CostPrice 65.9 -FixedCostShippingPrice 5.5 -RetailPrice 6.9 -Quantity 6 -AvailableForView $false -Weight 23.69 -WeightUnit "lb" -DimensionsUnit "cm" -IncreaseQuantity 4 -ReduceQuantity 4 -WarehouseId "1" -ReserveQuantity 1 -ManageStock $false -BackorderStatus "true" -Name "Pancil" -Sku "bag_01" -Visible "search" -Manufacturer "Samsung" -ManufacturerId "1" -CategoriesIds "23,56" -RelatedProductsIds "4,5" -UpSellProductsIds "4,5" -CrossSellProductsIds "4,5" -Description "New product description" -ShortDescription "Short description. This is very short description" -MetaTitle "category,test" -MetaKeywords "category,test" -MetaDescription "category,test" -StoreId "1" -LangId "3" -InStock $true -Status "disabled" -SeoUrl "some seo url" -ReportRequestId "105245017661" -DisableReportCache $false -Reindex $false -Tags "tag1,tag2" -ClearCache $false -Gtin "12345678912345" -Upc "9770317847001" -Mpn "9770317847001" -Ean "5901234123457" -Isbn "9783161484100" -Taxable $false -ProductClass "Shirts" -Height 56.12 -Length 56.12 -Width 56.12 -HarmonizedSystemCode "123456" -CountryOfOrigin "123456" -SearchKeywords "key1,key2,key3" -Barcode "9770317847001" -IsVirtual $false -IsFreeShipping $true -ReservePrice 65.9 -BuyitnowPrice 65.9 -AvailFrom "avail_from=2029-10-25T15:54:37-0500" -TaxClassId "9" -Type "simple" -Avail $false -DeliveryCode "24uurs-23" -CheckProcessStatus $false -PackageDetails $ProductAddPackageDetails -StoresIds "1,2" -ManufacturerInfo $ProductAddManufacturerInfo -ProductionPartnerIds "4,5" -ShippingTemplateId 40256592690 -WhenMade "2020_2025" -IsSupply $false -Downloadable $true -Materials "MyMaterials" -AutoRenew $false -OnSale $false # ProductUpdate | 
+$ProductUpdate = Initialize-ProductUpdate -Id "10" -Model "bag_01" -Sku "bag_01" -Name "Pancil" -Description "New product description" -ShortDescription "Short description. This is very short description" -Price 99.9 -OldPrice 99.9 -SpecialPrice 56.9 -SpriceCreate "2018-08-25 23:56:12" -SpriceExpire "2018-08-25 23:56:12" -CostPrice 65.9 -FixedCostShippingPrice 5.5 -RetailPrice 6.9 -TierPrices $ProductAddTierPricesInner -ReservePrice 65.9 -BuyitnowPrice 65.9 -Taxable $false -TaxClassId "9" -Type "simple" -Status "disabled" -Condition "Like New" -Visible "search" -InStock $true -Avail $false -AvailFrom "avail_from=2029-10-25T15:54:37-0500" -ProductClass "Shirts" -AvailableForView $false -StoresIds "1,2" -StoreId "1" -LangId "3" -Quantity 6 -ReserveQuantity 1 -ManageStock $false -BackorderStatus "true" -IncreaseQuantity 4 -ReduceQuantity 4 -WarehouseId "1" -Weight 23.69 -WeightUnit "lb" -Height 56.12 -Length 56.12 -Width 56.12 -DimensionsUnit "cm" -IsVirtual $false -IsFreeShipping $true -Gtin "12345678912345" -Upc "9770317847001" -Mpn "9770317847001" -Ean "5901234123457" -Isbn "9783161484100" -Barcode "9770317847001" -Manufacturer "Samsung" -ManufacturerId "1" -CategoriesIds "23,56" -RelatedProductsIds "4,5" -UpSellProductsIds "4,5" -CrossSellProductsIds "4,5" -MetaTitle "category,test" -MetaKeywords "category,test" -MetaDescription "category,test" -SeoUrl "some seo url" -SearchKeywords "key1,key2,key3" -Tags "tag1,tag2" -DeliveryCode "24uurs-23" -PackageDetails $ProductAddPackageDetails -CountryOfOrigin "123456" -HarmonizedSystemCode "123456" -ShippingTemplateId 40256592690 -WhenMade "2020_2025" -IsSupply $false -Downloadable $true -Materials "MyMaterials" -AutoRenew $false -OnSale $false -ProductionPartnerIds "4,5" -ManufacturerInfo $ProductAddManufacturerInfo -ReportRequestId "105245017661" -DisableReportCache $false -Reindex $false -ClearCache $false -CheckProcessStatus $false # ProductUpdate | 
 
 # product.update
 try {
@@ -2851,7 +2851,7 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 
 $ProductVariantAddAttributesInner = Initialize-ProductVariantAddAttributesInner -AttributeName "MyAttributeName" -AttributeValue "MyAttributeValue" -AttributePrice 0
 $ProductAddTierPricesInner = Initialize-ProductAddTierPricesInner -Quantity 0 -Price 0
-$ProductVariantAdd = Initialize-ProductVariantAdd -ProductId "10" -Name "Bag Green XXL" -Model "bag_01" -Sku "bag_01" -Barcode "9770317847001" -Gtin "12345678912345" -Price 99.9 -OldPrice 99.9 -CostPrice 65.9 -FixedCostShippingPrice 5.5 -Attributes $ProductVariantAddAttributesInner -Description "Product variant" -SpecialPrice 56.9 -SpriceCreate "2018-08-25 23:56:12" -SpriceModified "2018-12-05 13:46:20" -SpriceExpire "2018-08-25 23:56:12" -AvailableForView $false -AvailableForSale $false -Weight 23.69 -Width 56.12 -Height 56.12 -Length 56.12 -WeightUnit "lb" -ShortDescription "Short description. This is very short description" -WarehouseId "1" -Quantity 6 -CreatedAt "2014-08-09 13:13:13" -Manufacturer "Samsung" -TaxClassId "9" -MetaTitle "category,test" -MetaKeywords "category,test" -MetaDescription "category,test" -Url "/product_variant_slug" -StoreId "1" -LangId "3" -ClearCache $false -Taxable $false -HarmonizedSystemCode "123456" -CountryOfOrigin "123456" -ManageStock $false -Upc "9770317847001" -Mpn "9770317847001" -Ean "5901234123457" -Isbn "9783161484100" -StoresIds "1,2" -IsDefault $true -IsFreeShipping $true -MarketplaceItemProperties "{"color":["Silver"],"manufacturer":"Philips","features":["3 way"],"countPerPack":1,"watts":{"unit":"W","measure":40}}" -InStock $true -BackorderStatus "true" -TierPrices $ProductAddTierPricesInner -IsVirtual $false # ProductVariantAdd | 
+$ProductVariantAdd = Initialize-ProductVariantAdd -ProductId "10" -Attributes $ProductVariantAddAttributesInner -Name "Bag Green XXL" -Model "bag_01" -Description "Product variant" -ShortDescription "Short description. This is very short description" -AvailableForView $false -AvailableForSale $false -IsVirtual $false -IsDefault $true -StoreId "1" -StoresIds "1,2" -LangId "3" -Price 99.9 -OldPrice 99.9 -CostPrice 65.9 -SpecialPrice 56.9 -SpriceCreate "2018-08-25 23:56:12" -SpriceModified "2018-12-05 13:46:20" -SpriceExpire "2018-08-25 23:56:12" -TierPrices $ProductAddTierPricesInner -Quantity 6 -WarehouseId "1" -InStock $true -BackorderStatus "true" -ManageStock $false -Weight 23.69 -Width 56.12 -Height 56.12 -Length 56.12 -WeightUnit "lb" -Sku "bag_01" -Barcode "9770317847001" -Gtin "12345678912345" -Upc "9770317847001" -Ean "5901234123457" -Mpn "9770317847001" -Isbn "9783161484100" -Manufacturer "Samsung" -CreatedAt "2014-08-09 13:13:13" -MetaTitle "category,test" -MetaKeywords "category,test" -MetaDescription "category,test" -Url "/product_variant_slug" -TaxClassId "9" -Taxable $false -FixedCostShippingPrice 5.5 -IsFreeShipping $true -CountryOfOrigin "123456" -HarmonizedSystemCode "123456" -MarketplaceItemProperties "{"color":["Silver"],"manufacturer":"Philips","features":["3 way"],"countPerPack":1,"watts":{"unit":"W","measure":40}}" -ClearCache $false # ProductVariantAdd | 
 
 # product.variant.add
 try {
@@ -2947,12 +2947,12 @@ Name | Type | Description  | Notes
 # **Invoke-ProductVariantCount**
 > ProductVariantCount200Response Invoke-ProductVariantCount<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CategoryId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedTo] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedTo] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CategoryId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 
 product.variant.count
 
@@ -2973,16 +2973,16 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
 $ProductId = "10" # String | Retrieves products' variants specified by product id
+$CategoryId = "6" # String | Counts products’ variants specified by category id (optional)
+$StoreId = "1" # String | Retrieves variants specified by store id (optional)
 $CreatedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their creation date (optional)
 $CreatedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their creation date (optional)
 $ModifiedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their modification date (optional)
 $ModifiedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their modification date (optional)
-$CategoryId = "6" # String | Counts products’ variants specified by category id (optional)
-$StoreId = "1" # String | Retrieves variants specified by store id (optional)
 
 # product.variant.count
 try {
-    $Result = Invoke-ProductVariantCount -ProductId $ProductId -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -CategoryId $CategoryId -StoreId $StoreId
+    $Result = Invoke-ProductVariantCount -ProductId $ProductId -CategoryId $CategoryId -StoreId $StoreId -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ProductVariantCount: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -2994,12 +2994,12 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ProductId** | **String**| Retrieves products&#39; variants specified by product id | 
+ **CategoryId** | **String**| Counts products’ variants specified by category id | [optional] 
+ **StoreId** | **String**| Retrieves variants specified by store id | [optional] 
  **CreatedFrom** | **String**| Retrieve entities from their creation date | [optional] 
  **CreatedTo** | **String**| Retrieve entities to their creation date | [optional] 
  **ModifiedFrom** | **String**| Retrieve entities from their modification date | [optional] 
  **ModifiedTo** | **String**| Retrieve entities to their modification date | [optional] 
- **CategoryId** | **String**| Counts products’ variants specified by category id | [optional] 
- **StoreId** | **String**| Retrieves variants specified by store id | [optional] 
 
 ### Return type
 
@@ -3156,7 +3156,7 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
-$ProductVariantImageAdd = Initialize-ProductVariantImageAdd -ProductId "10" -ProductVariantId "45" -ImageName "abibas.png" -Type "small" -Url "http://docs.api2cart.com/img/logo.png" -Content "/9j/4AAQSkZ...gD/2Q==" -Label "This cool image" -Mime "image/jpeg" -Position 5 -StoreId "1" -OptionId "5" # ProductVariantImageAdd | 
+$ProductVariantImageAdd = Initialize-ProductVariantImageAdd -ProductId "10" -ProductVariantId "45" -StoreId "1" -ImageName "abibas.png" -Type "small" -Url "http://docs.api2cart.com/img/logo.png" -Content "/9j/4AAQSkZ...gD/2Q==" -Label "This cool image" -Mime "image/jpeg" -Position 5 -OptionId "5" # ProductVariantImageAdd | 
 
 # product.variant.image.add
 try {
@@ -3256,9 +3256,9 @@ Name | Type | Description  | Notes
 # **Invoke-ProductVariantInfo**
 > ProductInfo200Response Invoke-ProductVariantInfo<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Id] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 
 product.variant.info
 
@@ -3279,13 +3279,13 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
 $Id = "10" # String | Retrieves variant's info specified by variant id
+$StoreId = "1" # String | Retrieves variant info specified by store id (optional)
 $Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,description,price")
 $Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
-$StoreId = "1" # String | Retrieves variant info specified by store id (optional)
 
 # product.variant.info
 try {
-    $Result = Invoke-ProductVariantInfo -Id $Id -Params $Params -Exclude $Exclude -StoreId $StoreId
+    $Result = Invoke-ProductVariantInfo -Id $Id -StoreId $StoreId -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ProductVariantInfo: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -3297,9 +3297,9 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **Id** | **String**| Retrieves variant&#39;s info specified by variant id | 
+ **StoreId** | **String**| Retrieves variant info specified by store id | [optional] 
  **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,description,price&quot;]
  **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
- **StoreId** | **String**| Retrieves variant info specified by store id | [optional] 
 
 ### Return type
 
@@ -3321,15 +3321,15 @@ Name | Type | Description  | Notes
 > ProductVariantList200Response Invoke-ProductVariantList<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CategoryId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedTo] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedTo] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CategoryId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 
 product.variant.list
 
@@ -3351,19 +3351,19 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
-$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,description,price")
-$Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
+$ProductId = "10" # String | Retrieves products' variants specified by product id (optional)
+$CategoryId = "6" # String | Retrieves products’ variants specified by category id (optional)
+$StoreId = "1" # String | Retrieves variants specified by store id (optional)
 $CreatedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their creation date (optional)
 $CreatedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their creation date (optional)
 $ModifiedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their modification date (optional)
 $ModifiedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their modification date (optional)
-$CategoryId = "6" # String | Retrieves products’ variants specified by category id (optional)
-$ProductId = "10" # String | Retrieves products' variants specified by product id (optional)
-$StoreId = "1" # String | Retrieves variants specified by store id (optional)
+$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,description,price")
+$Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 
 # product.variant.list
 try {
-    $Result = Invoke-ProductVariantList -Start $Start -Count $Count -Params $Params -Exclude $Exclude -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -CategoryId $CategoryId -ProductId $ProductId -StoreId $StoreId
+    $Result = Invoke-ProductVariantList -Start $Start -Count $Count -ProductId $ProductId -CategoryId $CategoryId -StoreId $StoreId -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ProductVariantList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -3376,15 +3376,15 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,description,price&quot;]
- **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
+ **ProductId** | **String**| Retrieves products&#39; variants specified by product id | [optional] 
+ **CategoryId** | **String**| Retrieves products’ variants specified by category id | [optional] 
+ **StoreId** | **String**| Retrieves variants specified by store id | [optional] 
  **CreatedFrom** | **String**| Retrieve entities from their creation date | [optional] 
  **CreatedTo** | **String**| Retrieve entities to their creation date | [optional] 
  **ModifiedFrom** | **String**| Retrieve entities from their modification date | [optional] 
  **ModifiedTo** | **String**| Retrieve entities to their modification date | [optional] 
- **CategoryId** | **String**| Retrieves products’ variants specified by category id | [optional] 
- **ProductId** | **String**| Retrieves products&#39; variants specified by product id | [optional] 
- **StoreId** | **String**| Retrieves variants specified by store id | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,description,price&quot;]
+ **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
 
@@ -3601,7 +3601,7 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
 $ProductVariantUpdateOptionsInner = Initialize-ProductVariantUpdateOptionsInner -OptionName "MyOptionName" -OptionValue "MyOptionValue"
-$ProductVariantUpdate = Initialize-ProductVariantUpdate -StoreId "1" -Id "10" -ProductId "10" -WarehouseId "1" -ReserveQuantity 1 -Quantity 6 -IncreaseQuantity 4 -ReduceQuantity 4 -Price 99.9 -SpecialPrice 56.9 -RetailPrice 6.9 -OldPrice 99.9 -CostPrice 65.9 -FixedCostShippingPrice 5.5 -SpriceCreate "2018-08-25 23:56:12" -SpriceExpire "2018-08-25 23:56:12" -ManageStock $false -InStock $true -Name "Bag Green L" -Description "Product variant" -Sku "bag_01" -MetaTitle "category,test" -MetaDescription "category,test" -MetaKeywords "category,test" -ShortDescription "Short description. This is very short description" -Visible "catalog" -Status "disabled" -BackorderStatus "true" -Weight 23.69 -Barcode "9770317847001" -Reindex $false -Taxable $false -Options $ProductVariantUpdateOptionsInner -HarmonizedSystemCode "123456" -CountryOfOrigin "123456" -Width 56.12 -WeightUnit "lb" -Height 56.12 -Length 56.12 -Gtin "12345678912345" -ClearCache $false -LangId "3" -Model "bag_01" -AvailableForSale $false -Upc "9770317847001" -Mpn "9770317847001" -Ean "5901234123457" -Isbn "9783161484100" -Avail $false -IsDefault $true -IsFreeShipping $true -TaxClassId "9" -IsVirtual $false # ProductVariantUpdate | 
+$ProductVariantUpdate = Initialize-ProductVariantUpdate -Id "10" -ProductId "10" -StoreId "1" -LangId "3" -Options $ProductVariantUpdateOptionsInner -Name "Bag Green L" -Description "Product variant" -ShortDescription "Short description. This is very short description" -Model "bag_01" -Sku "bag_01" -Visible "catalog" -Status "disabled" -BackorderStatus "true" -AvailableForSale $false -Avail $false -IsDefault $true -IsFreeShipping $true -Taxable $false -TaxClassId "9" -IsVirtual $false -ManageStock $false -InStock $true -WarehouseId "1" -ReserveQuantity 1 -Quantity 6 -IncreaseQuantity 4 -ReduceQuantity 4 -Price 99.9 -SpecialPrice 56.9 -RetailPrice 6.9 -OldPrice 99.9 -CostPrice 65.9 -FixedCostShippingPrice 5.5 -SpriceCreate "2018-08-25 23:56:12" -SpriceExpire "2018-08-25 23:56:12" -Weight 23.69 -Barcode "9770317847001" -Width 56.12 -WeightUnit "lb" -Height 56.12 -Length 56.12 -Gtin "12345678912345" -Upc "9770317847001" -Mpn "9770317847001" -Ean "5901234123457" -Isbn "9783161484100" -HarmonizedSystemCode "123456" -CountryOfOrigin "123456" -MetaTitle "category,test" -MetaDescription "category,test" -MetaKeywords "category,test" -Reindex $false -ClearCache $false # ProductVariantUpdate | 
 
 # product.variant.update
 try {

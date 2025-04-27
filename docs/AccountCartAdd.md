@@ -76,6 +76,7 @@ Name | Type | Description | Notes
 **ShoplineAccessToken** | **String** | Shopline APP Key | [optional] 
 **ShoplineAppKey** | **String** | Shopline APP Key | [optional] 
 **ShoplineAppSecret** | **String** | Shopline App Secret | [optional] 
+**ShoplineSharedSecret** | **String** | Shopline Shared Secret | [optional] 
 **ShopifyAccessToken** | **String** | Access token authorizing the app to access resources on behalf of a user | [optional] 
 **ShopifyApiKey** | **String** | Shopify API Key | [optional] 
 **ShopifyApiPassword** | **String** | Shopify API Password | [optional] 
@@ -229,6 +230,7 @@ $AccountCartAdd = Initialize-PSOpenAPIToolsAccountCartAdd  -CartId Opencart14 `
  -ShoplineAccessToken igse8e4rdmzkxdi937qe69d59en1imw `
  -ShoplineAppKey 737cf6bd2879cb6c7e5a8ff9cd63f3d46b0b5b7b `
  -ShoplineAppSecret 1701d123bb5cc14cd2732dcaed90638316c0a09 `
+ -ShoplineSharedSecret 1701d123bb5cc14cd2732dcaed90638316c0a09 `
  -ShopifyAccessToken igse8e4rdmzkxdi937qe69d59en1imw `
  -ShopifyApiKey bbca57d8ff3c3677128112c15556d9e3 `
  -ShopifyApiPassword 860f3a6fc87632301a42cd88e4b5ab3d `

@@ -10,7 +10,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductVariantImageAdd' {
     Context 'ProductVariantImageAdd' {
         It 'Initialize-ProductVariantImageAdd' {
             # a simple test to create an object
-            #$NewObject = Initialize-ProductVariantImageAdd -ProductId "TEST_VALUE" -ProductVariantId "TEST_VALUE" -ImageName "TEST_VALUE" -Type "TEST_VALUE" -Url "TEST_VALUE" -Content "TEST_VALUE" -Label "TEST_VALUE" -Mime "TEST_VALUE" -Position "TEST_VALUE" -StoreId "TEST_VALUE" -OptionId "TEST_VALUE"
+            #$NewObject = Initialize-ProductVariantImageAdd -ProductId "TEST_VALUE" -ProductVariantId "TEST_VALUE" -StoreId "TEST_VALUE" -ImageName "TEST_VALUE" -Type "TEST_VALUE" -Url "TEST_VALUE" -Content "TEST_VALUE" -Label "TEST_VALUE" -Mime "TEST_VALUE" -Position "TEST_VALUE" -OptionId "TEST_VALUE"
             #$NewObject | Should -BeOfType ProductVariantImageAdd
             #$NewObject.property | Should -Be 0
         }

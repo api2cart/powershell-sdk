@@ -134,12 +134,12 @@ This endpoint does not need any parameter.
 <a id="Invoke-CartCatalogPriceRulesList"></a>
 # **Invoke-CartCatalogPriceRulesList**
 > ModelResponseCartCatalogPriceRulesList Invoke-CartCatalogPriceRulesList<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Ids] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 
 cart.catalog_price_rules.list
@@ -160,17 +160,17 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
-$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
+$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
 $Ids = "24,25" # String | Retrieves  catalog_price_rules by ids (optional)
-$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,description")
 $ResponseFields = "{result{catalog_price_rules_count,catalog_price_rules{id,type,name,avail,usage_count,actions,conditions}}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,description")
 $Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 
 # cart.catalog_price_rules.list
 try {
-    $Result = Invoke-CartCatalogPriceRulesList -PageCursor $PageCursor -Start $Start -Count $Count -Ids $Ids -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude
+    $Result = Invoke-CartCatalogPriceRulesList -Start $Start -Count $Count -PageCursor $PageCursor -Ids $Ids -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CartCatalogPriceRulesList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -181,12 +181,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+ **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
  **Ids** | **String**| Retrieves  catalog_price_rules by ids | [optional] 
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,description&quot;]
  **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,description&quot;]
  **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
@@ -395,7 +395,7 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
-$CartCouponAdd = Initialize-CartCouponAdd -StoreId "1" -Code "000_BIG_SALE_000" -Name "Sale! -30%" -Codes "MyCodes" -ActionType "percent" -ActionApplyTo "order_total" -ActionScope "order" -ActionAmount 15.5 -DateStart "2019-12-29 06:44:30" -DateEnd "2020-01-05 01:00:00" -UsageLimit 99 -UsageLimitPerCustomer 1 -ActionConditionEntity "order" -ActionConditionKey "product_id" -ActionConditionOperator "ONE_OF" -ActionConditionValue "17834222,45466663" -IncludeTax $true # CartCouponAdd | 
+$CartCouponAdd = Initialize-CartCouponAdd -Code "000_BIG_SALE_000" -ActionType "percent" -ActionApplyTo "order_total" -ActionScope "order" -ActionAmount 15.5 -Codes "MyCodes" -Name "Sale! -30%" -DateStart "2019-12-29 06:44:30" -DateEnd "2020-01-05 01:00:00" -UsageLimit 99 -UsageLimitPerCustomer 1 -ActionConditionEntity "order" -ActionConditionKey "product_id" -ActionConditionOperator "ONE_OF" -ActionConditionValue "17834222,45466663" -IncludeTax $true -StoreId "1" # CartCouponAdd | 
 
 # cart.coupon.add
 try {
@@ -435,10 +435,10 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Key] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Operator] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Value] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Target] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-IncludeTax] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-IncludeShipping] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 
 cart.coupon.condition.add
 
@@ -463,14 +463,14 @@ $Entity = "order" # String | Defines condition entity type
 $Key = "total" # String | Defines condition entity attribute key
 $Operator = "==" # String | Defines condition operator
 $Value = "2" # String | Defines condition value, can be comma separated according to the operator.
-$StoreId = "1" # String | Store Id (optional)
 $Target = "coupon_action" # String | Defines condition operator (optional) (default to "coupon_prerequisite")
 $IncludeTax = $true # Boolean | Indicates whether to apply a discount for taxes. (optional) (default to $false)
 $IncludeShipping = $true # Boolean | Indicates whether to apply a discount for shipping. (optional) (default to $false)
+$StoreId = "1" # String | Store Id (optional)
 
 # cart.coupon.condition.add
 try {
-    $Result = Invoke-CartCouponConditionAdd -CouponId $CouponId -Entity $Entity -Key $Key -Operator $Operator -Value $Value -StoreId $StoreId -Target $Target -IncludeTax $IncludeTax -IncludeShipping $IncludeShipping
+    $Result = Invoke-CartCouponConditionAdd -CouponId $CouponId -Entity $Entity -Key $Key -Operator $Operator -Value $Value -Target $Target -IncludeTax $IncludeTax -IncludeShipping $IncludeShipping -StoreId $StoreId
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CartCouponConditionAdd: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -486,10 +486,10 @@ Name | Type | Description  | Notes
  **Key** | **String**| Defines condition entity attribute key | 
  **Operator** | **String**| Defines condition operator | 
  **Value** | **String**| Defines condition value, can be comma separated according to the operator. | 
- **StoreId** | **String**| Store Id | [optional] 
  **Target** | **String**| Defines condition operator | [optional] [default to &quot;coupon_prerequisite&quot;]
  **IncludeTax** | **Boolean**| Indicates whether to apply a discount for taxes. | [optional] [default to $false]
  **IncludeShipping** | **Boolean**| Indicates whether to apply a discount for shipping. | [optional] [default to $false]
+ **StoreId** | **String**| Store Id | [optional] 
 
 ### Return type
 
@@ -510,11 +510,11 @@ Name | Type | Description  | Notes
 # **Invoke-CartCouponCount**
 > CartCouponCount200Response Invoke-CartCouponCount<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Avail] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DateStartFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DateStartTo] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DateEndFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DateEndTo] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Avail] <System.Nullable[Boolean]><br>
 
 cart.coupon.count
 
@@ -535,15 +535,15 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
 $StoreId = "1" # String | Store Id (optional)
+$Avail = $false # Boolean | Defines category's visibility status (optional) (default to $true)
 $DateStartFrom = "2016-12-29 16:44:30" # String | Filter entity by date_start (greater or equal) (optional)
 $DateStartTo = "2016-12-29 16:44:30" # String | Filter entity by date_start (less or equal) (optional)
 $DateEndFrom = "2016-12-29 16:44:30" # String | Filter entity by date_end (greater or equal) (optional)
 $DateEndTo = "2016-12-29 16:44:30" # String | Filter entity by date_end (less or equal) (optional)
-$Avail = $false # Boolean | Defines category's visibility status (optional) (default to $true)
 
 # cart.coupon.count
 try {
-    $Result = Invoke-CartCouponCount -StoreId $StoreId -DateStartFrom $DateStartFrom -DateStartTo $DateStartTo -DateEndFrom $DateEndFrom -DateEndTo $DateEndTo -Avail $Avail
+    $Result = Invoke-CartCouponCount -StoreId $StoreId -Avail $Avail -DateStartFrom $DateStartFrom -DateStartTo $DateStartTo -DateEndFrom $DateEndFrom -DateEndTo $DateEndTo
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CartCouponCount: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -555,11 +555,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **StoreId** | **String**| Store Id | [optional] 
+ **Avail** | **Boolean**| Defines category&#39;s visibility status | [optional] [default to $true]
  **DateStartFrom** | **String**| Filter entity by date_start (greater or equal) | [optional] 
  **DateStartTo** | **String**| Filter entity by date_start (less or equal) | [optional] 
  **DateEndFrom** | **String**| Filter entity by date_end (greater or equal) | [optional] 
  **DateEndTo** | **String**| Filter entity by date_end (less or equal) | [optional] 
- **Avail** | **Boolean**| Defines category&#39;s visibility status | [optional] [default to $true]
 
 ### Return type
 
@@ -637,19 +637,19 @@ Name | Type | Description  | Notes
 <a id="Invoke-CartCouponList"></a>
 # **Invoke-CartCouponList**
 > ModelResponseCartCouponList Invoke-CartCouponList<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CouponsIds] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Avail] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DateStartFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DateStartTo] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DateEndFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DateEndTo] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Avail] <System.Nullable[Boolean]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 
 cart.coupon.list
@@ -670,24 +670,24 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
-$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
+$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
 $CouponsIds = "1,2,3" # String | Filter coupons by ids (optional)
 $StoreId = "1" # String | Filter coupons by store id (optional)
+$LangId = "3" # String | Language id (optional)
+$Avail = $false # Boolean | Filter coupons by avail status (optional)
 $DateStartFrom = "2016-12-29 16:44:30" # String | Filter entity by date_start (greater or equal) (optional)
 $DateStartTo = "2016-12-29 16:44:30" # String | Filter entity by date_start (less or equal) (optional)
 $DateEndFrom = "2016-12-29 16:44:30" # String | Filter entity by date_end (greater or equal) (optional)
 $DateEndTo = "2016-12-29 16:44:30" # String | Filter entity by date_end (less or equal) (optional)
-$Avail = $false # Boolean | Filter coupons by avail status (optional)
-$LangId = "3" # String | Language id (optional)
-$Params = "id,code,type,amount" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,code,name,description")
 $ResponseFields = "{pagination,result{coupon_count,coupon{id,code,name,conditions,actions{scope,amount,conditions{id,value,sub-conditions}},date_start,avail}}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Params = "id,code,type,amount" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,code,name,description")
 $Exclude = "usage_history,type" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 
 # cart.coupon.list
 try {
-    $Result = Invoke-CartCouponList -PageCursor $PageCursor -Start $Start -Count $Count -CouponsIds $CouponsIds -StoreId $StoreId -DateStartFrom $DateStartFrom -DateStartTo $DateStartTo -DateEndFrom $DateEndFrom -DateEndTo $DateEndTo -Avail $Avail -LangId $LangId -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude
+    $Result = Invoke-CartCouponList -Start $Start -Count $Count -PageCursor $PageCursor -CouponsIds $CouponsIds -StoreId $StoreId -LangId $LangId -Avail $Avail -DateStartFrom $DateStartFrom -DateStartTo $DateStartTo -DateEndFrom $DateEndFrom -DateEndTo $DateEndTo -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CartCouponList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -698,19 +698,19 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+ **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
  **CouponsIds** | **String**| Filter coupons by ids | [optional] 
  **StoreId** | **String**| Filter coupons by store id | [optional] 
+ **LangId** | **String**| Language id | [optional] 
+ **Avail** | **Boolean**| Filter coupons by avail status | [optional] 
  **DateStartFrom** | **String**| Filter entity by date_start (greater or equal) | [optional] 
  **DateStartTo** | **String**| Filter entity by date_start (less or equal) | [optional] 
  **DateEndFrom** | **String**| Filter entity by date_end (greater or equal) | [optional] 
  **DateEndTo** | **String**| Filter entity by date_end (less or equal) | [optional] 
- **Avail** | **Boolean**| Filter coupons by avail status | [optional] 
- **LangId** | **String**| Language id | [optional] 
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,code,name,description&quot;]
  **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,code,name,description&quot;]
  **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
@@ -1077,12 +1077,12 @@ Name | Type | Description  | Notes
 <a id="Invoke-CartGiftcardList"></a>
 # **Invoke-CartGiftcardList**
 > ModelResponseCartGiftCardList Invoke-CartGiftcardList<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 
 cart.giftcard.list
@@ -1103,17 +1103,17 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
-$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
+$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
 $StoreId = "1" # String | Store Id (optional)
-$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,code,name")
 $ResponseFields = "{pagination,result{gift_card{id,code,amount,status}}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,code,name")
 $Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 
 # cart.giftcard.list
 try {
-    $Result = Invoke-CartGiftcardList -PageCursor $PageCursor -Start $Start -Count $Count -StoreId $StoreId -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude
+    $Result = Invoke-CartGiftcardList -Start $Start -Count $Count -PageCursor $PageCursor -StoreId $StoreId -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CartGiftcardList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -1124,12 +1124,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+ **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
  **StoreId** | **String**| Store Id | [optional] 
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,code,name&quot;]
  **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,code,name&quot;]
  **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
@@ -1150,10 +1150,10 @@ Name | Type | Description  | Notes
 <a id="Invoke-CartInfo"></a>
 # **Invoke-CartInfo**
 > CartInfo200Response Invoke-CartInfo<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 
 cart.info
 
@@ -1173,14 +1173,14 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
-$Params = "name,url" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "store_name,store_url,db_prefix")
-$ResponseFields = "{result{name,url,stores_info{store_id,name,currency{id,iso3},store_owner_info}}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
-$Exclude = "name,url" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 $StoreId = "1" # String | Store Id (optional)
+$ResponseFields = "{result{name,url,stores_info{store_id,name,currency{id,iso3},store_owner_info}}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Params = "name,url" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "store_name,store_url,db_prefix")
+$Exclude = "name,url" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 
 # cart.info
 try {
-    $Result = Invoke-CartInfo -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude -StoreId $StoreId
+    $Result = Invoke-CartInfo -StoreId $StoreId -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CartInfo: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -1191,10 +1191,10 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;store_name,store_url,db_prefix&quot;]
- **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
- **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
  **StoreId** | **String**| Store Id | [optional] 
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;store_name,store_url,db_prefix&quot;]
+ **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
 
@@ -1260,14 +1260,14 @@ This endpoint does not need any parameter.
 # **Invoke-CartMetaDataList**
 > ModelResponseCartMetaDataList Invoke-CartMetaDataList<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-EntityId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Entity] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Key] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 
 cart.meta_data.list
@@ -1289,19 +1289,19 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
 $EntityId = "1" # String | Entity Id
+$Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
+$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
 $Entity = "order" # String | Entity (optional) (default to "product")
 $StoreId = "1" # String | Store Id (optional)
 $LangId = "3" # String | Language id (optional)
 $Key = "subtotal" # String | Key (optional)
-$Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
-$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
-$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "key,value")
 $ResponseFields = "{result{items{key,value}}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "key,value")
 $Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 
 # cart.meta_data.list
 try {
-    $Result = Invoke-CartMetaDataList -EntityId $EntityId -Entity $Entity -StoreId $StoreId -LangId $LangId -Key $Key -Count $Count -PageCursor $PageCursor -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude
+    $Result = Invoke-CartMetaDataList -EntityId $EntityId -Count $Count -PageCursor $PageCursor -Entity $Entity -StoreId $StoreId -LangId $LangId -Key $Key -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CartMetaDataList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -1313,14 +1313,14 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **EntityId** | **String**| Entity Id | 
+ **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+ **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
  **Entity** | **String**| Entity | [optional] [default to &quot;product&quot;]
  **StoreId** | **String**| Store Id | [optional] 
  **LangId** | **String**| Language id | [optional] 
  **Key** | **String**| Key | [optional] 
- **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
- **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;key,value&quot;]
  **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;key,value&quot;]
  **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
@@ -1531,9 +1531,9 @@ This endpoint does not need any parameter.
 <a id="Invoke-CartPluginList"></a>
 # **Invoke-CartPluginList**
 > CartPluginList200Response Invoke-CartPluginList<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 
 cart.plugin.list
 
@@ -1553,13 +1553,13 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
-$StoreId = "1" # String | Store Id (optional)
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
+$StoreId = "1" # String | Store Id (optional)
 
 # cart.plugin.list
 try {
-    $Result = Invoke-CartPluginList -StoreId $StoreId -Start $Start -Count $Count
+    $Result = Invoke-CartPluginList -Start $Start -Count $Count -StoreId $StoreId
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CartPluginList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -1570,9 +1570,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **StoreId** | **String**| Store Id | [optional] 
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+ **StoreId** | **String**| Store Id | [optional] 
 
 ### Return type
 
@@ -1726,17 +1726,17 @@ Name | Type | Description  | Notes
 <a id="Invoke-CartScriptList"></a>
 # **Invoke-CartScriptList**
 > ModelResponseCartScriptList Invoke-CartScriptList<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ScriptIds] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedTo] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedTo] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ScriptIds] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 
 cart.script.list
@@ -1757,22 +1757,22 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
-$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
+$PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
+$ScriptIds = "34023324,34024032" # String | Retrieves only scripts with specific ids (optional)
+$StoreId = "1" # String | Store Id (optional)
 $CreatedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their creation date (optional)
 $CreatedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their creation date (optional)
 $ModifiedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their modification date (optional)
 $ModifiedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their modification date (optional)
-$ScriptIds = "34023324,34024032" # String | Retrieves only scripts with specific ids (optional)
-$StoreId = "1" # String | Store Id (optional)
-$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,description")
 $ResponseFields = "{pagination,result{total_count,scripts{id,name,src,created_time{value}}}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,description")
 $Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 
 # cart.script.list
 try {
-    $Result = Invoke-CartScriptList -PageCursor $PageCursor -Start $Start -Count $Count -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -ScriptIds $ScriptIds -StoreId $StoreId -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude
+    $Result = Invoke-CartScriptList -Start $Start -Count $Count -PageCursor $PageCursor -ScriptIds $ScriptIds -StoreId $StoreId -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CartScriptList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -1783,17 +1783,17 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
+ **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
+ **ScriptIds** | **String**| Retrieves only scripts with specific ids | [optional] 
+ **StoreId** | **String**| Store Id | [optional] 
  **CreatedFrom** | **String**| Retrieve entities from their creation date | [optional] 
  **CreatedTo** | **String**| Retrieve entities to their creation date | [optional] 
  **ModifiedFrom** | **String**| Retrieve entities from their modification date | [optional] 
  **ModifiedTo** | **String**| Retrieve entities to their modification date | [optional] 
- **ScriptIds** | **String**| Retrieves only scripts with specific ids | [optional] 
- **StoreId** | **String**| Store Id | [optional] 
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,description&quot;]
  **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,description&quot;]
  **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type
@@ -1814,11 +1814,11 @@ Name | Type | Description  | Notes
 <a id="Invoke-CartShippingZonesList"></a>
 # **Invoke-CartShippingZonesList**
 > ModelResponseCartShippingZonesList Invoke-CartShippingZonesList<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 
 cart.shipping_zones.list
@@ -1839,16 +1839,16 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
-$StoreId = "1" # String | Store Id (optional)
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
-$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,enabled")
+$StoreId = "1" # String | Store Id (optional)
 $ResponseFields = "{result{id,name,enabled,countries,shipping_methods{name,rates}}}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
+$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,enabled")
 $Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 
 # cart.shipping_zones.list
 try {
-    $Result = Invoke-CartShippingZonesList -StoreId $StoreId -Start $Start -Count $Count -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude
+    $Result = Invoke-CartShippingZonesList -Start $Start -Count $Count -StoreId $StoreId -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CartShippingZonesList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -1859,11 +1859,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **StoreId** | **String**| Store Id | [optional] 
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,enabled&quot;]
+ **StoreId** | **String**| Store Id | [optional] 
  **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,enabled&quot;]
  **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
 
 ### Return type

@@ -9,7 +9,7 @@
 Describe -tag 'PSOpenAPITools' -name 'SubscriberApi' {
     Context 'Invoke-SubscriberList' {
         It 'Test Invoke-SubscriberList' {
-            #$TestResult = Invoke-SubscriberList -Start "TEST_VALUE" -Count "TEST_VALUE" -Subscribed "TEST_VALUE" -StoreId "TEST_VALUE" -Email "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -PageCursor "TEST_VALUE" -ResponseFields "TEST_VALUE"
+            #$TestResult = Invoke-SubscriberList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -Subscribed "TEST_VALUE" -StoreId "TEST_VALUE" -Email "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

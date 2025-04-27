@@ -254,13 +254,13 @@ This endpoint does not need any parameter.
 <a id="Invoke-WebhookList"></a>
 # **Invoke-WebhookList**
 > WebhookList200Response Invoke-WebhookList<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Entity] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Action] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Active] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Ids] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 
 webhook.list
 
@@ -280,17 +280,17 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
-$Params = "id,entity,callback,fields" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,entity,action,callback")
 $Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
 $Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
 $Entity = "product" # String | The entity you want to filter webhooks by (e.g. order or product) (optional)
 $Action = "add" # String | The action you want to filter webhooks by (e.g. add, update, or delete) (optional)
 $Active = $true # Boolean | The webhook status you want to filter webhooks by (optional)
 $Ids = "3,14,25" # String | List of сomma-separated webhook ids (optional)
+$Params = "id,entity,callback,fields" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,entity,action,callback")
 
 # webhook.list
 try {
-    $Result = Invoke-WebhookList -Params $Params -Start $Start -Count $Count -Entity $Entity -Action $Action -Active $Active -Ids $Ids
+    $Result = Invoke-WebhookList -Start $Start -Count $Count -Entity $Entity -Action $Action -Active $Active -Ids $Ids -Params $Params
 } catch {
     Write-Host ("Exception occurred when calling Invoke-WebhookList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -301,13 +301,13 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,entity,action,callback&quot;]
  **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
  **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
  **Entity** | **String**| The entity you want to filter webhooks by (e.g. order or product) | [optional] 
  **Action** | **String**| The action you want to filter webhooks by (e.g. add, update, or delete) | [optional] 
  **Active** | **Boolean**| The webhook status you want to filter webhooks by | [optional] 
  **Ids** | **String**| List of сomma-separated webhook ids | [optional] 
+ **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,entity,action,callback&quot;]
 
 ### Return type
 

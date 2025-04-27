@@ -25,7 +25,7 @@ Describe -tag 'PSOpenAPITools' -name 'ReturnApi' {
 
     Context 'Invoke-ReturnInfo' {
         It 'Test Invoke-ReturnInfo' {
-            #$TestResult = Invoke-ReturnInfo -Id "TEST_VALUE" -OrderId "TEST_VALUE" -StoreId "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -ResponseFields "TEST_VALUE"
+            #$TestResult = Invoke-ReturnInfo -Id "TEST_VALUE" -OrderId "TEST_VALUE" -StoreId "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -33,7 +33,7 @@ Describe -tag 'PSOpenAPITools' -name 'ReturnApi' {
 
     Context 'Invoke-ReturnList' {
         It 'Test Invoke-ReturnList' {
-            #$TestResult = Invoke-ReturnList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -ResponseFields "TEST_VALUE" -OrderId "TEST_VALUE" -OrderIds "TEST_VALUE" -CustomerId "TEST_VALUE" -StoreId "TEST_VALUE" -Status "TEST_VALUE" -ReturnType "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -ReportRequestId "TEST_VALUE" -DisableReportCache "TEST_VALUE"
+            #$TestResult = Invoke-ReturnList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -OrderId "TEST_VALUE" -OrderIds "TEST_VALUE" -CustomerId "TEST_VALUE" -StoreId "TEST_VALUE" -Status "TEST_VALUE" -ReturnType "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -ReportRequestId "TEST_VALUE" -DisableReportCache "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

@@ -214,26 +214,23 @@ No description available.
 .PARAMETER ProductId
 Retrieves attributes specified by product id
 
-.PARAMETER AttributeId
-Retrieves info for specified attribute_id
-
-.PARAMETER VariantId
-Defines product's variants specified by variant id
-
-.PARAMETER PageCursor
-Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
-
 .PARAMETER Start
 This parameter sets the number from which you want to get entities
 
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
 
+.PARAMETER PageCursor
+Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+
+.PARAMETER AttributeId
+Retrieves info for specified attribute_id
+
+.PARAMETER VariantId
+Defines product's variants specified by variant id
+
 .PARAMETER AttributeGroupId
 Filter by attribute_group_id
-
-.PARAMETER SetName
-Retrieves attributes specified by set_name in Magento
 
 .PARAMETER LangId
 Retrieves attributes specified by language id
@@ -241,16 +238,19 @@ Retrieves attributes specified by language id
 .PARAMETER StoreId
 Retrieves attributes specified by store id
 
+.PARAMETER SetName
+Retrieves attributes specified by set_name in Magento
+
 .PARAMETER SortBy
 Set field to sort by
 
 .PARAMETER SortDirection
 Set sorting direction
 
-.PARAMETER Params
+.PARAMETER ResponseFields
 Set this parameter in order to choose which entity fields you want to retrieve
 
-.PARAMETER ResponseFields
+.PARAMETER Params
 Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Exclude
@@ -271,32 +271,32 @@ function Invoke-ProductAttributeList {
         [String]
         ${ProductId},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${AttributeId},
+        [System.Nullable[Int32]]
+        ${Start},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${VariantId},
+        [System.Nullable[Int32]]
+        ${Count},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${PageCursor},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Int32]]
-        ${Start},
+        [String]
+        ${AttributeId},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Int32]]
-        ${Count},
+        [String]
+        ${VariantId},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${AttributeGroupId},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SetName},
+        ${LangId},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${LangId},
+        ${StoreId},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${SetName},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${SortBy},
@@ -305,10 +305,10 @@ function Invoke-ProductAttributeList {
         ${SortDirection},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ResponseFields},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Params},
         [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Exclude},
@@ -335,6 +335,18 @@ function Invoke-ProductAttributeList {
 
         $LocalVarUri = '/product.attribute.list.json'
 
+        if ($Start) {
+            $LocalVarQueryParameters['start'] = $Start
+        }
+
+        if ($Count) {
+            $LocalVarQueryParameters['count'] = $Count
+        }
+
+        if ($PageCursor) {
+            $LocalVarQueryParameters['page_cursor'] = $PageCursor
+        }
+
         if (!$ProductId) {
             throw "Error! The required parameter `ProductId` missing when calling productAttributeList."
         }
@@ -348,24 +360,8 @@ function Invoke-ProductAttributeList {
             $LocalVarQueryParameters['variant_id'] = $VariantId
         }
 
-        if ($PageCursor) {
-            $LocalVarQueryParameters['page_cursor'] = $PageCursor
-        }
-
-        if ($Start) {
-            $LocalVarQueryParameters['start'] = $Start
-        }
-
-        if ($Count) {
-            $LocalVarQueryParameters['count'] = $Count
-        }
-
         if ($AttributeGroupId) {
             $LocalVarQueryParameters['attribute_group_id'] = $AttributeGroupId
-        }
-
-        if ($SetName) {
-            $LocalVarQueryParameters['set_name'] = $SetName
         }
 
         if ($LangId) {
@@ -376,6 +372,10 @@ function Invoke-ProductAttributeList {
             $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
+        if ($SetName) {
+            $LocalVarQueryParameters['set_name'] = $SetName
+        }
+
         if ($SortBy) {
             $LocalVarQueryParameters['sort_by'] = $SortBy
         }
@@ -384,12 +384,12 @@ function Invoke-ProductAttributeList {
             $LocalVarQueryParameters['sort_direction'] = $SortDirection
         }
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
-        }
-
         if ($ResponseFields) {
             $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
         }
 
         if ($Exclude) {
@@ -763,23 +763,26 @@ This parameter sets the entity amount that has to be retrieved. Max allowed coun
 .PARAMETER PageCursor
 Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
 
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
-
 .PARAMETER BrandIds
 Retrieves brands specified by brand ids
 
-.PARAMETER Exclude
-Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
 .PARAMETER CategoryId
 Retrieves product brands specified by category id
+
+.PARAMETER ParentId
+Retrieves brands specified by parent id
 
 .PARAMETER StoreId
 Store Id
 
 .PARAMETER LangId
 Language id
+
+.PARAMETER FindWhere
+Entity search that is specified by the comma-separated unique fields
+
+.PARAMETER FindValue
+Entity search that is specified by some value
 
 .PARAMETER CreatedFrom
 Retrieve entities from their creation date
@@ -793,17 +796,14 @@ Retrieve entities from their modification date
 .PARAMETER ModifiedTo
 Retrieve entities to their modification date
 
-.PARAMETER ParentId
-Retrieves brands specified by parent id
-
 .PARAMETER ResponseFields
 Set this parameter in order to choose which entity fields you want to retrieve
 
-.PARAMETER FindWhere
-Entity search that is specified by the comma-separated unique fields
+.PARAMETER Params
+Set this parameter in order to choose which entity fields you want to retrieve
 
-.PARAMETER FindValue
-Entity search that is specified by some value
+.PARAMETER Exclude
+Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 
 .PARAMETER WithHttpInfo
 
@@ -827,46 +827,46 @@ function Invoke-ProductBrandList {
         ${PageCursor},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${BrandIds},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${BrandIds},
+        ${CategoryId},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${ParentId},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CategoryId},
+        ${StoreId},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${LangId},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${LangId},
+        ${FindWhere},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedFrom},
+        ${FindValue},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedTo},
+        ${CreatedFrom},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedFrom},
+        ${CreatedTo},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedTo},
+        ${ModifiedFrom},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ParentId},
+        ${ModifiedTo},
         [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${ResponseFields},
         [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${FindWhere},
+        ${Params},
         [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${FindValue},
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -902,20 +902,16 @@ function Invoke-ProductBrandList {
             $LocalVarQueryParameters['page_cursor'] = $PageCursor
         }
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
-        }
-
         if ($BrandIds) {
             $LocalVarQueryParameters['brand_ids'] = $BrandIds
         }
 
-        if ($Exclude) {
-            $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
         if ($CategoryId) {
             $LocalVarQueryParameters['category_id'] = $CategoryId
+        }
+
+        if ($ParentId) {
+            $LocalVarQueryParameters['parent_id'] = $ParentId
         }
 
         if ($StoreId) {
@@ -924,6 +920,14 @@ function Invoke-ProductBrandList {
 
         if ($LangId) {
             $LocalVarQueryParameters['lang_id'] = $LangId
+        }
+
+        if ($FindWhere) {
+            $LocalVarQueryParameters['find_where'] = $FindWhere
+        }
+
+        if ($FindValue) {
+            $LocalVarQueryParameters['find_value'] = $FindValue
         }
 
         if ($CreatedFrom) {
@@ -942,20 +946,16 @@ function Invoke-ProductBrandList {
             $LocalVarQueryParameters['modified_to'] = $ModifiedTo
         }
 
-        if ($ParentId) {
-            $LocalVarQueryParameters['parent_id'] = $ParentId
-        }
-
         if ($ResponseFields) {
             $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
-        if ($FindWhere) {
-            $LocalVarQueryParameters['find_where'] = $FindWhere
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
         }
 
-        if ($FindValue) {
-            $LocalVarQueryParameters['find_value'] = $FindValue
+        if ($Exclude) {
+            $LocalVarQueryParameters['exclude'] = $Exclude
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -1136,15 +1136,6 @@ Filter by parent product id
 .PARAMETER Id
 Entity id
 
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
-
-.PARAMETER ResponseFields
-Set this parameter in order to choose which entity fields you want to retrieve
-
-.PARAMETER Exclude
-Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
 .PARAMETER StoreId
 Store Id
 
@@ -1153,6 +1144,15 @@ Language id
 
 .PARAMETER CurrencyId
 Currency Id
+
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Params
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Exclude
+Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 
 .PARAMETER UseLatestApiVersion
 Use the latest platform API version
@@ -1176,22 +1176,22 @@ function Invoke-ProductChildItemInfo {
         ${Id},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${StoreId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${LangId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${CurrencyId},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${ResponseFields},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${LangId},
+        ${Params},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CurrencyId},
+        ${Exclude},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${UseLatestApiVersion},
@@ -1218,18 +1218,6 @@ function Invoke-ProductChildItemInfo {
 
         $LocalVarUri = '/product.child_item.info.json'
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
-        }
-
-        if ($Exclude) {
-            $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
         if (!$ProductId) {
             throw "Error! The required parameter `ProductId` missing when calling productChildItemInfo."
         }
@@ -1250,6 +1238,18 @@ function Invoke-ProductChildItemInfo {
 
         if ($CurrencyId) {
             $LocalVarQueryParameters['currency_id'] = $CurrencyId
+        }
+
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
+        }
+
+        if ($Exclude) {
+            $LocalVarQueryParameters['exclude'] = $Exclude
         }
 
         if ($UseLatestApiVersion) {
@@ -1305,35 +1305,14 @@ product.child_item.list
 
 No description available.
 
-.PARAMETER PageCursor
-Used to retrieve products child items via cursor-based pagination (it can't be used with any other filtering parameter)
-
 .PARAMETER Start
 This parameter sets the number from which you want to get entities
 
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
 
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
-
-.PARAMETER ResponseFields
-Set this parameter in order to choose which entity fields you want to retrieve
-
-.PARAMETER Exclude
-Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
-.PARAMETER CreatedFrom
-Retrieve entities from their creation date
-
-.PARAMETER CreatedTo
-Retrieve entities to their creation date
-
-.PARAMETER ModifiedFrom
-Retrieve entities from their modification date
-
-.PARAMETER ModifiedTo
-Retrieve entities to their modification date
+.PARAMETER PageCursor
+Used to retrieve products child items via cursor-based pagination (it can't be used with any other filtering parameter)
 
 .PARAMETER ProductId
 Filter by parent product id
@@ -1362,6 +1341,30 @@ Entity search that is specified by some value
 .PARAMETER FindWhere
 Child products search that is specified by field
 
+.PARAMETER CreatedFrom
+Retrieve entities from their creation date
+
+.PARAMETER CreatedTo
+Retrieve entities to their creation date
+
+.PARAMETER ModifiedFrom
+Retrieve entities from their modification date
+
+.PARAMETER ModifiedTo
+Retrieve entities to their modification date
+
+.PARAMETER ReturnGlobal
+Determines the type of products to be returned. If set to 'true', only global products will be returned; if set to 'false', only local products will be returned.
+
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Params
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Exclude
+Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+
 .PARAMETER ReportRequestId
 Report request id
 
@@ -1370,9 +1373,6 @@ Disable report cache for current request
 
 .PARAMETER UseLatestApiVersion
 Use the latest platform API version
-
-.PARAMETER ReturnGlobal
-Determines the type of products to be returned. If set to 'true', only global products will be returned; if set to 'false', only local products will be returned.
 
 .PARAMETER WithHttpInfo
 
@@ -1386,74 +1386,74 @@ function Invoke-ProductChildItemList {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${PageCursor},
-        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Start},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Count},
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${PageCursor},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ProductId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${ProductIds},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${Sku},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedFrom},
+        ${StoreId},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedTo},
+        ${LangId},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedFrom},
-        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ModifiedTo},
-        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ProductId},
-        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ProductIds},
-        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Sku},
-        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${StoreId},
-        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${LangId},
-        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
         ${CurrencyId},
-        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${AvailSale},
-        [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${FindValue},
-        [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${FindWhere},
-        [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ReportRequestId},
-        [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Boolean]]
-        ${DisableReportCache},
-        [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Boolean]]
-        ${UseLatestApiVersion},
-        [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        ${CreatedFrom},
+        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CreatedTo},
+        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ModifiedFrom},
+        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ModifiedTo},
+        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${ReturnGlobal},
+        [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ResponseFields},
+        [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Params},
+        [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Exclude},
+        [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ReportRequestId},
+        [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Boolean]]
+        ${DisableReportCache},
+        [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Boolean]]
+        ${UseLatestApiVersion},
         [Switch]
         $WithHttpInfo
     )
@@ -1477,10 +1477,6 @@ function Invoke-ProductChildItemList {
 
         $LocalVarUri = '/product.child_item.list.json'
 
-        if ($PageCursor) {
-            $LocalVarQueryParameters['page_cursor'] = $PageCursor
-        }
-
         if ($Start) {
             $LocalVarQueryParameters['start'] = $Start
         }
@@ -1489,32 +1485,8 @@ function Invoke-ProductChildItemList {
             $LocalVarQueryParameters['count'] = $Count
         }
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
-        }
-
-        if ($Exclude) {
-            $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
-        if ($CreatedFrom) {
-            $LocalVarQueryParameters['created_from'] = $CreatedFrom
-        }
-
-        if ($CreatedTo) {
-            $LocalVarQueryParameters['created_to'] = $CreatedTo
-        }
-
-        if ($ModifiedFrom) {
-            $LocalVarQueryParameters['modified_from'] = $ModifiedFrom
-        }
-
-        if ($ModifiedTo) {
-            $LocalVarQueryParameters['modified_to'] = $ModifiedTo
+        if ($PageCursor) {
+            $LocalVarQueryParameters['page_cursor'] = $PageCursor
         }
 
         if ($ProductId) {
@@ -1553,6 +1525,38 @@ function Invoke-ProductChildItemList {
             $LocalVarQueryParameters['find_where'] = $FindWhere
         }
 
+        if ($CreatedFrom) {
+            $LocalVarQueryParameters['created_from'] = $CreatedFrom
+        }
+
+        if ($CreatedTo) {
+            $LocalVarQueryParameters['created_to'] = $CreatedTo
+        }
+
+        if ($ModifiedFrom) {
+            $LocalVarQueryParameters['modified_from'] = $ModifiedFrom
+        }
+
+        if ($ModifiedTo) {
+            $LocalVarQueryParameters['modified_to'] = $ModifiedTo
+        }
+
+        if ($ReturnGlobal) {
+            $LocalVarQueryParameters['return_global'] = $ReturnGlobal
+        }
+
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
+        }
+
+        if ($Exclude) {
+            $LocalVarQueryParameters['exclude'] = $Exclude
+        }
+
         if ($ReportRequestId) {
             $LocalVarQueryParameters['report_request_id'] = $ReportRequestId
         }
@@ -1563,10 +1567,6 @@ function Invoke-ProductChildItemList {
 
         if ($UseLatestApiVersion) {
             $LocalVarQueryParameters['use_latest_api_version'] = $UseLatestApiVersion
-        }
-
-        if ($ReturnGlobal) {
-            $LocalVarQueryParameters['return_global'] = $ReturnGlobal
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -1618,8 +1618,29 @@ product.count
 
 No description available.
 
+.PARAMETER ProductIds
+Counts products specified by product ids
+
+.PARAMETER SinceId
+Retrieve entities starting from the specified id.
+
+.PARAMETER CategoriesIds
+Defines product add that is specified by comma-separated categories id
+
 .PARAMETER CategoryId
 Counts products specified by category id
+
+.PARAMETER StoreId
+Counts products specified by store id
+
+.PARAMETER LangId
+Counts products specified by language id
+
+.PARAMETER AvailView
+Specifies the set of visible/invisible products
+
+.PARAMETER AvailSale
+Specifies the set of available/not available products for sale
 
 .PARAMETER CreatedFrom
 Retrieve entities from their creation date
@@ -1632,30 +1653,6 @@ Retrieve entities from their modification date
 
 .PARAMETER ModifiedTo
 Retrieve entities to their modification date
-
-.PARAMETER AvailView
-Specifies the set of visible/invisible products
-
-.PARAMETER AvailSale
-Specifies the set of available/not available products for sale
-
-.PARAMETER StoreId
-Counts products specified by store id
-
-.PARAMETER LangId
-Counts products specified by language id
-
-.PARAMETER ProductIds
-Counts products specified by product ids
-
-.PARAMETER SinceId
-Retrieve entities starting from the specified id.
-
-.PARAMETER ReportRequestId
-Report request id
-
-.PARAMETER DisableReportCache
-Disable report cache for current request
 
 .PARAMETER BrandName
 Retrieves brands specified by brand name
@@ -1675,14 +1672,17 @@ Entity search that is specified by some value
 .PARAMETER FindWhere
 Counts products that are searched specified by field
 
-.PARAMETER UseLatestApiVersion
-Use the latest platform API version
+.PARAMETER ReportRequestId
+Report request id
 
 .PARAMETER ReturnGlobal
 Determines the type of products to be returned. If set to 'true', only global products will be returned; if set to 'false', only local products will be returned.
 
-.PARAMETER CategoriesIds
-Defines product add that is specified by comma-separated categories id
+.PARAMETER DisableReportCache
+Disable report cache for current request
+
+.PARAMETER UseLatestApiVersion
+Use the latest platform API version
 
 .PARAMETER WithHttpInfo
 
@@ -1697,70 +1697,70 @@ function Invoke-ProductCount {
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CategoryId},
+        ${ProductIds},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedFrom},
+        ${SinceId},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedTo},
+        ${CategoriesIds},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedFrom},
+        ${CategoryId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedTo},
-        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Boolean]]
-        ${AvailView},
-        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Boolean]]
-        ${AvailSale},
-        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
         ${StoreId},
-        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${LangId},
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Boolean]]
+        ${AvailView},
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Boolean]]
+        ${AvailSale},
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CreatedFrom},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ProductIds},
+        ${CreatedTo},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SinceId},
+        ${ModifiedFrom},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ReportRequestId},
+        ${ModifiedTo},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Boolean]]
-        ${DisableReportCache},
-        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${BrandName},
-        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String[]]
         ${ProductAttributes},
-        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Status},
-        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Type},
-        [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${FindValue},
-        [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${FindWhere},
+        [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ReportRequestId},
         [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
-        ${UseLatestApiVersion},
+        ${ReturnGlobal},
         [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
-        ${ReturnGlobal},
+        ${DisableReportCache},
         [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CategoriesIds},
+        [System.Nullable[Boolean]]
+        ${UseLatestApiVersion},
         [Switch]
         $WithHttpInfo
     )
@@ -1784,8 +1784,36 @@ function Invoke-ProductCount {
 
         $LocalVarUri = '/product.count.json'
 
+        if ($ProductIds) {
+            $LocalVarQueryParameters['product_ids'] = $ProductIds
+        }
+
+        if ($SinceId) {
+            $LocalVarQueryParameters['since_id'] = $SinceId
+        }
+
+        if ($CategoriesIds) {
+            $LocalVarQueryParameters['categories_ids'] = $CategoriesIds
+        }
+
         if ($CategoryId) {
             $LocalVarQueryParameters['category_id'] = $CategoryId
+        }
+
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
+        }
+
+        if ($LangId) {
+            $LocalVarQueryParameters['lang_id'] = $LangId
+        }
+
+        if ($AvailView) {
+            $LocalVarQueryParameters['avail_view'] = $AvailView
+        }
+
+        if ($AvailSale) {
+            $LocalVarQueryParameters['avail_sale'] = $AvailSale
         }
 
         if ($CreatedFrom) {
@@ -1802,38 +1830,6 @@ function Invoke-ProductCount {
 
         if ($ModifiedTo) {
             $LocalVarQueryParameters['modified_to'] = $ModifiedTo
-        }
-
-        if ($AvailView) {
-            $LocalVarQueryParameters['avail_view'] = $AvailView
-        }
-
-        if ($AvailSale) {
-            $LocalVarQueryParameters['avail_sale'] = $AvailSale
-        }
-
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
-        }
-
-        if ($LangId) {
-            $LocalVarQueryParameters['lang_id'] = $LangId
-        }
-
-        if ($ProductIds) {
-            $LocalVarQueryParameters['product_ids'] = $ProductIds
-        }
-
-        if ($SinceId) {
-            $LocalVarQueryParameters['since_id'] = $SinceId
-        }
-
-        if ($ReportRequestId) {
-            $LocalVarQueryParameters['report_request_id'] = $ReportRequestId
-        }
-
-        if ($DisableReportCache) {
-            $LocalVarQueryParameters['disable_report_cache'] = $DisableReportCache
         }
 
         if ($BrandName) {
@@ -1860,16 +1856,20 @@ function Invoke-ProductCount {
             $LocalVarQueryParameters['find_where'] = $FindWhere
         }
 
-        if ($UseLatestApiVersion) {
-            $LocalVarQueryParameters['use_latest_api_version'] = $UseLatestApiVersion
+        if ($ReportRequestId) {
+            $LocalVarQueryParameters['report_request_id'] = $ReportRequestId
         }
 
         if ($ReturnGlobal) {
             $LocalVarQueryParameters['return_global'] = $ReturnGlobal
         }
 
-        if ($CategoriesIds) {
-            $LocalVarQueryParameters['categories_ids'] = $CategoriesIds
+        if ($DisableReportCache) {
+            $LocalVarQueryParameters['disable_report_cache'] = $DisableReportCache
+        }
+
+        if ($UseLatestApiVersion) {
+            $LocalVarQueryParameters['use_latest_api_version'] = $UseLatestApiVersion
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -2082,23 +2082,23 @@ This parameter sets the number from which you want to get entities
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
 
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
-
 .PARAMETER PageCursor
 Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
-
-.PARAMETER Exclude
-Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
-.PARAMETER ResponseFields
-Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Default
 Specifies the set of default/not default currencies
 
 .PARAMETER Avail
 Specifies the set of available/not available currencies
+
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Params
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Exclude
+Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 
 .PARAMETER WithHttpInfo
 
@@ -2119,22 +2119,22 @@ function Invoke-ProductCurrencyList {
         ${Count},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
-        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
         ${PageCursor},
+        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Boolean]]
+        ${Default},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Exclude},
+        [System.Nullable[Boolean]]
+        ${Avail},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${ResponseFields},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Boolean]]
-        ${Default},
+        [String]
+        ${Params},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Boolean]]
-        ${Avail},
+        [String]
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -2166,20 +2166,8 @@ function Invoke-ProductCurrencyList {
             $LocalVarQueryParameters['count'] = $Count
         }
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
-        }
-
         if ($PageCursor) {
             $LocalVarQueryParameters['page_cursor'] = $PageCursor
-        }
-
-        if ($Exclude) {
-            $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
         if ($Default) {
@@ -2188,6 +2176,18 @@ function Invoke-ProductCurrencyList {
 
         if ($Avail) {
             $LocalVarQueryParameters['avail'] = $Avail
+        }
+
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
+        }
+
+        if ($Exclude) {
+            $LocalVarQueryParameters['exclude'] = $Exclude
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -2890,6 +2890,12 @@ Defines image update specified by image id
 .PARAMETER VariantIds
 Defines product's variants ids
 
+.PARAMETER StoreId
+Store Id
+
+.PARAMETER LangId
+Language id
+
 .PARAMETER ImageName
 Defines image's name
 
@@ -2901,12 +2907,6 @@ Defines alternative text that has to be attached to the picture
 
 .PARAMETER Position
 Defines image’s position in the list
-
-.PARAMETER StoreId
-Store Id
-
-.PARAMETER LangId
-Language id
 
 .PARAMETER Hidden
 Define is hide image
@@ -2933,22 +2933,22 @@ function Invoke-ProductImageUpdate {
         ${VariantIds},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ImageName},
+        ${StoreId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Type},
+        ${LangId},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Label},
+        ${ImageName},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Int32]]
-        ${Position},
+        [String]
+        ${Type},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${Label},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${LangId},
+        [System.Nullable[Int32]]
+        ${Position},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${Hidden},
@@ -2980,8 +2980,21 @@ function Invoke-ProductImageUpdate {
         }
         $LocalVarQueryParameters['product_id'] = $ProductId
 
+        if (!$Id) {
+            throw "Error! The required parameter `Id` missing when calling productImageUpdate."
+        }
+        $LocalVarQueryParameters['id'] = $Id
+
         if ($VariantIds) {
             $LocalVarQueryParameters['variant_ids'] = $VariantIds
+        }
+
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
+        }
+
+        if ($LangId) {
+            $LocalVarQueryParameters['lang_id'] = $LangId
         }
 
         if ($ImageName) {
@@ -2998,19 +3011,6 @@ function Invoke-ProductImageUpdate {
 
         if ($Position) {
             $LocalVarQueryParameters['position'] = $Position
-        }
-
-        if (!$Id) {
-            throw "Error! The required parameter `Id` missing when calling productImageUpdate."
-        }
-        $LocalVarQueryParameters['id'] = $Id
-
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
-        }
-
-        if ($LangId) {
-            $LocalVarQueryParameters['lang_id'] = $LangId
         }
 
         if ($Hidden) {
@@ -3069,15 +3069,6 @@ No description available.
 .PARAMETER Id
 Retrieves product's info specified by product id
 
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
-
-.PARAMETER ResponseFields
-Set this parameter in order to choose which entity fields you want to retrieve
-
-.PARAMETER Exclude
-Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
 .PARAMETER StoreId
 Retrieves product info specified by store id
 
@@ -3086,6 +3077,15 @@ Retrieves product info specified by language id
 
 .PARAMETER CurrencyId
 Currency Id
+
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Params
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Exclude
+Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 
 .PARAMETER ReportRequestId
 Report request id
@@ -3112,22 +3112,22 @@ function Invoke-ProductInfo {
         ${Id},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${StoreId},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${LangId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${CurrencyId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${ResponseFields},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${LangId},
+        ${Params},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CurrencyId},
+        ${Exclude},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${ReportRequestId},
@@ -3165,18 +3165,6 @@ function Invoke-ProductInfo {
         }
         $LocalVarQueryParameters['id'] = $Id
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
-        }
-
-        if ($Exclude) {
-            $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
         if ($StoreId) {
             $LocalVarQueryParameters['store_id'] = $StoreId
         }
@@ -3187,6 +3175,18 @@ function Invoke-ProductInfo {
 
         if ($CurrencyId) {
             $LocalVarQueryParameters['currency_id'] = $CurrencyId
+        }
+
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
+        }
+
+        if ($Exclude) {
+            $LocalVarQueryParameters['exclude'] = $Exclude
         }
 
         if ($ReportRequestId) {
@@ -3250,26 +3250,41 @@ product.list
 
 No description available.
 
-.PARAMETER PageCursor
-Used to retrieve products via cursor-based pagination (it can't be used with any other filtering parameter)
-
 .PARAMETER Start
 This parameter sets the number from which you want to get entities
 
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
 
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
+.PARAMETER PageCursor
+Used to retrieve products via cursor-based pagination (it can't be used with any other filtering parameter)
 
-.PARAMETER ResponseFields
-Set this parameter in order to choose which entity fields you want to retrieve
+.PARAMETER ProductIds
+Retrieves products specified by product ids
 
-.PARAMETER Exclude
-Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+.PARAMETER SinceId
+Retrieve entities starting from the specified id.
+
+.PARAMETER CategoriesIds
+Retrieves products specified by categories ids
 
 .PARAMETER CategoryId
 Retrieves products specified by category id
+
+.PARAMETER StoreId
+Retrieves products specified by store id
+
+.PARAMETER LangId
+Retrieves products specified by language id
+
+.PARAMETER CurrencyId
+Currency Id
+
+.PARAMETER AvailView
+Specifies the set of visible/invisible products
+
+.PARAMETER AvailSale
+Specifies the set of available/not available products for sale
 
 .PARAMETER CreatedFrom
 Retrieve entities from their creation date
@@ -3283,44 +3298,8 @@ Retrieve entities from their modification date
 .PARAMETER ModifiedTo
 Retrieve entities to their modification date
 
-.PARAMETER AvailView
-Specifies the set of visible/invisible products
-
-.PARAMETER AvailSale
-Specifies the set of available/not available products for sale
-
-.PARAMETER StoreId
-Retrieves products specified by store id
-
-.PARAMETER LangId
-Retrieves products specified by language id
-
-.PARAMETER CurrencyId
-Currency Id
-
-.PARAMETER ProductIds
-Retrieves products specified by product ids
-
-.PARAMETER SinceId
-Retrieve entities starting from the specified id.
-
-.PARAMETER ReportRequestId
-Report request id
-
-.PARAMETER DisableReportCache
-Disable report cache for current request
-
-.PARAMETER SortBy
-Set field to sort by
-
-.PARAMETER SortDirection
-Set sorting direction
-
 .PARAMETER Sku
 Filter by product's sku
-
-.PARAMETER DisableCache
-Disable cache for current request
 
 .PARAMETER BrandName
 Retrieves brands specified by brand name
@@ -3340,14 +3319,35 @@ Entity search that is specified by some value
 .PARAMETER FindWhere
 Product search that is specified by field
 
-.PARAMETER UseLatestApiVersion
-Use the latest platform API version
-
 .PARAMETER ReturnGlobal
 Determines the type of products to be returned. If set to 'true', only global products will be returned; if set to 'false', only local products will be returned.
 
-.PARAMETER CategoriesIds
-Retrieves products specified by categories ids
+.PARAMETER Params
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Exclude
+Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+
+.PARAMETER SortBy
+Set field to sort by
+
+.PARAMETER SortDirection
+Set sorting direction
+
+.PARAMETER ReportRequestId
+Report request id
+
+.PARAMETER DisableCache
+Disable cache for current request
+
+.PARAMETER DisableReportCache
+Disable report cache for current request
+
+.PARAMETER UseLatestApiVersion
+Use the latest platform API version
 
 .PARAMETER WithHttpInfo
 
@@ -3361,104 +3361,104 @@ function Invoke-ProductList {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${PageCursor},
-        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Start},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Count},
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${PageCursor},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ProductIds},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${SinceId},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${CategoriesIds},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${CategoryId},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedFrom},
+        ${StoreId},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedTo},
+        ${LangId},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedFrom},
+        ${CurrencyId},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ModifiedTo},
-        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${AvailView},
-        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${AvailSale},
+        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CreatedFrom},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${CreatedTo},
         [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${LangId},
+        ${ModifiedFrom},
         [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CurrencyId},
+        ${ModifiedTo},
         [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ProductIds},
+        ${Sku},
         [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SinceId},
-        [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${ReportRequestId},
-        [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Boolean]]
-        ${DisableReportCache},
-        [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${SortBy},
-        [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${SortDirection},
-        [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Sku},
-        [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Boolean]]
-        ${DisableCache},
-        [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
         ${BrandName},
-        [Parameter(Position = 25, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String[]]
         ${ProductAttributes},
-        [Parameter(Position = 26, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Status},
-        [Parameter(Position = 27, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Type},
-        [Parameter(Position = 28, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${FindValue},
-        [Parameter(Position = 29, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${FindWhere},
-        [Parameter(Position = 30, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Boolean]]
-        ${UseLatestApiVersion},
-        [Parameter(Position = 31, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${ReturnGlobal},
-        [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CategoriesIds},
+        ${Params},
+        [Parameter(Position = 25, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ResponseFields},
+        [Parameter(Position = 26, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Exclude},
+        [Parameter(Position = 27, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${SortBy},
+        [Parameter(Position = 28, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${SortDirection},
+        [Parameter(Position = 29, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ReportRequestId},
+        [Parameter(Position = 30, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Boolean]]
+        ${DisableCache},
+        [Parameter(Position = 31, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Boolean]]
+        ${DisableReportCache},
+        [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Boolean]]
+        ${UseLatestApiVersion},
         [Switch]
         $WithHttpInfo
     )
@@ -3482,10 +3482,6 @@ function Invoke-ProductList {
 
         $LocalVarUri = '/product.list.json'
 
-        if ($PageCursor) {
-            $LocalVarQueryParameters['page_cursor'] = $PageCursor
-        }
-
         if ($Start) {
             $LocalVarQueryParameters['start'] = $Start
         }
@@ -3494,20 +3490,44 @@ function Invoke-ProductList {
             $LocalVarQueryParameters['count'] = $Count
         }
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
+        if ($PageCursor) {
+            $LocalVarQueryParameters['page_cursor'] = $PageCursor
         }
 
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        if ($ProductIds) {
+            $LocalVarQueryParameters['product_ids'] = $ProductIds
         }
 
-        if ($Exclude) {
-            $LocalVarQueryParameters['exclude'] = $Exclude
+        if ($SinceId) {
+            $LocalVarQueryParameters['since_id'] = $SinceId
+        }
+
+        if ($CategoriesIds) {
+            $LocalVarQueryParameters['categories_ids'] = $CategoriesIds
         }
 
         if ($CategoryId) {
             $LocalVarQueryParameters['category_id'] = $CategoryId
+        }
+
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
+        }
+
+        if ($LangId) {
+            $LocalVarQueryParameters['lang_id'] = $LangId
+        }
+
+        if ($CurrencyId) {
+            $LocalVarQueryParameters['currency_id'] = $CurrencyId
+        }
+
+        if ($AvailView) {
+            $LocalVarQueryParameters['avail_view'] = $AvailView
+        }
+
+        if ($AvailSale) {
+            $LocalVarQueryParameters['avail_sale'] = $AvailSale
         }
 
         if ($CreatedFrom) {
@@ -3526,56 +3546,8 @@ function Invoke-ProductList {
             $LocalVarQueryParameters['modified_to'] = $ModifiedTo
         }
 
-        if ($AvailView) {
-            $LocalVarQueryParameters['avail_view'] = $AvailView
-        }
-
-        if ($AvailSale) {
-            $LocalVarQueryParameters['avail_sale'] = $AvailSale
-        }
-
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
-        }
-
-        if ($LangId) {
-            $LocalVarQueryParameters['lang_id'] = $LangId
-        }
-
-        if ($CurrencyId) {
-            $LocalVarQueryParameters['currency_id'] = $CurrencyId
-        }
-
-        if ($ProductIds) {
-            $LocalVarQueryParameters['product_ids'] = $ProductIds
-        }
-
-        if ($SinceId) {
-            $LocalVarQueryParameters['since_id'] = $SinceId
-        }
-
-        if ($ReportRequestId) {
-            $LocalVarQueryParameters['report_request_id'] = $ReportRequestId
-        }
-
-        if ($DisableReportCache) {
-            $LocalVarQueryParameters['disable_report_cache'] = $DisableReportCache
-        }
-
-        if ($SortBy) {
-            $LocalVarQueryParameters['sort_by'] = $SortBy
-        }
-
-        if ($SortDirection) {
-            $LocalVarQueryParameters['sort_direction'] = $SortDirection
-        }
-
         if ($Sku) {
             $LocalVarQueryParameters['sku'] = $Sku
-        }
-
-        if ($DisableCache) {
-            $LocalVarQueryParameters['disable_cache'] = $DisableCache
         }
 
         if ($BrandName) {
@@ -3602,16 +3574,44 @@ function Invoke-ProductList {
             $LocalVarQueryParameters['find_where'] = $FindWhere
         }
 
-        if ($UseLatestApiVersion) {
-            $LocalVarQueryParameters['use_latest_api_version'] = $UseLatestApiVersion
-        }
-
         if ($ReturnGlobal) {
             $LocalVarQueryParameters['return_global'] = $ReturnGlobal
         }
 
-        if ($CategoriesIds) {
-            $LocalVarQueryParameters['categories_ids'] = $CategoriesIds
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
+        }
+
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
+        if ($Exclude) {
+            $LocalVarQueryParameters['exclude'] = $Exclude
+        }
+
+        if ($SortBy) {
+            $LocalVarQueryParameters['sort_by'] = $SortBy
+        }
+
+        if ($SortDirection) {
+            $LocalVarQueryParameters['sort_direction'] = $SortDirection
+        }
+
+        if ($ReportRequestId) {
+            $LocalVarQueryParameters['report_request_id'] = $ReportRequestId
+        }
+
+        if ($DisableCache) {
+            $LocalVarQueryParameters['disable_cache'] = $DisableCache
+        }
+
+        if ($DisableReportCache) {
+            $LocalVarQueryParameters['disable_report_cache'] = $DisableReportCache
+        }
+
+        if ($UseLatestApiVersion) {
+            $LocalVarQueryParameters['use_latest_api_version'] = $UseLatestApiVersion
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -4142,15 +4142,6 @@ This parameter sets the number from which you want to get entities
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
 
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
-
-.PARAMETER Exclude
-Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
-.PARAMETER ResponseFields
-Set this parameter in order to choose which entity fields you want to retrieve
-
 .PARAMETER ProductId
 Retrieves products' options specified by product id
 
@@ -4159,6 +4150,15 @@ Language id
 
 .PARAMETER StoreId
 Store Id
+
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Params
+Set this parameter in order to choose which entity fields you want to retrieve
+
+.PARAMETER Exclude
+Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 
 .PARAMETER WithHttpInfo
 
@@ -4179,22 +4179,22 @@ function Invoke-ProductOptionList {
         ${Count},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ProductId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${LangId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${StoreId},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ProductId},
+        ${ResponseFields},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${LangId},
+        ${Params},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -4226,18 +4226,6 @@ function Invoke-ProductOptionList {
             $LocalVarQueryParameters['count'] = $Count
         }
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
-        }
-
-        if ($Exclude) {
-            $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
-        }
-
         if ($ProductId) {
             $LocalVarQueryParameters['product_id'] = $ProductId
         }
@@ -4248,6 +4236,18 @@ function Invoke-ProductOptionList {
 
         if ($StoreId) {
             $LocalVarQueryParameters['store_id'] = $StoreId
+        }
+
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
+        }
+
+        if ($Exclude) {
+            $LocalVarQueryParameters['exclude'] = $Exclude
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -5177,11 +5177,11 @@ Product id
 .PARAMETER Start
 This parameter sets the number from which you want to get entities
 
-.PARAMETER PageCursor
-Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
-
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+
+.PARAMETER PageCursor
+Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
 
 .PARAMETER Ids
 Retrieves reviews specified by ids
@@ -5192,14 +5192,14 @@ Store Id
 .PARAMETER Status
 Defines status
 
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
 .PARAMETER Params
 Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Exclude
 Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
-.PARAMETER ResponseFields
-Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER WithHttpInfo
 
@@ -5219,11 +5219,11 @@ function Invoke-ProductReviewList {
         [System.Nullable[Int32]]
         ${Start},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${PageCursor},
-        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Count},
+        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${PageCursor},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Ids},
@@ -5235,13 +5235,13 @@ function Invoke-ProductReviewList {
         ${Status},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ResponseFields},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${Params},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -5269,12 +5269,12 @@ function Invoke-ProductReviewList {
             $LocalVarQueryParameters['start'] = $Start
         }
 
-        if ($PageCursor) {
-            $LocalVarQueryParameters['page_cursor'] = $PageCursor
-        }
-
         if ($Count) {
             $LocalVarQueryParameters['count'] = $Count
+        }
+
+        if ($PageCursor) {
+            $LocalVarQueryParameters['page_cursor'] = $PageCursor
         }
 
         if (!$ProductId) {
@@ -5294,16 +5294,16 @@ function Invoke-ProductReviewList {
             $LocalVarQueryParameters['status'] = $Status
         }
 
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
+        }
+
         if ($Params) {
             $LocalVarQueryParameters['params'] = $Params
         }
 
         if ($Exclude) {
             $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
-        if ($ResponseFields) {
-            $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -5953,6 +5953,12 @@ No description available.
 .PARAMETER ProductId
 Retrieves products' variants specified by product id
 
+.PARAMETER CategoryId
+Counts products’ variants specified by category id
+
+.PARAMETER StoreId
+Retrieves variants specified by store id
+
 .PARAMETER CreatedFrom
 Retrieve entities from their creation date
 
@@ -5964,12 +5970,6 @@ Retrieve entities from their modification date
 
 .PARAMETER ModifiedTo
 Retrieve entities to their modification date
-
-.PARAMETER CategoryId
-Counts products’ variants specified by category id
-
-.PARAMETER StoreId
-Retrieves variants specified by store id
 
 .PARAMETER WithHttpInfo
 
@@ -5987,22 +5987,22 @@ function Invoke-ProductVariantCount {
         ${ProductId},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedFrom},
+        ${CategoryId},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedTo},
+        ${StoreId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedFrom},
+        ${CreatedFrom},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedTo},
+        ${CreatedTo},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CategoryId},
+        ${ModifiedFrom},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${ModifiedTo},
         [Switch]
         $WithHttpInfo
     )
@@ -6026,6 +6026,19 @@ function Invoke-ProductVariantCount {
 
         $LocalVarUri = '/product.variant.count.json'
 
+        if (!$ProductId) {
+            throw "Error! The required parameter `ProductId` missing when calling productVariantCount."
+        }
+        $LocalVarQueryParameters['product_id'] = $ProductId
+
+        if ($CategoryId) {
+            $LocalVarQueryParameters['category_id'] = $CategoryId
+        }
+
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
+        }
+
         if ($CreatedFrom) {
             $LocalVarQueryParameters['created_from'] = $CreatedFrom
         }
@@ -6040,19 +6053,6 @@ function Invoke-ProductVariantCount {
 
         if ($ModifiedTo) {
             $LocalVarQueryParameters['modified_to'] = $ModifiedTo
-        }
-
-        if ($CategoryId) {
-            $LocalVarQueryParameters['category_id'] = $CategoryId
-        }
-
-        if (!$ProductId) {
-            throw "Error! The required parameter `ProductId` missing when calling productVariantCount."
-        }
-        $LocalVarQueryParameters['product_id'] = $ProductId
-
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -6544,14 +6544,14 @@ No description available.
 .PARAMETER Id
 Retrieves variant's info specified by variant id
 
+.PARAMETER StoreId
+Retrieves variant info specified by store id
+
 .PARAMETER Params
 Set this parameter in order to choose which entity fields you want to retrieve
 
 .PARAMETER Exclude
 Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-
-.PARAMETER StoreId
-Retrieves variant info specified by store id
 
 .PARAMETER WithHttpInfo
 
@@ -6569,13 +6569,13 @@ function Invoke-ProductVariantInfo {
         ${Id},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${StoreId},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${Params},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -6599,14 +6599,6 @@ function Invoke-ProductVariantInfo {
 
         $LocalVarUri = '/product.variant.info.json'
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
-        }
-
-        if ($Exclude) {
-            $LocalVarQueryParameters['exclude'] = $Exclude
-        }
-
         if (!$Id) {
             throw "Error! The required parameter `Id` missing when calling productVariantInfo."
         }
@@ -6614,6 +6606,14 @@ function Invoke-ProductVariantInfo {
 
         if ($StoreId) {
             $LocalVarQueryParameters['store_id'] = $StoreId
+        }
+
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
+        }
+
+        if ($Exclude) {
+            $LocalVarQueryParameters['exclude'] = $Exclude
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -6671,11 +6671,14 @@ This parameter sets the number from which you want to get entities
 .PARAMETER Count
 This parameter sets the entity amount that has to be retrieved. Max allowed count=250
 
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
+.PARAMETER ProductId
+Retrieves products' variants specified by product id
 
-.PARAMETER Exclude
-Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+.PARAMETER CategoryId
+Retrieves products’ variants specified by category id
+
+.PARAMETER StoreId
+Retrieves variants specified by store id
 
 .PARAMETER CreatedFrom
 Retrieve entities from their creation date
@@ -6689,14 +6692,11 @@ Retrieve entities from their modification date
 .PARAMETER ModifiedTo
 Retrieve entities to their modification date
 
-.PARAMETER CategoryId
-Retrieves products’ variants specified by category id
+.PARAMETER Params
+Set this parameter in order to choose which entity fields you want to retrieve
 
-.PARAMETER ProductId
-Retrieves products' variants specified by product id
-
-.PARAMETER StoreId
-Retrieves variants specified by store id
+.PARAMETER Exclude
+Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
 
 .PARAMETER WithHttpInfo
 
@@ -6717,31 +6717,31 @@ function Invoke-ProductVariantList {
         ${Count},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ProductId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${CategoryId},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedFrom},
+        ${StoreId},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedTo},
+        ${CreatedFrom},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedFrom},
+        ${CreatedTo},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedTo},
+        ${ModifiedFrom},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CategoryId},
+        ${ModifiedTo},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ProductId},
+        ${Params},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${Exclude},
         [Switch]
         $WithHttpInfo
     )
@@ -6773,12 +6773,16 @@ function Invoke-ProductVariantList {
             $LocalVarQueryParameters['count'] = $Count
         }
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
+        if ($ProductId) {
+            $LocalVarQueryParameters['product_id'] = $ProductId
         }
 
-        if ($Exclude) {
-            $LocalVarQueryParameters['exclude'] = $Exclude
+        if ($CategoryId) {
+            $LocalVarQueryParameters['category_id'] = $CategoryId
+        }
+
+        if ($StoreId) {
+            $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
         if ($CreatedFrom) {
@@ -6797,16 +6801,12 @@ function Invoke-ProductVariantList {
             $LocalVarQueryParameters['modified_to'] = $ModifiedTo
         }
 
-        if ($CategoryId) {
-            $LocalVarQueryParameters['category_id'] = $CategoryId
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
         }
 
-        if ($ProductId) {
-            $LocalVarQueryParameters['product_id'] = $ProductId
-        }
-
-        if ($StoreId) {
-            $LocalVarQueryParameters['store_id'] = $StoreId
+        if ($Exclude) {
+            $LocalVarQueryParameters['exclude'] = $Exclude
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {

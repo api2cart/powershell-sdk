@@ -25,7 +25,7 @@ Describe -tag 'PSOpenAPITools' -name 'CartApi' {
 
     Context 'Invoke-CartCatalogPriceRulesList' {
         It 'Test Invoke-CartCatalogPriceRulesList' {
-            #$TestResult = Invoke-CartCatalogPriceRulesList -PageCursor "TEST_VALUE" -Start "TEST_VALUE" -Count "TEST_VALUE" -Ids "TEST_VALUE" -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE"
+            #$TestResult = Invoke-CartCatalogPriceRulesList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -Ids "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -65,7 +65,7 @@ Describe -tag 'PSOpenAPITools' -name 'CartApi' {
 
     Context 'Invoke-CartCouponConditionAdd' {
         It 'Test Invoke-CartCouponConditionAdd' {
-            #$TestResult = Invoke-CartCouponConditionAdd -CouponId "TEST_VALUE" -Entity "TEST_VALUE" -Key "TEST_VALUE" -Operator "TEST_VALUE" -Value "TEST_VALUE" -StoreId "TEST_VALUE" -Target "TEST_VALUE" -IncludeTax "TEST_VALUE" -IncludeShipping "TEST_VALUE"
+            #$TestResult = Invoke-CartCouponConditionAdd -CouponId "TEST_VALUE" -Entity "TEST_VALUE" -Key "TEST_VALUE" -Operator "TEST_VALUE" -Value "TEST_VALUE" -Target "TEST_VALUE" -IncludeTax "TEST_VALUE" -IncludeShipping "TEST_VALUE" -StoreId "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -73,7 +73,7 @@ Describe -tag 'PSOpenAPITools' -name 'CartApi' {
 
     Context 'Invoke-CartCouponCount' {
         It 'Test Invoke-CartCouponCount' {
-            #$TestResult = Invoke-CartCouponCount -StoreId "TEST_VALUE" -DateStartFrom "TEST_VALUE" -DateStartTo "TEST_VALUE" -DateEndFrom "TEST_VALUE" -DateEndTo "TEST_VALUE" -Avail "TEST_VALUE"
+            #$TestResult = Invoke-CartCouponCount -StoreId "TEST_VALUE" -Avail "TEST_VALUE" -DateStartFrom "TEST_VALUE" -DateStartTo "TEST_VALUE" -DateEndFrom "TEST_VALUE" -DateEndTo "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -89,7 +89,7 @@ Describe -tag 'PSOpenAPITools' -name 'CartApi' {
 
     Context 'Invoke-CartCouponList' {
         It 'Test Invoke-CartCouponList' {
-            #$TestResult = Invoke-CartCouponList -PageCursor "TEST_VALUE" -Start "TEST_VALUE" -Count "TEST_VALUE" -CouponsIds "TEST_VALUE" -StoreId "TEST_VALUE" -DateStartFrom "TEST_VALUE" -DateStartTo "TEST_VALUE" -DateEndFrom "TEST_VALUE" -DateEndTo "TEST_VALUE" -Avail "TEST_VALUE" -LangId "TEST_VALUE" -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE"
+            #$TestResult = Invoke-CartCouponList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -CouponsIds "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -Avail "TEST_VALUE" -DateStartFrom "TEST_VALUE" -DateStartTo "TEST_VALUE" -DateEndFrom "TEST_VALUE" -DateEndTo "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -145,7 +145,7 @@ Describe -tag 'PSOpenAPITools' -name 'CartApi' {
 
     Context 'Invoke-CartGiftcardList' {
         It 'Test Invoke-CartGiftcardList' {
-            #$TestResult = Invoke-CartGiftcardList -PageCursor "TEST_VALUE" -Start "TEST_VALUE" -Count "TEST_VALUE" -StoreId "TEST_VALUE" -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE"
+            #$TestResult = Invoke-CartGiftcardList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -StoreId "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -153,7 +153,7 @@ Describe -tag 'PSOpenAPITools' -name 'CartApi' {
 
     Context 'Invoke-CartInfo' {
         It 'Test Invoke-CartInfo' {
-            #$TestResult = Invoke-CartInfo -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE" -StoreId "TEST_VALUE"
+            #$TestResult = Invoke-CartInfo -StoreId "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -169,7 +169,7 @@ Describe -tag 'PSOpenAPITools' -name 'CartApi' {
 
     Context 'Invoke-CartMetaDataList' {
         It 'Test Invoke-CartMetaDataList' {
-            #$TestResult = Invoke-CartMetaDataList -EntityId "TEST_VALUE" -Entity "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -Key "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE"
+            #$TestResult = Invoke-CartMetaDataList -EntityId "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -Entity "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -Key "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -201,7 +201,7 @@ Describe -tag 'PSOpenAPITools' -name 'CartApi' {
 
     Context 'Invoke-CartPluginList' {
         It 'Test Invoke-CartPluginList' {
-            #$TestResult = Invoke-CartPluginList -StoreId "TEST_VALUE" -Start "TEST_VALUE" -Count "TEST_VALUE"
+            #$TestResult = Invoke-CartPluginList -Start "TEST_VALUE" -Count "TEST_VALUE" -StoreId "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -225,7 +225,7 @@ Describe -tag 'PSOpenAPITools' -name 'CartApi' {
 
     Context 'Invoke-CartScriptList' {
         It 'Test Invoke-CartScriptList' {
-            #$TestResult = Invoke-CartScriptList -PageCursor "TEST_VALUE" -Start "TEST_VALUE" -Count "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -ScriptIds "TEST_VALUE" -StoreId "TEST_VALUE" -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE"
+            #$TestResult = Invoke-CartScriptList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -ScriptIds "TEST_VALUE" -StoreId "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -233,7 +233,7 @@ Describe -tag 'PSOpenAPITools' -name 'CartApi' {
 
     Context 'Invoke-CartShippingZonesList' {
         It 'Test Invoke-CartShippingZonesList' {
-            #$TestResult = Invoke-CartShippingZonesList -StoreId "TEST_VALUE" -Start "TEST_VALUE" -Count "TEST_VALUE" -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE"
+            #$TestResult = Invoke-CartShippingZonesList -Start "TEST_VALUE" -Count "TEST_VALUE" -StoreId "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

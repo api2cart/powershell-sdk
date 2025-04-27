@@ -3,10 +3,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**StoreId** | **String** | Store Id | [optional] 
 **WarehouseId** | **String** | This parameter is used for selecting a warehouse where you need to set/modify a product quantity. | [optional] 
-**CustomerEmail** | **String** | Retrieves orders specified by customer email | [optional] 
 **CustomerId** | **String** | Retrieves orders specified by customer id | [optional] 
+**CustomerEmail** | **String** | Retrieves orders specified by customer email | [optional] 
+**StoreId** | **String** | Store Id | [optional] 
 **ShippAddress1** | **String** | Specifies first shipping address | [optional] 
 **ShippCity** | **String** | Specifies shipping city | [optional] 
 **ShippPostcode** | **String** | Specifies shipping postcode | [optional] 
@@ -20,10 +20,10 @@ Name | Type | Description | Notes
 
 - Prepare the resource
 ```powershell
-$OrderPreestimateShippingList = Initialize-PSOpenAPIToolsOrderPreestimateShippingList  -StoreId 1 `
- -WarehouseId 1 `
- -CustomerEmail jubari@hannsgroup.com `
+$OrderPreestimateShippingList = Initialize-PSOpenAPIToolsOrderPreestimateShippingList  -WarehouseId 1 `
  -CustomerId 5 `
+ -CustomerEmail jubari@hannsgroup.com `
+ -StoreId 1 `
  -ShippAddress1 Green str. 35 `
  -ShippCity Chicago `
  -ShippPostcode 24545 `

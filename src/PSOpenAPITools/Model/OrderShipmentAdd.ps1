@@ -17,28 +17,28 @@ No description available.
 
 .PARAMETER OrderId
 Defines the order for which the shipment will be created
-.PARAMETER StoreId
-Store Id
 .PARAMETER WarehouseId
 This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
+.PARAMETER StoreId
+Store Id
 .PARAMETER ShipmentProvider
 Defines company name that provide tracking of shipment
 .PARAMETER ShippingMethod
 Define shipping method
 .PARAMETER Items
 Defines items in the order that will be shipped
-.PARAMETER SendNotifications
-Send notifications to customer after shipment was created
 .PARAMETER TrackingNumbers
 Defines shipment's tracking numbers that have to be added</br> How set tracking numbers to appropriate carrier:<ul><li>tracking_numbers[]=a2c.demo1,a2c.demo2 - set default carrier</li><li>tracking_numbers[<b>carrier_id</b>]=a2c.demo - set appropriate carrier</li></ul>To get the list of carriers IDs that are available in your store, use the <a href = ""https://api2cart.com/docs/#/cart/CartInfo"">cart.info</a > method
-.PARAMETER AdjustStock
-This parameter is used for adjust stock.
-.PARAMETER EnableCache
-If the value is 'true' and order exist in our cache, we will use order.info from cache to prepare shipment items.
 .PARAMETER TrackingLink
 Defines custom tracking link
 .PARAMETER IsShipped
 Defines shipment's status
+.PARAMETER SendNotifications
+Send notifications to customer after shipment was created
+.PARAMETER AdjustStock
+This parameter is used for adjust stock.
+.PARAMETER EnableCache
+If the value is 'true' and order exist in our cache, we will use order.info from cache to prepare shipment items.
 .PARAMETER CheckProcessStatus
 Disable or enable check process status. Please note that the response will be slower due to additional requests to the store.
 .PARAMETER UseLatestApiVersion
@@ -56,10 +56,10 @@ function Initialize-OrderShipmentAdd {
         ${OrderId},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${StoreId},
+        ${WarehouseId},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${WarehouseId},
+        ${StoreId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${ShipmentProvider},
@@ -70,23 +70,23 @@ function Initialize-OrderShipmentAdd {
         [PSCustomObject[]]
         ${Items},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${SendNotifications} = $false,
-        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${TrackingNumbers},
-        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${AdjustStock} = $false,
-        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${EnableCache} = $false,
-        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${TrackingLink},
-        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${IsShipped} = $true,
+        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${SendNotifications} = $false,
+        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${AdjustStock} = $false,
+        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${EnableCache} = $false,
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${CheckProcessStatus} = $false,
@@ -102,17 +102,17 @@ function Initialize-OrderShipmentAdd {
 
         $PSO = [PSCustomObject]@{
             "order_id" = ${OrderId}
-            "store_id" = ${StoreId}
             "warehouse_id" = ${WarehouseId}
+            "store_id" = ${StoreId}
             "shipment_provider" = ${ShipmentProvider}
             "shipping_method" = ${ShippingMethod}
             "items" = ${Items}
-            "send_notifications" = ${SendNotifications}
             "tracking_numbers" = ${TrackingNumbers}
-            "adjust_stock" = ${AdjustStock}
-            "enable_cache" = ${EnableCache}
             "tracking_link" = ${TrackingLink}
             "is_shipped" = ${IsShipped}
+            "send_notifications" = ${SendNotifications}
+            "adjust_stock" = ${AdjustStock}
+            "enable_cache" = ${EnableCache}
             "check_process_status" = ${CheckProcessStatus}
             "use_latest_api_version" = ${UseLatestApiVersion}
         }
@@ -152,7 +152,7 @@ function ConvertFrom-JsonToOrderShipmentAdd {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in OrderShipmentAdd
-        $AllProperties = ("order_id", "store_id", "warehouse_id", "shipment_provider", "shipping_method", "items", "send_notifications", "tracking_numbers", "adjust_stock", "enable_cache", "tracking_link", "is_shipped", "check_process_status", "use_latest_api_version")
+        $AllProperties = ("order_id", "warehouse_id", "store_id", "shipment_provider", "shipping_method", "items", "tracking_numbers", "tracking_link", "is_shipped", "send_notifications", "adjust_stock", "enable_cache", "check_process_status", "use_latest_api_version")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -165,16 +165,16 @@ function ConvertFrom-JsonToOrderShipmentAdd {
             $OrderId = $JsonParameters.PSobject.Properties["order_id"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_id"))) { #optional property not found
-            $StoreId = $null
-        } else {
-            $StoreId = $JsonParameters.PSobject.Properties["store_id"].value
-        }
-
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "warehouse_id"))) { #optional property not found
             $WarehouseId = $null
         } else {
             $WarehouseId = $JsonParameters.PSobject.Properties["warehouse_id"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_id"))) { #optional property not found
+            $StoreId = $null
+        } else {
+            $StoreId = $JsonParameters.PSobject.Properties["store_id"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipment_provider"))) { #optional property not found
@@ -195,28 +195,10 @@ function ConvertFrom-JsonToOrderShipmentAdd {
             $Items = $JsonParameters.PSobject.Properties["items"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "send_notifications"))) { #optional property not found
-            $SendNotifications = $null
-        } else {
-            $SendNotifications = $JsonParameters.PSobject.Properties["send_notifications"].value
-        }
-
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "tracking_numbers"))) { #optional property not found
             $TrackingNumbers = $null
         } else {
             $TrackingNumbers = $JsonParameters.PSobject.Properties["tracking_numbers"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "adjust_stock"))) { #optional property not found
-            $AdjustStock = $null
-        } else {
-            $AdjustStock = $JsonParameters.PSobject.Properties["adjust_stock"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "enable_cache"))) { #optional property not found
-            $EnableCache = $null
-        } else {
-            $EnableCache = $JsonParameters.PSobject.Properties["enable_cache"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "tracking_link"))) { #optional property not found
@@ -229,6 +211,24 @@ function ConvertFrom-JsonToOrderShipmentAdd {
             $IsShipped = $null
         } else {
             $IsShipped = $JsonParameters.PSobject.Properties["is_shipped"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "send_notifications"))) { #optional property not found
+            $SendNotifications = $null
+        } else {
+            $SendNotifications = $JsonParameters.PSobject.Properties["send_notifications"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "adjust_stock"))) { #optional property not found
+            $AdjustStock = $null
+        } else {
+            $AdjustStock = $JsonParameters.PSobject.Properties["adjust_stock"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "enable_cache"))) { #optional property not found
+            $EnableCache = $null
+        } else {
+            $EnableCache = $JsonParameters.PSobject.Properties["enable_cache"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "check_process_status"))) { #optional property not found
@@ -245,17 +245,17 @@ function ConvertFrom-JsonToOrderShipmentAdd {
 
         $PSO = [PSCustomObject]@{
             "order_id" = ${OrderId}
-            "store_id" = ${StoreId}
             "warehouse_id" = ${WarehouseId}
+            "store_id" = ${StoreId}
             "shipment_provider" = ${ShipmentProvider}
             "shipping_method" = ${ShippingMethod}
             "items" = ${Items}
-            "send_notifications" = ${SendNotifications}
             "tracking_numbers" = ${TrackingNumbers}
-            "adjust_stock" = ${AdjustStock}
-            "enable_cache" = ${EnableCache}
             "tracking_link" = ${TrackingLink}
             "is_shipped" = ${IsShipped}
+            "send_notifications" = ${SendNotifications}
+            "adjust_stock" = ${AdjustStock}
+            "enable_cache" = ${EnableCache}
             "check_process_status" = ${CheckProcessStatus}
             "use_latest_api_version" = ${UseLatestApiVersion}
         }

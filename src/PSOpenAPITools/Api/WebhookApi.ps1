@@ -460,9 +460,6 @@ webhook.list
 
 No description available.
 
-.PARAMETER Params
-Set this parameter in order to choose which entity fields you want to retrieve
-
 .PARAMETER Start
 This parameter sets the number from which you want to get entities
 
@@ -481,6 +478,9 @@ The webhook status you want to filter webhooks by
 .PARAMETER Ids
 List of сomma-separated webhook ids
 
+.PARAMETER Params
+Set this parameter in order to choose which entity fields you want to retrieve
+
 .PARAMETER WithHttpInfo
 
 A switch when turned on will return a hash table of Response, StatusCode and Headers instead of just the Response
@@ -493,26 +493,26 @@ function Invoke-WebhookList {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Params},
-        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Start},
-        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Int32]]
         ${Count},
-        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Entity},
-        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Action},
-        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${Active},
-        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Ids},
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Params},
         [Switch]
         $WithHttpInfo
     )
@@ -536,10 +536,6 @@ function Invoke-WebhookList {
 
         $LocalVarUri = '/webhook.list.json'
 
-        if ($Params) {
-            $LocalVarQueryParameters['params'] = $Params
-        }
-
         if ($Start) {
             $LocalVarQueryParameters['start'] = $Start
         }
@@ -562,6 +558,10 @@ function Invoke-WebhookList {
 
         if ($Ids) {
             $LocalVarQueryParameters['ids'] = $Ids
+        }
+
+        if ($Params) {
+            $LocalVarQueryParameters['params'] = $Params
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {

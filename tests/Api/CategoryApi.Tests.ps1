@@ -9,7 +9,7 @@
 Describe -tag 'PSOpenAPITools' -name 'CategoryApi' {
     Context 'Get-egoryAdd' {
         It 'Test Get-egoryAdd' {
-            #$TestResult = Get-egoryAdd -Name "TEST_VALUE" -ParentId "TEST_VALUE" -StoresIds "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -Avail "TEST_VALUE" -SortOrder "TEST_VALUE" -CreatedTime "TEST_VALUE" -ModifiedTime "TEST_VALUE" -Description "TEST_VALUE" -ShortDescription "TEST_VALUE" -MetaTitle "TEST_VALUE" -MetaDescription "TEST_VALUE" -MetaKeywords "TEST_VALUE" -SeoUrl "TEST_VALUE"
+            #$TestResult = Get-egoryAdd -Name "TEST_VALUE" -Description "TEST_VALUE" -ShortDescription "TEST_VALUE" -ParentId "TEST_VALUE" -Avail "TEST_VALUE" -CreatedTime "TEST_VALUE" -ModifiedTime "TEST_VALUE" -SortOrder "TEST_VALUE" -MetaTitle "TEST_VALUE" -MetaDescription "TEST_VALUE" -MetaKeywords "TEST_VALUE" -SeoUrl "TEST_VALUE" -StoreId "TEST_VALUE" -StoresIds "TEST_VALUE" -LangId "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -25,7 +25,7 @@ Describe -tag 'PSOpenAPITools' -name 'CategoryApi' {
 
     Context 'Get-egoryAssign' {
         It 'Test Get-egoryAssign' {
-            #$TestResult = Get-egoryAssign -ProductId "TEST_VALUE" -CategoryId "TEST_VALUE" -StoreId "TEST_VALUE"
+            #$TestResult = Get-egoryAssign -CategoryId "TEST_VALUE" -ProductId "TEST_VALUE" -StoreId "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -33,7 +33,7 @@ Describe -tag 'PSOpenAPITools' -name 'CategoryApi' {
 
     Context 'Get-egoryCount' {
         It 'Test Get-egoryCount' {
-            #$TestResult = Get-egoryCount -ParentId "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -Avail "TEST_VALUE" -ProductType "TEST_VALUE" -FindValue "TEST_VALUE" -FindWhere "TEST_VALUE" -ReportRequestId "TEST_VALUE" -DisableReportCache "TEST_VALUE"
+            #$TestResult = Get-egoryCount -ParentId "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -Avail "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -ProductType "TEST_VALUE" -FindValue "TEST_VALUE" -FindWhere "TEST_VALUE" -ReportRequestId "TEST_VALUE" -DisableReportCache "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -57,7 +57,7 @@ Describe -tag 'PSOpenAPITools' -name 'CategoryApi' {
 
     Context 'Get-egoryImageAdd' {
         It 'Test Get-egoryImageAdd' {
-            #$TestResult = Get-egoryImageAdd -CategoryId "TEST_VALUE" -ImageName "TEST_VALUE" -Url "TEST_VALUE" -Type "TEST_VALUE" -Label "TEST_VALUE" -Mime "TEST_VALUE" -Position "TEST_VALUE" -StoreId "TEST_VALUE"
+            #$TestResult = Get-egoryImageAdd -CategoryId "TEST_VALUE" -ImageName "TEST_VALUE" -Url "TEST_VALUE" -Type "TEST_VALUE" -StoreId "TEST_VALUE" -Label "TEST_VALUE" -Mime "TEST_VALUE" -Position "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -73,7 +73,7 @@ Describe -tag 'PSOpenAPITools' -name 'CategoryApi' {
 
     Context 'Get-egoryInfo' {
         It 'Test Get-egoryInfo' {
-            #$TestResult = Get-egoryInfo -Id "TEST_VALUE" -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -SchemaType "TEST_VALUE" -ReportRequestId "TEST_VALUE" -DisableReportCache "TEST_VALUE"
+            #$TestResult = Get-egoryInfo -Id "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -SchemaType "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -ReportRequestId "TEST_VALUE" -DisableReportCache "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -81,7 +81,7 @@ Describe -tag 'PSOpenAPITools' -name 'CategoryApi' {
 
     Context 'Get-egoryList' {
         It 'Test Get-egoryList' {
-            #$TestResult = Get-egoryList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -ParentId "TEST_VALUE" -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -Avail "TEST_VALUE" -ProductType "TEST_VALUE" -FindValue "TEST_VALUE" -FindWhere "TEST_VALUE" -ReportRequestId "TEST_VALUE" -DisableReportCache "TEST_VALUE" -DisableCache "TEST_VALUE"
+            #$TestResult = Get-egoryList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -ParentId "TEST_VALUE" -Avail "TEST_VALUE" -ProductType "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -FindValue "TEST_VALUE" -FindWhere "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE" -ReportRequestId "TEST_VALUE" -DisableReportCache "TEST_VALUE" -DisableCache "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -97,7 +97,7 @@ Describe -tag 'PSOpenAPITools' -name 'CategoryApi' {
 
     Context 'Get-egoryUpdate' {
         It 'Test Get-egoryUpdate' {
-            #$TestResult = Get-egoryUpdate -Id "TEST_VALUE" -Name "TEST_VALUE" -ParentId "TEST_VALUE" -StoresIds "TEST_VALUE" -Avail "TEST_VALUE" -SortOrder "TEST_VALUE" -ModifiedTime "TEST_VALUE" -Description "TEST_VALUE" -ShortDescription "TEST_VALUE" -MetaTitle "TEST_VALUE" -MetaDescription "TEST_VALUE" -MetaKeywords "TEST_VALUE" -SeoUrl "TEST_VALUE" -LangId "TEST_VALUE" -StoreId "TEST_VALUE"
+            #$TestResult = Get-egoryUpdate -Id "TEST_VALUE" -Name "TEST_VALUE" -Description "TEST_VALUE" -ShortDescription "TEST_VALUE" -ParentId "TEST_VALUE" -Avail "TEST_VALUE" -SortOrder "TEST_VALUE" -ModifiedTime "TEST_VALUE" -MetaTitle "TEST_VALUE" -MetaDescription "TEST_VALUE" -MetaKeywords "TEST_VALUE" -SeoUrl "TEST_VALUE" -StoreId "TEST_VALUE" -StoresIds "TEST_VALUE" -LangId "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

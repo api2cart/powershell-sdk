@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ProductId** | **String** | Defines product id where the variant image has to be added | [optional] 
 **ProductVariantId** | **String** | Defines product&#39;s variants specified by variant id | 
+**StoreId** | **String** | Store Id | [optional] 
 **ImageName** | **String** | Defines image&#39;s name | 
 **Type** | **String** | Defines image&#39;s types that are specified by comma-separated list | [default to "base"]
 **Url** | **String** | Defines URL of the image that has to be added | [optional] 
@@ -12,7 +13,6 @@ Name | Type | Description | Notes
 **Label** | **String** | Defines alternative text that has to be attached to the picture | [optional] 
 **Mime** | **String** | Mime type of image http://en.wikipedia.org/wiki/Internet_media_type. | [optional] 
 **Position** | **Int32** | Defines image’s position in the list | [optional] [default to 0]
-**StoreId** | **String** | Store Id | [optional] 
 **OptionId** | **String** | Defines option id of the product variant for which the image will be added | [optional] 
 
 ## Examples
@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 ```powershell
 $ProductVariantImageAdd = Initialize-PSOpenAPIToolsProductVariantImageAdd  -ProductId 10 `
  -ProductVariantId 45 `
+ -StoreId 1 `
  -ImageName abibas.png `
  -Type base `
  -Url http://docs.api2cart.com/img/logo.png `
@@ -28,7 +29,6 @@ $ProductVariantImageAdd = Initialize-PSOpenAPIToolsProductVariantImageAdd  -Prod
  -Label This cool image `
  -Mime image/jpeg `
  -Position 5 `
- -StoreId 1 `
  -OptionId 5
 ```
 
