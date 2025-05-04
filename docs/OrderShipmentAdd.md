@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **AdjustStock** | **Boolean** | This parameter is used for adjust stock. | [optional] [default to $false]
 **EnableCache** | **Boolean** | If the value is &#39;true&#39; and order exist in our cache, we will use order.info from cache to prepare shipment items. | [optional] [default to $false]
 **CheckProcessStatus** | **Boolean** | Disable or enable check process status. Please note that the response will be slower due to additional requests to the store. | [optional] [default to $false]
+**TrackingProvider** | **String** | Defines name of the company which provides shipment tracking | [optional] 
 **UseLatestApiVersion** | **Boolean** | Use the latest platform API version | [optional] [default to $false]
 
 ## Examples
@@ -35,6 +36,7 @@ $OrderShipmentAdd = Initialize-PSOpenAPIToolsOrderShipmentAdd  -OrderId 25 `
  -AdjustStock true `
  -EnableCache true `
  -CheckProcessStatus false `
+ -TrackingProvider Custom tracker `
  -UseLatestApiVersion true
 ```
 

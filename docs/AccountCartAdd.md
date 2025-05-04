@@ -37,6 +37,8 @@ Name | Type | Description | Notes
 **BolApiKey** | **String** | Bol API Key | [optional] 
 **BolApiSecret** | **String** | Bol API Secret | [optional] 
 **BolRetailerId** | **Int32** | Bol Retailer ID | [optional] 
+**BigcartelUserName** | **String** | Subdomain of store | 
+**BigcartelPassword** | **String** | BigCartel account password | 
 **DemandwareClientId** | **String** | Demandware client id | [optional] 
 **DemandwareApiPassword** | **String** | Demandware api password | [optional] 
 **DemandwareUserName** | **String** | Demandware user name | [optional] 
@@ -191,6 +193,8 @@ $AccountCartAdd = Initialize-PSOpenAPIToolsAccountCartAdd  -CartId Opencart14 `
  -BolApiKey 51369628-feee-11ed-be56-0242ac120002 `
  -BolApiSecret 8fGzEsbEP5z2MNZubmIil87m-sWzTkj?KDQKrmzmU!fA6aAUNMdKRp7LMWHwE!G37UMfnWByHBGSXJHkAG?QcuYTO2uklv4idIHwUMLHK!OO1yfRlWh! `
  -BolRetailerId 145001 `
+ -BigcartelUserName subdomain `
+ -BigcartelPassword 4GrrZCLNNoSUuhAjesKuchxo9SL `
  -DemandwareClientId b849eb85-v8b9-1dw8-9fe2-97e1d6ffc7b0 `
  -DemandwareApiPassword testpassword `
  -DemandwareUserName admin `

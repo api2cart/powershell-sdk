@@ -1043,7 +1043,7 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 
 $OrderShipmentAddItemsInner = Initialize-OrderShipmentAddItemsInner -OrderProductId "MyOrderProductId" -Quantity 0
 $OrderShipmentAddTrackingNumbersInner = Initialize-OrderShipmentAddTrackingNumbersInner -CarrierId "MyCarrierId" -TrackingNumber "MyTrackingNumber"
-$OrderShipmentAdd = Initialize-OrderShipmentAdd -OrderId "25" -WarehouseId "1" -StoreId "1" -ShipmentProvider "UPS" -ShippingMethod "flatrate_flatrate" -Items $OrderShipmentAddItemsInner -TrackingNumbers $OrderShipmentAddTrackingNumbersInner -TrackingLink "http://example.com?someParam=value" -IsShipped $true -SendNotifications $true -AdjustStock $true -EnableCache $true -CheckProcessStatus $false -UseLatestApiVersion $true # OrderShipmentAdd | 
+$OrderShipmentAdd = Initialize-OrderShipmentAdd -OrderId "25" -WarehouseId "1" -StoreId "1" -ShipmentProvider "UPS" -ShippingMethod "flatrate_flatrate" -Items $OrderShipmentAddItemsInner -TrackingNumbers $OrderShipmentAddTrackingNumbersInner -TrackingLink "http://example.com?someParam=value" -IsShipped $true -SendNotifications $true -AdjustStock $true -EnableCache $true -CheckProcessStatus $false -TrackingProvider "Custom tracker" -UseLatestApiVersion $true # OrderShipmentAdd | 
 
 # order.shipment.add
 try {
@@ -1434,7 +1434,8 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
 $OrderShipmentAddTrackingNumbersInner = Initialize-OrderShipmentAddTrackingNumbersInner -CarrierId "MyCarrierId" -TrackingNumber "MyTrackingNumber"
-$OrderShipmentUpdate = Initialize-OrderShipmentUpdate -ShipmentId "200000002" -OrderId "25" -StoreId "1" -ShipmentProvider "UPS" -TrackingNumbers $OrderShipmentAddTrackingNumbersInner -TrackingLink "http://example.com?someParam=value" -IsShipped $true -DeliveredAt "2024-08-25T23:56:12+00:00" -Replace $false # OrderShipmentUpdate | 
+$OrderShipmentAddItemsInner = Initialize-OrderShipmentAddItemsInner -OrderProductId "MyOrderProductId" -Quantity 0
+$OrderShipmentUpdate = Initialize-OrderShipmentUpdate -ShipmentId "200000002" -OrderId "25" -StoreId "1" -ShipmentProvider "UPS" -TrackingNumbers $OrderShipmentAddTrackingNumbersInner -TrackingLink "http://example.com?someParam=value" -IsShipped $true -DeliveredAt "2024-08-25T23:56:12+00:00" -Replace $false -SendNotifications $true -TrackingProvider "Custom tracker" -Items $OrderShipmentAddItemsInner # OrderShipmentUpdate | 
 
 # order.shipment.update
 try {

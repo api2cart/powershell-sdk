@@ -12,6 +12,9 @@ Name | Type | Description | Notes
 **IsShipped** | **Boolean** | Defines shipment&#39;s status | [optional] [default to $true]
 **DeliveredAt** | **String** | Defines the date of delivery | [optional] 
 **Replace** | **Boolean** | Allows rewrite tracking numbers | [optional] [default to $true]
+**SendNotifications** | **Boolean** | Send notifications to customer after order was created | [optional] [default to $false]
+**TrackingProvider** | **String** | Defines name of the company which provides shipment tracking | [optional] 
+**Items** | [**OrderShipmentAddItemsInner[]**](OrderShipmentAddItemsInner.md) | Defines items in the order that will be shipped | [optional] 
 
 ## Examples
 
@@ -25,7 +28,10 @@ $OrderShipmentUpdate = Initialize-PSOpenAPIToolsOrderShipmentUpdate  -ShipmentId
  -TrackingLink http://example.com?someParam&#x3D;value `
  -IsShipped true `
  -DeliveredAt 2024-08-25T23:56:12+00:00 `
- -Replace false
+ -Replace false `
+ -SendNotifications true `
+ -TrackingProvider Custom tracker `
+ -Items null
 ```
 
 - Convert the resource to JSON

@@ -33,6 +33,12 @@ Defines shipment's status
 Defines the date of delivery
 .PARAMETER Replace
 Allows rewrite tracking numbers
+.PARAMETER SendNotifications
+Send notifications to customer after order was created
+.PARAMETER TrackingProvider
+Defines name of the company which provides shipment tracking
+.PARAMETER Items
+Defines items in the order that will be shipped
 .OUTPUTS
 
 OrderShipmentUpdate<PSCustomObject>
@@ -67,7 +73,16 @@ function Initialize-OrderShipmentUpdate {
         ${DeliveredAt},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${Replace} = $true
+        ${Replace} = $true,
+        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${SendNotifications} = $false,
+        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${TrackingProvider},
+        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
+        [PSCustomObject[]]
+        ${Items}
     )
 
     Process {
@@ -89,6 +104,9 @@ function Initialize-OrderShipmentUpdate {
             "is_shipped" = ${IsShipped}
             "delivered_at" = ${DeliveredAt}
             "replace" = ${Replace}
+            "send_notifications" = ${SendNotifications}
+            "tracking_provider" = ${TrackingProvider}
+            "items" = ${Items}
         }
 
 
@@ -126,7 +144,7 @@ function ConvertFrom-JsonToOrderShipmentUpdate {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in OrderShipmentUpdate
-        $AllProperties = ("shipment_id", "order_id", "store_id", "shipment_provider", "tracking_numbers", "tracking_link", "is_shipped", "delivered_at", "replace")
+        $AllProperties = ("shipment_id", "order_id", "store_id", "shipment_provider", "tracking_numbers", "tracking_link", "is_shipped", "delivered_at", "replace", "send_notifications", "tracking_provider", "items")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -191,6 +209,24 @@ function ConvertFrom-JsonToOrderShipmentUpdate {
             $Replace = $JsonParameters.PSobject.Properties["replace"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "send_notifications"))) { #optional property not found
+            $SendNotifications = $null
+        } else {
+            $SendNotifications = $JsonParameters.PSobject.Properties["send_notifications"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "tracking_provider"))) { #optional property not found
+            $TrackingProvider = $null
+        } else {
+            $TrackingProvider = $JsonParameters.PSobject.Properties["tracking_provider"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "items"))) { #optional property not found
+            $Items = $null
+        } else {
+            $Items = $JsonParameters.PSobject.Properties["items"].value
+        }
+
         $PSO = [PSCustomObject]@{
             "shipment_id" = ${ShipmentId}
             "order_id" = ${OrderId}
@@ -201,6 +237,9 @@ function ConvertFrom-JsonToOrderShipmentUpdate {
             "is_shipped" = ${IsShipped}
             "delivered_at" = ${DeliveredAt}
             "replace" = ${Replace}
+            "send_notifications" = ${SendNotifications}
+            "tracking_provider" = ${TrackingProvider}
+            "items" = ${Items}
         }
 
         return $PSO

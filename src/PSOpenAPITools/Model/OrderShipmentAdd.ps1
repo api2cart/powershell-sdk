@@ -41,6 +41,8 @@ This parameter is used for adjust stock.
 If the value is 'true' and order exist in our cache, we will use order.info from cache to prepare shipment items.
 .PARAMETER CheckProcessStatus
 Disable or enable check process status. Please note that the response will be slower due to additional requests to the store.
+.PARAMETER TrackingProvider
+Defines name of the company which provides shipment tracking
 .PARAMETER UseLatestApiVersion
 Use the latest platform API version
 .OUTPUTS
@@ -91,6 +93,9 @@ function Initialize-OrderShipmentAdd {
         [System.Nullable[Boolean]]
         ${CheckProcessStatus} = $false,
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${TrackingProvider},
+        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${UseLatestApiVersion} = $false
     )
@@ -114,6 +119,7 @@ function Initialize-OrderShipmentAdd {
             "adjust_stock" = ${AdjustStock}
             "enable_cache" = ${EnableCache}
             "check_process_status" = ${CheckProcessStatus}
+            "tracking_provider" = ${TrackingProvider}
             "use_latest_api_version" = ${UseLatestApiVersion}
         }
 
@@ -152,7 +158,7 @@ function ConvertFrom-JsonToOrderShipmentAdd {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in OrderShipmentAdd
-        $AllProperties = ("order_id", "warehouse_id", "store_id", "shipment_provider", "shipping_method", "items", "tracking_numbers", "tracking_link", "is_shipped", "send_notifications", "adjust_stock", "enable_cache", "check_process_status", "use_latest_api_version")
+        $AllProperties = ("order_id", "warehouse_id", "store_id", "shipment_provider", "shipping_method", "items", "tracking_numbers", "tracking_link", "is_shipped", "send_notifications", "adjust_stock", "enable_cache", "check_process_status", "tracking_provider", "use_latest_api_version")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -237,6 +243,12 @@ function ConvertFrom-JsonToOrderShipmentAdd {
             $CheckProcessStatus = $JsonParameters.PSobject.Properties["check_process_status"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "tracking_provider"))) { #optional property not found
+            $TrackingProvider = $null
+        } else {
+            $TrackingProvider = $JsonParameters.PSobject.Properties["tracking_provider"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "use_latest_api_version"))) { #optional property not found
             $UseLatestApiVersion = $null
         } else {
@@ -257,6 +269,7 @@ function ConvertFrom-JsonToOrderShipmentAdd {
             "adjust_stock" = ${AdjustStock}
             "enable_cache" = ${EnableCache}
             "check_process_status" = ${CheckProcessStatus}
+            "tracking_provider" = ${TrackingProvider}
             "use_latest_api_version" = ${UseLatestApiVersion}
         }
 
