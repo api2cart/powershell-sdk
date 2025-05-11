@@ -179,6 +179,12 @@ Is reindex required
 Is cache clear required
 .PARAMETER CheckProcessStatus
 Disable or enable check process status. Please note that the response will be slower due to additional requests to the store.
+.PARAMETER Specifics
+An array of Item Specific Name/Value pairs used by the seller to provide descriptive details of an item in a structured manner.         The list of possible specifications can be obtained using the category.info method (additional_fields->product_specifics).         <b>The structure of the parameter is different for specific platforms.</b>
+.PARAMETER ShopSectionId
+Add Shop Section Id
+.PARAMETER PersonalizationDetails
+No description available.
 .OUTPUTS
 
 ProductUpdate<PSCustomObject>
@@ -432,7 +438,16 @@ function Initialize-ProductUpdate {
         ${ClearCache} = $true,
         [Parameter(Position = 81, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${CheckProcessStatus} = $false
+        ${CheckProcessStatus} = $false,
+        [Parameter(Position = 82, ValueFromPipelineByPropertyName = $true)]
+        [PSCustomObject[]]
+        ${Specifics},
+        [Parameter(Position = 83, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Int32]]
+        ${ShopSectionId},
+        [Parameter(Position = 84, ValueFromPipelineByPropertyName = $true)]
+        [PSCustomObject]
+        ${PersonalizationDetails}
     )
 
     Process {
@@ -523,6 +538,9 @@ function Initialize-ProductUpdate {
             "reindex" = ${Reindex}
             "clear_cache" = ${ClearCache}
             "check_process_status" = ${CheckProcessStatus}
+            "specifics" = ${Specifics}
+            "shop_section_id" = ${ShopSectionId}
+            "personalization_details" = ${PersonalizationDetails}
         }
 
 
@@ -560,7 +578,7 @@ function ConvertFrom-JsonToProductUpdate {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductUpdate
-        $AllProperties = ("id", "model", "sku", "name", "description", "short_description", "price", "old_price", "special_price", "sprice_create", "sprice_expire", "cost_price", "fixed_cost_shipping_price", "retail_price", "tier_prices", "reserve_price", "buyitnow_price", "taxable", "tax_class_id", "type", "status", "condition", "visible", "in_stock", "avail", "avail_from", "product_class", "available_for_view", "stores_ids", "store_id", "lang_id", "quantity", "reserve_quantity", "manage_stock", "backorder_status", "increase_quantity", "reduce_quantity", "warehouse_id", "weight", "weight_unit", "height", "length", "width", "dimensions_unit", "is_virtual", "is_free_shipping", "gtin", "upc", "mpn", "ean", "isbn", "barcode", "manufacturer", "manufacturer_id", "categories_ids", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "meta_title", "meta_keywords", "meta_description", "seo_url", "search_keywords", "tags", "delivery_code", "package_details", "country_of_origin", "harmonized_system_code", "shipping_template_id", "when_made", "is_supply", "downloadable", "materials", "auto_renew", "on_sale", "production_partner_ids", "manufacturer_info", "report_request_id", "disable_report_cache", "reindex", "clear_cache", "check_process_status")
+        $AllProperties = ("id", "model", "sku", "name", "description", "short_description", "price", "old_price", "special_price", "sprice_create", "sprice_expire", "cost_price", "fixed_cost_shipping_price", "retail_price", "tier_prices", "reserve_price", "buyitnow_price", "taxable", "tax_class_id", "type", "status", "condition", "visible", "in_stock", "avail", "avail_from", "product_class", "available_for_view", "stores_ids", "store_id", "lang_id", "quantity", "reserve_quantity", "manage_stock", "backorder_status", "increase_quantity", "reduce_quantity", "warehouse_id", "weight", "weight_unit", "height", "length", "width", "dimensions_unit", "is_virtual", "is_free_shipping", "gtin", "upc", "mpn", "ean", "isbn", "barcode", "manufacturer", "manufacturer_id", "categories_ids", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "meta_title", "meta_keywords", "meta_description", "seo_url", "search_keywords", "tags", "delivery_code", "package_details", "country_of_origin", "harmonized_system_code", "shipping_template_id", "when_made", "is_supply", "downloadable", "materials", "auto_renew", "on_sale", "production_partner_ids", "manufacturer_info", "report_request_id", "disable_report_cache", "reindex", "clear_cache", "check_process_status", "specifics", "shop_section_id", "personalization_details")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -1059,6 +1077,24 @@ function ConvertFrom-JsonToProductUpdate {
             $CheckProcessStatus = $JsonParameters.PSobject.Properties["check_process_status"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "specifics"))) { #optional property not found
+            $Specifics = $null
+        } else {
+            $Specifics = $JsonParameters.PSobject.Properties["specifics"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "shop_section_id"))) { #optional property not found
+            $ShopSectionId = $null
+        } else {
+            $ShopSectionId = $JsonParameters.PSobject.Properties["shop_section_id"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "personalization_details"))) { #optional property not found
+            $PersonalizationDetails = $null
+        } else {
+            $PersonalizationDetails = $JsonParameters.PSobject.Properties["personalization_details"].value
+        }
+
         $PSO = [PSCustomObject]@{
             "id" = ${Id}
             "model" = ${Model}
@@ -1142,6 +1178,9 @@ function ConvertFrom-JsonToProductUpdate {
             "reindex" = ${Reindex}
             "clear_cache" = ${ClearCache}
             "check_process_status" = ${CheckProcessStatus}
+            "specifics" = ${Specifics}
+            "shop_section_id" = ${ShopSectionId}
+            "personalization_details" = ${PersonalizationDetails}
         }
 
         return $PSO

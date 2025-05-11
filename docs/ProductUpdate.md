@@ -85,6 +85,9 @@ Name | Type | Description | Notes
 **Reindex** | **Boolean** | Is reindex required | [optional] [default to $true]
 **ClearCache** | **Boolean** | Is cache clear required | [optional] [default to $true]
 **CheckProcessStatus** | **Boolean** | Disable or enable check process status. Please note that the response will be slower due to additional requests to the store. | [optional] [default to $false]
+**Specifics** | [**ProductAddSpecificsInner[]**](ProductAddSpecificsInner.md) | An array of Item Specific Name/Value pairs used by the seller to provide descriptive details of an item in a structured manner.         The list of possible specifications can be obtained using the category.info method (additional_fields-&gt;product_specifics).         &lt;b&gt;The structure of the parameter is different for specific platforms.&lt;/b&gt; | [optional] 
+**ShopSectionId** | **Int32** | Add Shop Section Id | [optional] 
+**PersonalizationDetails** | [**ProductAddPersonalizationDetails**](ProductAddPersonalizationDetails.md) |  | [optional] 
 
 ## Examples
 
@@ -171,7 +174,10 @@ $ProductUpdate = Initialize-PSOpenAPIToolsProductUpdate  -Id 10 `
  -DisableReportCache false `
  -Reindex false `
  -ClearCache false `
- -CheckProcessStatus false
+ -CheckProcessStatus false `
+ -Specifics null `
+ -ShopSectionId &#x60;12345678&#x60; `
+ -PersonalizationDetails null
 ```
 
 - Convert the resource to JSON

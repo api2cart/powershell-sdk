@@ -506,6 +506,7 @@ Class | Method | HTTP request | Description
  - [PSOpenAPITools\Model.ProductAddLogisticInfoInner](docs/ProductAddLogisticInfoInner.md)
  - [PSOpenAPITools\Model.ProductAddManufacturerInfo](docs/ProductAddManufacturerInfo.md)
  - [PSOpenAPITools\Model.ProductAddPackageDetails](docs/ProductAddPackageDetails.md)
+ - [PSOpenAPITools\Model.ProductAddPersonalizationDetails](docs/ProductAddPersonalizationDetails.md)
  - [PSOpenAPITools\Model.ProductAddSalesTax](docs/ProductAddSalesTax.md)
  - [PSOpenAPITools\Model.ProductAddSellerProfiles](docs/ProductAddSellerProfiles.md)
  - [PSOpenAPITools\Model.ProductAddShippingDetailsInner](docs/ProductAddShippingDetailsInner.md)

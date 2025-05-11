@@ -239,6 +239,12 @@ Is cache clear required
 Specifies the number of product's reviews
 .PARAMETER OrderedCount
 Defines how many times the product was ordered
+.PARAMETER ShopSectionId
+Add Shop Section Id
+.PARAMETER ReturnPolicyId
+Add Return Policy Id
+.PARAMETER PersonalizationDetails
+No description available.
 .OUTPUTS
 
 ProductAdd<PSCustomObject>
@@ -582,7 +588,16 @@ function Initialize-ProductAdd {
         ${ViewedCount} = 0,
         [Parameter(Position = 111, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
-        ${OrderedCount} = 0
+        ${OrderedCount} = 0,
+        [Parameter(Position = 112, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Int32]]
+        ${ShopSectionId},
+        [Parameter(Position = 113, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Int32]]
+        ${ReturnPolicyId},
+        [Parameter(Position = 114, ValueFromPipelineByPropertyName = $true)]
+        [PSCustomObject]
+        ${PersonalizationDetails}
     )
 
     Process {
@@ -719,6 +734,9 @@ function Initialize-ProductAdd {
             "clear_cache" = ${ClearCache}
             "viewed_count" = ${ViewedCount}
             "ordered_count" = ${OrderedCount}
+            "shop_section_id" = ${ShopSectionId}
+            "return_policy_id" = ${ReturnPolicyId}
+            "personalization_details" = ${PersonalizationDetails}
         }
 
 
@@ -756,7 +774,7 @@ function ConvertFrom-JsonToProductAdd {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductAdd
-        $AllProperties = ("name", "model", "description", "price", "sku", "short_description", "type", "status", "visible", "category_id", "categories_ids", "product_class", "product_type", "is_virtual", "downloadable", "is_supply", "available_for_view", "available_for_sale", "store_id", "stores_ids", "lang_id", "old_price", "special_price", "wholesale_price", "cost_price", "fixed_cost_shipping_price", "tier_prices", "group_prices", "buyitnow_price", "reserve_price", "quantity", "in_stock", "manage_stock", "warehouse_id", "backorder_status", "min_order_quantity", "max_order_quantity", "weight", "weight_unit", "width", "height", "length", "dimensions_unit", "barcode", "upc", "ean", "isbn", "gtin", "mpn", "asin", "product_reference", "harmonized_system_code", "country_of_origin", "manufacturer", "manufacturer_id", "manufacturer_info", "brand_name", "image_url", "image_name", "additional_image_urls", "files", "size_chart", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "attribute_set_name", "attribute_name", "search_keywords", "tags", "materials", "certifications", "specifics", "avail_from", "sprice_create", "sprice_modified", "sprice_expire", "created_at", "auto_renew", "when_made", "meta_title", "meta_keywords", "meta_description", "url", "seo_url", "tax_class_id", "taxable", "sales_tax", "condition", "condition_description", "allow_display_condition", "payment_methods", "paypal_email", "shipping_template_id", "shipping_details", "is_free_shipping", "delivery_code", "delivery_type", "delivery_time", "delivery_option_ids", "package_details", "logistic_info", "listing_duration", "listing_type", "return_accepted", "seller_profiles", "auction_confidentiality_level", "best_offer", "production_partner_ids", "marketplace_item_properties", "clear_cache", "viewed_count", "ordered_count")
+        $AllProperties = ("name", "model", "description", "price", "sku", "short_description", "type", "status", "visible", "category_id", "categories_ids", "product_class", "product_type", "is_virtual", "downloadable", "is_supply", "available_for_view", "available_for_sale", "store_id", "stores_ids", "lang_id", "old_price", "special_price", "wholesale_price", "cost_price", "fixed_cost_shipping_price", "tier_prices", "group_prices", "buyitnow_price", "reserve_price", "quantity", "in_stock", "manage_stock", "warehouse_id", "backorder_status", "min_order_quantity", "max_order_quantity", "weight", "weight_unit", "width", "height", "length", "dimensions_unit", "barcode", "upc", "ean", "isbn", "gtin", "mpn", "asin", "product_reference", "harmonized_system_code", "country_of_origin", "manufacturer", "manufacturer_id", "manufacturer_info", "brand_name", "image_url", "image_name", "additional_image_urls", "files", "size_chart", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "attribute_set_name", "attribute_name", "search_keywords", "tags", "materials", "certifications", "specifics", "avail_from", "sprice_create", "sprice_modified", "sprice_expire", "created_at", "auto_renew", "when_made", "meta_title", "meta_keywords", "meta_description", "url", "seo_url", "tax_class_id", "taxable", "sales_tax", "condition", "condition_description", "allow_display_condition", "payment_methods", "paypal_email", "shipping_template_id", "shipping_details", "is_free_shipping", "delivery_code", "delivery_type", "delivery_time", "delivery_option_ids", "package_details", "logistic_info", "listing_duration", "listing_type", "return_accepted", "seller_profiles", "auction_confidentiality_level", "best_offer", "production_partner_ids", "marketplace_item_properties", "clear_cache", "viewed_count", "ordered_count", "shop_section_id", "return_policy_id", "personalization_details")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -1439,6 +1457,24 @@ function ConvertFrom-JsonToProductAdd {
             $OrderedCount = $JsonParameters.PSobject.Properties["ordered_count"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "shop_section_id"))) { #optional property not found
+            $ShopSectionId = $null
+        } else {
+            $ShopSectionId = $JsonParameters.PSobject.Properties["shop_section_id"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "return_policy_id"))) { #optional property not found
+            $ReturnPolicyId = $null
+        } else {
+            $ReturnPolicyId = $JsonParameters.PSobject.Properties["return_policy_id"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "personalization_details"))) { #optional property not found
+            $PersonalizationDetails = $null
+        } else {
+            $PersonalizationDetails = $JsonParameters.PSobject.Properties["personalization_details"].value
+        }
+
         $PSO = [PSCustomObject]@{
             "name" = ${Name}
             "model" = ${Model}
@@ -1552,6 +1588,9 @@ function ConvertFrom-JsonToProductAdd {
             "clear_cache" = ${ClearCache}
             "viewed_count" = ${ViewedCount}
             "ordered_count" = ${OrderedCount}
+            "shop_section_id" = ${ShopSectionId}
+            "return_policy_id" = ${ReturnPolicyId}
+            "personalization_details" = ${PersonalizationDetails}
         }
 
         return $PSO

@@ -115,6 +115,9 @@ Name | Type | Description | Notes
 **ClearCache** | **Boolean** | Is cache clear required | [optional] [default to $true]
 **ViewedCount** | **Int32** | Specifies the number of product&#39;s reviews | [optional] [default to 0]
 **OrderedCount** | **Int32** | Defines how many times the product was ordered | [optional] [default to 0]
+**ShopSectionId** | **Int32** | Add Shop Section Id | [optional] 
+**ReturnPolicyId** | **Int32** | Add Return Policy Id | [optional] 
+**PersonalizationDetails** | [**ProductAddPersonalizationDetails**](ProductAddPersonalizationDetails.md) |  | [optional] 
 
 ## Examples
 
@@ -231,7 +234,10 @@ $ProductAdd = Initialize-PSOpenAPIToolsProductAdd  -Name Bag `
  -MarketplaceItemProperties {&quot;color&quot;:[&quot;Silver&quot;],&quot;manufacturer&quot;:&quot;Philips&quot;,&quot;features&quot;:[&quot;3 way&quot;],&quot;countPerPack&quot;:1,&quot;watts&quot;:{&quot;unit&quot;:&quot;W&quot;,&quot;measure&quot;:40}} `
  -ClearCache false `
  -ViewedCount 9 `
- -OrderedCount 15
+ -OrderedCount 15 `
+ -ShopSectionId &#x60;12345678&#x60; `
+ -ReturnPolicyId &#x60;12345678&#x60; `
+ -PersonalizationDetails null
 ```
 
 - Convert the resource to JSON

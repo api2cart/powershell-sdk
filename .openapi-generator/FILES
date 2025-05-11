@@ -285,6 +285,7 @@ docs/ProductAddGroupPricesInner.md
 docs/ProductAddLogisticInfoInner.md
 docs/ProductAddManufacturerInfo.md
 docs/ProductAddPackageDetails.md
+docs/ProductAddPersonalizationDetails.md
 docs/ProductAddSalesTax.md
 docs/ProductAddSellerProfiles.md
 docs/ProductAddShippingDetailsInner.md
@@ -744,6 +745,7 @@ src/PSOpenAPITools/Model/ProductAddGroupPricesInner.ps1
 src/PSOpenAPITools/Model/ProductAddLogisticInfoInner.ps1
 src/PSOpenAPITools/Model/ProductAddManufacturerInfo.ps1
 src/PSOpenAPITools/Model/ProductAddPackageDetails.ps1
+src/PSOpenAPITools/Model/ProductAddPersonalizationDetails.ps1
 src/PSOpenAPITools/Model/ProductAddSalesTax.ps1
 src/PSOpenAPITools/Model/ProductAddSellerProfiles.ps1
 src/PSOpenAPITools/Model/ProductAddShippingDetailsInner.ps1
@@ -1203,6 +1205,7 @@ tests/Model/ProductAddGroupPricesInner.Tests.ps1
 tests/Model/ProductAddLogisticInfoInner.Tests.ps1
 tests/Model/ProductAddManufacturerInfo.Tests.ps1
 tests/Model/ProductAddPackageDetails.Tests.ps1
+tests/Model/ProductAddPersonalizationDetails.Tests.ps1
 tests/Model/ProductAddSalesTax.Tests.ps1
 tests/Model/ProductAddSellerProfiles.Tests.ps1
 tests/Model/ProductAddShippingDetailsInner.Tests.ps1
