@@ -3312,6 +3312,9 @@ Determines whether an invoice should be created if it has not already been creat
 .PARAMETER Origin
 The source of the order
 
+.PARAMETER Tags
+Order tags
+
 .PARAMETER WithHttpInfo
 
 A switch when turned on will return a hash table of Response, StatusCode and Headers instead of just the Response
@@ -3371,6 +3374,9 @@ function Invoke-OrderUpdate {
         [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Origin},
+        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Tags},
         [Switch]
         $WithHttpInfo
     )
@@ -3457,6 +3463,10 @@ function Invoke-OrderUpdate {
 
         if ($Origin) {
             $LocalVarQueryParameters['origin'] = $Origin
+        }
+
+        if ($Tags) {
+            $LocalVarQueryParameters['tags'] = $Tags
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {

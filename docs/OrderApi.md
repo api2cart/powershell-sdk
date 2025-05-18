@@ -1620,6 +1620,7 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SendNotifications] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreateInvoice] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Origin] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Tags] <String><br>
 
 order.update
 
@@ -1655,10 +1656,11 @@ $DateFinished = "2014-06-05 05:05:00" # String | Specifies order's  finished dat
 $SendNotifications = $true # Boolean | Send notifications to customer after order was created (optional) (default to $false)
 $CreateInvoice = $true # Boolean | Determines whether an invoice should be created if it has not already been created (optional)
 $Origin = "newsletter" # String | The source of the order (optional)
+$Tags = "tag1,tag2" # String | Order tags (optional)
 
 # order.update
 try {
-    $Result = Invoke-OrderUpdate -OrderId $OrderId -StoreId $StoreId -OrderStatus $OrderStatus -FinancialStatus $FinancialStatus -FulfillmentStatus $FulfillmentStatus -CancellationReason $CancellationReason -OrderPaymentMethod $OrderPaymentMethod -Comment $Comment -AdminComment $AdminComment -AdminPrivateComment $AdminPrivateComment -InvoiceAdminComment $InvoiceAdminComment -DateModified $DateModified -DateFinished $DateFinished -SendNotifications $SendNotifications -CreateInvoice $CreateInvoice -Origin $Origin
+    $Result = Invoke-OrderUpdate -OrderId $OrderId -StoreId $StoreId -OrderStatus $OrderStatus -FinancialStatus $FinancialStatus -FulfillmentStatus $FulfillmentStatus -CancellationReason $CancellationReason -OrderPaymentMethod $OrderPaymentMethod -Comment $Comment -AdminComment $AdminComment -AdminPrivateComment $AdminPrivateComment -InvoiceAdminComment $InvoiceAdminComment -DateModified $DateModified -DateFinished $DateFinished -SendNotifications $SendNotifications -CreateInvoice $CreateInvoice -Origin $Origin -Tags $Tags
 } catch {
     Write-Host ("Exception occurred when calling Invoke-OrderUpdate: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -1685,6 +1687,7 @@ Name | Type | Description  | Notes
  **SendNotifications** | **Boolean**| Send notifications to customer after order was created | [optional] [default to $false]
  **CreateInvoice** | **Boolean**| Determines whether an invoice should be created if it has not already been created | [optional] 
  **Origin** | **String**| The source of the order | [optional] 
+ **Tags** | **String**| Order tags | [optional] 
 
 ### Return type
 
