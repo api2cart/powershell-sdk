@@ -83,6 +83,12 @@ Name | Type | Description | Notes
 **ShopifyApiKey** | **String** | Shopify API Key | [optional] 
 **ShopifyApiPassword** | **String** | Shopify API Password | [optional] 
 **ShopifySharedSecret** | **String** | Shared secret | [optional] 
+**ShopeePartnerId** | **String** | Shopee Partner ID | [optional] 
+**ShopeePartnerKey** | **String** | Shopee Partner Key | [optional] 
+**ShopeeShopId** | **String** | Shopee SHOP ID | [optional] 
+**ShopeeRefreshToken** | **String** | Shopee Refresh Token | [optional] 
+**ShopeeRegion** | **String** | Shopee API endpoint Region. Use for Chinese Mainland or Brazil. | [optional] 
+**ShopeeEnvironment** | **String** | Shopee Environment | [optional] [default to "production"]
 **ShoplazzaAccessToken** | **String** | Access token authorizing the app to access resources on behalf of a user | [optional] 
 **ShoplazzaSharedSecret** | **String** | Shared secret | [optional] 
 **ShopwareAccessKey** | **String** | Shopware access key | [optional] 
@@ -154,6 +160,10 @@ Name | Type | Description | Notes
 **SallaClientSecret** | **String** | Salla Client Secret | [optional] 
 **SallaRefreshToken** | **String** | Salla Refresh Token | [optional] 
 **SallaAccessToken** | **String** | Salla Access Token | [optional] 
+**TemuAppKey** | **String** | Temu App Key | [optional] 
+**TemuAppSecret** | **String** | Temu App Secret | [optional] 
+**TemuAccessToken** | **String** | Temu Access Token | 
+**TemuRegion** | **String** | Temu API endpoint Region. | [optional] [default to "US"]
 
 ## Examples
 
@@ -239,6 +249,12 @@ $AccountCartAdd = Initialize-PSOpenAPIToolsAccountCartAdd  -CartId Opencart14 `
  -ShopifyApiKey bbca57d8ff3c3677128112c15556d9e3 `
  -ShopifyApiPassword 860f3a6fc87632301a42cd88e4b5ab3d `
  -ShopifySharedSecret gmz3iz45x2 `
+ -ShopeePartnerId 1276777 `
+ -ShopeePartnerKey 6a46494b4d746576554646626775617a577542774850636375464d6a736d5598 `
+ -ShopeeShopId 137968 `
+ -ShopeeRefreshToken EAAPP06rM2n8BO4mZBuMPnu9zS0MaMbN7ue8aUkcxw4zewU987mVVb5br `
+ -ShopeeRegion CN `
+ -ShopeeEnvironment sandbox `
  -ShoplazzaAccessToken igse8e4rdmzkxdi937qe69d59en1imw `
  -ShoplazzaSharedSecret gmz3iz45x2 `
  -ShopwareAccessKey SWSCS3O1RJBSRNBYQLFIYJN2ZQ `
@@ -314,7 +330,11 @@ $AccountCartAdd = Initialize-PSOpenAPIToolsAccountCartAdd  -CartId Opencart14 `
  -SallaClientId 1bxxxcf9-5xx4-xxx-bxxf-929b8xxxxe11 `
  -SallaClientSecret 8x88axxxc25e1fxxxa1c06fxxx150xx5 `
  -SallaRefreshToken oxy_rt_zxxxxiY2xxZWWxxxxlU-tROxxxxx2JzS2fwzxxxxxkU.p3xxxkCIyFexxxxP50WwZYfhw5_wg1xxxxV5F-8xxXc `
- -SallaAccessToken oxy_rt_zxxxxiY2xxZWWxxxxlU-tROxxxxx2JzS2fwzxxxxxkU.p3xxxkCIyFexxxxP50WwZYfhw5_wg1xxxxV5F-8xxXc
+ -SallaAccessToken oxy_rt_zxxxxiY2xxZWWxxxxlU-tROxxxxx2JzS2fwzxxxxxkU.p3xxxkCIyFexxxxP50WwZYfhw5_wg1xxxxV5F-8xxXc `
+ -TemuAppKey 4ebbc9190ae410443d65b4c2faca9811 `
+ -TemuAppSecret 4782d2d827276688bf4758bed55dbdd4bbe79a78 `
+ -TemuAccessToken uplv3hfyt5kcwoymrgnajnbl1ow5qxlz4sqhev6hl3xosz5dejrtyl2jre6 `
+ -TemuRegion US
 ```
 
 - Convert the resource to JSON
