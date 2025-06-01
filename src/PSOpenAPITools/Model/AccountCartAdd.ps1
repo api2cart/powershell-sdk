@@ -827,8 +827,9 @@ function Initialize-AccountCartAdd {
         [String]
         ${TemuAccessToken},
         [Parameter(Position = 160, ValueFromPipelineByPropertyName = $true)]
+        [ValidateSet("US", "EU", "GLOBAL")]
         [String]
-        ${TemuRegion} = "US"
+        ${TemuRegion}
     )
 
     Process {
@@ -861,6 +862,10 @@ function Initialize-AccountCartAdd {
 
         if ($null -eq $TemuAccessToken) {
             throw "invalid value for 'TemuAccessToken', 'TemuAccessToken' cannot be null."
+        }
+
+        if ($null -eq $TemuRegion) {
+            throw "invalid value for 'TemuRegion', 'TemuRegion' cannot be null."
         }
 
 
@@ -1108,6 +1113,12 @@ function ConvertFrom-JsonToAccountCartAdd {
             throw "Error! JSON cannot be serialized due to the required property 'temu_access_token' missing."
         } else {
             $TemuAccessToken = $JsonParameters.PSobject.Properties["temu_access_token"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "temu_region"))) {
+            throw "Error! JSON cannot be serialized due to the required property 'temu_region' missing."
+        } else {
+            $TemuRegion = $JsonParameters.PSobject.Properties["temu_region"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_url"))) { #optional property not found
@@ -2032,12 +2043,6 @@ function ConvertFrom-JsonToAccountCartAdd {
             $TemuAppSecret = $null
         } else {
             $TemuAppSecret = $JsonParameters.PSobject.Properties["temu_app_secret"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "temu_region"))) { #optional property not found
-            $TemuRegion = $null
-        } else {
-            $TemuRegion = $JsonParameters.PSobject.Properties["temu_region"].value
         }
 
         $PSO = [PSCustomObject]@{

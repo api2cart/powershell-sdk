@@ -466,7 +466,7 @@ $SallaAccessToken = "oxy_rt_zxxxxiY2xxZWWxxxxlU-tROxxxxx2JzS2fwzxxxxxkU.p3xxxkCI
 $TemuAppKey = "4ebbc9190ae410443d65b4c2faca9811" # String | Temu App Key (optional)
 $TemuAppSecret = "4782d2d827276688bf4758bed55dbdd4bbe79a78" # String | Temu App Secret (optional)
 $TemuAccessToken = "uplv3hfyt5kcwoymrgnajnbl1ow5qxlz4sqhev6hl3xosz5dejrtyl2jre6" # String | Temu Access Token (optional)
-$TemuRegion = "US" # String | Temu API endpoint Region. (optional) (default to "US")
+$TemuRegion = "US" # String | Temu API endpoint Region. (optional)
 
 # account.config.update
 try {
@@ -634,7 +634,7 @@ Name | Type | Description  | Notes
  **TemuAppKey** | **String**| Temu App Key | [optional] 
  **TemuAppSecret** | **String**| Temu App Secret | [optional] 
  **TemuAccessToken** | **String**| Temu Access Token | [optional] 
- **TemuRegion** | **String**| Temu API endpoint Region. | [optional] [default to &quot;US&quot;]
+ **TemuRegion** | **String**| Temu API endpoint Region. | [optional] 
 
 ### Return type
 
