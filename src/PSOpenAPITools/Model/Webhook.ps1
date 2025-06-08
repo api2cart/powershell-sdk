@@ -21,6 +21,8 @@ No description available.
 No description available.
 .PARAMETER StoreId
 No description available.
+.PARAMETER LangId
+No description available.
 .PARAMETER Active
 No description available.
 .PARAMETER Callback
@@ -57,30 +59,33 @@ function Initialize-Webhook {
         [String]
         ${StoreId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${LangId},
+        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${Active},
-        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Callback},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Fields},
+        ${Callback},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CreatedAt},
+        ${Fields},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${UpdatedAt},
+        ${CreatedAt},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Entity},
+        ${UpdatedAt},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Action},
+        ${Entity},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Action},
+        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${AdditionalFields},
-        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${CustomFields}
     )
@@ -94,6 +99,7 @@ function Initialize-Webhook {
             "id" = ${Id}
             "label" = ${Label}
             "store_id" = ${StoreId}
+            "lang_id" = ${LangId}
             "active" = ${Active}
             "callback" = ${Callback}
             "fields" = ${Fields}
@@ -140,7 +146,7 @@ function ConvertFrom-JsonToWebhook {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in Webhook
-        $AllProperties = ("id", "label", "store_id", "active", "callback", "fields", "created_at", "updated_at", "entity", "action", "additional_fields", "custom_fields")
+        $AllProperties = ("id", "label", "store_id", "lang_id", "active", "callback", "fields", "created_at", "updated_at", "entity", "action", "additional_fields", "custom_fields")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -163,6 +169,12 @@ function ConvertFrom-JsonToWebhook {
             $StoreId = $null
         } else {
             $StoreId = $JsonParameters.PSobject.Properties["store_id"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "lang_id"))) { #optional property not found
+            $LangId = $null
+        } else {
+            $LangId = $JsonParameters.PSobject.Properties["lang_id"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "active"))) { #optional property not found
@@ -223,6 +235,7 @@ function ConvertFrom-JsonToWebhook {
             "id" = ${Id}
             "label" = ${Label}
             "store_id" = ${StoreId}
+            "lang_id" = ${LangId}
             "active" = ${Active}
             "callback" = ${Callback}
             "fields" = ${Fields}

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **Id** | **Int32** |  | [optional] 
 **Label** | **String** |  | [optional] 
 **StoreId** | **String** |  | [optional] 
+**LangId** | **String** |  | [optional] 
 **Active** | **Boolean** |  | [optional] 
 **Callback** | **String** |  | [optional] 
 **Fields** | **String** |  | [optional] 
@@ -23,6 +24,7 @@ Name | Type | Description | Notes
 $Webhook = Initialize-PSOpenAPIToolsWebhook  -Id null `
  -Label null `
  -StoreId null `
+ -LangId null `
  -Active null `
  -Callback null `
  -Fields null `

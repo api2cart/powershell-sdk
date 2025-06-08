@@ -146,6 +146,9 @@ Fields the webhook should send
 .PARAMETER Active
 Webhook status
 
+.PARAMETER LangId
+Language id
+
 .PARAMETER StoreId
 Defines store id where the webhook should be assigned
 
@@ -179,6 +182,9 @@ function Invoke-WebhookCreate {
         [System.Nullable[Boolean]]
         ${Active},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${LangId},
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${StoreId},
         [Switch]
@@ -228,6 +234,10 @@ function Invoke-WebhookCreate {
 
         if ($Active) {
             $LocalVarQueryParameters['active'] = $Active
+        }
+
+        if ($LangId) {
+            $LocalVarQueryParameters['lang_id'] = $LangId
         }
 
         if ($StoreId) {
@@ -628,6 +638,9 @@ Fields the webhook should send
 .PARAMETER Active
 Webhook status
 
+.PARAMETER LangId
+Language id
+
 .PARAMETER WithHttpInfo
 
 A switch when turned on will return a hash table of Response, StatusCode and Headers instead of just the Response
@@ -654,6 +667,9 @@ function Invoke-WebhookUpdate {
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${Active},
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${LangId},
         [Switch]
         $WithHttpInfo
     )
@@ -696,6 +712,10 @@ function Invoke-WebhookUpdate {
 
         if ($Active) {
             $LocalVarQueryParameters['active'] = $Active
+        }
+
+        if ($LangId) {
+            $LocalVarQueryParameters['lang_id'] = $LangId
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
