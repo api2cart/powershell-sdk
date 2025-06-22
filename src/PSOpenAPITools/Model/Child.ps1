@@ -69,6 +69,8 @@ No description available.
 No description available.
 .PARAMETER InStock
 No description available.
+.PARAMETER OnSale
+No description available.
 .PARAMETER ManageStock
 No description available.
 .PARAMETER InventoryLevel
@@ -198,59 +200,62 @@ function Initialize-Child {
         ${InStock},
         [Parameter(Position = 27, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${ManageStock},
+        ${OnSale},
         [Parameter(Position = 28, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${ManageStock},
+        [Parameter(Position = 29, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${InventoryLevel},
-        [Parameter(Position = 29, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 30, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Inventory},
-        [Parameter(Position = 30, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${MinQuantity},
         [Parameter(Position = 31, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${DefaultQtyInPack},
+        ${MinQuantity},
         [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${DefaultQtyInPack},
+        [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${IsQtyInPackFixed},
-        [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${WeightUnit},
-        [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 35, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${Weight},
-        [Parameter(Position = 35, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${DimensionsUnit},
-        [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${Width},
         [Parameter(Position = 37, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Height},
+        ${Width},
         [Parameter(Position = 38, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Length},
+        ${Height},
         [Parameter(Position = 39, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${MetaTitle},
+        [System.Nullable[Decimal]]
+        ${Length},
         [Parameter(Position = 40, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaDescription},
+        ${MetaTitle},
         [Parameter(Position = 41, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaKeywords},
+        ${MetaDescription},
         [Parameter(Position = 42, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${MetaKeywords},
+        [Parameter(Position = 43, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Discounts},
-        [Parameter(Position = 43, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 44, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${IsVirtual},
-        [Parameter(Position = 44, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 45, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${AdditionalFields},
-        [Parameter(Position = 45, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 46, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${CustomFields}
     )
@@ -288,6 +293,7 @@ function Initialize-Child {
             "avail_for_sale" = ${AvailForSale}
             "allow_backorders" = ${AllowBackorders}
             "in_stock" = ${InStock}
+            "on_sale" = ${OnSale}
             "manage_stock" = ${ManageStock}
             "inventory_level" = ${InventoryLevel}
             "inventory" = ${Inventory}
@@ -344,7 +350,7 @@ function ConvertFrom-JsonToChild {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in Child
-        $AllProperties = ("id", "parent_id", "sku", "upc", "ean", "mpn", "gtin", "isbn", "url", "seo_url", "sort_order", "created_time", "modified_time", "name", "short_description", "full_description", "images", "combination", "default_price", "cost_price", "list_price", "wholesale_price", "advanced_price", "tax_class_id", "avail_for_sale", "allow_backorders", "in_stock", "manage_stock", "inventory_level", "inventory", "min_quantity", "default_qty_in_pack", "is_qty_in_pack_fixed", "weight_unit", "weight", "dimensions_unit", "width", "height", "length", "meta_title", "meta_description", "meta_keywords", "discounts", "is_virtual", "additional_fields", "custom_fields")
+        $AllProperties = ("id", "parent_id", "sku", "upc", "ean", "mpn", "gtin", "isbn", "url", "seo_url", "sort_order", "created_time", "modified_time", "name", "short_description", "full_description", "images", "combination", "default_price", "cost_price", "list_price", "wholesale_price", "advanced_price", "tax_class_id", "avail_for_sale", "allow_backorders", "in_stock", "on_sale", "manage_stock", "inventory_level", "inventory", "min_quantity", "default_qty_in_pack", "is_qty_in_pack_fixed", "weight_unit", "weight", "dimensions_unit", "width", "height", "length", "meta_title", "meta_description", "meta_keywords", "discounts", "is_virtual", "additional_fields", "custom_fields")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -513,6 +519,12 @@ function ConvertFrom-JsonToChild {
             $InStock = $JsonParameters.PSobject.Properties["in_stock"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "on_sale"))) { #optional property not found
+            $OnSale = $null
+        } else {
+            $OnSale = $JsonParameters.PSobject.Properties["on_sale"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "manage_stock"))) { #optional property not found
             $ManageStock = $null
         } else {
@@ -655,6 +667,7 @@ function ConvertFrom-JsonToChild {
             "avail_for_sale" = ${AvailForSale}
             "allow_backorders" = ${AllowBackorders}
             "in_stock" = ${InStock}
+            "on_sale" = ${OnSale}
             "manage_stock" = ${ManageStock}
             "inventory_level" = ${InventoryLevel}
             "inventory" = ${Inventory}

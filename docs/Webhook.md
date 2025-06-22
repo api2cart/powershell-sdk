@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Active** | **Boolean** |  | [optional] 
 **Callback** | **String** |  | [optional] 
 **Fields** | **String** |  | [optional] 
+**ResponseFields** | **String** |  | [optional] 
 **CreatedAt** | **String** |  | [optional] 
 **UpdatedAt** | **String** |  | [optional] 
 **Entity** | **String** |  | [optional] 
@@ -28,6 +29,7 @@ $Webhook = Initialize-PSOpenAPIToolsWebhook  -Id null `
  -Active null `
  -Callback null `
  -Fields null `
+ -ResponseFields null `
  -CreatedAt null `
  -UpdatedAt null `
  -Entity null `

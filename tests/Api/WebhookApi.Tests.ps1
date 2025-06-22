@@ -17,7 +17,7 @@ Describe -tag 'PSOpenAPITools' -name 'WebhookApi' {
 
     Context 'Invoke-WebhookCreate' {
         It 'Test Invoke-WebhookCreate' {
-            #$TestResult = Invoke-WebhookCreate -Entity "TEST_VALUE" -Action "TEST_VALUE" -Callback "TEST_VALUE" -Label "TEST_VALUE" -Fields "TEST_VALUE" -Active "TEST_VALUE" -LangId "TEST_VALUE" -StoreId "TEST_VALUE"
+            #$TestResult = Invoke-WebhookCreate -Entity "TEST_VALUE" -Action "TEST_VALUE" -Callback "TEST_VALUE" -Label "TEST_VALUE" -Fields "TEST_VALUE" -ResponseFields "TEST_VALUE" -Active "TEST_VALUE" -LangId "TEST_VALUE" -StoreId "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -49,7 +49,7 @@ Describe -tag 'PSOpenAPITools' -name 'WebhookApi' {
 
     Context 'Invoke-WebhookUpdate' {
         It 'Test Invoke-WebhookUpdate' {
-            #$TestResult = Invoke-WebhookUpdate -Id "TEST_VALUE" -Callback "TEST_VALUE" -Label "TEST_VALUE" -Fields "TEST_VALUE" -Active "TEST_VALUE" -LangId "TEST_VALUE"
+            #$TestResult = Invoke-WebhookUpdate -Id "TEST_VALUE" -Callback "TEST_VALUE" -Label "TEST_VALUE" -Fields "TEST_VALUE" -ResponseFields "TEST_VALUE" -Active "TEST_VALUE" -LangId "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

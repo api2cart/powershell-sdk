@@ -30,6 +30,7 @@ Name | Type | Description | Notes
 **AvailForSale** | **Boolean** |  | [optional] 
 **AllowBackorders** | **Boolean** |  | [optional] 
 **InStock** | **Boolean** |  | [optional] 
+**OnSale** | **Boolean** |  | [optional] 
 **ManageStock** | **Boolean** |  | [optional] 
 **InventoryLevel** | **Decimal** |  | [optional] 
 **Inventory** | [**ProductInventory[]**](ProductInventory.md) |  | [optional] 
@@ -81,6 +82,7 @@ $Child = Initialize-PSOpenAPIToolsChild  -Id null `
  -AvailForSale null `
  -AllowBackorders null `
  -InStock null `
+ -OnSale null `
  -ManageStock null `
  -InventoryLevel null `
  -Inventory null `

@@ -81,6 +81,7 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Callback] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Label] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Fields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Active] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
@@ -108,13 +109,14 @@ $Action = "add" # String | Specify what action (event) will trigger the webhook 
 $Callback = "https://example.com/callback" # String | Callback url that returns shipping rates. It should be able to accept POST requests with json data. (optional)
 $Label = "Super webhook" # String | The name you give to the webhook (optional)
 $Fields = "id, name, description" # String | Fields the webhook should send (optional) (default to "force_all")
+$ResponseFields = "{result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
 $Active = $true # Boolean | Webhook status (optional) (default to $true)
 $LangId = "3" # String | Language id (optional)
 $StoreId = "1" # String | Defines store id where the webhook should be assigned (optional)
 
 # webhook.create
 try {
-    $Result = Invoke-WebhookCreate -Entity $Entity -Action $Action -Callback $Callback -Label $Label -Fields $Fields -Active $Active -LangId $LangId -StoreId $StoreId
+    $Result = Invoke-WebhookCreate -Entity $Entity -Action $Action -Callback $Callback -Label $Label -Fields $Fields -ResponseFields $ResponseFields -Active $Active -LangId $LangId -StoreId $StoreId
 } catch {
     Write-Host ("Exception occurred when calling Invoke-WebhookCreate: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -130,6 +132,7 @@ Name | Type | Description  | Notes
  **Callback** | **String**| Callback url that returns shipping rates. It should be able to accept POST requests with json data. | [optional] 
  **Label** | **String**| The name you give to the webhook | [optional] 
  **Fields** | **String**| Fields the webhook should send | [optional] [default to &quot;force_all&quot;]
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
  **Active** | **Boolean**| Webhook status | [optional] [default to $true]
  **LangId** | **String**| Language id | [optional] 
  **StoreId** | **String**| Defines store id where the webhook should be assigned | [optional] 
@@ -334,6 +337,7 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Callback] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Label] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Fields] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Active] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
 
@@ -359,12 +363,13 @@ $Id = "25" # String | Webhook id
 $Callback = "https://example.com/callback" # String | Callback url that returns shipping rates. It should be able to accept POST requests with json data. (optional)
 $Label = "Super webhook" # String | The name you give to the webhook (optional)
 $Fields = "id, name, description" # String | Fields the webhook should send (optional)
+$ResponseFields = "{result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
 $Active = $true # Boolean | Webhook status (optional)
 $LangId = "3" # String | Language id (optional)
 
 # webhook.update
 try {
-    $Result = Invoke-WebhookUpdate -Id $Id -Callback $Callback -Label $Label -Fields $Fields -Active $Active -LangId $LangId
+    $Result = Invoke-WebhookUpdate -Id $Id -Callback $Callback -Label $Label -Fields $Fields -ResponseFields $ResponseFields -Active $Active -LangId $LangId
 } catch {
     Write-Host ("Exception occurred when calling Invoke-WebhookUpdate: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -379,6 +384,7 @@ Name | Type | Description  | Notes
  **Callback** | **String**| Callback url that returns shipping rates. It should be able to accept POST requests with json data. | [optional] 
  **Label** | **String**| The name you give to the webhook | [optional] 
  **Fields** | **String**| Fields the webhook should send | [optional] 
+ **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
  **Active** | **Boolean**| Webhook status | [optional] 
  **LangId** | **String**| Language id | [optional] 
 

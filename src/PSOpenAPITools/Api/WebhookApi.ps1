@@ -143,6 +143,9 @@ The name you give to the webhook
 .PARAMETER Fields
 Fields the webhook should send
 
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
 .PARAMETER Active
 Webhook status
 
@@ -179,12 +182,15 @@ function Invoke-WebhookCreate {
         [String]
         ${Fields},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ResponseFields},
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${Active},
-        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${LangId},
-        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${StoreId},
         [Switch]
@@ -230,6 +236,10 @@ function Invoke-WebhookCreate {
 
         if ($Fields) {
             $LocalVarQueryParameters['fields'] = $Fields
+        }
+
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
         if ($Active) {
@@ -635,6 +645,9 @@ The name you give to the webhook
 .PARAMETER Fields
 Fields the webhook should send
 
+.PARAMETER ResponseFields
+Set this parameter in order to choose which entity fields you want to retrieve
+
 .PARAMETER Active
 Webhook status
 
@@ -665,9 +678,12 @@ function Invoke-WebhookUpdate {
         [String]
         ${Fields},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ResponseFields},
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${Active},
-        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${LangId},
         [Switch]
@@ -708,6 +724,10 @@ function Invoke-WebhookUpdate {
 
         if ($Fields) {
             $LocalVarQueryParameters['fields'] = $Fields
+        }
+
+        if ($ResponseFields) {
+            $LocalVarQueryParameters['response_fields'] = $ResponseFields
         }
 
         if ($Active) {

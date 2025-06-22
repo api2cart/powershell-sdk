@@ -29,6 +29,8 @@ No description available.
 No description available.
 .PARAMETER Fields
 No description available.
+.PARAMETER ResponseFields
+No description available.
 .PARAMETER CreatedAt
 No description available.
 .PARAMETER UpdatedAt
@@ -72,20 +74,23 @@ function Initialize-Webhook {
         ${Fields},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CreatedAt},
+        ${ResponseFields},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${UpdatedAt},
+        ${CreatedAt},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Entity},
+        ${UpdatedAt},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Action},
+        ${Entity},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Action},
+        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${AdditionalFields},
-        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${CustomFields}
     )
@@ -103,6 +108,7 @@ function Initialize-Webhook {
             "active" = ${Active}
             "callback" = ${Callback}
             "fields" = ${Fields}
+            "response_fields" = ${ResponseFields}
             "created_at" = ${CreatedAt}
             "updated_at" = ${UpdatedAt}
             "entity" = ${Entity}
@@ -146,7 +152,7 @@ function ConvertFrom-JsonToWebhook {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in Webhook
-        $AllProperties = ("id", "label", "store_id", "lang_id", "active", "callback", "fields", "created_at", "updated_at", "entity", "action", "additional_fields", "custom_fields")
+        $AllProperties = ("id", "label", "store_id", "lang_id", "active", "callback", "fields", "response_fields", "created_at", "updated_at", "entity", "action", "additional_fields", "custom_fields")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -195,6 +201,12 @@ function ConvertFrom-JsonToWebhook {
             $Fields = $JsonParameters.PSobject.Properties["fields"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "response_fields"))) { #optional property not found
+            $ResponseFields = $null
+        } else {
+            $ResponseFields = $JsonParameters.PSobject.Properties["response_fields"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "created_at"))) { #optional property not found
             $CreatedAt = $null
         } else {
@@ -239,6 +251,7 @@ function ConvertFrom-JsonToWebhook {
             "active" = ${Active}
             "callback" = ${Callback}
             "fields" = ${Fields}
+            "response_fields" = ${ResponseFields}
             "created_at" = ${CreatedAt}
             "updated_at" = ${UpdatedAt}
             "entity" = ${Entity}
