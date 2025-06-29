@@ -25,6 +25,8 @@ No description available.
 No description available.
 .PARAMETER ScaleId
 No description available.
+.PARAMETER InputValue
+No description available.
 .PARAMETER FoodDetails
 No description available.
 .PARAMETER GroupProductsDetails
@@ -55,12 +57,15 @@ function Initialize-ProductAddSpecificsInner {
         [System.Nullable[Int32]]
         ${ScaleId},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${InputValue},
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${FoodDetails},
-        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${GroupProductsDetails},
-        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${BookingDetails}
     )
@@ -84,6 +89,7 @@ function Initialize-ProductAddSpecificsInner {
             "values" = ${Values}
             "used_for_variations" = ${UsedForVariations}
             "scale_id" = ${ScaleId}
+            "input_value" = ${InputValue}
             "food_details" = ${FoodDetails}
             "group_products_details" = ${GroupProductsDetails}
             "booking_details" = ${BookingDetails}
@@ -124,7 +130,7 @@ function ConvertFrom-JsonToProductAddSpecificsInner {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductAddSpecificsInner
-        $AllProperties = ("name", "value", "values", "used_for_variations", "scale_id", "food_details", "group_products_details", "booking_details")
+        $AllProperties = ("name", "value", "values", "used_for_variations", "scale_id", "input_value", "food_details", "group_products_details", "booking_details")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -161,6 +167,12 @@ function ConvertFrom-JsonToProductAddSpecificsInner {
             $ScaleId = $JsonParameters.PSobject.Properties["scale_id"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "input_value"))) { #optional property not found
+            $InputValue = $null
+        } else {
+            $InputValue = $JsonParameters.PSobject.Properties["input_value"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "food_details"))) { #optional property not found
             $FoodDetails = $null
         } else {
@@ -185,6 +197,7 @@ function ConvertFrom-JsonToProductAddSpecificsInner {
             "values" = ${Values}
             "used_for_variations" = ${UsedForVariations}
             "scale_id" = ${ScaleId}
+            "input_value" = ${InputValue}
             "food_details" = ${FoodDetails}
             "group_products_details" = ${GroupProductsDetails}
             "booking_details" = ${BookingDetails}

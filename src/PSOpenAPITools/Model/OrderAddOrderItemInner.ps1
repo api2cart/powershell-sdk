@@ -31,6 +31,8 @@ Defines orders specified by order item weight
 Ordered product variant. Where x is order item ID
 .PARAMETER OrderItemTax
 Percentage of tax for product order
+.PARAMETER OrderItemTaxClass
+Id of the tax class of product.
 .PARAMETER OrderItemPriceIncludesTax
 Defines if item price includes tax
 .PARAMETER OrderItemParent
@@ -78,24 +80,27 @@ function Initialize-OrderAddOrderItemInner {
         [System.Nullable[Decimal]]
         ${OrderItemTax} = 0,
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${OrderItemTaxClass},
+        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${OrderItemPriceIncludesTax} = $false,
-        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
         ${OrderItemParent},
-        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${OrderItemParentOptionName},
-        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${OrderItemAllowRefundItemsSeparately},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${OrderItemAllowShipItemsSeparately},
+        ${OrderItemAllowRefundItemsSeparately},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${OrderItemAllowShipItemsSeparately},
+        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${OrderItemOption},
-        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${OrderItemProperty}
     )
@@ -130,6 +135,7 @@ function Initialize-OrderAddOrderItemInner {
             "order_item_weight" = ${OrderItemWeight}
             "order_item_variant_id" = ${OrderItemVariantId}
             "order_item_tax" = ${OrderItemTax}
+            "order_item_tax_class" = ${OrderItemTaxClass}
             "order_item_price_includes_tax" = ${OrderItemPriceIncludesTax}
             "order_item_parent" = ${OrderItemParent}
             "order_item_parent_option_name" = ${OrderItemParentOptionName}
@@ -174,7 +180,7 @@ function ConvertFrom-JsonToOrderAddOrderItemInner {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in OrderAddOrderItemInner
-        $AllProperties = ("order_item_id", "order_item_name", "order_item_model", "order_item_price", "order_item_quantity", "order_item_weight", "order_item_variant_id", "order_item_tax", "order_item_price_includes_tax", "order_item_parent", "order_item_parent_option_name", "order_item_allow_refund_items_separately", "order_item_allow_ship_items_separately", "order_item_option", "order_item_property")
+        $AllProperties = ("order_item_id", "order_item_name", "order_item_model", "order_item_price", "order_item_quantity", "order_item_weight", "order_item_variant_id", "order_item_tax", "order_item_tax_class", "order_item_price_includes_tax", "order_item_parent", "order_item_parent_option_name", "order_item_allow_refund_items_separately", "order_item_allow_ship_items_separately", "order_item_option", "order_item_property")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -233,6 +239,12 @@ function ConvertFrom-JsonToOrderAddOrderItemInner {
             $OrderItemTax = $JsonParameters.PSobject.Properties["order_item_tax"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "order_item_tax_class"))) { #optional property not found
+            $OrderItemTaxClass = $null
+        } else {
+            $OrderItemTaxClass = $JsonParameters.PSobject.Properties["order_item_tax_class"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "order_item_price_includes_tax"))) { #optional property not found
             $OrderItemPriceIncludesTax = $null
         } else {
@@ -284,6 +296,7 @@ function ConvertFrom-JsonToOrderAddOrderItemInner {
             "order_item_weight" = ${OrderItemWeight}
             "order_item_variant_id" = ${OrderItemVariantId}
             "order_item_tax" = ${OrderItemTax}
+            "order_item_tax_class" = ${OrderItemTaxClass}
             "order_item_price_includes_tax" = ${OrderItemPriceIncludesTax}
             "order_item_parent" = ${OrderItemParent}
             "order_item_parent_option_name" = ${OrderItemParentOptionName}

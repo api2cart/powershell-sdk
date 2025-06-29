@@ -10,7 +10,7 @@ Describe -tag 'PSOpenAPITools' -name 'OrderAddOrderItemInner' {
     Context 'OrderAddOrderItemInner' {
         It 'Initialize-OrderAddOrderItemInner' {
             # a simple test to create an object
-            #$NewObject = Initialize-OrderAddOrderItemInner -OrderItemId "TEST_VALUE" -OrderItemName "TEST_VALUE" -OrderItemModel "TEST_VALUE" -OrderItemPrice "TEST_VALUE" -OrderItemQuantity "TEST_VALUE" -OrderItemWeight "TEST_VALUE" -OrderItemVariantId "TEST_VALUE" -OrderItemTax "TEST_VALUE" -OrderItemPriceIncludesTax "TEST_VALUE" -OrderItemParent "TEST_VALUE" -OrderItemParentOptionName "TEST_VALUE" -OrderItemAllowRefundItemsSeparately "TEST_VALUE" -OrderItemAllowShipItemsSeparately "TEST_VALUE" -OrderItemOption "TEST_VALUE" -OrderItemProperty "TEST_VALUE"
+            #$NewObject = Initialize-OrderAddOrderItemInner -OrderItemId "TEST_VALUE" -OrderItemName "TEST_VALUE" -OrderItemModel "TEST_VALUE" -OrderItemPrice "TEST_VALUE" -OrderItemQuantity "TEST_VALUE" -OrderItemWeight "TEST_VALUE" -OrderItemVariantId "TEST_VALUE" -OrderItemTax "TEST_VALUE" -OrderItemTaxClass "TEST_VALUE" -OrderItemPriceIncludesTax "TEST_VALUE" -OrderItemParent "TEST_VALUE" -OrderItemParentOptionName "TEST_VALUE" -OrderItemAllowRefundItemsSeparately "TEST_VALUE" -OrderItemAllowShipItemsSeparately "TEST_VALUE" -OrderItemOption "TEST_VALUE" -OrderItemProperty "TEST_VALUE"
             #$NewObject | Should -BeOfType OrderAddOrderItemInner
             #$NewObject.property | Should -Be 0
         }

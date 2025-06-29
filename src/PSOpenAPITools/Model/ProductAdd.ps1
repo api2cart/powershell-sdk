@@ -221,6 +221,8 @@ Defines product's logistic channel settings
 Describes the number of days the seller wants the listing to be active. Look at cart.info method response for allowed values.
 .PARAMETER ListingType
 Indicates the selling format of the marketplace listing.
+.PARAMETER CategoryType
+Specifies the type of category (e.g., apparel or other) for the product being added.
 .PARAMETER ReturnAccepted
 Indicates whether the seller allows the buyer to return the item.
 .PARAMETER SellerProfiles
@@ -563,39 +565,42 @@ function Initialize-ProductAdd {
         [String]
         ${ListingType} = "FixedPrice",
         [Parameter(Position = 103, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${CategoryType},
+        [Parameter(Position = 104, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${ReturnAccepted},
-        [Parameter(Position = 104, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 105, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${SellerProfiles},
-        [Parameter(Position = 105, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 106, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${AuctionConfidentialityLevel},
-        [Parameter(Position = 106, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 107, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${BestOffer},
-        [Parameter(Position = 107, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${ProductionPartnerIds},
         [Parameter(Position = 108, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MarketplaceItemProperties},
+        ${ProductionPartnerIds},
         [Parameter(Position = 109, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${MarketplaceItemProperties},
+        [Parameter(Position = 110, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${ClearCache} = $true,
-        [Parameter(Position = 110, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Int32]]
-        ${ViewedCount} = 0,
         [Parameter(Position = 111, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
-        ${OrderedCount} = 0,
+        ${ViewedCount} = 0,
         [Parameter(Position = 112, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
-        ${ShopSectionId},
+        ${OrderedCount} = 0,
         [Parameter(Position = 113, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
-        ${ReturnPolicyId},
+        ${ShopSectionId},
         [Parameter(Position = 114, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Int32]]
+        ${ReturnPolicyId},
+        [Parameter(Position = 115, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${PersonalizationDetails}
     )
@@ -725,6 +730,7 @@ function Initialize-ProductAdd {
             "logistic_info" = ${LogisticInfo}
             "listing_duration" = ${ListingDuration}
             "listing_type" = ${ListingType}
+            "category_type" = ${CategoryType}
             "return_accepted" = ${ReturnAccepted}
             "seller_profiles" = ${SellerProfiles}
             "auction_confidentiality_level" = ${AuctionConfidentialityLevel}
@@ -774,7 +780,7 @@ function ConvertFrom-JsonToProductAdd {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductAdd
-        $AllProperties = ("name", "model", "description", "price", "sku", "short_description", "type", "status", "visible", "category_id", "categories_ids", "product_class", "product_type", "is_virtual", "downloadable", "is_supply", "available_for_view", "available_for_sale", "store_id", "stores_ids", "lang_id", "old_price", "special_price", "wholesale_price", "cost_price", "fixed_cost_shipping_price", "tier_prices", "group_prices", "buyitnow_price", "reserve_price", "quantity", "in_stock", "manage_stock", "warehouse_id", "backorder_status", "min_order_quantity", "max_order_quantity", "weight", "weight_unit", "width", "height", "length", "dimensions_unit", "barcode", "upc", "ean", "isbn", "gtin", "mpn", "asin", "product_reference", "harmonized_system_code", "country_of_origin", "manufacturer", "manufacturer_id", "manufacturer_info", "brand_name", "image_url", "image_name", "additional_image_urls", "files", "size_chart", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "attribute_set_name", "attribute_name", "search_keywords", "tags", "materials", "certifications", "specifics", "avail_from", "sprice_create", "sprice_modified", "sprice_expire", "created_at", "auto_renew", "when_made", "meta_title", "meta_keywords", "meta_description", "url", "seo_url", "tax_class_id", "taxable", "sales_tax", "condition", "condition_description", "allow_display_condition", "payment_methods", "paypal_email", "shipping_template_id", "shipping_details", "is_free_shipping", "delivery_code", "delivery_type", "delivery_time", "delivery_option_ids", "package_details", "logistic_info", "listing_duration", "listing_type", "return_accepted", "seller_profiles", "auction_confidentiality_level", "best_offer", "production_partner_ids", "marketplace_item_properties", "clear_cache", "viewed_count", "ordered_count", "shop_section_id", "return_policy_id", "personalization_details")
+        $AllProperties = ("name", "model", "description", "price", "sku", "short_description", "type", "status", "visible", "category_id", "categories_ids", "product_class", "product_type", "is_virtual", "downloadable", "is_supply", "available_for_view", "available_for_sale", "store_id", "stores_ids", "lang_id", "old_price", "special_price", "wholesale_price", "cost_price", "fixed_cost_shipping_price", "tier_prices", "group_prices", "buyitnow_price", "reserve_price", "quantity", "in_stock", "manage_stock", "warehouse_id", "backorder_status", "min_order_quantity", "max_order_quantity", "weight", "weight_unit", "width", "height", "length", "dimensions_unit", "barcode", "upc", "ean", "isbn", "gtin", "mpn", "asin", "product_reference", "harmonized_system_code", "country_of_origin", "manufacturer", "manufacturer_id", "manufacturer_info", "brand_name", "image_url", "image_name", "additional_image_urls", "files", "size_chart", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "attribute_set_name", "attribute_name", "search_keywords", "tags", "materials", "certifications", "specifics", "avail_from", "sprice_create", "sprice_modified", "sprice_expire", "created_at", "auto_renew", "when_made", "meta_title", "meta_keywords", "meta_description", "url", "seo_url", "tax_class_id", "taxable", "sales_tax", "condition", "condition_description", "allow_display_condition", "payment_methods", "paypal_email", "shipping_template_id", "shipping_details", "is_free_shipping", "delivery_code", "delivery_type", "delivery_time", "delivery_option_ids", "package_details", "logistic_info", "listing_duration", "listing_type", "category_type", "return_accepted", "seller_profiles", "auction_confidentiality_level", "best_offer", "production_partner_ids", "marketplace_item_properties", "clear_cache", "viewed_count", "ordered_count", "shop_section_id", "return_policy_id", "personalization_details")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -1403,6 +1409,12 @@ function ConvertFrom-JsonToProductAdd {
             $ListingType = $JsonParameters.PSobject.Properties["listing_type"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "category_type"))) { #optional property not found
+            $CategoryType = $null
+        } else {
+            $CategoryType = $JsonParameters.PSobject.Properties["category_type"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "return_accepted"))) { #optional property not found
             $ReturnAccepted = $null
         } else {
@@ -1579,6 +1591,7 @@ function ConvertFrom-JsonToProductAdd {
             "logistic_info" = ${LogisticInfo}
             "listing_duration" = ${ListingDuration}
             "listing_type" = ${ListingType}
+            "category_type" = ${CategoryType}
             "return_accepted" = ${ReturnAccepted}
             "seller_profiles" = ${SellerProfiles}
             "auction_confidentiality_level" = ${AuctionConfidentialityLevel}

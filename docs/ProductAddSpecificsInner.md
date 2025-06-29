@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Values** | **String[]** |  | [optional] 
 **UsedForVariations** | **Boolean** |  | [optional] [default to $false]
 **ScaleId** | **Int32** |  | [optional] 
+**InputValue** | **String** |  | [optional] 
 **FoodDetails** | [**ProductAddSpecificsInnerFoodDetails**](ProductAddSpecificsInnerFoodDetails.md) |  | [optional] 
 **GroupProductsDetails** | [**ProductAddSpecificsInnerGroupProductsDetailsInner[]**](ProductAddSpecificsInnerGroupProductsDetailsInner.md) |  | [optional] 
 **BookingDetails** | [**ProductAddSpecificsInnerBookingDetails**](ProductAddSpecificsInnerBookingDetails.md) |  | [optional] 
@@ -21,6 +22,7 @@ $ProductAddSpecificsInner = Initialize-PSOpenAPIToolsProductAddSpecificsInner  -
  -Values null `
  -UsedForVariations null `
  -ScaleId null `
+ -InputValue null `
  -FoodDetails null `
  -GroupProductsDetails null `
  -BookingDetails null

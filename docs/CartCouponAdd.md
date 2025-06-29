@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **ActionConditionValue** | **String** | Defines condition attribute value/s. Can be comma separated string. | [optional] 
 **IncludeTax** | **Boolean** | Indicates whether to apply a discount for taxes. | [optional] [default to $false]
 **StoreId** | **String** | Store Id | [optional] 
+**FreeCashOnDelivery** | **Boolean** | Defines whether the coupon provides free cash on delivery | [optional] 
 
 ## Examples
 
@@ -41,7 +42,8 @@ $CartCouponAdd = Initialize-PSOpenAPIToolsCartCouponAdd  -Code 000_BIG_SALE_000 
  -ActionConditionOperator ONE_OF `
  -ActionConditionValue 17834222,45466663 `
  -IncludeTax true `
- -StoreId 1
+ -StoreId 1 `
+ -FreeCashOnDelivery true
 ```
 
 - Convert the resource to JSON

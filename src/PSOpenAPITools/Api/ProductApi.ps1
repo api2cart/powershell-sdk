@@ -1666,6 +1666,9 @@ Defines product's status
 .PARAMETER Type
 Defines products's type
 
+.PARAMETER Visible
+Filter items by visibility status
+
 .PARAMETER FindValue
 Entity search that is specified by some value
 
@@ -1745,20 +1748,23 @@ function Invoke-ProductCount {
         ${Type},
         [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${FindValue},
+        ${Visible},
         [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${FindWhere},
+        ${FindValue},
         [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ReportRequestId},
+        ${FindWhere},
         [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Boolean]]
-        ${ReturnGlobal},
+        [String]
+        ${ReportRequestId},
         [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
-        ${DisableReportCache},
+        ${ReturnGlobal},
         [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Boolean]]
+        ${DisableReportCache},
+        [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${UseLatestApiVersion},
         [Switch]
@@ -1846,6 +1852,10 @@ function Invoke-ProductCount {
 
         if ($Type) {
             $LocalVarQueryParameters['type'] = $Type
+        }
+
+        if ($Visible) {
+            $LocalVarQueryParameters['visible'] = $Visible
         }
 
         if ($FindValue) {
@@ -3313,6 +3323,9 @@ Defines product's status
 .PARAMETER Type
 Defines products's type
 
+.PARAMETER Visible
+Filter items by visibility status
+
 .PARAMETER FindValue
 Entity search that is specified by some value
 
@@ -3425,38 +3438,41 @@ function Invoke-ProductList {
         ${Type},
         [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${FindValue},
+        ${Visible},
         [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${FindWhere},
+        ${FindValue},
         [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${FindWhere},
+        [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${ReturnGlobal},
-        [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Params},
         [Parameter(Position = 25, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Params},
         [Parameter(Position = 26, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${ResponseFields},
         [Parameter(Position = 27, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SortBy},
+        ${Exclude},
         [Parameter(Position = 28, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SortDirection},
+        ${SortBy},
         [Parameter(Position = 29, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ReportRequestId},
+        ${SortDirection},
         [Parameter(Position = 30, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Boolean]]
-        ${DisableCache},
+        [String]
+        ${ReportRequestId},
         [Parameter(Position = 31, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
-        ${DisableReportCache},
+        ${DisableCache},
         [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Boolean]]
+        ${DisableReportCache},
+        [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${UseLatestApiVersion},
         [Switch]
@@ -3564,6 +3580,10 @@ function Invoke-ProductList {
 
         if ($Type) {
             $LocalVarQueryParameters['type'] = $Type
+        }
+
+        if ($Visible) {
+            $LocalVarQueryParameters['visible'] = $Visible
         }
 
         if ($FindValue) {

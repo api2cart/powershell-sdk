@@ -395,7 +395,7 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
-$CartCouponAdd = Initialize-CartCouponAdd -Code "000_BIG_SALE_000" -ActionType "percent" -ActionApplyTo "order_total" -ActionScope "order" -ActionAmount 15.5 -Codes "MyCodes" -Name "Sale! -30%" -DateStart "2019-12-29 06:44:30" -DateEnd "2020-01-05 01:00:00" -UsageLimit 99 -UsageLimitPerCustomer 1 -ActionConditionEntity "order" -ActionConditionKey "product_id" -ActionConditionOperator "ONE_OF" -ActionConditionValue "17834222,45466663" -IncludeTax $true -StoreId "1" # CartCouponAdd | 
+$CartCouponAdd = Initialize-CartCouponAdd -Code "000_BIG_SALE_000" -ActionType "percent" -ActionApplyTo "order_total" -ActionScope "order" -ActionAmount 15.5 -Codes "MyCodes" -Name "Sale! -30%" -DateStart "2019-12-29 06:44:30" -DateEnd "2020-01-05 01:00:00" -UsageLimit 99 -UsageLimitPerCustomer 1 -ActionConditionEntity "order" -ActionConditionKey "product_id" -ActionConditionOperator "ONE_OF" -ActionConditionValue "17834222,45466663" -IncludeTax $true -StoreId "1" -FreeCashOnDelivery $true # CartCouponAdd | 
 
 # cart.coupon.add
 try {

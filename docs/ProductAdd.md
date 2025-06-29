@@ -106,6 +106,7 @@ Name | Type | Description | Notes
 **LogisticInfo** | [**ProductAddLogisticInfoInner[]**](ProductAddLogisticInfoInner.md) | Defines product&#39;s logistic channel settings | [optional] 
 **ListingDuration** | **String** | Describes the number of days the seller wants the listing to be active. Look at cart.info method response for allowed values. | [optional] 
 **ListingType** | **String** | Indicates the selling format of the marketplace listing. | [optional] [default to "FixedPrice"]
+**CategoryType** | **String** | Specifies the type of category (e.g., apparel or other) for the product being added. | [optional] 
 **ReturnAccepted** | **Boolean** | Indicates whether the seller allows the buyer to return the item. | [optional] 
 **SellerProfiles** | [**ProductAddSellerProfiles**](ProductAddSellerProfiles.md) |  | [optional] 
 **AuctionConfidentialityLevel** | **String** | This allows buyers to remain anonymous when the bid or buy an item. | [optional] 
@@ -226,6 +227,7 @@ $ProductAdd = Initialize-PSOpenAPIToolsProductAdd  -Name Bag `
  -LogisticInfo null `
  -ListingDuration Days_3 `
  -ListingType Auction `
+ -CategoryType Apparel `
  -ReturnAccepted true `
  -SellerProfiles null `
  -AuctionConfidentialityLevel public `

@@ -10,7 +10,7 @@ Describe -tag 'PSOpenAPITools' -name 'CartCouponAdd' {
     Context 'CartCouponAdd' {
         It 'Initialize-CartCouponAdd' {
             # a simple test to create an object
-            #$NewObject = Initialize-CartCouponAdd -Code "TEST_VALUE" -ActionType "TEST_VALUE" -ActionApplyTo "TEST_VALUE" -ActionScope "TEST_VALUE" -ActionAmount "TEST_VALUE" -Codes "TEST_VALUE" -Name "TEST_VALUE" -DateStart "TEST_VALUE" -DateEnd "TEST_VALUE" -UsageLimit "TEST_VALUE" -UsageLimitPerCustomer "TEST_VALUE" -ActionConditionEntity "TEST_VALUE" -ActionConditionKey "TEST_VALUE" -ActionConditionOperator "TEST_VALUE" -ActionConditionValue "TEST_VALUE" -IncludeTax "TEST_VALUE" -StoreId "TEST_VALUE"
+            #$NewObject = Initialize-CartCouponAdd -Code "TEST_VALUE" -ActionType "TEST_VALUE" -ActionApplyTo "TEST_VALUE" -ActionScope "TEST_VALUE" -ActionAmount "TEST_VALUE" -Codes "TEST_VALUE" -Name "TEST_VALUE" -DateStart "TEST_VALUE" -DateEnd "TEST_VALUE" -UsageLimit "TEST_VALUE" -UsageLimitPerCustomer "TEST_VALUE" -ActionConditionEntity "TEST_VALUE" -ActionConditionKey "TEST_VALUE" -ActionConditionOperator "TEST_VALUE" -ActionConditionValue "TEST_VALUE" -IncludeTax "TEST_VALUE" -StoreId "TEST_VALUE" -FreeCashOnDelivery "TEST_VALUE"
             #$NewObject | Should -BeOfType CartCouponAdd
             #$NewObject.property | Should -Be 0
         }

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **OrderItemWeight** | **Decimal** | Defines orders specified by order item weight | [optional] 
 **OrderItemVariantId** | **String** | Ordered product variant. Where x is order item ID | [optional] 
 **OrderItemTax** | **Decimal** | Percentage of tax for product order | [optional] [default to 0]
+**OrderItemTaxClass** | **String** | Id of the tax class of product. | [optional] 
 **OrderItemPriceIncludesTax** | **Boolean** | Defines if item price includes tax | [optional] [default to $false]
 **OrderItemParent** | **Int32** | Index of the parent grouped/bundle product | [optional] 
 **OrderItemParentOptionName** | **String** | Option name of the parent grouped/bundle product | [optional] 
@@ -31,6 +32,7 @@ $OrderAddOrderItemInner = Initialize-PSOpenAPIToolsOrderAddOrderItemInner  -Orde
  -OrderItemWeight 5, where {x} - 1,2,3,... etc `
  -OrderItemVariantId 52 `
  -OrderItemTax 5.5 `
+ -OrderItemTaxClass standard `
  -OrderItemPriceIncludesTax null `
  -OrderItemParent 2 `
  -OrderItemParentOptionName Internal Memory Storage `

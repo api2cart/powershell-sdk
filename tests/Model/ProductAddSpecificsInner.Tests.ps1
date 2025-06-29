@@ -10,7 +10,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductAddSpecificsInner' {
     Context 'ProductAddSpecificsInner' {
         It 'Initialize-ProductAddSpecificsInner' {
             # a simple test to create an object
-            #$NewObject = Initialize-ProductAddSpecificsInner -Name "TEST_VALUE" -Value "TEST_VALUE" -Values "TEST_VALUE" -UsedForVariations "TEST_VALUE" -ScaleId "TEST_VALUE" -FoodDetails "TEST_VALUE" -GroupProductsDetails "TEST_VALUE" -BookingDetails "TEST_VALUE"
+            #$NewObject = Initialize-ProductAddSpecificsInner -Name "TEST_VALUE" -Value "TEST_VALUE" -Values "TEST_VALUE" -UsedForVariations "TEST_VALUE" -ScaleId "TEST_VALUE" -InputValue "TEST_VALUE" -FoodDetails "TEST_VALUE" -GroupProductsDetails "TEST_VALUE" -BookingDetails "TEST_VALUE"
             #$NewObject | Should -BeOfType ProductAddSpecificsInner
             #$NewObject.property | Should -Be 0
         }
