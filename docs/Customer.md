@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **LastLogin** | [**A2CDateTime**](A2CDateTime.md) |  | [optional] 
 **BirthDay** | [**A2CDateTime**](A2CDateTime.md) |  | [optional] 
 **Status** | **String** |  | [optional] 
+**IsGuest** | **Boolean** |  | [optional] 
 **NewsLetterSubscription** | **Boolean** |  | [optional] 
 **Consents** | [**CustomerConsent[]**](CustomerConsent.md) |  | [optional] 
 **Gender** | **String** |  | [optional] 
@@ -46,6 +47,7 @@ $Customer = Initialize-PSOpenAPIToolsCustomer  -Id null `
  -LastLogin null `
  -BirthDay null `
  -Status null `
+ -IsGuest null `
  -NewsLetterSubscription null `
  -Consents null `
  -Gender null `

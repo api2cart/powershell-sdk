@@ -39,6 +39,8 @@ No description available.
 No description available.
 .PARAMETER Status
 No description available.
+.PARAMETER IsGuest
+No description available.
 .PARAMETER NewsLetterSubscription
 No description available.
 .PARAMETER Consents
@@ -113,44 +115,47 @@ function Initialize-Customer {
         ${Status},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${NewsLetterSubscription},
+        ${IsGuest},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${NewsLetterSubscription},
+        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Consents},
-        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Gender},
-        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true)]
         [String[]]
         ${StoresIds},
-        [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Website},
         [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Fax},
+        ${Website},
         [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Company},
+        ${Fax},
         [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${IpAddress},
+        ${Company},
         [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${IpAddress},
+        [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${AddressBook},
-        [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${LangId},
-        [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
         ${OrdersCount},
-        [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${LastOrderId},
-        [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 25, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${AdditionalFields},
-        [Parameter(Position = 25, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 26, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${CustomFields}
     )
@@ -173,6 +178,7 @@ function Initialize-Customer {
             "last_login" = ${LastLogin}
             "birth_day" = ${BirthDay}
             "status" = ${Status}
+            "is_guest" = ${IsGuest}
             "news_letter_subscription" = ${NewsLetterSubscription}
             "consents" = ${Consents}
             "gender" = ${Gender}
@@ -224,7 +230,7 @@ function ConvertFrom-JsonToCustomer {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in Customer
-        $AllProperties = ("id", "email", "first_name", "last_name", "phone", "created_time", "modified_time", "group", "login", "last_login", "birth_day", "status", "news_letter_subscription", "consents", "gender", "stores_ids", "website", "fax", "company", "ip_address", "address_book", "lang_id", "orders_count", "last_order_id", "additional_fields", "custom_fields")
+        $AllProperties = ("id", "email", "first_name", "last_name", "phone", "created_time", "modified_time", "group", "login", "last_login", "birth_day", "status", "is_guest", "news_letter_subscription", "consents", "gender", "stores_ids", "website", "fax", "company", "ip_address", "address_book", "lang_id", "orders_count", "last_order_id", "additional_fields", "custom_fields")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -301,6 +307,12 @@ function ConvertFrom-JsonToCustomer {
             $Status = $null
         } else {
             $Status = $JsonParameters.PSobject.Properties["status"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "is_guest"))) { #optional property not found
+            $IsGuest = $null
+        } else {
+            $IsGuest = $JsonParameters.PSobject.Properties["is_guest"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "news_letter_subscription"))) { #optional property not found
@@ -400,6 +412,7 @@ function ConvertFrom-JsonToCustomer {
             "last_login" = ${LastLogin}
             "birth_day" = ${BirthDay}
             "status" = ${Status}
+            "is_guest" = ${IsGuest}
             "news_letter_subscription" = ${NewsLetterSubscription}
             "consents" = ${Consents}
             "gender" = ${Gender}

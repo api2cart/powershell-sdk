@@ -33,7 +33,7 @@ Describe -tag 'PSOpenAPITools' -name 'CustomerApi' {
 
     Context 'Invoke-CustomerCount' {
         It 'Test Invoke-CustomerCount' {
-            #$TestResult = Invoke-CustomerCount -Ids "TEST_VALUE" -SinceId "TEST_VALUE" -CustomerListId "TEST_VALUE" -GroupId "TEST_VALUE" -StoreId "TEST_VALUE" -Avail "TEST_VALUE" -FindValue "TEST_VALUE" -FindWhere "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE"
+            #$TestResult = Invoke-CustomerCount -Ids "TEST_VALUE" -SinceId "TEST_VALUE" -CustomerListId "TEST_VALUE" -GroupId "TEST_VALUE" -StoreId "TEST_VALUE" -Avail "TEST_VALUE" -IncludeGuests "TEST_VALUE" -FindValue "TEST_VALUE" -FindWhere "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -49,7 +49,7 @@ Describe -tag 'PSOpenAPITools' -name 'CustomerApi' {
 
     Context 'Invoke-CustomerFind' {
         It 'Test Invoke-CustomerFind' {
-            #$TestResult = Invoke-CustomerFind -FindValue "TEST_VALUE" -FindWhere "TEST_VALUE" -FindParams "TEST_VALUE" -StoreId "TEST_VALUE"
+            #$TestResult = Invoke-CustomerFind -FindValue "TEST_VALUE" -FindWhere "TEST_VALUE" -FindParams "TEST_VALUE" -StoreId "TEST_VALUE" -IncludeGuests "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -81,7 +81,7 @@ Describe -tag 'PSOpenAPITools' -name 'CustomerApi' {
 
     Context 'Invoke-CustomerList' {
         It 'Test Invoke-CustomerList' {
-            #$TestResult = Invoke-CustomerList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -Ids "TEST_VALUE" -SinceId "TEST_VALUE" -CustomerListId "TEST_VALUE" -GroupId "TEST_VALUE" -StoreId "TEST_VALUE" -Avail "TEST_VALUE" -FindValue "TEST_VALUE" -FindWhere "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -SortBy "TEST_VALUE" -SortDirection "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
+            #$TestResult = Invoke-CustomerList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -Ids "TEST_VALUE" -SinceId "TEST_VALUE" -CustomerListId "TEST_VALUE" -GroupId "TEST_VALUE" -StoreId "TEST_VALUE" -Avail "TEST_VALUE" -IncludeGuests "TEST_VALUE" -FindValue "TEST_VALUE" -FindWhere "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -SortBy "TEST_VALUE" -SortDirection "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

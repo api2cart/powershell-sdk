@@ -393,6 +393,9 @@ Counts customer specified by store id
 .PARAMETER Avail
 Defines category's visibility status
 
+.PARAMETER IncludeGuests
+Indicates whether to include guest customers in the total count.
+
 .PARAMETER FindValue
 Entity search that is specified by some value
 
@@ -441,21 +444,24 @@ function Invoke-CustomerCount {
         [System.Nullable[Boolean]]
         ${Avail},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${FindValue},
+        [System.Nullable[Boolean]]
+        ${IncludeGuests},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${FindWhere},
+        ${FindValue},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedFrom},
+        ${FindWhere},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedTo},
+        ${CreatedFrom},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedFrom},
+        ${CreatedTo},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ModifiedFrom},
+        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${ModifiedTo},
         [Switch]
@@ -503,6 +509,10 @@ function Invoke-CustomerCount {
 
         if ($Avail) {
             $LocalVarQueryParameters['avail'] = $Avail
+        }
+
+        if ($IncludeGuests) {
+            $LocalVarQueryParameters['include_guests'] = $IncludeGuests
         }
 
         if ($FindValue) {
@@ -684,6 +694,9 @@ Entity search that is specified by comma-separated parameters
 .PARAMETER StoreId
 Store Id
 
+.PARAMETER IncludeGuests
+Indicates whether to search among guest customers when looking up a customer.
+
 .PARAMETER WithHttpInfo
 
 A switch when turned on will return a hash table of Response, StatusCode and Headers instead of just the Response
@@ -707,6 +720,9 @@ function Invoke-CustomerFind {
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${StoreId},
+        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Boolean]]
+        ${IncludeGuests},
         [Switch]
         $WithHttpInfo
     )
@@ -745,6 +761,10 @@ function Invoke-CustomerFind {
 
         if ($StoreId) {
             $LocalVarQueryParameters['store_id'] = $StoreId
+        }
+
+        if ($IncludeGuests) {
+            $LocalVarQueryParameters['include_guests'] = $IncludeGuests
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -1254,6 +1274,9 @@ Retrieves customers specified by store id
 .PARAMETER Avail
 Defines category's visibility status
 
+.PARAMETER IncludeGuests
+Indicates whether to include guest customers in the list results.
+
 .PARAMETER FindValue
 Entity search that is specified by some value
 
@@ -1326,36 +1349,39 @@ function Invoke-CustomerList {
         [System.Nullable[Boolean]]
         ${Avail},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${FindValue},
+        [System.Nullable[Boolean]]
+        ${IncludeGuests},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${FindWhere},
+        ${FindValue},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedFrom},
+        ${FindWhere},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedTo},
+        ${CreatedFrom},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedFrom},
+        ${CreatedTo},
         [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedTo},
+        ${ModifiedFrom},
         [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SortBy},
+        ${ModifiedTo},
         [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SortDirection},
+        ${SortBy},
         [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${SortDirection},
         [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ResponseFields},
         [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Params},
+        [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Exclude},
         [Switch]
@@ -1415,6 +1441,10 @@ function Invoke-CustomerList {
 
         if ($Avail) {
             $LocalVarQueryParameters['avail'] = $Avail
+        }
+
+        if ($IncludeGuests) {
+            $LocalVarQueryParameters['include_guests'] = $IncludeGuests
         }
 
         if ($FindValue) {

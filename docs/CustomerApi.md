@@ -215,6 +215,7 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-GroupId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Avail] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-IncludeGuests] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindValue] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindWhere] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedFrom] <String><br>
@@ -246,6 +247,7 @@ $CustomerListId = "exampleListId" # String | The numeric ID of the customer list
 $GroupId = "3" # String | Customer group_id (optional)
 $StoreId = "1" # String | Counts customer specified by store id (optional)
 $Avail = $false # Boolean | Defines category's visibility status (optional) (default to $true)
+$IncludeGuests = $true # Boolean | Indicates whether to include guest customers in the total count. (optional) (default to $false)
 $FindValue = "mail@gmail.com" # String | Entity search that is specified by some value (optional)
 $FindWhere = "email" # String | Counts customers that are searched specified by field (optional)
 $CreatedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their creation date (optional)
@@ -255,7 +257,7 @@ $ModifiedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their modifi
 
 # customer.count
 try {
-    $Result = Invoke-CustomerCount -Ids $Ids -SinceId $SinceId -CustomerListId $CustomerListId -GroupId $GroupId -StoreId $StoreId -Avail $Avail -FindValue $FindValue -FindWhere $FindWhere -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo
+    $Result = Invoke-CustomerCount -Ids $Ids -SinceId $SinceId -CustomerListId $CustomerListId -GroupId $GroupId -StoreId $StoreId -Avail $Avail -IncludeGuests $IncludeGuests -FindValue $FindValue -FindWhere $FindWhere -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CustomerCount: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -272,6 +274,7 @@ Name | Type | Description  | Notes
  **GroupId** | **String**| Customer group_id | [optional] 
  **StoreId** | **String**| Counts customer specified by store id | [optional] 
  **Avail** | **Boolean**| Defines category&#39;s visibility status | [optional] [default to $true]
+ **IncludeGuests** | **Boolean**| Indicates whether to include guest customers in the total count. | [optional] [default to $false]
  **FindValue** | **String**| Entity search that is specified by some value | [optional] 
  **FindWhere** | **String**| Counts customers that are searched specified by field | [optional] 
  **CreatedFrom** | **String**| Retrieve entities from their creation date | [optional] 
@@ -356,6 +359,7 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindWhere] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindParams] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-IncludeGuests] <System.Nullable[Boolean]><br>
 
 customer.find
 
@@ -379,10 +383,11 @@ $FindValue = "mail@gmail.com" # String | Entity search that is specified by some
 $FindWhere = "email" # String | Entity search that is specified by the comma-separated unique fields (optional) (default to "email")
 $FindParams = "regex" # String | Entity search that is specified by comma-separated parameters (optional) (default to "whole_words")
 $StoreId = "1" # String | Store Id (optional)
+$IncludeGuests = $true # Boolean | Indicates whether to search among guest customers when looking up a customer. (optional) (default to $false)
 
 # customer.find
 try {
-    $Result = Invoke-CustomerFind -FindValue $FindValue -FindWhere $FindWhere -FindParams $FindParams -StoreId $StoreId
+    $Result = Invoke-CustomerFind -FindValue $FindValue -FindWhere $FindWhere -FindParams $FindParams -StoreId $StoreId -IncludeGuests $IncludeGuests
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CustomerFind: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -397,6 +402,7 @@ Name | Type | Description  | Notes
  **FindWhere** | **String**| Entity search that is specified by the comma-separated unique fields | [optional] [default to &quot;email&quot;]
  **FindParams** | **String**| Entity search that is specified by comma-separated parameters | [optional] [default to &quot;whole_words&quot;]
  **StoreId** | **String**| Store Id | [optional] 
+ **IncludeGuests** | **Boolean**| Indicates whether to search among guest customers when looking up a customer. | [optional] [default to $false]
 
 ### Return type
 
@@ -635,6 +641,7 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-GroupId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Avail] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-IncludeGuests] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindValue] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FindWhere] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedFrom] <String><br>
@@ -674,6 +681,7 @@ $CustomerListId = "exampleListId" # String | The numeric ID of the customer list
 $GroupId = "3" # String | Customer group_id (optional)
 $StoreId = "1" # String | Retrieves customers specified by store id (optional)
 $Avail = $false # Boolean | Defines category's visibility status (optional) (default to $true)
+$IncludeGuests = $true # Boolean | Indicates whether to include guest customers in the list results. (optional) (default to $false)
 $FindValue = "mail@gmail.com" # String | Entity search that is specified by some value (optional)
 $FindWhere = "email" # String | Customer search that is specified by field (optional)
 $CreatedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their creation date (optional)
@@ -688,7 +696,7 @@ $Exclude = "id,email" # String | Set this parameter in order to choose which ent
 
 # customer.list
 try {
-    $Result = Invoke-CustomerList -Start $Start -Count $Count -PageCursor $PageCursor -Ids $Ids -SinceId $SinceId -CustomerListId $CustomerListId -GroupId $GroupId -StoreId $StoreId -Avail $Avail -FindValue $FindValue -FindWhere $FindWhere -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -SortBy $SortBy -SortDirection $SortDirection -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
+    $Result = Invoke-CustomerList -Start $Start -Count $Count -PageCursor $PageCursor -Ids $Ids -SinceId $SinceId -CustomerListId $CustomerListId -GroupId $GroupId -StoreId $StoreId -Avail $Avail -IncludeGuests $IncludeGuests -FindValue $FindValue -FindWhere $FindWhere -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -SortBy $SortBy -SortDirection $SortDirection -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CustomerList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -708,6 +716,7 @@ Name | Type | Description  | Notes
  **GroupId** | **String**| Customer group_id | [optional] 
  **StoreId** | **String**| Retrieves customers specified by store id | [optional] 
  **Avail** | **Boolean**| Defines category&#39;s visibility status | [optional] [default to $true]
+ **IncludeGuests** | **Boolean**| Indicates whether to include guest customers in the list results. | [optional] [default to $false]
  **FindValue** | **String**| Entity search that is specified by some value | [optional] 
  **FindWhere** | **String**| Customer search that is specified by field | [optional] 
  **CreatedFrom** | **String**| Retrieve entities from their creation date | [optional] 
