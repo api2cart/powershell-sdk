@@ -39,6 +39,10 @@ Name | Type | Description | Notes
 **BolRetailerId** | **Int32** | Bol Retailer ID | [optional] 
 **BigcartelUserName** | **String** | Subdomain of store | 
 **BigcartelPassword** | **String** | BigCartel account password | 
+**BricklinkConsumerKey** | **String** | Bricklink Consumer Key | 
+**BricklinkConsumerSecret** | **String** | Bricklink Consumer Secret | 
+**BricklinkToken** | **String** | Bricklink Access Token | 
+**BricklinkTokenSecret** | **String** | Bricklink Access Token Secret | 
 **DemandwareClientId** | **String** | Demandware client id | [optional] 
 **DemandwareApiPassword** | **String** | Demandware api password | [optional] 
 **DemandwareUserName** | **String** | Demandware user name | [optional] 
@@ -205,6 +209,10 @@ $AccountCartAdd = Initialize-PSOpenAPIToolsAccountCartAdd  -CartId Opencart14 `
  -BolRetailerId 145001 `
  -BigcartelUserName subdomain `
  -BigcartelPassword 4GrrZCLNNoSUuhAjesKuchxo9SL `
+ -BricklinkConsumerKey 26F6CDA087D9444EAA71AC09E7A1D39A `
+ -BricklinkConsumerSecret a46abc3kxyinlbggy06i9g975xqo6gjq `
+ -BricklinkToken ktv4n9rgrj0evjuy2t6p2xlb1f8u5pmy `
+ -BricklinkTokenSecret a46abc3kxyinlbggy06i9g975xqo6gjq `
  -DemandwareClientId b849eb85-v8b9-1dw8-9fe2-97e1d6ffc7b0 `
  -DemandwareApiPassword testpassword `
  -DemandwareUserName admin `

@@ -48,7 +48,7 @@ For troubleshooting, please run `$DebugPreference = 'Continue'` to turn on debug
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://api.api2cart.com/v1.1*
+All URIs are relative to *https://api.api2cart.local.com/v1.1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -83,26 +83,19 @@ Class | Method | HTTP request | Description
 *BridgeApi* | [**Invoke-BridgeDelete**](docs/BridgeApi.md#Invoke-BridgeDelete) | **POST** /bridge.delete.json | bridge.delete
 *BridgeApi* | [**Invoke-BridgeDownload**](docs/BridgeApi.md#Invoke-BridgeDownload) | **GET** /bridge.download.file | bridge.download
 *BridgeApi* | [**Invoke-BridgeUpdate**](docs/BridgeApi.md#Invoke-BridgeUpdate) | **POST** /bridge.update.json | bridge.update
-*CartApi* | [**Invoke-CartBridge**](docs/CartApi.md#Invoke-CartBridge) | **GET** /cart.bridge.json | cart.bridge
 *CartApi* | [**Invoke-CartCatalogPriceRulesCount**](docs/CartApi.md#Invoke-CartCatalogPriceRulesCount) | **GET** /cart.catalog_price_rules.count.json | cart.catalog_price_rules.count
 *CartApi* | [**Invoke-CartCatalogPriceRulesList**](docs/CartApi.md#Invoke-CartCatalogPriceRulesList) | **GET** /cart.catalog_price_rules.list.json | cart.catalog_price_rules.list
-*CartApi* | [**Invoke-CartClearCache**](docs/CartApi.md#Invoke-CartClearCache) | **POST** /cart.clear_cache.json | cart.clear_cache
-*CartApi* | [**Invoke-CartConfig**](docs/CartApi.md#Invoke-CartConfig) | **GET** /cart.config.json | cart.config
-*CartApi* | [**Invoke-CartConfigUpdate**](docs/CartApi.md#Invoke-CartConfigUpdate) | **PUT** /cart.config.update.json | cart.config.update
 *CartApi* | [**Invoke-CartCouponAdd**](docs/CartApi.md#Invoke-CartCouponAdd) | **POST** /cart.coupon.add.json | cart.coupon.add
 *CartApi* | [**Invoke-CartCouponConditionAdd**](docs/CartApi.md#Invoke-CartCouponConditionAdd) | **POST** /cart.coupon.condition.add.json | cart.coupon.condition.add
 *CartApi* | [**Invoke-CartCouponCount**](docs/CartApi.md#Invoke-CartCouponCount) | **GET** /cart.coupon.count.json | cart.coupon.count
 *CartApi* | [**Invoke-CartCouponDelete**](docs/CartApi.md#Invoke-CartCouponDelete) | **DELETE** /cart.coupon.delete.json | cart.coupon.delete
 *CartApi* | [**Invoke-CartCouponList**](docs/CartApi.md#Invoke-CartCouponList) | **GET** /cart.coupon.list.json | cart.coupon.list
-*CartApi* | [**Invoke-CartCreate**](docs/CartApi.md#Invoke-CartCreate) | **POST** /cart.create.json | cart.create
 *CartApi* | [**Invoke-CartDelete**](docs/CartApi.md#Invoke-CartDelete) | **DELETE** /cart.delete.json | cart.delete
-*CartApi* | [**Invoke-CartDisconnect**](docs/CartApi.md#Invoke-CartDisconnect) | **GET** /cart.disconnect.json | cart.disconnect
 *CartApi* | [**Invoke-CartGiftcardAdd**](docs/CartApi.md#Invoke-CartGiftcardAdd) | **POST** /cart.giftcard.add.json | cart.giftcard.add
 *CartApi* | [**Invoke-CartGiftcardCount**](docs/CartApi.md#Invoke-CartGiftcardCount) | **GET** /cart.giftcard.count.json | cart.giftcard.count
 *CartApi* | [**Invoke-CartGiftcardDelete**](docs/CartApi.md#Invoke-CartGiftcardDelete) | **DELETE** /cart.giftcard.delete.json | cart.giftcard.delete
 *CartApi* | [**Invoke-CartGiftcardList**](docs/CartApi.md#Invoke-CartGiftcardList) | **GET** /cart.giftcard.list.json | cart.giftcard.list
 *CartApi* | [**Invoke-CartInfo**](docs/CartApi.md#Invoke-CartInfo) | **GET** /cart.info.json | cart.info
-*CartApi* | [**Invoke-CartList**](docs/CartApi.md#Invoke-CartList) | **GET** /cart.list.json | cart.list
 *CartApi* | [**Invoke-CartMetaDataList**](docs/CartApi.md#Invoke-CartMetaDataList) | **GET** /cart.meta_data.list.json | cart.meta_data.list
 *CartApi* | [**Invoke-CartMetaDataSet**](docs/CartApi.md#Invoke-CartMetaDataSet) | **POST** /cart.meta_data.set.json | cart.meta_data.set
 *CartApi* | [**Invoke-CartMetaDataUnset**](docs/CartApi.md#Invoke-CartMetaDataUnset) | **DELETE** /cart.meta_data.unset.json | cart.meta_data.unset
@@ -142,7 +135,6 @@ Class | Method | HTTP request | Description
 *OrderApi* | [**Invoke-OrderAdd**](docs/OrderApi.md#Invoke-OrderAdd) | **POST** /order.add.json | order.add
 *OrderApi* | [**Invoke-OrderCount**](docs/OrderApi.md#Invoke-OrderCount) | **GET** /order.count.json | order.count
 *OrderApi* | [**Invoke-OrderFinancialStatusList**](docs/OrderApi.md#Invoke-OrderFinancialStatusList) | **GET** /order.financial_status.list.json | order.financial_status.list
-*OrderApi* | [**Invoke-OrderFind**](docs/OrderApi.md#Invoke-OrderFind) | **GET** /order.find.json | order.find
 *OrderApi* | [**Invoke-OrderFulfillmentStatusList**](docs/OrderApi.md#Invoke-OrderFulfillmentStatusList) | **GET** /order.fulfillment_status.list.json | order.fulfillment_status.list
 *OrderApi* | [**Invoke-OrderInfo**](docs/OrderApi.md#Invoke-OrderInfo) | **GET** /order.info.json | order.info
 *OrderApi* | [**Invoke-OrderList**](docs/OrderApi.md#Invoke-OrderList) | **GET** /order.list.json | order.list
@@ -175,7 +167,6 @@ Class | Method | HTTP request | Description
 *ProductApi* | [**Invoke-ProductCurrencyList**](docs/ProductApi.md#Invoke-ProductCurrencyList) | **GET** /product.currency.list.json | product.currency.list
 *ProductApi* | [**Invoke-ProductDelete**](docs/ProductApi.md#Invoke-ProductDelete) | **DELETE** /product.delete.json | product.delete
 *ProductApi* | [**Invoke-ProductDeleteBatch**](docs/ProductApi.md#Invoke-ProductDeleteBatch) | **POST** /product.delete.batch.json | product.delete.batch
-*ProductApi* | [**Invoke-ProductFields**](docs/ProductApi.md#Invoke-ProductFields) | **GET** /product.fields.json | product.fields
 *ProductApi* | [**Invoke-ProductFind**](docs/ProductApi.md#Invoke-ProductFind) | **GET** /product.find.json | product.find
 *ProductApi* | [**Invoke-ProductImageAdd**](docs/ProductApi.md#Invoke-ProductImageAdd) | **POST** /product.image.add.json | product.image.add
 *ProductApi* | [**Invoke-ProductImageDelete**](docs/ProductApi.md#Invoke-ProductImageDelete) | **DELETE** /product.image.delete.json | product.image.delete
@@ -201,13 +192,10 @@ Class | Method | HTTP request | Description
 *ProductApi* | [**Invoke-ProductUpdateBatch**](docs/ProductApi.md#Invoke-ProductUpdateBatch) | **POST** /product.update.batch.json | product.update.batch
 *ProductApi* | [**Invoke-ProductVariantAdd**](docs/ProductApi.md#Invoke-ProductVariantAdd) | **POST** /product.variant.add.json | product.variant.add
 *ProductApi* | [**Invoke-ProductVariantAddBatch**](docs/ProductApi.md#Invoke-ProductVariantAddBatch) | **POST** /product.variant.add.batch.json | product.variant.add.batch
-*ProductApi* | [**Invoke-ProductVariantCount**](docs/ProductApi.md#Invoke-ProductVariantCount) | **GET** /product.variant.count.json | product.variant.count
 *ProductApi* | [**Invoke-ProductVariantDelete**](docs/ProductApi.md#Invoke-ProductVariantDelete) | **DELETE** /product.variant.delete.json | product.variant.delete
 *ProductApi* | [**Invoke-ProductVariantDeleteBatch**](docs/ProductApi.md#Invoke-ProductVariantDeleteBatch) | **POST** /product.variant.delete.batch.json | product.variant.delete.batch
 *ProductApi* | [**Invoke-ProductVariantImageAdd**](docs/ProductApi.md#Invoke-ProductVariantImageAdd) | **POST** /product.variant.image.add.json | product.variant.image.add
 *ProductApi* | [**Invoke-ProductVariantImageDelete**](docs/ProductApi.md#Invoke-ProductVariantImageDelete) | **DELETE** /product.variant.image.delete.json | product.variant.image.delete
-*ProductApi* | [**Invoke-ProductVariantInfo**](docs/ProductApi.md#Invoke-ProductVariantInfo) | **GET** /product.variant.info.json | product.variant.info
-*ProductApi* | [**Invoke-ProductVariantList**](docs/ProductApi.md#Invoke-ProductVariantList) | **GET** /product.variant.list.json | product.variant.list
 *ProductApi* | [**Invoke-ProductVariantPriceAdd**](docs/ProductApi.md#Invoke-ProductVariantPriceAdd) | **POST** /product.variant.price.add.json | product.variant.price.add
 *ProductApi* | [**Invoke-ProductVariantPriceDelete**](docs/ProductApi.md#Invoke-ProductVariantPriceDelete) | **DELETE** /product.variant.price.delete.json | product.variant.price.delete
 *ProductApi* | [**Invoke-ProductVariantPriceUpdate**](docs/ProductApi.md#Invoke-ProductVariantPriceUpdate) | **PUT** /product.variant.price.update.json | product.variant.price.update
@@ -287,35 +275,21 @@ Class | Method | HTTP request | Description
  - [PSOpenAPITools\Model.Brand](docs/Brand.md)
  - [PSOpenAPITools\Model.Carrier](docs/Carrier.md)
  - [PSOpenAPITools\Model.Cart](docs/Cart.md)
- - [PSOpenAPITools\Model.CartBridge200Response](docs/CartBridge200Response.md)
- - [PSOpenAPITools\Model.CartBridge200ResponseResult](docs/CartBridge200ResponseResult.md)
  - [PSOpenAPITools\Model.CartCatalogPriceRulesCount200Response](docs/CartCatalogPriceRulesCount200Response.md)
  - [PSOpenAPITools\Model.CartCatalogPriceRulesCount200ResponseResult](docs/CartCatalogPriceRulesCount200ResponseResult.md)
  - [PSOpenAPITools\Model.CartChannel](docs/CartChannel.md)
- - [PSOpenAPITools\Model.CartClearCache200Response](docs/CartClearCache200Response.md)
- - [PSOpenAPITools\Model.CartClearCache200ResponseResult](docs/CartClearCache200ResponseResult.md)
- - [PSOpenAPITools\Model.CartConfig200Response](docs/CartConfig200Response.md)
- - [PSOpenAPITools\Model.CartConfig200ResponseResult](docs/CartConfig200ResponseResult.md)
- - [PSOpenAPITools\Model.CartConfigUpdate](docs/CartConfigUpdate.md)
- - [PSOpenAPITools\Model.CartConfigUpdate200Response](docs/CartConfigUpdate200Response.md)
  - [PSOpenAPITools\Model.CartCouponAdd](docs/CartCouponAdd.md)
  - [PSOpenAPITools\Model.CartCouponAdd200Response](docs/CartCouponAdd200Response.md)
  - [PSOpenAPITools\Model.CartCouponAdd200ResponseResult](docs/CartCouponAdd200ResponseResult.md)
  - [PSOpenAPITools\Model.CartCouponCount200Response](docs/CartCouponCount200Response.md)
  - [PSOpenAPITools\Model.CartCouponCount200ResponseResult](docs/CartCouponCount200ResponseResult.md)
- - [PSOpenAPITools\Model.CartCreate](docs/CartCreate.md)
  - [PSOpenAPITools\Model.CartDelete200Response](docs/CartDelete200Response.md)
  - [PSOpenAPITools\Model.CartDelete200ResponseResult](docs/CartDelete200ResponseResult.md)
- - [PSOpenAPITools\Model.CartDisconnect200Response](docs/CartDisconnect200Response.md)
- - [PSOpenAPITools\Model.CartDisconnect200ResponseResult](docs/CartDisconnect200ResponseResult.md)
  - [PSOpenAPITools\Model.CartGiftcardAdd200Response](docs/CartGiftcardAdd200Response.md)
  - [PSOpenAPITools\Model.CartGiftcardAdd200ResponseResult](docs/CartGiftcardAdd200ResponseResult.md)
  - [PSOpenAPITools\Model.CartGiftcardCount200Response](docs/CartGiftcardCount200Response.md)
  - [PSOpenAPITools\Model.CartGiftcardCount200ResponseResult](docs/CartGiftcardCount200ResponseResult.md)
  - [PSOpenAPITools\Model.CartInfo200Response](docs/CartInfo200Response.md)
- - [PSOpenAPITools\Model.CartList200Response](docs/CartList200Response.md)
- - [PSOpenAPITools\Model.CartList200ResponseResult](docs/CartList200ResponseResult.md)
- - [PSOpenAPITools\Model.CartList200ResponseResultSupportedCartsInner](docs/CartList200ResponseResultSupportedCartsInner.md)
  - [PSOpenAPITools\Model.CartMetaData](docs/CartMetaData.md)
  - [PSOpenAPITools\Model.CartMethods200Response](docs/CartMethods200Response.md)
  - [PSOpenAPITools\Model.CartMethods200ResponseResult](docs/CartMethods200ResponseResult.md)
@@ -341,6 +315,7 @@ Class | Method | HTTP request | Description
  - [PSOpenAPITools\Model.CategoryAddBatch200ResponseResult](docs/CategoryAddBatch200ResponseResult.md)
  - [PSOpenAPITools\Model.CategoryAddBatchPayloadInner](docs/CategoryAddBatchPayloadInner.md)
  - [PSOpenAPITools\Model.CategoryAddBatchPayloadInnerImagesInner](docs/CategoryAddBatchPayloadInnerImagesInner.md)
+ - [PSOpenAPITools\Model.CategoryAssign200Response](docs/CategoryAssign200Response.md)
  - [PSOpenAPITools\Model.CategoryCount200Response](docs/CategoryCount200Response.md)
  - [PSOpenAPITools\Model.CategoryCount200ResponseResult](docs/CategoryCount200ResponseResult.md)
  - [PSOpenAPITools\Model.CategoryDelete200Response](docs/CategoryDelete200Response.md)
@@ -439,8 +414,6 @@ Class | Method | HTTP request | Description
  - [PSOpenAPITools\Model.OrderFinancialStatusList200Response](docs/OrderFinancialStatusList200Response.md)
  - [PSOpenAPITools\Model.OrderFinancialStatusList200ResponseResult](docs/OrderFinancialStatusList200ResponseResult.md)
  - [PSOpenAPITools\Model.OrderFinancialStatusList200ResponseResultOrderFinancialStatusesInner](docs/OrderFinancialStatusList200ResponseResultOrderFinancialStatusesInner.md)
- - [PSOpenAPITools\Model.OrderFind200Response](docs/OrderFind200Response.md)
- - [PSOpenAPITools\Model.OrderFind200ResponseResult](docs/OrderFind200ResponseResult.md)
  - [PSOpenAPITools\Model.OrderFulfillmentStatusList200Response](docs/OrderFulfillmentStatusList200Response.md)
  - [PSOpenAPITools\Model.OrderFulfillmentStatusList200ResponseResult](docs/OrderFulfillmentStatusList200ResponseResult.md)
  - [PSOpenAPITools\Model.OrderInfo200Response](docs/OrderInfo200Response.md)
@@ -583,15 +556,11 @@ Class | Method | HTTP request | Description
  - [PSOpenAPITools\Model.ProductVariantAddBatch](docs/ProductVariantAddBatch.md)
  - [PSOpenAPITools\Model.ProductVariantAddBatchPayloadInner](docs/ProductVariantAddBatchPayloadInner.md)
  - [PSOpenAPITools\Model.ProductVariantAddBatchPayloadInnerCombinationInner](docs/ProductVariantAddBatchPayloadInnerCombinationInner.md)
- - [PSOpenAPITools\Model.ProductVariantCount200Response](docs/ProductVariantCount200Response.md)
- - [PSOpenAPITools\Model.ProductVariantCount200ResponseResult](docs/ProductVariantCount200ResponseResult.md)
  - [PSOpenAPITools\Model.ProductVariantDeleteBatch](docs/ProductVariantDeleteBatch.md)
  - [PSOpenAPITools\Model.ProductVariantDeleteBatchPayloadInner](docs/ProductVariantDeleteBatchPayloadInner.md)
  - [PSOpenAPITools\Model.ProductVariantImageAdd](docs/ProductVariantImageAdd.md)
  - [PSOpenAPITools\Model.ProductVariantImageAdd200Response](docs/ProductVariantImageAdd200Response.md)
  - [PSOpenAPITools\Model.ProductVariantImageAdd200ResponseResult](docs/ProductVariantImageAdd200ResponseResult.md)
- - [PSOpenAPITools\Model.ProductVariantList200Response](docs/ProductVariantList200Response.md)
- - [PSOpenAPITools\Model.ProductVariantList200ResponseResult](docs/ProductVariantList200ResponseResult.md)
  - [PSOpenAPITools\Model.ProductVariantPriceAdd](docs/ProductVariantPriceAdd.md)
  - [PSOpenAPITools\Model.ProductVariantPriceUpdate](docs/ProductVariantPriceUpdate.md)
  - [PSOpenAPITools\Model.ProductVariantUpdate](docs/ProductVariantUpdate.md)

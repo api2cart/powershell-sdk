@@ -1,6 +1,6 @@
 # PSOpenAPITools.PSOpenAPITools\Api.CategoryApi
 
-All URIs are relative to *https://api.api2cart.com/v1.1*
+All URIs are relative to *https://api.api2cart.local.com/v1.1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -175,7 +175,7 @@ Name | Type | Description  | Notes
 
 <a id="Get-egoryAssign"></a>
 # **Get-egoryAssign**
-> CartConfigUpdate200Response Get-egoryAssign<br>
+> CategoryAssign200Response Get-egoryAssign<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CategoryId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
@@ -221,7 +221,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CartConfigUpdate200Response**](CartConfigUpdate200Response.md) (PSCustomObject)
+[**CategoryAssign200Response**](CategoryAssign200Response.md) (PSCustomObject)
 
 ### Authorization
 
@@ -780,7 +780,7 @@ Name | Type | Description  | Notes
 
 <a id="Get-egoryUnassign"></a>
 # **Get-egoryUnassign**
-> CartConfigUpdate200Response Get-egoryUnassign<br>
+> CategoryAssign200Response Get-egoryUnassign<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CategoryId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
@@ -826,7 +826,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CartConfigUpdate200Response**](CartConfigUpdate200Response.md) (PSCustomObject)
+[**CategoryAssign200Response**](CategoryAssign200Response.md) (PSCustomObject)
 
 ### Authorization
 

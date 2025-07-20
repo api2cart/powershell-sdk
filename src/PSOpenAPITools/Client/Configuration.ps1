@@ -24,7 +24,7 @@ function Get-Configuration {
     $Configuration = $Script:Configuration
 
     if ([string]::IsNullOrEmpty($Configuration["BaseUrl"])) {
-        $Configuration["BaseUrl"] = "https://api.api2cart.com/v1.1";
+        $Configuration["BaseUrl"] = "https://api.api2cart.local.com/v1.1";
     }
 
     if (!$Configuration.containsKey("Username")) {
@@ -313,7 +313,7 @@ System.Collections.Hashtable[]
 function Get-HostSetting {
     return ,@(
           @{
-            "Url" = "https://api.api2cart.com/v1.1";
+            "Url" = "https://api.api2cart.local.com/v1.1";
             "Description" = "API2Cart Production Server";
           }
     )

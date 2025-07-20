@@ -87,6 +87,14 @@ Bol Retailer ID
 Subdomain of store
 .PARAMETER BigcartelPassword
 BigCartel account password
+.PARAMETER BricklinkConsumerKey
+Bricklink Consumer Key
+.PARAMETER BricklinkConsumerSecret
+Bricklink Consumer Secret
+.PARAMETER BricklinkToken
+Bricklink Access Token
+.PARAMETER BricklinkTokenSecret
+Bricklink Access Token Secret
 .PARAMETER DemandwareClientId
 Demandware client id
 .PARAMETER DemandwareApiPassword
@@ -456,377 +464,389 @@ function Initialize-AccountCartAdd {
         ${BigcartelPassword},
         [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${DemandwareClientId},
+        ${BricklinkConsumerKey},
         [Parameter(Position = 37, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${DemandwareApiPassword},
+        ${BricklinkConsumerSecret},
         [Parameter(Position = 38, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${DemandwareUserName},
+        ${BricklinkToken},
         [Parameter(Position = 39, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${DemandwareUserPassword},
+        ${BricklinkTokenSecret},
         [Parameter(Position = 40, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${EbayClientId},
+        ${DemandwareClientId},
         [Parameter(Position = 41, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${EbayClientSecret},
+        ${DemandwareApiPassword},
         [Parameter(Position = 42, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${EbayRuname},
+        ${DemandwareUserName},
         [Parameter(Position = 43, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${EbayAccessToken},
+        ${DemandwareUserPassword},
         [Parameter(Position = 44, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${EbayRefreshToken},
+        ${EbayClientId},
         [Parameter(Position = 45, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${EbayEnvironment} = "production",
+        ${EbayClientSecret},
         [Parameter(Position = 46, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Int32]]
-        ${EbaySiteId} = 0,
+        [String]
+        ${EbayRuname},
         [Parameter(Position = 47, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${WalmartClientId},
+        ${EbayAccessToken},
         [Parameter(Position = 48, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${WalmartClientSecret},
+        ${EbayRefreshToken},
         [Parameter(Position = 49, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${WalmartEnvironment} = "production",
+        ${EbayEnvironment} = "production",
         [Parameter(Position = 50, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${WalmartChannelType},
+        [System.Nullable[Int32]]
+        ${EbaySiteId} = 0,
         [Parameter(Position = 51, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${WalmartRegion} = "us",
+        ${WalmartClientId},
         [Parameter(Position = 52, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${EcwidAcessToken},
+        ${WalmartClientSecret},
         [Parameter(Position = 53, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${EcwidStoreId},
+        ${WalmartEnvironment} = "production",
         [Parameter(Position = 54, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${LazadaAppId},
+        ${WalmartChannelType},
         [Parameter(Position = 55, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${LazadaAppSecret},
+        ${WalmartRegion} = "us",
         [Parameter(Position = 56, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${LazadaRefreshToken},
+        ${EcwidAcessToken},
         [Parameter(Position = 57, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${LazadaRegion},
+        ${EcwidStoreId},
         [Parameter(Position = 58, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${LightspeedApiKey},
+        ${LazadaAppId},
         [Parameter(Position = 59, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${LightspeedApiSecret},
+        ${LazadaAppSecret},
         [Parameter(Position = 60, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${EtsyKeystring},
+        ${LazadaRefreshToken},
         [Parameter(Position = 61, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${EtsySharedSecret},
+        ${LazadaRegion},
         [Parameter(Position = 62, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${EtsyAccessToken},
+        ${LightspeedApiKey},
         [Parameter(Position = 63, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${EtsyTokenSecret},
+        ${LightspeedApiSecret},
         [Parameter(Position = 64, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${EtsyClientId},
+        ${EtsyKeystring},
         [Parameter(Position = 65, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${EtsyRefreshToken},
+        ${EtsySharedSecret},
         [Parameter(Position = 66, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${FacebookAppId},
+        ${EtsyAccessToken},
         [Parameter(Position = 67, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${FacebookAppSecret},
+        ${EtsyTokenSecret},
         [Parameter(Position = 68, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${FacebookAccessToken},
+        ${EtsyClientId},
         [Parameter(Position = 69, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${FacebookBusinessId},
+        ${EtsyRefreshToken},
         [Parameter(Position = 70, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${NetoApiKey},
+        ${FacebookAppId},
         [Parameter(Position = 71, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${NetoApiUsername},
+        ${FacebookAppSecret},
         [Parameter(Position = 72, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShoplineAccessToken},
+        ${FacebookAccessToken},
         [Parameter(Position = 73, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShoplineAppKey},
+        ${FacebookBusinessId},
         [Parameter(Position = 74, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShoplineAppSecret},
+        ${NetoApiKey},
         [Parameter(Position = 75, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShoplineSharedSecret},
+        ${NetoApiUsername},
         [Parameter(Position = 76, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShopifyAccessToken},
+        ${ShoplineAccessToken},
         [Parameter(Position = 77, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShopifyApiKey},
+        ${ShoplineAppKey},
         [Parameter(Position = 78, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShopifyApiPassword},
+        ${ShoplineAppSecret},
         [Parameter(Position = 79, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShopifySharedSecret},
+        ${ShoplineSharedSecret},
         [Parameter(Position = 80, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShopeePartnerId},
+        ${ShopifyAccessToken},
         [Parameter(Position = 81, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShopeePartnerKey},
+        ${ShopifyApiKey},
         [Parameter(Position = 82, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShopeeShopId},
+        ${ShopifyApiPassword},
         [Parameter(Position = 83, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShopeeRefreshToken},
+        ${ShopifySharedSecret},
         [Parameter(Position = 84, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShopeeRegion},
+        ${ShopeePartnerId},
         [Parameter(Position = 85, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShopeeEnvironment} = "production",
+        ${ShopeePartnerKey},
         [Parameter(Position = 86, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShoplazzaAccessToken},
+        ${ShopeeShopId},
         [Parameter(Position = 87, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShoplazzaSharedSecret},
+        ${ShopeeRefreshToken},
         [Parameter(Position = 88, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShopwareAccessKey},
+        ${ShopeeRegion},
         [Parameter(Position = 89, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShopwareApiKey},
+        ${ShopeeEnvironment} = "production",
         [Parameter(Position = 90, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ShopwareApiSecret},
+        ${ShoplazzaAccessToken},
         [Parameter(Position = 91, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MivaAccessToken},
+        ${ShoplazzaSharedSecret},
         [Parameter(Position = 92, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MivaSignature},
+        ${ShopwareAccessKey},
         [Parameter(Position = 93, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Int32]]
-        ${TiendanubeUserId},
+        [String]
+        ${ShopwareApiKey},
         [Parameter(Position = 94, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${TiendanubeAccessToken},
+        ${ShopwareApiSecret},
         [Parameter(Position = 95, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${TiendanubeClientSecret},
+        ${MivaAccessToken},
         [Parameter(Position = 96, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${VolusionLogin},
+        ${MivaSignature},
         [Parameter(Position = 97, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${VolusionPassword},
+        [System.Nullable[Int32]]
+        ${TiendanubeUserId},
         [Parameter(Position = 98, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${HybrisClientId},
+        ${TiendanubeAccessToken},
         [Parameter(Position = 99, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${HybrisClientSecret},
+        ${TiendanubeClientSecret},
         [Parameter(Position = 100, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${HybrisUsername},
+        ${VolusionLogin},
         [Parameter(Position = 101, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${HybrisPassword},
+        ${VolusionPassword},
         [Parameter(Position = 102, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject[]]
-        ${HybrisWebsites},
+        [String]
+        ${HybrisClientId},
         [Parameter(Position = 103, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SquareClientId},
+        ${HybrisClientSecret},
         [Parameter(Position = 104, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SquareClientSecret},
+        ${HybrisUsername},
         [Parameter(Position = 105, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SquareRefreshToken},
+        ${HybrisPassword},
         [Parameter(Position = 106, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${SquarespaceApiKey},
+        [PSCustomObject[]]
+        ${HybrisWebsites},
         [Parameter(Position = 107, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SquarespaceClientId},
+        ${SquareClientId},
         [Parameter(Position = 108, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SquarespaceClientSecret},
+        ${SquareClientSecret},
         [Parameter(Position = 109, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SquarespaceAccessToken},
+        ${SquareRefreshToken},
         [Parameter(Position = 110, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SquarespaceRefreshToken},
+        ${SquarespaceApiKey},
         [Parameter(Position = 111, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CommercehqApiKey},
+        ${SquarespaceClientId},
         [Parameter(Position = 112, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CommercehqApiPassword},
+        ${SquarespaceClientSecret},
         [Parameter(Position = 113, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${WcConsumerKey},
+        ${SquarespaceAccessToken},
         [Parameter(Position = 114, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${WcConsumerSecret},
+        ${SquarespaceRefreshToken},
         [Parameter(Position = 115, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MagentoConsumerKey},
+        ${CommercehqApiKey},
         [Parameter(Position = 116, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MagentoConsumerSecret},
+        ${CommercehqApiPassword},
         [Parameter(Position = 117, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MagentoAccessToken},
+        ${WcConsumerKey},
         [Parameter(Position = 118, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MagentoTokenSecret},
+        ${WcConsumerSecret},
         [Parameter(Position = 119, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${PrestashopWebserviceKey},
+        ${MagentoConsumerKey},
         [Parameter(Position = 120, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${WixAppId},
+        ${MagentoConsumerSecret},
         [Parameter(Position = 121, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${WixAppSecretKey},
+        ${MagentoAccessToken},
         [Parameter(Position = 122, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${WixInstanceId},
+        ${MagentoTokenSecret},
         [Parameter(Position = 123, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${WixRefreshToken},
+        ${PrestashopWebserviceKey},
         [Parameter(Position = 124, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MercadoLibreAppId},
+        ${WixAppId},
         [Parameter(Position = 125, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MercadoLibreAppSecretKey},
+        ${WixAppSecretKey},
         [Parameter(Position = 126, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MercadoLibreRefreshToken},
+        ${WixInstanceId},
         [Parameter(Position = 127, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Int32]]
-        ${ZidClientId},
+        [String]
+        ${WixRefreshToken},
         [Parameter(Position = 128, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ZidClientSecret},
+        ${MercadoLibreAppId},
         [Parameter(Position = 129, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ZidAccessToken},
+        ${MercadoLibreAppSecretKey},
         [Parameter(Position = 130, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ZidAuthorization},
+        ${MercadoLibreRefreshToken},
         [Parameter(Position = 131, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${ZidRefreshToken},
+        [System.Nullable[Int32]]
+        ${ZidClientId},
         [Parameter(Position = 132, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${FlipkartClientId},
+        ${ZidClientSecret},
         [Parameter(Position = 133, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${FlipkartClientSecret},
+        ${ZidAccessToken},
         [Parameter(Position = 134, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${AllegroClientId},
+        ${ZidAuthorization},
         [Parameter(Position = 135, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${AllegroClientSecret},
+        ${ZidRefreshToken},
         [Parameter(Position = 136, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${AllegroAccessToken},
+        ${FlipkartClientId},
         [Parameter(Position = 137, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${AllegroRefreshToken},
+        ${FlipkartClientSecret},
         [Parameter(Position = 138, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${AllegroEnvironment} = "production",
+        ${AllegroClientId},
         [Parameter(Position = 139, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ZohoClientId},
+        ${AllegroClientSecret},
         [Parameter(Position = 140, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ZohoClientSecret},
+        ${AllegroAccessToken},
         [Parameter(Position = 141, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ZohoRefreshToken},
+        ${AllegroRefreshToken},
         [Parameter(Position = 142, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ZohoRegion},
+        ${AllegroEnvironment} = "production",
         [Parameter(Position = 143, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${OttoClientId},
+        ${ZohoClientId},
         [Parameter(Position = 144, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${OttoClientSecret},
+        ${ZohoClientSecret},
         [Parameter(Position = 145, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${OttoAppId},
+        ${ZohoRefreshToken},
         [Parameter(Position = 146, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${OttoRefreshToken},
+        ${ZohoRegion},
         [Parameter(Position = 147, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${OttoEnvironment} = "production",
+        ${OttoClientId},
         [Parameter(Position = 148, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${OttoAccessToken},
+        ${OttoClientSecret},
         [Parameter(Position = 149, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${TiktokshopAppKey},
+        ${OttoAppId},
         [Parameter(Position = 150, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${TiktokshopAppSecret},
+        ${OttoRefreshToken},
         [Parameter(Position = 151, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${TiktokshopRefreshToken},
+        ${OttoEnvironment} = "production",
         [Parameter(Position = 152, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${TiktokshopAccessToken},
+        ${OttoAccessToken},
         [Parameter(Position = 153, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SallaClientId},
+        ${TiktokshopAppKey},
         [Parameter(Position = 154, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SallaClientSecret},
+        ${TiktokshopAppSecret},
         [Parameter(Position = 155, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SallaRefreshToken},
+        ${TiktokshopRefreshToken},
         [Parameter(Position = 156, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SallaAccessToken},
+        ${TiktokshopAccessToken},
         [Parameter(Position = 157, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${TemuAppKey},
+        ${SallaClientId},
         [Parameter(Position = 158, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${TemuAppSecret},
+        ${SallaClientSecret},
         [Parameter(Position = 159, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${TemuAccessToken},
+        ${SallaRefreshToken},
         [Parameter(Position = 160, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${SallaAccessToken},
+        [Parameter(Position = 161, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${TemuAppKey},
+        [Parameter(Position = 162, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${TemuAppSecret},
+        [Parameter(Position = 163, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${TemuAccessToken},
+        [Parameter(Position = 164, ValueFromPipelineByPropertyName = $true)]
         [ValidateSet("US", "EU", "GLOBAL")]
         [String]
         ${TemuRegion}
@@ -846,6 +866,22 @@ function Initialize-AccountCartAdd {
 
         if ($null -eq $BigcartelPassword) {
             throw "invalid value for 'BigcartelPassword', 'BigcartelPassword' cannot be null."
+        }
+
+        if ($null -eq $BricklinkConsumerKey) {
+            throw "invalid value for 'BricklinkConsumerKey', 'BricklinkConsumerKey' cannot be null."
+        }
+
+        if ($null -eq $BricklinkConsumerSecret) {
+            throw "invalid value for 'BricklinkConsumerSecret', 'BricklinkConsumerSecret' cannot be null."
+        }
+
+        if ($null -eq $BricklinkToken) {
+            throw "invalid value for 'BricklinkToken', 'BricklinkToken' cannot be null."
+        }
+
+        if ($null -eq $BricklinkTokenSecret) {
+            throw "invalid value for 'BricklinkTokenSecret', 'BricklinkTokenSecret' cannot be null."
         }
 
         if (!$HybrisWebsites -and $HybrisWebsites.length -lt 1) {
@@ -906,6 +942,10 @@ function Initialize-AccountCartAdd {
             "bol_retailer_id" = ${BolRetailerId}
             "bigcartel_user_name" = ${BigcartelUserName}
             "bigcartel_password" = ${BigcartelPassword}
+            "bricklink_consumer_key" = ${BricklinkConsumerKey}
+            "bricklink_consumer_secret" = ${BricklinkConsumerSecret}
+            "bricklink_token" = ${BricklinkToken}
+            "bricklink_token_secret" = ${BricklinkTokenSecret}
             "demandware_client_id" = ${DemandwareClientId}
             "demandware_api_password" = ${DemandwareApiPassword}
             "demandware_user_name" = ${DemandwareUserName}
@@ -1068,7 +1108,7 @@ function ConvertFrom-JsonToAccountCartAdd {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in AccountCartAdd
-        $AllProperties = ("cart_id", "store_url", "bridge_url", "store_root", "store_key", "validate_version", "verify", "db_tables_prefix", "user_agent", "ftp_host", "ftp_user", "ftp_password", "ftp_port", "ftp_store_dir", "3dcart_private_key", "3dcart_access_token", "3dcartapi_api_key", "amazon_sp_client_id", "amazon_sp_client_secret", "amazon_sp_refresh_token", "amazon_sp_aws_region", "amazon_sp_api_environment", "amazon_seller_id", "aspdotnetstorefront_api_user", "aspdotnetstorefront_api_pass", "bigcommerceapi_admin_account", "bigcommerceapi_api_path", "bigcommerceapi_api_key", "bigcommerceapi_client_id", "bigcommerceapi_access_token", "bigcommerceapi_context", "bol_api_key", "bol_api_secret", "bol_retailer_id", "bigcartel_user_name", "bigcartel_password", "demandware_client_id", "demandware_api_password", "demandware_user_name", "demandware_user_password", "ebay_client_id", "ebay_client_secret", "ebay_runame", "ebay_access_token", "ebay_refresh_token", "ebay_environment", "ebay_site_id", "walmart_client_id", "walmart_client_secret", "walmart_environment", "walmart_channel_type", "walmart_region", "ecwid_acess_token", "ecwid_store_id", "lazada_app_id", "lazada_app_secret", "lazada_refresh_token", "lazada_region", "lightspeed_api_key", "lightspeed_api_secret", "etsy_keystring", "etsy_shared_secret", "etsy_access_token", "etsy_token_secret", "etsy_client_id", "etsy_refresh_token", "facebook_app_id", "facebook_app_secret", "facebook_access_token", "facebook_business_id", "neto_api_key", "neto_api_username", "shopline_access_token", "shopline_app_key", "shopline_app_secret", "shopline_shared_secret", "shopify_access_token", "shopify_api_key", "shopify_api_password", "shopify_shared_secret", "shopee_partner_id", "shopee_partner_key", "shopee_shop_id", "shopee_refresh_token", "shopee_region", "shopee_environment", "shoplazza_access_token", "shoplazza_shared_secret", "shopware_access_key", "shopware_api_key", "shopware_api_secret", "miva_access_token", "miva_signature", "tiendanube_user_id", "tiendanube_access_token", "tiendanube_client_secret", "volusion_login", "volusion_password", "hybris_client_id", "hybris_client_secret", "hybris_username", "hybris_password", "hybris_websites", "square_client_id", "square_client_secret", "square_refresh_token", "squarespace_api_key", "squarespace_client_id", "squarespace_client_secret", "squarespace_access_token", "squarespace_refresh_token", "commercehq_api_key", "commercehq_api_password", "wc_consumer_key", "wc_consumer_secret", "magento_consumer_key", "magento_consumer_secret", "magento_access_token", "magento_token_secret", "prestashop_webservice_key", "wix_app_id", "wix_app_secret_key", "wix_instance_id", "wix_refresh_token", "mercado_libre_app_id", "mercado_libre_app_secret_key", "mercado_libre_refresh_token", "zid_client_id", "zid_client_secret", "zid_access_token", "zid_authorization", "zid_refresh_token", "flipkart_client_id", "flipkart_client_secret", "allegro_client_id", "allegro_client_secret", "allegro_access_token", "allegro_refresh_token", "allegro_environment", "zoho_client_id", "zoho_client_secret", "zoho_refresh_token", "zoho_region", "otto_client_id", "otto_client_secret", "otto_app_id", "otto_refresh_token", "otto_environment", "otto_access_token", "tiktokshop_app_key", "tiktokshop_app_secret", "tiktokshop_refresh_token", "tiktokshop_access_token", "salla_client_id", "salla_client_secret", "salla_refresh_token", "salla_access_token", "temu_app_key", "temu_app_secret", "temu_access_token", "temu_region")
+        $AllProperties = ("cart_id", "store_url", "bridge_url", "store_root", "store_key", "validate_version", "verify", "db_tables_prefix", "user_agent", "ftp_host", "ftp_user", "ftp_password", "ftp_port", "ftp_store_dir", "3dcart_private_key", "3dcart_access_token", "3dcartapi_api_key", "amazon_sp_client_id", "amazon_sp_client_secret", "amazon_sp_refresh_token", "amazon_sp_aws_region", "amazon_sp_api_environment", "amazon_seller_id", "aspdotnetstorefront_api_user", "aspdotnetstorefront_api_pass", "bigcommerceapi_admin_account", "bigcommerceapi_api_path", "bigcommerceapi_api_key", "bigcommerceapi_client_id", "bigcommerceapi_access_token", "bigcommerceapi_context", "bol_api_key", "bol_api_secret", "bol_retailer_id", "bigcartel_user_name", "bigcartel_password", "bricklink_consumer_key", "bricklink_consumer_secret", "bricklink_token", "bricklink_token_secret", "demandware_client_id", "demandware_api_password", "demandware_user_name", "demandware_user_password", "ebay_client_id", "ebay_client_secret", "ebay_runame", "ebay_access_token", "ebay_refresh_token", "ebay_environment", "ebay_site_id", "walmart_client_id", "walmart_client_secret", "walmart_environment", "walmart_channel_type", "walmart_region", "ecwid_acess_token", "ecwid_store_id", "lazada_app_id", "lazada_app_secret", "lazada_refresh_token", "lazada_region", "lightspeed_api_key", "lightspeed_api_secret", "etsy_keystring", "etsy_shared_secret", "etsy_access_token", "etsy_token_secret", "etsy_client_id", "etsy_refresh_token", "facebook_app_id", "facebook_app_secret", "facebook_access_token", "facebook_business_id", "neto_api_key", "neto_api_username", "shopline_access_token", "shopline_app_key", "shopline_app_secret", "shopline_shared_secret", "shopify_access_token", "shopify_api_key", "shopify_api_password", "shopify_shared_secret", "shopee_partner_id", "shopee_partner_key", "shopee_shop_id", "shopee_refresh_token", "shopee_region", "shopee_environment", "shoplazza_access_token", "shoplazza_shared_secret", "shopware_access_key", "shopware_api_key", "shopware_api_secret", "miva_access_token", "miva_signature", "tiendanube_user_id", "tiendanube_access_token", "tiendanube_client_secret", "volusion_login", "volusion_password", "hybris_client_id", "hybris_client_secret", "hybris_username", "hybris_password", "hybris_websites", "square_client_id", "square_client_secret", "square_refresh_token", "squarespace_api_key", "squarespace_client_id", "squarespace_client_secret", "squarespace_access_token", "squarespace_refresh_token", "commercehq_api_key", "commercehq_api_password", "wc_consumer_key", "wc_consumer_secret", "magento_consumer_key", "magento_consumer_secret", "magento_access_token", "magento_token_secret", "prestashop_webservice_key", "wix_app_id", "wix_app_secret_key", "wix_instance_id", "wix_refresh_token", "mercado_libre_app_id", "mercado_libre_app_secret_key", "mercado_libre_refresh_token", "zid_client_id", "zid_client_secret", "zid_access_token", "zid_authorization", "zid_refresh_token", "flipkart_client_id", "flipkart_client_secret", "allegro_client_id", "allegro_client_secret", "allegro_access_token", "allegro_refresh_token", "allegro_environment", "zoho_client_id", "zoho_client_secret", "zoho_refresh_token", "zoho_region", "otto_client_id", "otto_client_secret", "otto_app_id", "otto_refresh_token", "otto_environment", "otto_access_token", "tiktokshop_app_key", "tiktokshop_app_secret", "tiktokshop_refresh_token", "tiktokshop_access_token", "salla_client_id", "salla_client_secret", "salla_refresh_token", "salla_access_token", "temu_app_key", "temu_app_secret", "temu_access_token", "temu_region")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -1095,6 +1135,30 @@ function ConvertFrom-JsonToAccountCartAdd {
             throw "Error! JSON cannot be serialized due to the required property 'bigcartel_password' missing."
         } else {
             $BigcartelPassword = $JsonParameters.PSobject.Properties["bigcartel_password"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bricklink_consumer_key"))) {
+            throw "Error! JSON cannot be serialized due to the required property 'bricklink_consumer_key' missing."
+        } else {
+            $BricklinkConsumerKey = $JsonParameters.PSobject.Properties["bricklink_consumer_key"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bricklink_consumer_secret"))) {
+            throw "Error! JSON cannot be serialized due to the required property 'bricklink_consumer_secret' missing."
+        } else {
+            $BricklinkConsumerSecret = $JsonParameters.PSobject.Properties["bricklink_consumer_secret"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bricklink_token"))) {
+            throw "Error! JSON cannot be serialized due to the required property 'bricklink_token' missing."
+        } else {
+            $BricklinkToken = $JsonParameters.PSobject.Properties["bricklink_token"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bricklink_token_secret"))) {
+            throw "Error! JSON cannot be serialized due to the required property 'bricklink_token_secret' missing."
+        } else {
+            $BricklinkTokenSecret = $JsonParameters.PSobject.Properties["bricklink_token_secret"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "wix_app_id"))) {
@@ -2082,6 +2146,10 @@ function ConvertFrom-JsonToAccountCartAdd {
             "bol_retailer_id" = ${BolRetailerId}
             "bigcartel_user_name" = ${BigcartelUserName}
             "bigcartel_password" = ${BigcartelPassword}
+            "bricklink_consumer_key" = ${BricklinkConsumerKey}
+            "bricklink_consumer_secret" = ${BricklinkConsumerSecret}
+            "bricklink_token" = ${BricklinkToken}
+            "bricklink_token_secret" = ${BricklinkTokenSecret}
             "demandware_client_id" = ${DemandwareClientId}
             "demandware_api_password" = ${DemandwareApiPassword}
             "demandware_user_name" = ${DemandwareUserName}

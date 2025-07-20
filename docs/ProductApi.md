@@ -1,6 +1,6 @@
 # PSOpenAPITools.PSOpenAPITools\Api.ProductApi
 
-All URIs are relative to *https://api.api2cart.com/v1.1*
+All URIs are relative to *https://api.api2cart.local.com/v1.1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -18,7 +18,6 @@ Method | HTTP request | Description
 [**Invoke-ProductCurrencyList**](ProductApi.md#Invoke-ProductCurrencyList) | **GET** /product.currency.list.json | product.currency.list
 [**Invoke-ProductDelete**](ProductApi.md#Invoke-ProductDelete) | **DELETE** /product.delete.json | product.delete
 [**Invoke-ProductDeleteBatch**](ProductApi.md#Invoke-ProductDeleteBatch) | **POST** /product.delete.batch.json | product.delete.batch
-[**Invoke-ProductFields**](ProductApi.md#Invoke-ProductFields) | **GET** /product.fields.json | product.fields
 [**Invoke-ProductFind**](ProductApi.md#Invoke-ProductFind) | **GET** /product.find.json | product.find
 [**Invoke-ProductImageAdd**](ProductApi.md#Invoke-ProductImageAdd) | **POST** /product.image.add.json | product.image.add
 [**Invoke-ProductImageDelete**](ProductApi.md#Invoke-ProductImageDelete) | **DELETE** /product.image.delete.json | product.image.delete
@@ -44,13 +43,10 @@ Method | HTTP request | Description
 [**Invoke-ProductUpdateBatch**](ProductApi.md#Invoke-ProductUpdateBatch) | **POST** /product.update.batch.json | product.update.batch
 [**Invoke-ProductVariantAdd**](ProductApi.md#Invoke-ProductVariantAdd) | **POST** /product.variant.add.json | product.variant.add
 [**Invoke-ProductVariantAddBatch**](ProductApi.md#Invoke-ProductVariantAddBatch) | **POST** /product.variant.add.batch.json | product.variant.add.batch
-[**Invoke-ProductVariantCount**](ProductApi.md#Invoke-ProductVariantCount) | **GET** /product.variant.count.json | product.variant.count
 [**Invoke-ProductVariantDelete**](ProductApi.md#Invoke-ProductVariantDelete) | **DELETE** /product.variant.delete.json | product.variant.delete
 [**Invoke-ProductVariantDeleteBatch**](ProductApi.md#Invoke-ProductVariantDeleteBatch) | **POST** /product.variant.delete.batch.json | product.variant.delete.batch
 [**Invoke-ProductVariantImageAdd**](ProductApi.md#Invoke-ProductVariantImageAdd) | **POST** /product.variant.image.add.json | product.variant.image.add
 [**Invoke-ProductVariantImageDelete**](ProductApi.md#Invoke-ProductVariantImageDelete) | **DELETE** /product.variant.image.delete.json | product.variant.image.delete
-[**Invoke-ProductVariantInfo**](ProductApi.md#Invoke-ProductVariantInfo) | **GET** /product.variant.info.json | product.variant.info
-[**Invoke-ProductVariantList**](ProductApi.md#Invoke-ProductVariantList) | **GET** /product.variant.list.json | product.variant.list
 [**Invoke-ProductVariantPriceAdd**](ProductApi.md#Invoke-ProductVariantPriceAdd) | **POST** /product.variant.price.add.json | product.variant.price.add
 [**Invoke-ProductVariantPriceDelete**](ProductApi.md#Invoke-ProductVariantPriceDelete) | **DELETE** /product.variant.price.delete.json | product.variant.price.delete
 [**Invoke-ProductVariantPriceUpdate**](ProductApi.md#Invoke-ProductVariantPriceUpdate) | **PUT** /product.variant.price.update.json | product.variant.price.update
@@ -1191,56 +1187,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-<a id="Invoke-ProductFields"></a>
-# **Invoke-ProductFields**
-> CartConfigUpdate200Response Invoke-ProductFields<br>
-
-product.fields
-
-Retrieve all available fields for product item in store.
-
-### Example
-```powershell
-# general setting of the PowerShell module, e.g. base URL, authentication, etc
-$Configuration = Get-Configuration
-# Configure API key authorization: StoreKeyAuth
-$Configuration.ApiKey.x-store-key = "YOUR_API_KEY"
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-#$Configuration.ApiKeyPrefix.x-store-key = "Bearer"
-
-# Configure API key authorization: ApiKeyAuth
-$Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-#$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
-
-
-# product.fields
-try {
-    $Result = Invoke-ProductFields
-} catch {
-    Write-Host ("Exception occurred when calling Invoke-ProductFields: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
-    Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
-}
-```
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-[**CartConfigUpdate200Response**](CartConfigUpdate200Response.md) (PSCustomObject)
-
-### Authorization
-
-[StoreKeyAuth](../README.md#StoreKeyAuth), [ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2963,79 +2909,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-<a id="Invoke-ProductVariantCount"></a>
-# **Invoke-ProductVariantCount**
-> ProductVariantCount200Response Invoke-ProductVariantCount<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CategoryId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedFrom] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedTo] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedFrom] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedTo] <String><br>
-
-product.variant.count
-
-Get count variants.
-
-### Example
-```powershell
-# general setting of the PowerShell module, e.g. base URL, authentication, etc
-$Configuration = Get-Configuration
-# Configure API key authorization: StoreKeyAuth
-$Configuration.ApiKey.x-store-key = "YOUR_API_KEY"
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-#$Configuration.ApiKeyPrefix.x-store-key = "Bearer"
-
-# Configure API key authorization: ApiKeyAuth
-$Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-#$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
-
-$ProductId = "10" # String | Retrieves products' variants specified by product id
-$CategoryId = "6" # String | Counts products’ variants specified by category id (optional)
-$StoreId = "1" # String | Retrieves variants specified by store id (optional)
-$CreatedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their creation date (optional)
-$CreatedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their creation date (optional)
-$ModifiedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their modification date (optional)
-$ModifiedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their modification date (optional)
-
-# product.variant.count
-try {
-    $Result = Invoke-ProductVariantCount -ProductId $ProductId -CategoryId $CategoryId -StoreId $StoreId -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo
-} catch {
-    Write-Host ("Exception occurred when calling Invoke-ProductVariantCount: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
-    Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ProductId** | **String**| Retrieves products&#39; variants specified by product id | 
- **CategoryId** | **String**| Counts products’ variants specified by category id | [optional] 
- **StoreId** | **String**| Retrieves variants specified by store id | [optional] 
- **CreatedFrom** | **String**| Retrieve entities from their creation date | [optional] 
- **CreatedTo** | **String**| Retrieve entities to their creation date | [optional] 
- **ModifiedFrom** | **String**| Retrieve entities from their modification date | [optional] 
- **ModifiedTo** | **String**| Retrieve entities to their modification date | [optional] 
-
-### Return type
-
-[**ProductVariantCount200Response**](ProductVariantCount200Response.md) (PSCustomObject)
-
-### Authorization
-
-[StoreKeyAuth](../README.md#StoreKeyAuth), [ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 <a id="Invoke-ProductVariantDelete"></a>
 # **Invoke-ProductVariantDelete**
 > AttributeValueDelete200Response Invoke-ProductVariantDelete<br>
@@ -3260,155 +3133,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AttributeDelete200Response**](AttributeDelete200Response.md) (PSCustomObject)
-
-### Authorization
-
-[StoreKeyAuth](../README.md#StoreKeyAuth), [ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-<a id="Invoke-ProductVariantInfo"></a>
-# **Invoke-ProductVariantInfo**
-> ProductInfo200Response Invoke-ProductVariantInfo<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Id] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
-
-product.variant.info
-
-Get variant info. This method is deprecated, and its development is stopped. Please use ""product.child_item.info"" instead.
-
-### Example
-```powershell
-# general setting of the PowerShell module, e.g. base URL, authentication, etc
-$Configuration = Get-Configuration
-# Configure API key authorization: StoreKeyAuth
-$Configuration.ApiKey.x-store-key = "YOUR_API_KEY"
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-#$Configuration.ApiKeyPrefix.x-store-key = "Bearer"
-
-# Configure API key authorization: ApiKeyAuth
-$Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-#$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
-
-$Id = "10" # String | Retrieves variant's info specified by variant id
-$StoreId = "1" # String | Retrieves variant info specified by store id (optional)
-$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,description,price")
-$Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
-
-# product.variant.info
-try {
-    $Result = Invoke-ProductVariantInfo -Id $Id -StoreId $StoreId -Params $Params -Exclude $Exclude
-} catch {
-    Write-Host ("Exception occurred when calling Invoke-ProductVariantInfo: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
-    Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **Id** | **String**| Retrieves variant&#39;s info specified by variant id | 
- **StoreId** | **String**| Retrieves variant info specified by store id | [optional] 
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,description,price&quot;]
- **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
-
-### Return type
-
-[**ProductInfo200Response**](ProductInfo200Response.md) (PSCustomObject)
-
-### Authorization
-
-[StoreKeyAuth](../README.md#StoreKeyAuth), [ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-<a id="Invoke-ProductVariantList"></a>
-# **Invoke-ProductVariantList**
-> ProductVariantList200Response Invoke-ProductVariantList<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CategoryId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedFrom] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedTo] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedFrom] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedTo] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
-
-product.variant.list
-
-Get a list of variants. This method is deprecated, and its development is stopped. Please use ""product.child_item.list"" instead.
-
-### Example
-```powershell
-# general setting of the PowerShell module, e.g. base URL, authentication, etc
-$Configuration = Get-Configuration
-# Configure API key authorization: StoreKeyAuth
-$Configuration.ApiKey.x-store-key = "YOUR_API_KEY"
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-#$Configuration.ApiKeyPrefix.x-store-key = "Bearer"
-
-# Configure API key authorization: ApiKeyAuth
-$Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-#$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
-
-$Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
-$Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
-$ProductId = "10" # String | Retrieves products' variants specified by product id (optional)
-$CategoryId = "6" # String | Retrieves products’ variants specified by category id (optional)
-$StoreId = "1" # String | Retrieves variants specified by store id (optional)
-$CreatedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their creation date (optional)
-$CreatedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their creation date (optional)
-$ModifiedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their modification date (optional)
-$ModifiedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their modification date (optional)
-$Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,name,description,price")
-$Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
-
-# product.variant.list
-try {
-    $Result = Invoke-ProductVariantList -Start $Start -Count $Count -ProductId $ProductId -CategoryId $CategoryId -StoreId $StoreId -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -Params $Params -Exclude $Exclude
-} catch {
-    Write-Host ("Exception occurred when calling Invoke-ProductVariantList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
-    Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
- **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
- **ProductId** | **String**| Retrieves products&#39; variants specified by product id | [optional] 
- **CategoryId** | **String**| Retrieves products’ variants specified by category id | [optional] 
- **StoreId** | **String**| Retrieves variants specified by store id | [optional] 
- **CreatedFrom** | **String**| Retrieve entities from their creation date | [optional] 
- **CreatedTo** | **String**| Retrieve entities to their creation date | [optional] 
- **ModifiedFrom** | **String**| Retrieve entities from their modification date | [optional] 
- **ModifiedTo** | **String**| Retrieve entities to their modification date | [optional] 
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,name,description,price&quot;]
- **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
-
-### Return type
-
-[**ProductVariantList200Response**](ProductVariantList200Response.md) (PSCustomObject)
 
 ### Authorization
 

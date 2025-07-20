@@ -7,14 +7,6 @@
 #
 
 Describe -tag 'PSOpenAPITools' -name 'CartApi' {
-    Context 'Invoke-CartBridge' {
-        It 'Test Invoke-CartBridge' {
-            #$TestResult = Invoke-CartBridge
-            #$TestResult | Should -BeOfType TODO
-            #$TestResult.property | Should -Be 0
-        }
-    }
-
     Context 'Invoke-CartCatalogPriceRulesCount' {
         It 'Test Invoke-CartCatalogPriceRulesCount' {
             #$TestResult = Invoke-CartCatalogPriceRulesCount
@@ -26,30 +18,6 @@ Describe -tag 'PSOpenAPITools' -name 'CartApi' {
     Context 'Invoke-CartCatalogPriceRulesList' {
         It 'Test Invoke-CartCatalogPriceRulesList' {
             #$TestResult = Invoke-CartCatalogPriceRulesList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -Ids "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
-            #$TestResult | Should -BeOfType TODO
-            #$TestResult.property | Should -Be 0
-        }
-    }
-
-    Context 'Invoke-CartClearCache' {
-        It 'Test Invoke-CartClearCache' {
-            #$TestResult = Invoke-CartClearCache -CacheType "TEST_VALUE"
-            #$TestResult | Should -BeOfType TODO
-            #$TestResult.property | Should -Be 0
-        }
-    }
-
-    Context 'Invoke-CartConfig' {
-        It 'Test Invoke-CartConfig' {
-            #$TestResult = Invoke-CartConfig -Params "TEST_VALUE" -Exclude "TEST_VALUE"
-            #$TestResult | Should -BeOfType TODO
-            #$TestResult.property | Should -Be 0
-        }
-    }
-
-    Context 'Invoke-CartConfigUpdate' {
-        It 'Test Invoke-CartConfigUpdate' {
-            #$TestResult = Invoke-CartConfigUpdate -CartConfigUpdate "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -95,25 +63,9 @@ Describe -tag 'PSOpenAPITools' -name 'CartApi' {
         }
     }
 
-    Context 'Invoke-CartCreate' {
-        It 'Test Invoke-CartCreate' {
-            #$TestResult = Invoke-CartCreate -CartCreate "TEST_VALUE"
-            #$TestResult | Should -BeOfType TODO
-            #$TestResult.property | Should -Be 0
-        }
-    }
-
     Context 'Invoke-CartDelete' {
         It 'Test Invoke-CartDelete' {
             #$TestResult = Invoke-CartDelete -DeleteBridge "TEST_VALUE"
-            #$TestResult | Should -BeOfType TODO
-            #$TestResult.property | Should -Be 0
-        }
-    }
-
-    Context 'Invoke-CartDisconnect' {
-        It 'Test Invoke-CartDisconnect' {
-            #$TestResult = Invoke-CartDisconnect -DeleteBridge "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -154,14 +106,6 @@ Describe -tag 'PSOpenAPITools' -name 'CartApi' {
     Context 'Invoke-CartInfo' {
         It 'Test Invoke-CartInfo' {
             #$TestResult = Invoke-CartInfo -StoreId "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
-            #$TestResult | Should -BeOfType TODO
-            #$TestResult.property | Should -Be 0
-        }
-    }
-
-    Context 'Invoke-CartList' {
-        It 'Test Invoke-CartList' {
-            #$TestResult = Invoke-CartList
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

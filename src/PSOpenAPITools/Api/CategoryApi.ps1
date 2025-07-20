@@ -362,7 +362,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-CartConfigUpdate200Response
+CategoryAssign200Response
 #>
 function Get-egoryAssign {
     [CmdletBinding()]
@@ -442,7 +442,7 @@ function Get-egoryAssign {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "CartConfigUpdate200Response" `
+                                -ReturnType "CategoryAssign200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {
@@ -1668,7 +1668,7 @@ A switch when turned on will return a hash table of Response, StatusCode and Hea
 
 .OUTPUTS
 
-CartConfigUpdate200Response
+CategoryAssign200Response
 #>
 function Get-egoryUnassign {
     [CmdletBinding()]
@@ -1748,7 +1748,7 @@ function Get-egoryUnassign {
                                 -QueryParameters $LocalVarQueryParameters `
                                 -FormParameters $LocalVarFormParameters `
                                 -CookieParameters $LocalVarCookieParameters `
-                                -ReturnType "CartConfigUpdate200Response" `
+                                -ReturnType "CategoryAssign200Response" `
                                 -IsBodyNullable $false
 
         if ($WithHttpInfo.IsPresent) {

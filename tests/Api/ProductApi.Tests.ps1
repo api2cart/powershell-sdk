@@ -119,14 +119,6 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
         }
     }
 
-    Context 'Invoke-ProductFields' {
-        It 'Test Invoke-ProductFields' {
-            #$TestResult = Invoke-ProductFields
-            #$TestResult | Should -BeOfType TODO
-            #$TestResult.property | Should -Be 0
-        }
-    }
-
     Context 'Invoke-ProductFind' {
         It 'Test Invoke-ProductFind' {
             #$TestResult = Invoke-ProductFind -FindValue "TEST_VALUE" -FindWhere "TEST_VALUE" -FindParams "TEST_VALUE" -FindWhat "TEST_VALUE" -LangId "TEST_VALUE" -StoreId "TEST_VALUE"
@@ -327,14 +319,6 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
         }
     }
 
-    Context 'Invoke-ProductVariantCount' {
-        It 'Test Invoke-ProductVariantCount' {
-            #$TestResult = Invoke-ProductVariantCount -ProductId "TEST_VALUE" -CategoryId "TEST_VALUE" -StoreId "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE"
-            #$TestResult | Should -BeOfType TODO
-            #$TestResult.property | Should -Be 0
-        }
-    }
-
     Context 'Invoke-ProductVariantDelete' {
         It 'Test Invoke-ProductVariantDelete' {
             #$TestResult = Invoke-ProductVariantDelete -Id "TEST_VALUE" -ProductId "TEST_VALUE" -StoreId "TEST_VALUE"
@@ -362,22 +346,6 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
     Context 'Invoke-ProductVariantImageDelete' {
         It 'Test Invoke-ProductVariantImageDelete' {
             #$TestResult = Invoke-ProductVariantImageDelete -ProductId "TEST_VALUE" -ProductVariantId "TEST_VALUE" -Id "TEST_VALUE" -StoreId "TEST_VALUE"
-            #$TestResult | Should -BeOfType TODO
-            #$TestResult.property | Should -Be 0
-        }
-    }
-
-    Context 'Invoke-ProductVariantInfo' {
-        It 'Test Invoke-ProductVariantInfo' {
-            #$TestResult = Invoke-ProductVariantInfo -Id "TEST_VALUE" -StoreId "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
-            #$TestResult | Should -BeOfType TODO
-            #$TestResult.property | Should -Be 0
-        }
-    }
-
-    Context 'Invoke-ProductVariantList' {
-        It 'Test Invoke-ProductVariantList' {
-            #$TestResult = Invoke-ProductVariantList -Start "TEST_VALUE" -Count "TEST_VALUE" -ProductId "TEST_VALUE" -CategoryId "TEST_VALUE" -StoreId "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

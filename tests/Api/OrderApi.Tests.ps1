@@ -39,14 +39,6 @@ Describe -tag 'PSOpenAPITools' -name 'OrderApi' {
         }
     }
 
-    Context 'Invoke-OrderFind' {
-        It 'Test Invoke-OrderFind' {
-            #$TestResult = Invoke-OrderFind -Start "TEST_VALUE" -Count "TEST_VALUE" -CustomerId "TEST_VALUE" -CustomerEmail "TEST_VALUE" -OrderStatus "TEST_VALUE" -FinancialStatus "TEST_VALUE" -CreatedTo "TEST_VALUE" -CreatedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
-            #$TestResult | Should -BeOfType TODO
-            #$TestResult.property | Should -Be 0
-        }
-    }
-
     Context 'Invoke-OrderFulfillmentStatusList' {
         It 'Test Invoke-OrderFulfillmentStatusList' {
             #$TestResult = Invoke-OrderFulfillmentStatusList -Action "TEST_VALUE"

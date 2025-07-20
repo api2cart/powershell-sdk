@@ -1,6 +1,6 @@
 # PSOpenAPITools.PSOpenAPITools\Api.OrderApi
 
-All URIs are relative to *https://api.api2cart.com/v1.1*
+All URIs are relative to *https://api.api2cart.local.com/v1.1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -8,7 +8,6 @@ Method | HTTP request | Description
 [**Invoke-OrderAdd**](OrderApi.md#Invoke-OrderAdd) | **POST** /order.add.json | order.add
 [**Invoke-OrderCount**](OrderApi.md#Invoke-OrderCount) | **GET** /order.count.json | order.count
 [**Invoke-OrderFinancialStatusList**](OrderApi.md#Invoke-OrderFinancialStatusList) | **GET** /order.financial_status.list.json | order.financial_status.list
-[**Invoke-OrderFind**](OrderApi.md#Invoke-OrderFind) | **GET** /order.find.json | order.find
 [**Invoke-OrderFulfillmentStatusList**](OrderApi.md#Invoke-OrderFulfillmentStatusList) | **GET** /order.fulfillment_status.list.json | order.fulfillment_status.list
 [**Invoke-OrderInfo**](OrderApi.md#Invoke-OrderInfo) | **GET** /order.info.json | order.info
 [**Invoke-OrderList**](OrderApi.md#Invoke-OrderList) | **GET** /order.list.json | order.list
@@ -334,94 +333,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**OrderFinancialStatusList200Response**](OrderFinancialStatusList200Response.md) (PSCustomObject)
-
-### Authorization
-
-[StoreKeyAuth](../README.md#StoreKeyAuth), [ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-<a id="Invoke-OrderFind"></a>
-# **Invoke-OrderFind**
-> OrderFind200Response Invoke-OrderFind<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Start] <System.Nullable[Int32]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Count] <System.Nullable[Int32]><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CustomerId] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CustomerEmail] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-OrderStatus] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-FinancialStatus] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedTo] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedFrom] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedTo] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedFrom] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
-
-order.find
-
-This method is deprecated and won't be supported in the future. Please use ""order.list"" instead.
-
-### Example
-```powershell
-# general setting of the PowerShell module, e.g. base URL, authentication, etc
-$Configuration = Get-Configuration
-# Configure API key authorization: StoreKeyAuth
-$Configuration.ApiKey.x-store-key = "YOUR_API_KEY"
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-#$Configuration.ApiKeyPrefix.x-store-key = "Bearer"
-
-# Configure API key authorization: ApiKeyAuth
-$Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-#$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
-
-$Start = 0 # Int32 | This parameter sets the number from which you want to get entities (optional) (default to 0)
-$Count = 20 # Int32 | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 (optional) (default to 10)
-$CustomerId = "5" # String | Retrieves orders specified by customer id (optional)
-$CustomerEmail = "jubari@hannsgroup.com" # String | Retrieves orders specified by customer email (optional)
-$OrderStatus = "Completed" # String | Retrieves orders specified by order status (optional)
-$FinancialStatus = "paid" # String | Retrieves orders specified by financial status (optional)
-$CreatedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their creation date (optional)
-$CreatedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their creation date (optional)
-$ModifiedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their modification date (optional)
-$ModifiedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their modification date (optional)
-$Params = "order_id,totals,status" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "order_id,customer,totals,address,items,bundles,status")
-$Exclude = "order_id,totals,status" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
-
-# order.find
-try {
-    $Result = Invoke-OrderFind -Start $Start -Count $Count -CustomerId $CustomerId -CustomerEmail $CustomerEmail -OrderStatus $OrderStatus -FinancialStatus $FinancialStatus -CreatedTo $CreatedTo -CreatedFrom $CreatedFrom -ModifiedTo $ModifiedTo -ModifiedFrom $ModifiedFrom -Params $Params -Exclude $Exclude
-} catch {
-    Write-Host ("Exception occurred when calling Invoke-OrderFind: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
-    Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **Start** | **Int32**| This parameter sets the number from which you want to get entities | [optional] [default to 0]
- **Count** | **Int32**| This parameter sets the entity amount that has to be retrieved. Max allowed count&#x3D;250 | [optional] [default to 10]
- **CustomerId** | **String**| Retrieves orders specified by customer id | [optional] 
- **CustomerEmail** | **String**| Retrieves orders specified by customer email | [optional] 
- **OrderStatus** | **String**| Retrieves orders specified by order status | [optional] 
- **FinancialStatus** | **String**| Retrieves orders specified by financial status | [optional] 
- **CreatedTo** | **String**| Retrieve entities to their creation date | [optional] 
- **CreatedFrom** | **String**| Retrieve entities from their creation date | [optional] 
- **ModifiedTo** | **String**| Retrieve entities to their modification date | [optional] 
- **ModifiedFrom** | **String**| Retrieve entities from their modification date | [optional] 
- **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;order_id,customer,totals,address,items,bundles,status&quot;]
- **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
-
-### Return type
-
-[**OrderFind200Response**](OrderFind200Response.md) (PSCustomObject)
 
 ### Authorization
 
