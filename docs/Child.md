@@ -35,6 +35,7 @@ Name | Type | Description | Notes
 **InventoryLevel** | **Decimal** |  | [optional] 
 **Inventory** | [**ProductInventory[]**](ProductInventory.md) |  | [optional] 
 **MinQuantity** | **Decimal** |  | [optional] 
+**LowStockThreshold** | **Decimal** |  | [optional] 
 **DefaultQtyInPack** | **Decimal** |  | [optional] 
 **IsQtyInPackFixed** | **Boolean** |  | [optional] 
 **WeightUnit** | **String** |  | [optional] 
@@ -87,6 +88,7 @@ $Child = Initialize-PSOpenAPIToolsChild  -Id null `
  -InventoryLevel null `
  -Inventory null `
  -MinQuantity null `
+ -LowStockThreshold null `
  -DefaultQtyInPack null `
  -IsQtyInPackFixed null `
  -WeightUnit null `

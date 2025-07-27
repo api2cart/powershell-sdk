@@ -40,6 +40,7 @@ Name | Type | Description | Notes
 **BackorderStatus** | **String** | Set backorder status | [optional] 
 **MinOrderQuantity** | **Decimal** | The minimum quantity an order must contain, to be eligible to purchase this product. | [optional] 
 **MaxOrderQuantity** | **Decimal** | The maximum quantity an order can contain when purchasing the product. | [optional] 
+**LowStockThreshold** | **Decimal** | Specify the quantity threshold below which the product is considered low in stock | [optional] 
 **Weight** | **Decimal** | Weight | [optional] [default to 0]
 **WeightUnit** | **String** | Weight Unit | [optional] 
 **Width** | **Decimal** | Defines product&#39;s width | [optional] 
@@ -161,6 +162,7 @@ $ProductAdd = Initialize-PSOpenAPIToolsProductAdd  -Name Bag `
  -BackorderStatus true `
  -MinOrderQuantity 1 `
  -MaxOrderQuantity 1 `
+ -LowStockThreshold 1 `
  -Weight 23.69 `
  -WeightUnit lb `
  -Width 56.12 `

@@ -41,6 +41,8 @@ Set visibility status
 Defines product variant's status
 .PARAMETER BackorderStatus
 Set backorder status
+.PARAMETER LowStockThreshold
+Specify the quantity threshold below which the product is considered low in stock
 .PARAMETER AvailableForSale
 Specifies the set of visible/invisible product's variants for sale
 .PARAMETER Avail
@@ -169,123 +171,126 @@ function Initialize-ProductVariantUpdate {
         [String]
         ${BackorderStatus},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${AvailableForSale} = $true,
+        [System.Nullable[Decimal]]
+        ${LowStockThreshold},
         [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${Avail} = $true,
+        ${AvailableForSale} = $true,
         [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${IsDefault},
+        ${Avail} = $true,
         [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${IsFreeShipping},
+        ${IsDefault},
         [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${Taxable} = $true,
+        ${IsFreeShipping},
         [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${Taxable} = $true,
+        [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${TaxClassId},
-        [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${IsVirtual} = $false,
         [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${ManageStock},
+        ${IsVirtual} = $false,
         [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${InStock},
+        ${ManageStock},
         [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${InStock},
+        [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${WarehouseId},
-        [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${ReserveQuantity},
         [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Quantity},
+        ${ReserveQuantity},
         [Parameter(Position = 25, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${IncreaseQuantity} = 0,
+        ${Quantity},
         [Parameter(Position = 26, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${ReduceQuantity} = 0,
+        ${IncreaseQuantity} = 0,
         [Parameter(Position = 27, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Price},
+        ${ReduceQuantity} = 0,
         [Parameter(Position = 28, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${SpecialPrice},
+        ${Price},
         [Parameter(Position = 29, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${RetailPrice},
+        ${SpecialPrice},
         [Parameter(Position = 30, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${OldPrice},
+        ${RetailPrice},
         [Parameter(Position = 31, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${CostPrice},
+        ${OldPrice},
         [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${FixedCostShippingPrice},
+        ${CostPrice},
         [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${SpriceCreate},
+        [System.Nullable[Decimal]]
+        ${FixedCostShippingPrice},
         [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SpriceExpire},
+        ${SpriceCreate},
         [Parameter(Position = 35, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${SpriceExpire},
+        [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${Weight} = 0,
-        [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 37, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Barcode},
-        [Parameter(Position = 37, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 38, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${Width},
-        [Parameter(Position = 38, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 39, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${WeightUnit},
-        [Parameter(Position = 39, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${Height},
         [Parameter(Position = 40, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Length},
+        ${Height},
         [Parameter(Position = 41, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Gtin},
+        [System.Nullable[Decimal]]
+        ${Length},
         [Parameter(Position = 42, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Upc},
+        ${Gtin},
         [Parameter(Position = 43, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Mpn},
+        ${Upc},
         [Parameter(Position = 44, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Ean},
+        ${Mpn},
         [Parameter(Position = 45, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Isbn},
+        ${Ean},
         [Parameter(Position = 46, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${HarmonizedSystemCode},
+        ${Isbn},
         [Parameter(Position = 47, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CountryOfOrigin},
+        ${HarmonizedSystemCode},
         [Parameter(Position = 48, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaTitle},
+        ${CountryOfOrigin},
         [Parameter(Position = 49, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaDescription},
+        ${MetaTitle},
         [Parameter(Position = 50, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaKeywords},
+        ${MetaDescription},
         [Parameter(Position = 51, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${MetaKeywords},
+        [Parameter(Position = 52, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${Reindex} = $true,
-        [Parameter(Position = 52, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 53, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${ClearCache} = $true
     )
@@ -309,6 +314,7 @@ function Initialize-ProductVariantUpdate {
             "visible" = ${Visible}
             "status" = ${Status}
             "backorder_status" = ${BackorderStatus}
+            "low_stock_threshold" = ${LowStockThreshold}
             "available_for_sale" = ${AvailableForSale}
             "avail" = ${Avail}
             "is_default" = ${IsDefault}
@@ -386,7 +392,7 @@ function ConvertFrom-JsonToProductVariantUpdate {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductVariantUpdate
-        $AllProperties = ("id", "product_id", "store_id", "lang_id", "options", "name", "description", "short_description", "model", "sku", "visible", "status", "backorder_status", "available_for_sale", "avail", "is_default", "is_free_shipping", "taxable", "tax_class_id", "is_virtual", "manage_stock", "in_stock", "warehouse_id", "reserve_quantity", "quantity", "increase_quantity", "reduce_quantity", "price", "special_price", "retail_price", "old_price", "cost_price", "fixed_cost_shipping_price", "sprice_create", "sprice_expire", "weight", "barcode", "width", "weight_unit", "height", "length", "gtin", "upc", "mpn", "ean", "isbn", "harmonized_system_code", "country_of_origin", "meta_title", "meta_description", "meta_keywords", "reindex", "clear_cache")
+        $AllProperties = ("id", "product_id", "store_id", "lang_id", "options", "name", "description", "short_description", "model", "sku", "visible", "status", "backorder_status", "low_stock_threshold", "available_for_sale", "avail", "is_default", "is_free_shipping", "taxable", "tax_class_id", "is_virtual", "manage_stock", "in_stock", "warehouse_id", "reserve_quantity", "quantity", "increase_quantity", "reduce_quantity", "price", "special_price", "retail_price", "old_price", "cost_price", "fixed_cost_shipping_price", "sprice_create", "sprice_expire", "weight", "barcode", "width", "weight_unit", "height", "length", "gtin", "upc", "mpn", "ean", "isbn", "harmonized_system_code", "country_of_origin", "meta_title", "meta_description", "meta_keywords", "reindex", "clear_cache")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -469,6 +475,12 @@ function ConvertFrom-JsonToProductVariantUpdate {
             $BackorderStatus = $null
         } else {
             $BackorderStatus = $JsonParameters.PSobject.Properties["backorder_status"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "low_stock_threshold"))) { #optional property not found
+            $LowStockThreshold = $null
+        } else {
+            $LowStockThreshold = $JsonParameters.PSobject.Properties["low_stock_threshold"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "available_for_sale"))) { #optional property not found
@@ -725,6 +737,7 @@ function ConvertFrom-JsonToProductVariantUpdate {
             "visible" = ${Visible}
             "status" = ${Status}
             "backorder_status" = ${BackorderStatus}
+            "low_stock_threshold" = ${LowStockThreshold}
             "available_for_sale" = ${AvailableForSale}
             "avail" = ${Avail}
             "is_default" = ${IsDefault}

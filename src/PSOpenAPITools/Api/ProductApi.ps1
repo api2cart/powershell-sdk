@@ -3279,6 +3279,9 @@ Disable report cache for current request
 .PARAMETER UseLatestApiVersion
 Use the latest platform API version
 
+.PARAMETER ProductType
+A categorization for the product
+
 .PARAMETER WithHttpInfo
 
 A switch when turned on will return a hash table of Response, StatusCode and Headers instead of just the Response
@@ -3392,6 +3395,9 @@ function Invoke-ProductList {
         [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${UseLatestApiVersion},
+        [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ProductType},
         [Switch]
         $WithHttpInfo
     )
@@ -3549,6 +3555,10 @@ function Invoke-ProductList {
 
         if ($UseLatestApiVersion) {
             $LocalVarQueryParameters['use_latest_api_version'] = $UseLatestApiVersion
+        }
+
+        if ($ProductType) {
+            $LocalVarQueryParameters['product_type'] = $ProductType
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {

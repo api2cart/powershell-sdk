@@ -79,6 +79,8 @@ No description available.
 No description available.
 .PARAMETER MinQuantity
 No description available.
+.PARAMETER LowStockThreshold
+No description available.
 .PARAMETER DefaultQtyInPack
 No description available.
 .PARAMETER IsQtyInPackFixed
@@ -215,47 +217,50 @@ function Initialize-Child {
         ${MinQuantity},
         [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${DefaultQtyInPack},
+        ${LowStockThreshold},
         [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${DefaultQtyInPack},
+        [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${IsQtyInPackFixed},
-        [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 35, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${WeightUnit},
-        [Parameter(Position = 35, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${Weight},
-        [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 37, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${DimensionsUnit},
-        [Parameter(Position = 37, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${Width},
         [Parameter(Position = 38, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Height},
+        ${Width},
         [Parameter(Position = 39, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Length},
+        ${Height},
         [Parameter(Position = 40, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${MetaTitle},
+        [System.Nullable[Decimal]]
+        ${Length},
         [Parameter(Position = 41, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaDescription},
+        ${MetaTitle},
         [Parameter(Position = 42, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaKeywords},
+        ${MetaDescription},
         [Parameter(Position = 43, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${MetaKeywords},
+        [Parameter(Position = 44, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Discounts},
-        [Parameter(Position = 44, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 45, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${IsVirtual},
-        [Parameter(Position = 45, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 46, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${AdditionalFields},
-        [Parameter(Position = 46, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 47, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${CustomFields}
     )
@@ -298,6 +303,7 @@ function Initialize-Child {
             "inventory_level" = ${InventoryLevel}
             "inventory" = ${Inventory}
             "min_quantity" = ${MinQuantity}
+            "low_stock_threshold" = ${LowStockThreshold}
             "default_qty_in_pack" = ${DefaultQtyInPack}
             "is_qty_in_pack_fixed" = ${IsQtyInPackFixed}
             "weight_unit" = ${WeightUnit}
@@ -350,7 +356,7 @@ function ConvertFrom-JsonToChild {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in Child
-        $AllProperties = ("id", "parent_id", "sku", "upc", "ean", "mpn", "gtin", "isbn", "url", "seo_url", "sort_order", "created_time", "modified_time", "name", "short_description", "full_description", "images", "combination", "default_price", "cost_price", "list_price", "wholesale_price", "advanced_price", "tax_class_id", "avail_for_sale", "allow_backorders", "in_stock", "on_sale", "manage_stock", "inventory_level", "inventory", "min_quantity", "default_qty_in_pack", "is_qty_in_pack_fixed", "weight_unit", "weight", "dimensions_unit", "width", "height", "length", "meta_title", "meta_description", "meta_keywords", "discounts", "is_virtual", "additional_fields", "custom_fields")
+        $AllProperties = ("id", "parent_id", "sku", "upc", "ean", "mpn", "gtin", "isbn", "url", "seo_url", "sort_order", "created_time", "modified_time", "name", "short_description", "full_description", "images", "combination", "default_price", "cost_price", "list_price", "wholesale_price", "advanced_price", "tax_class_id", "avail_for_sale", "allow_backorders", "in_stock", "on_sale", "manage_stock", "inventory_level", "inventory", "min_quantity", "low_stock_threshold", "default_qty_in_pack", "is_qty_in_pack_fixed", "weight_unit", "weight", "dimensions_unit", "width", "height", "length", "meta_title", "meta_description", "meta_keywords", "discounts", "is_virtual", "additional_fields", "custom_fields")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -549,6 +555,12 @@ function ConvertFrom-JsonToChild {
             $MinQuantity = $JsonParameters.PSobject.Properties["min_quantity"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "low_stock_threshold"))) { #optional property not found
+            $LowStockThreshold = $null
+        } else {
+            $LowStockThreshold = $JsonParameters.PSobject.Properties["low_stock_threshold"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "default_qty_in_pack"))) { #optional property not found
             $DefaultQtyInPack = $null
         } else {
@@ -672,6 +684,7 @@ function ConvertFrom-JsonToChild {
             "inventory_level" = ${InventoryLevel}
             "inventory" = ${Inventory}
             "min_quantity" = ${MinQuantity}
+            "low_stock_threshold" = ${LowStockThreshold}
             "default_qty_in_pack" = ${DefaultQtyInPack}
             "is_qty_in_pack_fixed" = ${IsQtyInPackFixed}
             "weight_unit" = ${WeightUnit}

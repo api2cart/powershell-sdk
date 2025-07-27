@@ -40,6 +40,7 @@ Name | Type | Description | Notes
 **BackorderStatus** | **String** | Set backorder status | [optional] 
 **IncreaseQuantity** | **Decimal** | Defines the incremental changes in product quantity | [optional] 
 **ReduceQuantity** | **Decimal** | Defines the decrement changes in product quantity | [optional] 
+**LowStockThreshold** | **Decimal** | Specify the quantity threshold below which the product is considered low in stock | [optional] 
 **WarehouseId** | **String** | This parameter is used for selecting a warehouse where you need to set/modify a product quantity. | [optional] 
 **Weight** | **Decimal** | Weight | [optional] 
 **WeightUnit** | **String** | Weight Unit | [optional] 
@@ -130,6 +131,7 @@ $ProductUpdate = Initialize-PSOpenAPIToolsProductUpdate  -Id 10 `
  -BackorderStatus true `
  -IncreaseQuantity 4 `
  -ReduceQuantity 4 `
+ -LowStockThreshold 1 `
  -WarehouseId 1 `
  -Weight 23.69 `
  -WeightUnit lb `

@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **InStock** | **Boolean** | Set stock status | [optional] 
 **BackorderStatus** | **String** | Set backorder status | [optional] 
 **ManageStock** | **Boolean** | Defines inventory tracking for product variant | [optional] 
+**LowStockThreshold** | **Decimal** | Specify the quantity threshold below which the product is considered low in stock | [optional] 
 **Weight** | **Decimal** | Weight | [optional] [default to 0]
 **Width** | **Decimal** | Defines product&#39;s width | [optional] 
 **Height** | **Decimal** | Defines product&#39;s height | [optional] 
@@ -86,6 +87,7 @@ $ProductVariantAdd = Initialize-PSOpenAPIToolsProductVariantAdd  -ProductId 10 `
  -InStock true `
  -BackorderStatus true `
  -ManageStock false `
+ -LowStockThreshold 1 `
  -Weight 23.69 `
  -Width 56.12 `
  -Height 56.12 `

@@ -89,6 +89,8 @@ Set backorder status
 Defines the incremental changes in product quantity
 .PARAMETER ReduceQuantity
 Defines the decrement changes in product quantity
+.PARAMETER LowStockThreshold
+Specify the quantity threshold below which the product is considered low in stock
 .PARAMETER WarehouseId
 This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
 .PARAMETER Weight
@@ -305,147 +307,150 @@ function Initialize-ProductUpdate {
         [System.Nullable[Decimal]]
         ${ReduceQuantity},
         [Parameter(Position = 37, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${LowStockThreshold},
+        [Parameter(Position = 38, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${WarehouseId},
-        [Parameter(Position = 38, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 39, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${Weight},
-        [Parameter(Position = 39, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 40, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${WeightUnit},
-        [Parameter(Position = 40, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${Height},
         [Parameter(Position = 41, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Length},
+        ${Height},
         [Parameter(Position = 42, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Width},
+        ${Length},
         [Parameter(Position = 43, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${Width},
+        [Parameter(Position = 44, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${DimensionsUnit},
-        [Parameter(Position = 44, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${IsVirtual} = $false,
         [Parameter(Position = 45, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${IsFreeShipping},
+        ${IsVirtual} = $false,
         [Parameter(Position = 46, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Gtin},
+        [System.Nullable[Boolean]]
+        ${IsFreeShipping},
         [Parameter(Position = 47, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Upc},
+        ${Gtin},
         [Parameter(Position = 48, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Mpn},
+        ${Upc},
         [Parameter(Position = 49, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Ean},
+        ${Mpn},
         [Parameter(Position = 50, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Isbn},
+        ${Ean},
         [Parameter(Position = 51, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Barcode},
+        ${Isbn},
         [Parameter(Position = 52, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Manufacturer},
+        ${Barcode},
         [Parameter(Position = 53, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ManufacturerId},
+        ${Manufacturer},
         [Parameter(Position = 54, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CategoriesIds},
+        ${ManufacturerId},
         [Parameter(Position = 55, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${RelatedProductsIds},
+        ${CategoriesIds},
         [Parameter(Position = 56, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${UpSellProductsIds},
+        ${RelatedProductsIds},
         [Parameter(Position = 57, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CrossSellProductsIds},
+        ${UpSellProductsIds},
         [Parameter(Position = 58, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaTitle},
+        ${CrossSellProductsIds},
         [Parameter(Position = 59, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaKeywords},
+        ${MetaTitle},
         [Parameter(Position = 60, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaDescription},
+        ${MetaKeywords},
         [Parameter(Position = 61, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SeoUrl},
+        ${MetaDescription},
         [Parameter(Position = 62, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SearchKeywords},
+        ${SeoUrl},
         [Parameter(Position = 63, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Tags},
+        ${SearchKeywords},
         [Parameter(Position = 64, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${DeliveryCode},
+        ${Tags},
         [Parameter(Position = 65, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${DeliveryCode},
+        [Parameter(Position = 66, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${PackageDetails},
-        [Parameter(Position = 66, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${CountryOfOrigin},
         [Parameter(Position = 67, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${HarmonizedSystemCode},
+        ${CountryOfOrigin},
         [Parameter(Position = 68, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${HarmonizedSystemCode},
+        [Parameter(Position = 69, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
         ${ShippingTemplateId} = 0,
-        [Parameter(Position = 69, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 70, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${WhenMade} = "made_to_order",
-        [Parameter(Position = 70, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${IsSupply} = $true,
         [Parameter(Position = 71, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${Downloadable} = $false,
+        ${IsSupply} = $true,
         [Parameter(Position = 72, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${Downloadable} = $false,
+        [Parameter(Position = 73, ValueFromPipelineByPropertyName = $true)]
         [String[]]
         ${Materials},
-        [Parameter(Position = 73, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${AutoRenew} = $false,
         [Parameter(Position = 74, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${OnSale} = $false,
+        ${AutoRenew} = $false,
         [Parameter(Position = 75, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${OnSale} = $false,
+        [Parameter(Position = 76, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${ProductionPartnerIds},
-        [Parameter(Position = 76, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 77, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${ManufacturerInfo},
-        [Parameter(Position = 77, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 78, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${ReportRequestId},
-        [Parameter(Position = 78, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${DisableReportCache} = $false,
         [Parameter(Position = 79, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${Reindex} = $true,
+        ${DisableReportCache} = $false,
         [Parameter(Position = 80, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${ClearCache} = $true,
+        ${Reindex} = $true,
         [Parameter(Position = 81, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${CheckProcessStatus} = $false,
+        ${ClearCache} = $true,
         [Parameter(Position = 82, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${CheckProcessStatus} = $false,
+        [Parameter(Position = 83, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Specifics},
-        [Parameter(Position = 83, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 84, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
         ${ShopSectionId},
-        [Parameter(Position = 84, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 85, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${PersonalizationDetails}
     )
@@ -493,6 +498,7 @@ function Initialize-ProductUpdate {
             "backorder_status" = ${BackorderStatus}
             "increase_quantity" = ${IncreaseQuantity}
             "reduce_quantity" = ${ReduceQuantity}
+            "low_stock_threshold" = ${LowStockThreshold}
             "warehouse_id" = ${WarehouseId}
             "weight" = ${Weight}
             "weight_unit" = ${WeightUnit}
@@ -578,7 +584,7 @@ function ConvertFrom-JsonToProductUpdate {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductUpdate
-        $AllProperties = ("id", "model", "sku", "name", "description", "short_description", "price", "old_price", "special_price", "sprice_create", "sprice_expire", "cost_price", "fixed_cost_shipping_price", "retail_price", "tier_prices", "reserve_price", "buyitnow_price", "taxable", "tax_class_id", "type", "status", "condition", "visible", "in_stock", "avail", "avail_from", "product_class", "available_for_view", "stores_ids", "store_id", "lang_id", "quantity", "reserve_quantity", "manage_stock", "backorder_status", "increase_quantity", "reduce_quantity", "warehouse_id", "weight", "weight_unit", "height", "length", "width", "dimensions_unit", "is_virtual", "is_free_shipping", "gtin", "upc", "mpn", "ean", "isbn", "barcode", "manufacturer", "manufacturer_id", "categories_ids", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "meta_title", "meta_keywords", "meta_description", "seo_url", "search_keywords", "tags", "delivery_code", "package_details", "country_of_origin", "harmonized_system_code", "shipping_template_id", "when_made", "is_supply", "downloadable", "materials", "auto_renew", "on_sale", "production_partner_ids", "manufacturer_info", "report_request_id", "disable_report_cache", "reindex", "clear_cache", "check_process_status", "specifics", "shop_section_id", "personalization_details")
+        $AllProperties = ("id", "model", "sku", "name", "description", "short_description", "price", "old_price", "special_price", "sprice_create", "sprice_expire", "cost_price", "fixed_cost_shipping_price", "retail_price", "tier_prices", "reserve_price", "buyitnow_price", "taxable", "tax_class_id", "type", "status", "condition", "visible", "in_stock", "avail", "avail_from", "product_class", "available_for_view", "stores_ids", "store_id", "lang_id", "quantity", "reserve_quantity", "manage_stock", "backorder_status", "increase_quantity", "reduce_quantity", "low_stock_threshold", "warehouse_id", "weight", "weight_unit", "height", "length", "width", "dimensions_unit", "is_virtual", "is_free_shipping", "gtin", "upc", "mpn", "ean", "isbn", "barcode", "manufacturer", "manufacturer_id", "categories_ids", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "meta_title", "meta_keywords", "meta_description", "seo_url", "search_keywords", "tags", "delivery_code", "package_details", "country_of_origin", "harmonized_system_code", "shipping_template_id", "when_made", "is_supply", "downloadable", "materials", "auto_renew", "on_sale", "production_partner_ids", "manufacturer_info", "report_request_id", "disable_report_cache", "reindex", "clear_cache", "check_process_status", "specifics", "shop_section_id", "personalization_details")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -805,6 +811,12 @@ function ConvertFrom-JsonToProductUpdate {
             $ReduceQuantity = $null
         } else {
             $ReduceQuantity = $JsonParameters.PSobject.Properties["reduce_quantity"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "low_stock_threshold"))) { #optional property not found
+            $LowStockThreshold = $null
+        } else {
+            $LowStockThreshold = $JsonParameters.PSobject.Properties["low_stock_threshold"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "warehouse_id"))) { #optional property not found
@@ -1133,6 +1145,7 @@ function ConvertFrom-JsonToProductUpdate {
             "backorder_status" = ${BackorderStatus}
             "increase_quantity" = ${IncreaseQuantity}
             "reduce_quantity" = ${ReduceQuantity}
+            "low_stock_threshold" = ${LowStockThreshold}
             "warehouse_id" = ${WarehouseId}
             "weight" = ${Weight}
             "weight_unit" = ${WeightUnit}

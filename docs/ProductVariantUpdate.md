@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **Visible** | **String** | Set visibility status | [optional] 
 **Status** | **String** | Defines product variant&#39;s status | [optional] 
 **BackorderStatus** | **String** | Set backorder status | [optional] 
+**LowStockThreshold** | **Decimal** | Specify the quantity threshold below which the product is considered low in stock | [optional] 
 **AvailableForSale** | **Boolean** | Specifies the set of visible/invisible product&#39;s variants for sale | [optional] [default to $true]
 **Avail** | **Boolean** | Defines category&#39;s visibility status | [optional] [default to $true]
 **IsDefault** | **Boolean** | Defines as a default variant | [optional] 
@@ -74,6 +75,7 @@ $ProductVariantUpdate = Initialize-PSOpenAPIToolsProductVariantUpdate  -Id 10 `
  -Visible catalog `
  -Status disabled `
  -BackorderStatus true `
+ -LowStockThreshold 1 `
  -AvailableForSale false `
  -Avail false `
  -IsDefault true `

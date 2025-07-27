@@ -67,6 +67,8 @@ Set stock status
 Set backorder status
 .PARAMETER ManageStock
 Defines inventory tracking for product variant
+.PARAMETER LowStockThreshold
+Specify the quantity threshold below which the product is considered low in stock
 .PARAMETER Weight
 Weight
 .PARAMETER Width
@@ -207,80 +209,83 @@ function Initialize-ProductVariantAdd {
         ${ManageStock},
         [Parameter(Position = 26, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Weight} = 0,
+        ${LowStockThreshold},
         [Parameter(Position = 27, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Width},
+        ${Weight} = 0,
         [Parameter(Position = 28, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Height},
+        ${Width},
         [Parameter(Position = 29, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Length},
+        ${Height},
         [Parameter(Position = 30, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${WeightUnit},
+        [System.Nullable[Decimal]]
+        ${Length},
         [Parameter(Position = 31, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Sku},
+        ${WeightUnit},
         [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Barcode},
+        ${Sku},
         [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Gtin},
+        ${Barcode},
         [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Upc},
+        ${Gtin},
         [Parameter(Position = 35, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Ean},
+        ${Upc},
         [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Mpn},
+        ${Ean},
         [Parameter(Position = 37, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Isbn},
+        ${Mpn},
         [Parameter(Position = 38, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Manufacturer},
+        ${Isbn},
         [Parameter(Position = 39, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CreatedAt},
+        ${Manufacturer},
         [Parameter(Position = 40, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaTitle},
+        ${CreatedAt},
         [Parameter(Position = 41, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaKeywords},
+        ${MetaTitle},
         [Parameter(Position = 42, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaDescription},
+        ${MetaKeywords},
         [Parameter(Position = 43, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Url},
+        ${MetaDescription},
         [Parameter(Position = 44, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${TaxClassId},
+        ${Url},
         [Parameter(Position = 45, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${TaxClassId},
+        [Parameter(Position = 46, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${Taxable} = $true,
-        [Parameter(Position = 46, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 47, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${FixedCostShippingPrice},
-        [Parameter(Position = 47, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 48, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${IsFreeShipping},
-        [Parameter(Position = 48, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${CountryOfOrigin},
         [Parameter(Position = 49, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${HarmonizedSystemCode},
+        ${CountryOfOrigin},
         [Parameter(Position = 50, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MarketplaceItemProperties},
+        ${HarmonizedSystemCode},
         [Parameter(Position = 51, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${MarketplaceItemProperties},
+        [Parameter(Position = 52, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${ClearCache} = $true
     )
@@ -321,6 +326,7 @@ function Initialize-ProductVariantAdd {
             "in_stock" = ${InStock}
             "backorder_status" = ${BackorderStatus}
             "manage_stock" = ${ManageStock}
+            "low_stock_threshold" = ${LowStockThreshold}
             "weight" = ${Weight}
             "width" = ${Width}
             "height" = ${Height}
@@ -384,7 +390,7 @@ function ConvertFrom-JsonToProductVariantAdd {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductVariantAdd
-        $AllProperties = ("product_id", "attributes", "name", "model", "description", "short_description", "available_for_view", "available_for_sale", "is_virtual", "is_default", "store_id", "stores_ids", "lang_id", "price", "old_price", "cost_price", "special_price", "sprice_create", "sprice_modified", "sprice_expire", "tier_prices", "quantity", "warehouse_id", "in_stock", "backorder_status", "manage_stock", "weight", "width", "height", "length", "weight_unit", "sku", "barcode", "gtin", "upc", "ean", "mpn", "isbn", "manufacturer", "created_at", "meta_title", "meta_keywords", "meta_description", "url", "tax_class_id", "taxable", "fixed_cost_shipping_price", "is_free_shipping", "country_of_origin", "harmonized_system_code", "marketplace_item_properties", "clear_cache")
+        $AllProperties = ("product_id", "attributes", "name", "model", "description", "short_description", "available_for_view", "available_for_sale", "is_virtual", "is_default", "store_id", "stores_ids", "lang_id", "price", "old_price", "cost_price", "special_price", "sprice_create", "sprice_modified", "sprice_expire", "tier_prices", "quantity", "warehouse_id", "in_stock", "backorder_status", "manage_stock", "low_stock_threshold", "weight", "width", "height", "length", "weight_unit", "sku", "barcode", "gtin", "upc", "ean", "mpn", "isbn", "manufacturer", "created_at", "meta_title", "meta_keywords", "meta_description", "url", "tax_class_id", "taxable", "fixed_cost_shipping_price", "is_free_shipping", "country_of_origin", "harmonized_system_code", "marketplace_item_properties", "clear_cache")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -549,6 +555,12 @@ function ConvertFrom-JsonToProductVariantAdd {
             $ManageStock = $null
         } else {
             $ManageStock = $JsonParameters.PSobject.Properties["manage_stock"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "low_stock_threshold"))) { #optional property not found
+            $LowStockThreshold = $null
+        } else {
+            $LowStockThreshold = $JsonParameters.PSobject.Properties["low_stock_threshold"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "weight"))) { #optional property not found
@@ -734,6 +746,7 @@ function ConvertFrom-JsonToProductVariantAdd {
             "in_stock" = ${InStock}
             "backorder_status" = ${BackorderStatus}
             "manage_stock" = ${ManageStock}
+            "low_stock_threshold" = ${LowStockThreshold}
             "weight" = ${Weight}
             "width" = ${Width}
             "height" = ${Height}
