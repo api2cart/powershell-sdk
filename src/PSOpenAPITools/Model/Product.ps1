@@ -75,13 +75,13 @@ No description available.
 No description available.
 .PARAMETER InStock
 No description available.
-.PARAMETER OnSale
-No description available.
 .PARAMETER Backorders
 No description available.
 .PARAMETER ManageStock
 No description available.
 .PARAMETER IsStockManaged
+No description available.
+.PARAMETER OnSale
 No description available.
 .PARAMETER CreateAt
 No description available.
@@ -228,17 +228,17 @@ function Initialize-Product {
         [System.Nullable[Boolean]]
         ${InStock},
         [Parameter(Position = 30, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${OnSale},
-        [Parameter(Position = 31, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Backorders},
-        [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 31, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${ManageStock},
-        [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${IsStockManaged},
+        [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${OnSale},
         [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${CreateAt},
@@ -346,10 +346,10 @@ function Initialize-Product {
             "weight_unit" = ${WeightUnit}
             "sort_order" = ${SortOrder}
             "in_stock" = ${InStock}
-            "on_sale" = ${OnSale}
             "backorders" = ${Backorders}
             "manage_stock" = ${ManageStock}
             "is_stock_managed" = ${IsStockManaged}
+            "on_sale" = ${OnSale}
             "create_at" = ${CreateAt}
             "modified_at" = ${ModifiedAt}
             "tax_class_id" = ${TaxClassId}
@@ -410,7 +410,7 @@ function ConvertFrom-JsonToProduct {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in Product
-        $AllProperties = ("id", "type", "u_model", "u_sku", "name", "description", "short_description", "price", "advanced_price", "cost_price", "quantity", "inventory", "group_items", "u_brand_id", "u_brand", "categories_ids", "stores_ids", "url", "seo_url", "meta_title", "meta_keywords", "meta_description", "avail_sale", "avail_view", "is_virtual", "is_downloadable", "weight", "weight_unit", "sort_order", "in_stock", "on_sale", "backorders", "manage_stock", "is_stock_managed", "create_at", "modified_at", "tax_class_id", "special_price", "tier_price", "group_price", "images", "product_options", "u_upc", "u_mpn", "u_gtin", "u_isbn", "u_ean", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "dimensions_unit", "width", "height", "length", "discounts", "additional_fields", "custom_fields")
+        $AllProperties = ("id", "type", "u_model", "u_sku", "name", "description", "short_description", "price", "advanced_price", "cost_price", "quantity", "inventory", "group_items", "u_brand_id", "u_brand", "categories_ids", "stores_ids", "url", "seo_url", "meta_title", "meta_keywords", "meta_description", "avail_sale", "avail_view", "is_virtual", "is_downloadable", "weight", "weight_unit", "sort_order", "in_stock", "backorders", "manage_stock", "is_stock_managed", "on_sale", "create_at", "modified_at", "tax_class_id", "special_price", "tier_price", "group_price", "images", "product_options", "u_upc", "u_mpn", "u_gtin", "u_isbn", "u_ean", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "dimensions_unit", "width", "height", "length", "discounts", "additional_fields", "custom_fields")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -597,12 +597,6 @@ function ConvertFrom-JsonToProduct {
             $InStock = $JsonParameters.PSobject.Properties["in_stock"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "on_sale"))) { #optional property not found
-            $OnSale = $null
-        } else {
-            $OnSale = $JsonParameters.PSobject.Properties["on_sale"].value
-        }
-
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "backorders"))) { #optional property not found
             $Backorders = $null
         } else {
@@ -619,6 +613,12 @@ function ConvertFrom-JsonToProduct {
             $IsStockManaged = $null
         } else {
             $IsStockManaged = $JsonParameters.PSobject.Properties["is_stock_managed"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "on_sale"))) { #optional property not found
+            $OnSale = $null
+        } else {
+            $OnSale = $JsonParameters.PSobject.Properties["on_sale"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "create_at"))) { #optional property not found
@@ -790,10 +790,10 @@ function ConvertFrom-JsonToProduct {
             "weight_unit" = ${WeightUnit}
             "sort_order" = ${SortOrder}
             "in_stock" = ${InStock}
-            "on_sale" = ${OnSale}
             "backorders" = ${Backorders}
             "manage_stock" = ${ManageStock}
             "is_stock_managed" = ${IsStockManaged}
+            "on_sale" = ${OnSale}
             "create_at" = ${CreateAt}
             "modified_at" = ${ModifiedAt}
             "tax_class_id" = ${TaxClassId}

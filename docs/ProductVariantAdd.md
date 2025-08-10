@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **ShortDescription** | **String** | Defines short description | [optional] 
 **AvailableForView** | **Boolean** | Specifies the set of visible/invisible product&#39;s variants for users | [optional] [default to $true]
 **AvailableForSale** | **Boolean** | Specifies the set of visible/invisible product&#39;s variants for sale | [optional] [default to $true]
+**Status** | **String** | Defines status | [optional] 
 **IsVirtual** | **Boolean** | Defines whether the product is virtual | [optional] [default to $false]
 **IsDefault** | **Boolean** | Defines as a default variant | [optional] 
 **StoreId** | **String** | Add variants specified by store id | [optional] 
@@ -42,6 +43,7 @@ Name | Type | Description | Notes
 **Ean** | **String** | European Article Number. An EAN is a unique 8 or 13-digit identifier that many industries (such as book publishers) use to identify products. | [optional] 
 **Mpn** | **String** | Manufacturer Part Number. A MPN is an identifier of a particular part design or material used. | [optional] 
 **Isbn** | **String** | International Standard Book Number. An ISBN is a unique identifier for books. | [optional] 
+**SeoUrl** | **String** | Defines unique URL for SEO | [optional] 
 **Manufacturer** | **String** | Specifies the product variant&#39;s manufacturer | [optional] 
 **CreatedAt** | **String** | Defines the date of entity creation | [optional] 
 **MetaTitle** | **String** | Defines unique meta title for each entity | [optional] 
@@ -69,6 +71,7 @@ $ProductVariantAdd = Initialize-PSOpenAPIToolsProductVariantAdd  -ProductId 10 `
  -ShortDescription Short description. This is very short description `
  -AvailableForView false `
  -AvailableForSale false `
+ -Status disabled `
  -IsVirtual false `
  -IsDefault true `
  -StoreId 1 `
@@ -100,6 +103,7 @@ $ProductVariantAdd = Initialize-PSOpenAPIToolsProductVariantAdd  -ProductId 10 `
  -Ean 5901234123457 `
  -Mpn 9770317847001 `
  -Isbn 9783161484100 `
+ -SeoUrl some seo url `
  -Manufacturer Samsung `
  -CreatedAt 2014-08-09 13:13:13 `
  -MetaTitle category,test `

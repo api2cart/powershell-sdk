@@ -37,12 +37,12 @@ Name | Type | Description | Notes
 **BolApiKey** | **String** | Bol API Key | [optional] 
 **BolApiSecret** | **String** | Bol API Secret | [optional] 
 **BolRetailerId** | **Int32** | Bol Retailer ID | [optional] 
-**BigcartelUserName** | **String** | Subdomain of store | 
-**BigcartelPassword** | **String** | BigCartel account password | 
-**BricklinkConsumerKey** | **String** | Bricklink Consumer Key | 
-**BricklinkConsumerSecret** | **String** | Bricklink Consumer Secret | 
-**BricklinkToken** | **String** | Bricklink Access Token | 
-**BricklinkTokenSecret** | **String** | Bricklink Access Token Secret | 
+**BigcartelUserName** | **String** | Subdomain of store | [optional] 
+**BigcartelPassword** | **String** | BigCartel account password | [optional] 
+**BricklinkConsumerKey** | **String** | Bricklink Consumer Key | [optional] 
+**BricklinkConsumerSecret** | **String** | Bricklink Consumer Secret | [optional] 
+**BricklinkToken** | **String** | Bricklink Access Token | [optional] 
+**BricklinkTokenSecret** | **String** | Bricklink Access Token Secret | [optional] 
 **DemandwareClientId** | **String** | Demandware client id | [optional] 
 **DemandwareApiPassword** | **String** | Demandware api password | [optional] 
 **DemandwareUserName** | **String** | Demandware user name | [optional] 
@@ -127,8 +127,8 @@ Name | Type | Description | Notes
 **MagentoAccessToken** | **String** | Magento Access Token | [optional] 
 **MagentoTokenSecret** | **String** | Magento Token Secret | [optional] 
 **PrestashopWebserviceKey** | **String** | Prestashop webservice key | [optional] 
-**WixAppId** | **String** | Wix App ID | 
-**WixAppSecretKey** | **String** | Wix App Secret Key | 
+**WixAppId** | **String** | Wix App ID | [optional] 
+**WixAppSecretKey** | **String** | Wix App Secret Key | [optional] 
 **WixInstanceId** | **String** | Wix Instance ID | [optional] 
 **WixRefreshToken** | **String** | Wix refresh token | [optional] 
 **MercadoLibreAppId** | **String** | Mercado Libre App ID | [optional] 
@@ -166,8 +166,8 @@ Name | Type | Description | Notes
 **SallaAccessToken** | **String** | Salla Access Token | [optional] 
 **TemuAppKey** | **String** | Temu App Key | [optional] 
 **TemuAppSecret** | **String** | Temu App Secret | [optional] 
-**TemuAccessToken** | **String** | Temu Access Token | 
-**TemuRegion** | **String** | Temu API endpoint Region. | 
+**TemuAccessToken** | **String** | Temu Access Token | [optional] 
+**TemuRegion** | **String** | Temu API endpoint Region. | [optional] 
 
 ## Examples
 

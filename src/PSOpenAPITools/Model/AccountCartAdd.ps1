@@ -847,7 +847,6 @@ function Initialize-AccountCartAdd {
         [String]
         ${TemuAccessToken},
         [Parameter(Position = 164, ValueFromPipelineByPropertyName = $true)]
-        [ValidateSet("US", "EU", "GLOBAL")]
         [String]
         ${TemuRegion}
     )
@@ -860,48 +859,8 @@ function Initialize-AccountCartAdd {
             throw "invalid value for 'CartId', 'CartId' cannot be null."
         }
 
-        if ($null -eq $BigcartelUserName) {
-            throw "invalid value for 'BigcartelUserName', 'BigcartelUserName' cannot be null."
-        }
-
-        if ($null -eq $BigcartelPassword) {
-            throw "invalid value for 'BigcartelPassword', 'BigcartelPassword' cannot be null."
-        }
-
-        if ($null -eq $BricklinkConsumerKey) {
-            throw "invalid value for 'BricklinkConsumerKey', 'BricklinkConsumerKey' cannot be null."
-        }
-
-        if ($null -eq $BricklinkConsumerSecret) {
-            throw "invalid value for 'BricklinkConsumerSecret', 'BricklinkConsumerSecret' cannot be null."
-        }
-
-        if ($null -eq $BricklinkToken) {
-            throw "invalid value for 'BricklinkToken', 'BricklinkToken' cannot be null."
-        }
-
-        if ($null -eq $BricklinkTokenSecret) {
-            throw "invalid value for 'BricklinkTokenSecret', 'BricklinkTokenSecret' cannot be null."
-        }
-
         if (!$HybrisWebsites -and $HybrisWebsites.length -lt 1) {
             throw "invalid value for 'HybrisWebsites', number of items must be greater than or equal to 1."
-        }
-
-        if ($null -eq $WixAppId) {
-            throw "invalid value for 'WixAppId', 'WixAppId' cannot be null."
-        }
-
-        if ($null -eq $WixAppSecretKey) {
-            throw "invalid value for 'WixAppSecretKey', 'WixAppSecretKey' cannot be null."
-        }
-
-        if ($null -eq $TemuAccessToken) {
-            throw "invalid value for 'TemuAccessToken', 'TemuAccessToken' cannot be null."
-        }
-
-        if ($null -eq $TemuRegion) {
-            throw "invalid value for 'TemuRegion', 'TemuRegion' cannot be null."
         }
 
 
@@ -1125,66 +1084,6 @@ function ConvertFrom-JsonToAccountCartAdd {
             $CartId = $JsonParameters.PSobject.Properties["cart_id"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bigcartel_user_name"))) {
-            throw "Error! JSON cannot be serialized due to the required property 'bigcartel_user_name' missing."
-        } else {
-            $BigcartelUserName = $JsonParameters.PSobject.Properties["bigcartel_user_name"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bigcartel_password"))) {
-            throw "Error! JSON cannot be serialized due to the required property 'bigcartel_password' missing."
-        } else {
-            $BigcartelPassword = $JsonParameters.PSobject.Properties["bigcartel_password"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bricklink_consumer_key"))) {
-            throw "Error! JSON cannot be serialized due to the required property 'bricklink_consumer_key' missing."
-        } else {
-            $BricklinkConsumerKey = $JsonParameters.PSobject.Properties["bricklink_consumer_key"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bricklink_consumer_secret"))) {
-            throw "Error! JSON cannot be serialized due to the required property 'bricklink_consumer_secret' missing."
-        } else {
-            $BricklinkConsumerSecret = $JsonParameters.PSobject.Properties["bricklink_consumer_secret"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bricklink_token"))) {
-            throw "Error! JSON cannot be serialized due to the required property 'bricklink_token' missing."
-        } else {
-            $BricklinkToken = $JsonParameters.PSobject.Properties["bricklink_token"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bricklink_token_secret"))) {
-            throw "Error! JSON cannot be serialized due to the required property 'bricklink_token_secret' missing."
-        } else {
-            $BricklinkTokenSecret = $JsonParameters.PSobject.Properties["bricklink_token_secret"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "wix_app_id"))) {
-            throw "Error! JSON cannot be serialized due to the required property 'wix_app_id' missing."
-        } else {
-            $WixAppId = $JsonParameters.PSobject.Properties["wix_app_id"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "wix_app_secret_key"))) {
-            throw "Error! JSON cannot be serialized due to the required property 'wix_app_secret_key' missing."
-        } else {
-            $WixAppSecretKey = $JsonParameters.PSobject.Properties["wix_app_secret_key"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "temu_access_token"))) {
-            throw "Error! JSON cannot be serialized due to the required property 'temu_access_token' missing."
-        } else {
-            $TemuAccessToken = $JsonParameters.PSobject.Properties["temu_access_token"].value
-        }
-
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "temu_region"))) {
-            throw "Error! JSON cannot be serialized due to the required property 'temu_region' missing."
-        } else {
-            $TemuRegion = $JsonParameters.PSobject.Properties["temu_region"].value
-        }
-
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "store_url"))) { #optional property not found
             $StoreUrl = $null
         } else {
@@ -1381,6 +1280,42 @@ function ConvertFrom-JsonToAccountCartAdd {
             $BolRetailerId = $null
         } else {
             $BolRetailerId = $JsonParameters.PSobject.Properties["bol_retailer_id"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bigcartel_user_name"))) { #optional property not found
+            $BigcartelUserName = $null
+        } else {
+            $BigcartelUserName = $JsonParameters.PSobject.Properties["bigcartel_user_name"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bigcartel_password"))) { #optional property not found
+            $BigcartelPassword = $null
+        } else {
+            $BigcartelPassword = $JsonParameters.PSobject.Properties["bigcartel_password"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bricklink_consumer_key"))) { #optional property not found
+            $BricklinkConsumerKey = $null
+        } else {
+            $BricklinkConsumerKey = $JsonParameters.PSobject.Properties["bricklink_consumer_key"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bricklink_consumer_secret"))) { #optional property not found
+            $BricklinkConsumerSecret = $null
+        } else {
+            $BricklinkConsumerSecret = $JsonParameters.PSobject.Properties["bricklink_consumer_secret"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bricklink_token"))) { #optional property not found
+            $BricklinkToken = $null
+        } else {
+            $BricklinkToken = $JsonParameters.PSobject.Properties["bricklink_token"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bricklink_token_secret"))) { #optional property not found
+            $BricklinkTokenSecret = $null
+        } else {
+            $BricklinkTokenSecret = $JsonParameters.PSobject.Properties["bricklink_token_secret"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "demandware_client_id"))) { #optional property not found
@@ -1887,6 +1822,18 @@ function ConvertFrom-JsonToAccountCartAdd {
             $PrestashopWebserviceKey = $JsonParameters.PSobject.Properties["prestashop_webservice_key"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "wix_app_id"))) { #optional property not found
+            $WixAppId = $null
+        } else {
+            $WixAppId = $JsonParameters.PSobject.Properties["wix_app_id"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "wix_app_secret_key"))) { #optional property not found
+            $WixAppSecretKey = $null
+        } else {
+            $WixAppSecretKey = $JsonParameters.PSobject.Properties["wix_app_secret_key"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "wix_instance_id"))) { #optional property not found
             $WixInstanceId = $null
         } else {
@@ -2107,6 +2054,18 @@ function ConvertFrom-JsonToAccountCartAdd {
             $TemuAppSecret = $null
         } else {
             $TemuAppSecret = $JsonParameters.PSobject.Properties["temu_app_secret"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "temu_access_token"))) { #optional property not found
+            $TemuAccessToken = $null
+        } else {
+            $TemuAccessToken = $JsonParameters.PSobject.Properties["temu_access_token"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "temu_region"))) { #optional property not found
+            $TemuRegion = $null
+        } else {
+            $TemuRegion = $JsonParameters.PSobject.Properties["temu_region"].value
         }
 
         $PSO = [PSCustomObject]@{

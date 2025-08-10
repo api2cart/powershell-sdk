@@ -33,10 +33,10 @@ Name | Type | Description | Notes
 **WeightUnit** | **String** |  | [optional] 
 **SortOrder** | **Int32** |  | [optional] 
 **InStock** | **Boolean** |  | [optional] 
-**OnSale** | **Boolean** |  | [optional] 
 **Backorders** | **String** |  | [optional] 
 **ManageStock** | **String** |  | [optional] 
 **IsStockManaged** | **Boolean** |  | [optional] 
+**OnSale** | **Boolean** |  | [optional] 
 **CreateAt** | [**A2CDateTime**](A2CDateTime.md) |  | [optional] 
 **ModifiedAt** | [**A2CDateTime**](A2CDateTime.md) |  | [optional] 
 **TaxClassId** | **String** |  | [optional] 
@@ -95,10 +95,10 @@ $Product = Initialize-PSOpenAPIToolsProduct  -Id null `
  -WeightUnit null `
  -SortOrder null `
  -InStock null `
- -OnSale null `
  -Backorders null `
  -ManageStock null `
  -IsStockManaged null `
+ -OnSale null `
  -CreateAt null `
  -ModifiedAt null `
  -TaxClassId null `

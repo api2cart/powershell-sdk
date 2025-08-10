@@ -31,6 +31,8 @@ Defines short description
 Specifies the set of visible/invisible product's variants for users
 .PARAMETER AvailableForSale
 Specifies the set of visible/invisible product's variants for sale
+.PARAMETER Status
+Defines status
 .PARAMETER IsVirtual
 Defines whether the product is virtual
 .PARAMETER IsDefault
@@ -93,6 +95,8 @@ European Article Number. An EAN is a unique 8 or 13-digit identifier that many i
 Manufacturer Part Number. A MPN is an identifier of a particular part design or material used.
 .PARAMETER Isbn
 International Standard Book Number. An ISBN is a unique identifier for books.
+.PARAMETER SeoUrl
+Defines unique URL for SEO
 .PARAMETER Manufacturer
 Specifies the product variant's manufacturer
 .PARAMETER CreatedAt
@@ -154,138 +158,144 @@ function Initialize-ProductVariantAdd {
         [System.Nullable[Boolean]]
         ${AvailableForSale} = $true,
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${IsVirtual} = $false,
+        [String]
+        ${Status},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${IsDefault},
+        ${IsVirtual} = $false,
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${StoreId},
+        [System.Nullable[Boolean]]
+        ${IsDefault},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${StoresIds},
+        ${StoreId},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${LangId},
+        ${StoresIds},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${Price},
+        [String]
+        ${LangId},
         [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${OldPrice},
+        ${Price},
         [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${CostPrice},
+        ${OldPrice},
         [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${SpecialPrice},
+        ${CostPrice},
         [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${SpriceCreate},
+        [System.Nullable[Decimal]]
+        ${SpecialPrice},
         [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SpriceModified},
+        ${SpriceCreate},
         [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SpriceExpire},
+        ${SpriceModified},
         [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${SpriceExpire},
+        [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${TierPrices},
-        [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${Quantity} = 0,
-        [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${WarehouseId},
-        [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${InStock},
-        [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 25, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${BackorderStatus},
-        [Parameter(Position = 25, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 26, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${ManageStock},
-        [Parameter(Position = 26, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${LowStockThreshold},
         [Parameter(Position = 27, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Weight} = 0,
+        ${LowStockThreshold},
         [Parameter(Position = 28, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Width},
+        ${Weight} = 0,
         [Parameter(Position = 29, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Height},
+        ${Width},
         [Parameter(Position = 30, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Length},
+        ${Height},
         [Parameter(Position = 31, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${WeightUnit},
+        [System.Nullable[Decimal]]
+        ${Length},
         [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Sku},
+        ${WeightUnit},
         [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Barcode},
+        ${Sku},
         [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Gtin},
+        ${Barcode},
         [Parameter(Position = 35, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Upc},
+        ${Gtin},
         [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Ean},
+        ${Upc},
         [Parameter(Position = 37, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Mpn},
+        ${Ean},
         [Parameter(Position = 38, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Isbn},
+        ${Mpn},
         [Parameter(Position = 39, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Manufacturer},
+        ${Isbn},
         [Parameter(Position = 40, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CreatedAt},
+        ${SeoUrl},
         [Parameter(Position = 41, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaTitle},
+        ${Manufacturer},
         [Parameter(Position = 42, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaKeywords},
+        ${CreatedAt},
         [Parameter(Position = 43, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaDescription},
+        ${MetaTitle},
         [Parameter(Position = 44, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Url},
+        ${MetaKeywords},
         [Parameter(Position = 45, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${TaxClassId},
+        ${MetaDescription},
         [Parameter(Position = 46, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${Taxable} = $true,
+        [String]
+        ${Url},
         [Parameter(Position = 47, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${FixedCostShippingPrice},
+        [String]
+        ${TaxClassId},
         [Parameter(Position = 48, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${IsFreeShipping},
+        ${Taxable} = $true,
         [Parameter(Position = 49, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${CountryOfOrigin},
+        [System.Nullable[Decimal]]
+        ${FixedCostShippingPrice},
         [Parameter(Position = 50, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${HarmonizedSystemCode},
+        [System.Nullable[Boolean]]
+        ${IsFreeShipping},
         [Parameter(Position = 51, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MarketplaceItemProperties},
+        ${CountryOfOrigin},
         [Parameter(Position = 52, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${HarmonizedSystemCode},
+        [Parameter(Position = 53, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${MarketplaceItemProperties},
+        [Parameter(Position = 54, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${ClearCache} = $true
     )
@@ -308,6 +318,7 @@ function Initialize-ProductVariantAdd {
             "short_description" = ${ShortDescription}
             "available_for_view" = ${AvailableForView}
             "available_for_sale" = ${AvailableForSale}
+            "status" = ${Status}
             "is_virtual" = ${IsVirtual}
             "is_default" = ${IsDefault}
             "store_id" = ${StoreId}
@@ -339,6 +350,7 @@ function Initialize-ProductVariantAdd {
             "ean" = ${Ean}
             "mpn" = ${Mpn}
             "isbn" = ${Isbn}
+            "seo_url" = ${SeoUrl}
             "manufacturer" = ${Manufacturer}
             "created_at" = ${CreatedAt}
             "meta_title" = ${MetaTitle}
@@ -390,7 +402,7 @@ function ConvertFrom-JsonToProductVariantAdd {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductVariantAdd
-        $AllProperties = ("product_id", "attributes", "name", "model", "description", "short_description", "available_for_view", "available_for_sale", "is_virtual", "is_default", "store_id", "stores_ids", "lang_id", "price", "old_price", "cost_price", "special_price", "sprice_create", "sprice_modified", "sprice_expire", "tier_prices", "quantity", "warehouse_id", "in_stock", "backorder_status", "manage_stock", "low_stock_threshold", "weight", "width", "height", "length", "weight_unit", "sku", "barcode", "gtin", "upc", "ean", "mpn", "isbn", "manufacturer", "created_at", "meta_title", "meta_keywords", "meta_description", "url", "tax_class_id", "taxable", "fixed_cost_shipping_price", "is_free_shipping", "country_of_origin", "harmonized_system_code", "marketplace_item_properties", "clear_cache")
+        $AllProperties = ("product_id", "attributes", "name", "model", "description", "short_description", "available_for_view", "available_for_sale", "status", "is_virtual", "is_default", "store_id", "stores_ids", "lang_id", "price", "old_price", "cost_price", "special_price", "sprice_create", "sprice_modified", "sprice_expire", "tier_prices", "quantity", "warehouse_id", "in_stock", "backorder_status", "manage_stock", "low_stock_threshold", "weight", "width", "height", "length", "weight_unit", "sku", "barcode", "gtin", "upc", "ean", "mpn", "isbn", "seo_url", "manufacturer", "created_at", "meta_title", "meta_keywords", "meta_description", "url", "tax_class_id", "taxable", "fixed_cost_shipping_price", "is_free_shipping", "country_of_origin", "harmonized_system_code", "marketplace_item_properties", "clear_cache")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -447,6 +459,12 @@ function ConvertFrom-JsonToProductVariantAdd {
             $AvailableForSale = $null
         } else {
             $AvailableForSale = $JsonParameters.PSobject.Properties["available_for_sale"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "status"))) { #optional property not found
+            $Status = $null
+        } else {
+            $Status = $JsonParameters.PSobject.Properties["status"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "is_virtual"))) { #optional property not found
@@ -635,6 +653,12 @@ function ConvertFrom-JsonToProductVariantAdd {
             $Isbn = $JsonParameters.PSobject.Properties["isbn"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "seo_url"))) { #optional property not found
+            $SeoUrl = $null
+        } else {
+            $SeoUrl = $JsonParameters.PSobject.Properties["seo_url"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "manufacturer"))) { #optional property not found
             $Manufacturer = $null
         } else {
@@ -728,6 +752,7 @@ function ConvertFrom-JsonToProductVariantAdd {
             "short_description" = ${ShortDescription}
             "available_for_view" = ${AvailableForView}
             "available_for_sale" = ${AvailableForSale}
+            "status" = ${Status}
             "is_virtual" = ${IsVirtual}
             "is_default" = ${IsDefault}
             "store_id" = ${StoreId}
@@ -759,6 +784,7 @@ function ConvertFrom-JsonToProductVariantAdd {
             "ean" = ${Ean}
             "mpn" = ${Mpn}
             "isbn" = ${Isbn}
+            "seo_url" = ${SeoUrl}
             "manufacturer" = ${Manufacturer}
             "created_at" = ${CreatedAt}
             "meta_title" = ${MetaTitle}

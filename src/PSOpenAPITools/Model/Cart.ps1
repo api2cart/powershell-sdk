@@ -21,6 +21,8 @@ No description available.
 No description available.
 .PARAMETER Version
 No description available.
+.PARAMETER BridgeVersion
+No description available.
 .PARAMETER DbPrefix
 No description available.
 .PARAMETER StoresInfo
@@ -52,20 +54,23 @@ function Initialize-Cart {
         ${Version},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${DbPrefix},
+        ${BridgeVersion},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject[]]
-        ${StoresInfo},
+        [String]
+        ${DbPrefix},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
-        ${Warehouses},
+        ${StoresInfo},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
-        ${ShippingZones},
+        ${Warehouses},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
+        [PSCustomObject[]]
+        ${ShippingZones},
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${AdditionalFields},
-        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${CustomFields}
     )
@@ -79,6 +84,7 @@ function Initialize-Cart {
             "name" = ${Name}
             "url" = ${Url}
             "version" = ${Version}
+            "bridge_version" = ${BridgeVersion}
             "db_prefix" = ${DbPrefix}
             "stores_info" = ${StoresInfo}
             "warehouses" = ${Warehouses}
@@ -122,7 +128,7 @@ function ConvertFrom-JsonToCart {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in Cart
-        $AllProperties = ("name", "url", "version", "db_prefix", "stores_info", "warehouses", "shipping_zones", "additional_fields", "custom_fields")
+        $AllProperties = ("name", "url", "version", "bridge_version", "db_prefix", "stores_info", "warehouses", "shipping_zones", "additional_fields", "custom_fields")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -145,6 +151,12 @@ function ConvertFrom-JsonToCart {
             $Version = $null
         } else {
             $Version = $JsonParameters.PSobject.Properties["version"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bridge_version"))) { #optional property not found
+            $BridgeVersion = $null
+        } else {
+            $BridgeVersion = $JsonParameters.PSobject.Properties["bridge_version"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "db_prefix"))) { #optional property not found
@@ -187,6 +199,7 @@ function ConvertFrom-JsonToCart {
             "name" = ${Name}
             "url" = ${Url}
             "version" = ${Version}
+            "bridge_version" = ${BridgeVersion}
             "db_prefix" = ${DbPrefix}
             "stores_info" = ${StoresInfo}
             "warehouses" = ${Warehouses}

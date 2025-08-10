@@ -89,6 +89,8 @@ Name | Type | Description | Notes
 **Specifics** | [**ProductAddSpecificsInner[]**](ProductAddSpecificsInner.md) | An array of Item Specific Name/Value pairs used by the seller to provide descriptive details of an item in a structured manner.         The list of possible specifications can be obtained using the category.info method (additional_fields-&gt;product_specifics).         &lt;b&gt;The structure of the parameter is different for specific platforms.&lt;/b&gt; | [optional] 
 **ShopSectionId** | **Int32** | Add Shop Section Id | [optional] 
 **PersonalizationDetails** | [**ProductAddPersonalizationDetails**](ProductAddPersonalizationDetails.md) |  | [optional] 
+**MarketplaceItemProperties** | **String** | String containing the JSON representation of the supplied data | [optional] 
+**MinOrderQuantity** | **Decimal** | The minimum quantity an order must contain, to be eligible to purchase this product. | [optional] 
 
 ## Examples
 
@@ -179,7 +181,9 @@ $ProductUpdate = Initialize-PSOpenAPIToolsProductUpdate  -Id 10 `
  -CheckProcessStatus false `
  -Specifics null `
  -ShopSectionId &#x60;12345678&#x60; `
- -PersonalizationDetails null
+ -PersonalizationDetails null `
+ -MarketplaceItemProperties {&quot;color&quot;:[&quot;Silver&quot;],&quot;manufacturer&quot;:&quot;Philips&quot;,&quot;features&quot;:[&quot;3 way&quot;],&quot;countPerPack&quot;:1,&quot;watts&quot;:{&quot;unit&quot;:&quot;W&quot;,&quot;measure&quot;:40}} `
+ -MinOrderQuantity 1
 ```
 
 - Convert the resource to JSON

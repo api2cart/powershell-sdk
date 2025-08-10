@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **Name** | **String** |  | [optional] 
 **Url** | **String** |  | [optional] 
 **Version** | **String** |  | [optional] 
+**BridgeVersion** | **String** |  | [optional] 
 **DbPrefix** | **String** |  | [optional] 
 **StoresInfo** | [**CartStoreInfo[]**](CartStoreInfo.md) |  | [optional] 
 **Warehouses** | [**CartWarehouse[]**](CartWarehouse.md) |  | [optional] 
@@ -20,6 +21,7 @@ Name | Type | Description | Notes
 $Cart = Initialize-PSOpenAPIToolsCart  -Name null `
  -Url null `
  -Version null `
+ -BridgeVersion null `
  -DbPrefix null `
  -StoresInfo null `
  -Warehouses null `
