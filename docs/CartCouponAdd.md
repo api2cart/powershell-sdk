@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **IncludeTax** | **Boolean** | Indicates whether to apply a discount for taxes. | [optional] [default to $false]
 **StoreId** | **String** | Store Id | [optional] 
 **FreeCashOnDelivery** | **Boolean** | Defines whether the coupon provides free cash on delivery | [optional] 
+**CustomerId** | **String** | Retrieves orders specified by customer id | [optional] 
 
 ## Examples
 
@@ -43,7 +44,8 @@ $CartCouponAdd = Initialize-PSOpenAPIToolsCartCouponAdd  -Code 000_BIG_SALE_000 
  -ActionConditionValue 17834222,45466663 `
  -IncludeTax true `
  -StoreId 1 `
- -FreeCashOnDelivery true
+ -FreeCashOnDelivery true `
+ -CustomerId 5
 ```
 
 - Convert the resource to JSON

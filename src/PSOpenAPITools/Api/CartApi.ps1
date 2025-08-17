@@ -797,6 +797,9 @@ Language id
 .PARAMETER Avail
 Filter coupons by avail status
 
+.PARAMETER Status
+Defines coupon's status
+
 .PARAMETER DateStartFrom
 Filter entity by date_start (greater or equal)
 
@@ -852,23 +855,26 @@ function Invoke-CartCouponList {
         ${Avail},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${DateStartFrom},
+        ${Status},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${DateStartTo},
+        ${DateStartFrom},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${DateEndFrom},
+        ${DateStartTo},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${DateEndTo},
+        ${DateEndFrom},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${DateEndTo},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${ResponseFields},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Params},
+        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Exclude},
         [Switch]
@@ -920,6 +926,10 @@ function Invoke-CartCouponList {
 
         if ($Avail) {
             $LocalVarQueryParameters['avail'] = $Avail
+        }
+
+        if ($Status) {
+            $LocalVarQueryParameters['status'] = $Status
         }
 
         if ($DateStartFrom) {

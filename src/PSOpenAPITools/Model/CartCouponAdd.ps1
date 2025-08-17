@@ -51,6 +51,8 @@ Indicates whether to apply a discount for taxes.
 Store Id
 .PARAMETER FreeCashOnDelivery
 Defines whether the coupon provides free cash on delivery
+.PARAMETER CustomerId
+Retrieves orders specified by customer id
 .OUTPUTS
 
 CartCouponAdd<PSCustomObject>
@@ -115,7 +117,10 @@ function Initialize-CartCouponAdd {
         ${StoreId},
         [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${FreeCashOnDelivery}
+        ${FreeCashOnDelivery},
+        [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${CustomerId}
     )
 
     Process {
@@ -162,6 +167,7 @@ function Initialize-CartCouponAdd {
             "include_tax" = ${IncludeTax}
             "store_id" = ${StoreId}
             "free_cash_on_delivery" = ${FreeCashOnDelivery}
+            "customer_id" = ${CustomerId}
         }
 
 
@@ -199,7 +205,7 @@ function ConvertFrom-JsonToCartCouponAdd {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in CartCouponAdd
-        $AllProperties = ("code", "action_type", "action_apply_to", "action_scope", "action_amount", "codes", "name", "date_start", "date_end", "usage_limit", "usage_limit_per_customer", "action_condition_entity", "action_condition_key", "action_condition_operator", "action_condition_value", "include_tax", "store_id", "free_cash_on_delivery")
+        $AllProperties = ("code", "action_type", "action_apply_to", "action_scope", "action_amount", "codes", "name", "date_start", "date_end", "usage_limit", "usage_limit_per_customer", "action_condition_entity", "action_condition_key", "action_condition_operator", "action_condition_value", "include_tax", "store_id", "free_cash_on_delivery", "customer_id")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -318,6 +324,12 @@ function ConvertFrom-JsonToCartCouponAdd {
             $FreeCashOnDelivery = $JsonParameters.PSobject.Properties["free_cash_on_delivery"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "customer_id"))) { #optional property not found
+            $CustomerId = $null
+        } else {
+            $CustomerId = $JsonParameters.PSobject.Properties["customer_id"].value
+        }
+
         $PSO = [PSCustomObject]@{
             "code" = ${Code}
             "action_type" = ${ActionType}
@@ -337,6 +349,7 @@ function ConvertFrom-JsonToCartCouponAdd {
             "include_tax" = ${IncludeTax}
             "store_id" = ${StoreId}
             "free_cash_on_delivery" = ${FreeCashOnDelivery}
+            "customer_id" = ${CustomerId}
         }
 
         return $PSO

@@ -175,7 +175,7 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
-$CartCouponAdd = Initialize-CartCouponAdd -Code "000_BIG_SALE_000" -ActionType "percent" -ActionApplyTo "order_total" -ActionScope "order" -ActionAmount 15.5 -Codes "MyCodes" -Name "Sale! -30%" -DateStart "2019-12-29 06:44:30" -DateEnd "2020-01-05 01:00:00" -UsageLimit 99 -UsageLimitPerCustomer 1 -ActionConditionEntity "order" -ActionConditionKey "product_id" -ActionConditionOperator "ONE_OF" -ActionConditionValue "17834222,45466663" -IncludeTax $true -StoreId "1" -FreeCashOnDelivery $true # CartCouponAdd | 
+$CartCouponAdd = Initialize-CartCouponAdd -Code "000_BIG_SALE_000" -ActionType "percent" -ActionApplyTo "order_total" -ActionScope "order" -ActionAmount 15.5 -Codes "MyCodes" -Name "Sale! -30%" -DateStart "2019-12-29 06:44:30" -DateEnd "2020-01-05 01:00:00" -UsageLimit 99 -UsageLimitPerCustomer 1 -ActionConditionEntity "order" -ActionConditionKey "product_id" -ActionConditionOperator "ONE_OF" -ActionConditionValue "17834222,45466663" -IncludeTax $true -StoreId "1" -FreeCashOnDelivery $true -CustomerId "5" # CartCouponAdd | 
 
 # cart.coupon.add
 try {
@@ -424,6 +424,7 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Avail] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Status] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DateStartFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DateStartTo] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-DateEndFrom] <String><br>
@@ -457,6 +458,7 @@ $CouponsIds = "1,2,3" # String | Filter coupons by ids (optional)
 $StoreId = "1" # String | Filter coupons by store id (optional)
 $LangId = "3" # String | Language id (optional)
 $Avail = $false # Boolean | Filter coupons by avail status (optional)
+$Status = "disabled" # String | Defines coupon's status (optional)
 $DateStartFrom = "2016-12-29 16:44:30" # String | Filter entity by date_start (greater or equal) (optional)
 $DateStartTo = "2016-12-29 16:44:30" # String | Filter entity by date_start (less or equal) (optional)
 $DateEndFrom = "2016-12-29 16:44:30" # String | Filter entity by date_end (greater or equal) (optional)
@@ -467,7 +469,7 @@ $Exclude = "usage_history,type" # String | Set this parameter in order to choose
 
 # cart.coupon.list
 try {
-    $Result = Invoke-CartCouponList -Start $Start -Count $Count -PageCursor $PageCursor -CouponsIds $CouponsIds -StoreId $StoreId -LangId $LangId -Avail $Avail -DateStartFrom $DateStartFrom -DateStartTo $DateStartTo -DateEndFrom $DateEndFrom -DateEndTo $DateEndTo -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
+    $Result = Invoke-CartCouponList -Start $Start -Count $Count -PageCursor $PageCursor -CouponsIds $CouponsIds -StoreId $StoreId -LangId $LangId -Avail $Avail -Status $Status -DateStartFrom $DateStartFrom -DateStartTo $DateStartTo -DateEndFrom $DateEndFrom -DateEndTo $DateEndTo -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-CartCouponList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -485,6 +487,7 @@ Name | Type | Description  | Notes
  **StoreId** | **String**| Filter coupons by store id | [optional] 
  **LangId** | **String**| Language id | [optional] 
  **Avail** | **Boolean**| Filter coupons by avail status | [optional] 
+ **Status** | **String**| Defines coupon&#39;s status | [optional] 
  **DateStartFrom** | **String**| Filter entity by date_start (greater or equal) | [optional] 
  **DateStartTo** | **String**| Filter entity by date_start (less or equal) | [optional] 
  **DateEndFrom** | **String**| Filter entity by date_end (greater or equal) | [optional] 

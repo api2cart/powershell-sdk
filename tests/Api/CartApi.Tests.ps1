@@ -57,7 +57,7 @@ Describe -tag 'PSOpenAPITools' -name 'CartApi' {
 
     Context 'Invoke-CartCouponList' {
         It 'Test Invoke-CartCouponList' {
-            #$TestResult = Invoke-CartCouponList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -CouponsIds "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -Avail "TEST_VALUE" -DateStartFrom "TEST_VALUE" -DateStartTo "TEST_VALUE" -DateEndFrom "TEST_VALUE" -DateEndTo "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
+            #$TestResult = Invoke-CartCouponList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -CouponsIds "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -Avail "TEST_VALUE" -Status "TEST_VALUE" -DateStartFrom "TEST_VALUE" -DateStartTo "TEST_VALUE" -DateEndFrom "TEST_VALUE" -DateEndTo "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

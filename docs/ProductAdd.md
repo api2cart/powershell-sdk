@@ -55,6 +55,7 @@ Name | Type | Description | Notes
 **Mpn** | **String** | Manufacturer Part Number. A MPN is an identifier of a particular part design or material used. | [optional] 
 **Asin** | **String** | Amazon Standard Identification Number. | [optional] 
 **ProductReference** | **String** | Groups all variations, that you want to combine into one product. | [optional] 
+**ExternalProductLink** | **String** | External product link | [optional] 
 **HarmonizedSystemCode** | **String** | Harmonized System Code. An HSC is a 6-digit identifier that allows participating countries to classify traded goods on a common basis for customs purposes | [optional] 
 **CountryOfOrigin** | **String** | The country where the inventory item was made | [optional] 
 **Manufacturer** | **String** | Defines product&#39;s manufacturer | [optional] 
@@ -177,6 +178,7 @@ $ProductAdd = Initialize-PSOpenAPIToolsProductAdd  -Name Bag `
  -Mpn 9770317847001 `
  -Asin 97703178470 `
  -ProductReference 5901234123457 `
+ -ExternalProductLink http://example.com/t-shirt `
  -HarmonizedSystemCode 123456 `
  -CountryOfOrigin 123456 `
  -Manufacturer Samsung `
