@@ -187,6 +187,8 @@ An array of Item Specific Name/Value pairs used by the seller to provide descrip
 Add Shop Section Id
 .PARAMETER PersonalizationDetails
 No description available.
+.PARAMETER ExternalProductLink
+External product link
 .PARAMETER MarketplaceItemProperties
 String containing the JSON representation of the supplied data
 .PARAMETER MinOrderQuantity
@@ -459,8 +461,11 @@ function Initialize-ProductUpdate {
         ${PersonalizationDetails},
         [Parameter(Position = 86, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MarketplaceItemProperties},
+        ${ExternalProductLink},
         [Parameter(Position = 87, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${MarketplaceItemProperties},
+        [Parameter(Position = 88, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${MinOrderQuantity}
     )
@@ -557,6 +562,7 @@ function Initialize-ProductUpdate {
             "specifics" = ${Specifics}
             "shop_section_id" = ${ShopSectionId}
             "personalization_details" = ${PersonalizationDetails}
+            "external_product_link" = ${ExternalProductLink}
             "marketplace_item_properties" = ${MarketplaceItemProperties}
             "min_order_quantity" = ${MinOrderQuantity}
         }
@@ -596,7 +602,7 @@ function ConvertFrom-JsonToProductUpdate {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductUpdate
-        $AllProperties = ("id", "model", "sku", "name", "description", "short_description", "price", "old_price", "special_price", "sprice_create", "sprice_expire", "cost_price", "fixed_cost_shipping_price", "retail_price", "tier_prices", "reserve_price", "buyitnow_price", "taxable", "tax_class_id", "type", "status", "condition", "visible", "in_stock", "avail", "avail_from", "product_class", "available_for_view", "stores_ids", "store_id", "lang_id", "quantity", "reserve_quantity", "manage_stock", "backorder_status", "increase_quantity", "reduce_quantity", "low_stock_threshold", "warehouse_id", "weight", "weight_unit", "height", "length", "width", "dimensions_unit", "is_virtual", "is_free_shipping", "gtin", "upc", "mpn", "ean", "isbn", "barcode", "manufacturer", "manufacturer_id", "categories_ids", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "meta_title", "meta_keywords", "meta_description", "seo_url", "search_keywords", "tags", "delivery_code", "package_details", "country_of_origin", "harmonized_system_code", "shipping_template_id", "when_made", "is_supply", "downloadable", "materials", "auto_renew", "on_sale", "production_partner_ids", "manufacturer_info", "report_request_id", "disable_report_cache", "reindex", "clear_cache", "check_process_status", "specifics", "shop_section_id", "personalization_details", "marketplace_item_properties", "min_order_quantity")
+        $AllProperties = ("id", "model", "sku", "name", "description", "short_description", "price", "old_price", "special_price", "sprice_create", "sprice_expire", "cost_price", "fixed_cost_shipping_price", "retail_price", "tier_prices", "reserve_price", "buyitnow_price", "taxable", "tax_class_id", "type", "status", "condition", "visible", "in_stock", "avail", "avail_from", "product_class", "available_for_view", "stores_ids", "store_id", "lang_id", "quantity", "reserve_quantity", "manage_stock", "backorder_status", "increase_quantity", "reduce_quantity", "low_stock_threshold", "warehouse_id", "weight", "weight_unit", "height", "length", "width", "dimensions_unit", "is_virtual", "is_free_shipping", "gtin", "upc", "mpn", "ean", "isbn", "barcode", "manufacturer", "manufacturer_id", "categories_ids", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "meta_title", "meta_keywords", "meta_description", "seo_url", "search_keywords", "tags", "delivery_code", "package_details", "country_of_origin", "harmonized_system_code", "shipping_template_id", "when_made", "is_supply", "downloadable", "materials", "auto_renew", "on_sale", "production_partner_ids", "manufacturer_info", "report_request_id", "disable_report_cache", "reindex", "clear_cache", "check_process_status", "specifics", "shop_section_id", "personalization_details", "external_product_link", "marketplace_item_properties", "min_order_quantity")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -1119,6 +1125,12 @@ function ConvertFrom-JsonToProductUpdate {
             $PersonalizationDetails = $JsonParameters.PSobject.Properties["personalization_details"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "external_product_link"))) { #optional property not found
+            $ExternalProductLink = $null
+        } else {
+            $ExternalProductLink = $JsonParameters.PSobject.Properties["external_product_link"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "marketplace_item_properties"))) { #optional property not found
             $MarketplaceItemProperties = $null
         } else {
@@ -1218,6 +1230,7 @@ function ConvertFrom-JsonToProductUpdate {
             "specifics" = ${Specifics}
             "shop_section_id" = ${ShopSectionId}
             "personalization_details" = ${PersonalizationDetails}
+            "external_product_link" = ${ExternalProductLink}
             "marketplace_item_properties" = ${MarketplaceItemProperties}
             "min_order_quantity" = ${MinOrderQuantity}
         }
