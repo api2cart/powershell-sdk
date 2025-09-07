@@ -169,7 +169,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
 
     Context 'Invoke-ProductManufacturerAdd' {
         It 'Test Invoke-ProductManufacturerAdd' {
-            #$TestResult = Invoke-ProductManufacturerAdd -ProductId "TEST_VALUE" -Manufacturer "TEST_VALUE" -StoreId "TEST_VALUE"
+            #$TestResult = Invoke-ProductManufacturerAdd -ProductId "TEST_VALUE" -Manufacturer "TEST_VALUE" -StoreId "TEST_VALUE" -MetaTitle "TEST_VALUE" -MetaKeywords "TEST_VALUE" -MetaDescription "TEST_VALUE" -SearchKeywords "TEST_VALUE" -ImageUrl "TEST_VALUE" -SeoUrl "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -265,7 +265,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductApi' {
 
     Context 'Invoke-ProductReviewList' {
         It 'Test Invoke-ProductReviewList' {
-            #$TestResult = Invoke-ProductReviewList -ProductId "TEST_VALUE" -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -Ids "TEST_VALUE" -StoreId "TEST_VALUE" -Status "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
+            #$TestResult = Invoke-ProductReviewList -ProductId "TEST_VALUE" -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -Ids "TEST_VALUE" -StoreId "TEST_VALUE" -LangId "TEST_VALUE" -Status "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -CustomerId "TEST_VALUE" -SortBy "TEST_VALUE" -SortDirection "TEST_VALUE" -ResponseFields "TEST_VALUE" -Params "TEST_VALUE" -Exclude "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

@@ -25,6 +25,8 @@ Defines customer's last name
 Defines customer's unique password
 .PARAMETER Group
 Defines the group where the customer
+.PARAMETER GroupId
+Customer group_id
 .PARAMETER GroupIds
 Groups that will be assigned to a customer
 .PARAMETER Status
@@ -86,56 +88,59 @@ function Initialize-CustomerAdd {
         ${Group},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${GroupIds},
+        ${GroupId},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Status} = "enabled",
+        ${GroupIds},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CreatedTime},
+        ${Status} = "enabled",
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ModifiedTime},
+        ${CreatedTime},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Login},
+        ${ModifiedTime},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${LastLogin},
+        ${Login},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${BirthDay},
+        ${LastLogin},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${BirthDay},
+        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${NewsLetterSubscription},
-        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Consents},
-        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Gender},
         [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Website},
+        ${Gender},
         [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Fax},
+        ${Website},
         [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Company},
+        ${Fax},
         [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Phone},
+        ${Company},
         [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Note},
+        ${Phone},
         [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Country},
+        ${Note},
         [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${StoreId},
+        ${Country},
         [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${StoreId},
+        [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Address}
     )
@@ -159,6 +164,7 @@ function Initialize-CustomerAdd {
             "last_name" = ${LastName}
             "password" = ${Password}
             "group" = ${Group}
+            "group_id" = ${GroupId}
             "group_ids" = ${GroupIds}
             "status" = ${Status}
             "created_time" = ${CreatedTime}
@@ -214,7 +220,7 @@ function ConvertFrom-JsonToCustomerAdd {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in CustomerAdd
-        $AllProperties = ("email", "first_name", "last_name", "password", "group", "group_ids", "status", "created_time", "modified_time", "login", "last_login", "birth_day", "news_letter_subscription", "consents", "gender", "website", "fax", "company", "phone", "note", "country", "store_id", "address")
+        $AllProperties = ("email", "first_name", "last_name", "password", "group", "group_id", "group_ids", "status", "created_time", "modified_time", "login", "last_login", "birth_day", "news_letter_subscription", "consents", "gender", "website", "fax", "company", "phone", "note", "country", "store_id", "address")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -253,6 +259,12 @@ function ConvertFrom-JsonToCustomerAdd {
             $Group = $null
         } else {
             $Group = $JsonParameters.PSobject.Properties["group"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "group_id"))) { #optional property not found
+            $GroupId = $null
+        } else {
+            $GroupId = $JsonParameters.PSobject.Properties["group_id"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "group_ids"))) { #optional property not found
@@ -369,6 +381,7 @@ function ConvertFrom-JsonToCustomerAdd {
             "last_name" = ${LastName}
             "password" = ${Password}
             "group" = ${Group}
+            "group_id" = ${GroupId}
             "group_ids" = ${GroupIds}
             "status" = ${Status}
             "created_time" = ${CreatedTime}

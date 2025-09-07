@@ -330,6 +330,104 @@ function Invoke-OrderAdd {
 <#
 .SYNOPSIS
 
+order.calculate
+
+.DESCRIPTION
+
+No description available.
+
+.PARAMETER OrderCalculate
+No description available.
+
+.PARAMETER WithHttpInfo
+
+A switch when turned on will return a hash table of Response, StatusCode and Headers instead of just the Response
+
+.OUTPUTS
+
+OrderCalculate200Response
+#>
+function Invoke-OrderCalculate {
+    [CmdletBinding()]
+    Param (
+        [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [PSCustomObject]
+        ${OrderCalculate},
+        [Switch]
+        $WithHttpInfo
+    )
+
+    Process {
+        'Calling method: Invoke-OrderCalculate' | Write-Debug
+        $PSBoundParameters | Out-DebugParameter | Write-Debug
+
+        $LocalVarAccepts = @()
+        $LocalVarContentTypes = @()
+        $LocalVarQueryParameters = @{}
+        $LocalVarHeaderParameters = @{}
+        $LocalVarFormParameters = @{}
+        $LocalVarPathParameters = @{}
+        $LocalVarCookieParameters = @{}
+        $LocalVarBodyParameter = $null
+
+        $Configuration = Get-Configuration
+        # HTTP header 'Accept' (if needed)
+        $LocalVarAccepts = @('application/json')
+
+        # HTTP header 'Content-Type'
+        $LocalVarContentTypes = @('application/json')
+
+        $LocalVarUri = '/order.calculate.json'
+
+        if (!$OrderCalculate) {
+            throw "Error! The required parameter `OrderCalculate` missing when calling orderCalculate."
+        }
+
+        $LocalVarBodyParameter = $OrderCalculate | ConvertTo-Json -Depth 100
+
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["x-store-key"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["ApiKey"] -and $Configuration["ApiKey"]["x-store-key"]) {
+            $LocalVarHeaderParameters['x-store-key'] = $apiKeyPrefix + $Configuration["ApiKey"]["x-store-key"]
+            Write-Verbose ("Using API key 'x-store-key' in the header for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
+        if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-api-key"]) {
+            $apiKeyPrefix = $Configuration["ApiKeyPrefix"]["x-api-key"]
+        } else {
+            $apiKeyPrefix = ""
+        }
+        if ($Configuration["ApiKey"] -and $Configuration["ApiKey"]["x-api-key"]) {
+            $LocalVarHeaderParameters['x-api-key'] = $apiKeyPrefix + $Configuration["ApiKey"]["x-api-key"]
+            Write-Verbose ("Using API key 'x-api-key' in the header for authentication in {0}" -f $MyInvocation.MyCommand)
+        }
+
+        $LocalVarResult = Invoke-ApiClient -Method 'POST' `
+                                -Uri $LocalVarUri `
+                                -Accepts $LocalVarAccepts `
+                                -ContentTypes $LocalVarContentTypes `
+                                -Body $LocalVarBodyParameter `
+                                -HeaderParameters $LocalVarHeaderParameters `
+                                -QueryParameters $LocalVarQueryParameters `
+                                -FormParameters $LocalVarFormParameters `
+                                -CookieParameters $LocalVarCookieParameters `
+                                -ReturnType "OrderCalculate200Response" `
+                                -IsBodyNullable $false
+
+        if ($WithHttpInfo.IsPresent) {
+            return $LocalVarResult
+        } else {
+            return $LocalVarResult["Response"]
+        }
+    }
+}
+
+<#
+.SYNOPSIS
+
 order.count
 
 .DESCRIPTION

@@ -163,7 +163,7 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 $ProductAddBatchPayloadInnerAdvancedPricesInner = Initialize-ProductAddBatchPayloadInnerAdvancedPricesInner -Value 0 -GroupId 0 -Quantity 0 -StartTime "MyStartTime" -ExpireTime "MyExpireTime"
 $ProductAddBatchPayloadInnerImagesInner = Initialize-ProductAddBatchPayloadInnerImagesInner -Type "MyType" -Url "MyUrl" -Label "MyLabel" -Name "MyName" -Position 0
 $ProductAddFilesInner = Initialize-ProductAddFilesInner -Name "MyName" -Url "MyUrl"
-$ProductAddBatchPayloadInner = Initialize-ProductAddBatchPayloadInner -Name "MyName" -Description "MyDescription" -ShortDescription "MyShortDescription" -Sku "MySku" -Model "MyModel" -Asin "MyAsin" -Upc "MyUpc" -Ean "MyEan" -Gtin "MyGtin" -Mpn "MyMpn" -Barcode "MyBarcode" -Price 0 -OldPrice 0 -CostPrice 0 -SpecialPrice 0 -SpriceCreate "MySpriceCreate" -SpriceExpire "MySpriceExpire" -AdvancedPrices $ProductAddBatchPayloadInnerAdvancedPricesInner -FixedCostShippingPrice 0 -Quantity 0 -ManageStock $false -ProductType "MyProductType" -MarketplaceItemProperties  -IsFreeShipping $false -Taxable $false -Status "MyStatus" -Condition "MyCondition" -Visible "MyVisible" -AvailableForView $false -AvailableForSale $false -IsVirtual $false -InStock $false -Type "MyType" -Downloadable $false -Weight 0 -Length 0 -Width 0 -Height 0 -WeightUnit "MyWeightUnit" -DimensionsUnit "MyDimensionsUnit" -StoreId "MyStoreId" -LangId "MyLangId" -CategoryId "MyCategoryId" -WarehouseId "MyWarehouseId" -CategoriesIds "MyCategoriesIds" -RelatedProductsIds "MyRelatedProductsIds" -UpSellProductsIds "MyUpSellProductsIds" -CrossSellProductsIds "MyCrossSellProductsIds" -StoresIds "MyStoresIds" -TaxClassId "MyTaxClassId" -MetaTitle "MyMetaTitle" -MetaDescription "MyMetaDescription" -MetaKeywords "MyMetaKeywords" -SearchKeywords "MySearchKeywords" -HarmonizedSystemCode "MyHarmonizedSystemCode" -Url "MyUrl" -SeoUrl "MySeoUrl" -Manufacturer "MyManufacturer" -ManufacturerId "MyManufacturerId" -BackorderStatus "MyBackorderStatus" -Images $ProductAddBatchPayloadInnerImagesInner -Tags "MyTags" -Files $ProductAddFilesInner
+$ProductAddBatchPayloadInner = Initialize-ProductAddBatchPayloadInner -Name "MyName" -Description "MyDescription" -ShortDescription "MyShortDescription" -Sku "MySku" -Model "MyModel" -Asin "MyAsin" -Upc "MyUpc" -Ean "MyEan" -Gtin "MyGtin" -Mpn "MyMpn" -Barcode "MyBarcode" -Price 0 -OldPrice 0 -CostPrice 0 -SpecialPrice 0 -SpriceCreate "MySpriceCreate" -SpriceExpire "MySpriceExpire" -AdvancedPrices $ProductAddBatchPayloadInnerAdvancedPricesInner -FixedCostShippingPrice 0 -Quantity 0 -ManageStock $false -ProductType "MyProductType" -MarketplaceItemProperties  -Specifics  -IsFreeShipping $false -Taxable $false -Status "MyStatus" -Condition "MyCondition" -Visible "MyVisible" -AvailableForView $false -AvailableForSale $false -IsVirtual $false -InStock $false -Type "MyType" -Downloadable $false -Weight 0 -Length 0 -Width 0 -Height 0 -WeightUnit "MyWeightUnit" -DimensionsUnit "MyDimensionsUnit" -StoreId "MyStoreId" -LangId "MyLangId" -CategoryId "MyCategoryId" -WarehouseId "MyWarehouseId" -CategoriesIds "MyCategoriesIds" -RelatedProductsIds "MyRelatedProductsIds" -UpSellProductsIds "MyUpSellProductsIds" -CrossSellProductsIds "MyCrossSellProductsIds" -StoresIds "MyStoresIds" -TaxClassId "MyTaxClassId" -MetaTitle "MyMetaTitle" -MetaDescription "MyMetaDescription" -MetaKeywords "MyMetaKeywords" -SearchKeywords "MySearchKeywords" -HarmonizedSystemCode "MyHarmonizedSystemCode" -Url "MyUrl" -SeoUrl "MySeoUrl" -ExternalProductLink "MyExternalProductLink" -Manufacturer "MyManufacturer" -ManufacturerId "MyManufacturerId" -BackorderStatus "MyBackorderStatus" -Images $ProductAddBatchPayloadInnerImagesInner -Tags "MyTags" -Files $ProductAddFilesInner
 
 $ProductAddBatch = Initialize-ProductAddBatch -NestedItemsUpdateBehaviour "replace" -ClearCache $false -Reindex $false -Payload $ProductAddBatchPayloadInner # ProductAddBatch | 
 
@@ -1704,6 +1704,12 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Manufacturer] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-MetaTitle] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-MetaKeywords] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-MetaDescription] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SearchKeywords] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ImageUrl] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SeoUrl] <String><br>
 
 product.manufacturer.add
 
@@ -1726,10 +1732,16 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 $ProductId = "10" # String | Defines products specified by product id
 $Manufacturer = "Samsung" # String | Defines product’s manufacturer's name
 $StoreId = "1" # String | Store Id (optional)
+$MetaTitle = "category,test" # String | Defines unique meta title for each entity (optional)
+$MetaKeywords = "category,test" # String | Defines unique meta keywords for each entity (optional)
+$MetaDescription = "category,test" # String | Defines unique meta description of a entity (optional)
+$SearchKeywords = "key1,key2,key3" # String | Defines unique search keywords (optional)
+$ImageUrl = "https://docs.api2cart.com/img/logo.png" # String | Image Url (optional)
+$SeoUrl = "some seo url" # String | Defines unique URL for SEO (optional)
 
 # product.manufacturer.add
 try {
-    $Result = Invoke-ProductManufacturerAdd -ProductId $ProductId -Manufacturer $Manufacturer -StoreId $StoreId
+    $Result = Invoke-ProductManufacturerAdd -ProductId $ProductId -Manufacturer $Manufacturer -StoreId $StoreId -MetaTitle $MetaTitle -MetaKeywords $MetaKeywords -MetaDescription $MetaDescription -SearchKeywords $SearchKeywords -ImageUrl $ImageUrl -SeoUrl $SeoUrl
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ProductManufacturerAdd: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -1743,6 +1755,12 @@ Name | Type | Description  | Notes
  **ProductId** | **String**| Defines products specified by product id | 
  **Manufacturer** | **String**| Defines product’s manufacturer&#39;s name | 
  **StoreId** | **String**| Store Id | [optional] 
+ **MetaTitle** | **String**| Defines unique meta title for each entity | [optional] 
+ **MetaKeywords** | **String**| Defines unique meta keywords for each entity | [optional] 
+ **MetaDescription** | **String**| Defines unique meta description of a entity | [optional] 
+ **SearchKeywords** | **String**| Defines unique search keywords | [optional] 
+ **ImageUrl** | **String**| Image Url | [optional] 
+ **SeoUrl** | **String**| Defines unique URL for SEO | [optional] 
 
 ### Return type
 
@@ -2478,7 +2496,13 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-PageCursor] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Ids] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-StoreId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-LangId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Status] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedFrom] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CreatedTo] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CustomerId] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SortBy] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SortDirection] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ResponseFields] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Params] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
@@ -2507,14 +2531,20 @@ $Count = 20 # Int32 | This parameter sets the entity amount that has to be retri
 $PageCursor = "MyPageCursor" # String | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) (optional)
 $Ids = "24,25" # String | Retrieves reviews specified by ids (optional)
 $StoreId = "1" # String | Store Id (optional)
+$LangId = "3" # String | Language id (optional)
 $Status = "disabled" # String | Defines status (optional)
+$CreatedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their creation date (optional)
+$CreatedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their creation date (optional)
+$CustomerId = "5" # String | Retrieves orders specified by customer id (optional)
+$SortBy = "value_id" # String | Set field to sort by (optional) (default to "id")
+$SortDirection = "asc" # String | Set sorting direction (optional) (default to "asc")
 $ResponseFields = "{return_code,return_message,pagination,result}" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional)
 $Params = "id,model,price,images" # String | Set this parameter in order to choose which entity fields you want to retrieve (optional) (default to "id,customer_id,email,message,status,product_id,nick_name,summary,rating,ratings,status,created_time")
 $Exclude = "false" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 
 # product.review.list
 try {
-    $Result = Invoke-ProductReviewList -ProductId $ProductId -Start $Start -Count $Count -PageCursor $PageCursor -Ids $Ids -StoreId $StoreId -Status $Status -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
+    $Result = Invoke-ProductReviewList -ProductId $ProductId -Start $Start -Count $Count -PageCursor $PageCursor -Ids $Ids -StoreId $StoreId -LangId $LangId -Status $Status -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -CustomerId $CustomerId -SortBy $SortBy -SortDirection $SortDirection -ResponseFields $ResponseFields -Params $Params -Exclude $Exclude
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ProductReviewList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -2531,7 +2561,13 @@ Name | Type | Description  | Notes
  **PageCursor** | **String**| Used to retrieve entities via cursor-based pagination (it can&#39;t be used with any other filtering parameter) | [optional] 
  **Ids** | **String**| Retrieves reviews specified by ids | [optional] 
  **StoreId** | **String**| Store Id | [optional] 
+ **LangId** | **String**| Language id | [optional] 
  **Status** | **String**| Defines status | [optional] 
+ **CreatedFrom** | **String**| Retrieve entities from their creation date | [optional] 
+ **CreatedTo** | **String**| Retrieve entities to their creation date | [optional] 
+ **CustomerId** | **String**| Retrieves orders specified by customer id | [optional] 
+ **SortBy** | **String**| Set field to sort by | [optional] [default to &quot;id&quot;]
+ **SortDirection** | **String**| Set sorting direction | [optional] [default to &quot;asc&quot;]
  **ResponseFields** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] 
  **Params** | **String**| Set this parameter in order to choose which entity fields you want to retrieve | [optional] [default to &quot;id,customer_id,email,message,status,product_id,nick_name,summary,rating,ratings,status,created_time&quot;]
  **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 

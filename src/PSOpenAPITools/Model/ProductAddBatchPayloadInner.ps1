@@ -61,6 +61,8 @@ No description available.
 No description available.
 .PARAMETER MarketplaceItemProperties
 No description available.
+.PARAMETER Specifics
+No description available.
 .PARAMETER IsFreeShipping
 No description available.
 .PARAMETER Taxable
@@ -128,6 +130,8 @@ No description available.
 .PARAMETER Url
 No description available.
 .PARAMETER SeoUrl
+No description available.
+.PARAMETER ExternalProductLink
 No description available.
 .PARAMETER Manufacturer
 No description available.
@@ -219,123 +223,129 @@ function Initialize-ProductAddBatchPayloadInner {
         [PSCustomObject]
         ${MarketplaceItemProperties},
         [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${IsFreeShipping},
+        [PSCustomObject]
+        ${Specifics},
         [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${Taxable},
+        ${IsFreeShipping},
         [Parameter(Position = 25, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Status},
+        [System.Nullable[Boolean]]
+        ${Taxable},
         [Parameter(Position = 26, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Condition},
+        ${Status},
         [Parameter(Position = 27, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Visible},
+        ${Condition},
         [Parameter(Position = 28, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${AvailableForView},
+        [String]
+        ${Visible},
         [Parameter(Position = 29, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${AvailableForSale},
+        ${AvailableForView},
         [Parameter(Position = 30, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${IsVirtual},
+        ${AvailableForSale},
         [Parameter(Position = 31, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${InStock},
+        ${IsVirtual},
         [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${InStock},
+        [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Type},
-        [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${Downloadable},
-        [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${Weight},
         [Parameter(Position = 35, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Length},
+        ${Weight},
         [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Width},
+        ${Length},
         [Parameter(Position = 37, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Height},
+        ${Width},
         [Parameter(Position = 38, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${WeightUnit},
+        [System.Nullable[Decimal]]
+        ${Height},
         [Parameter(Position = 39, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${DimensionsUnit},
+        ${WeightUnit},
         [Parameter(Position = 40, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${StoreId},
+        ${DimensionsUnit},
         [Parameter(Position = 41, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${LangId},
+        ${StoreId},
         [Parameter(Position = 42, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CategoryId},
+        ${LangId},
         [Parameter(Position = 43, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${WarehouseId},
+        ${CategoryId},
         [Parameter(Position = 44, ValueFromPipelineByPropertyName = $true)]
-        [String[]]
-        ${CategoriesIds},
+        [String]
+        ${WarehouseId},
         [Parameter(Position = 45, ValueFromPipelineByPropertyName = $true)]
         [String[]]
-        ${RelatedProductsIds},
+        ${CategoriesIds},
         [Parameter(Position = 46, ValueFromPipelineByPropertyName = $true)]
         [String[]]
-        ${UpSellProductsIds},
+        ${RelatedProductsIds},
         [Parameter(Position = 47, ValueFromPipelineByPropertyName = $true)]
         [String[]]
-        ${CrossSellProductsIds},
+        ${UpSellProductsIds},
         [Parameter(Position = 48, ValueFromPipelineByPropertyName = $true)]
         [String[]]
-        ${StoresIds},
+        ${CrossSellProductsIds},
         [Parameter(Position = 49, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${TaxClassId},
+        [String[]]
+        ${StoresIds},
         [Parameter(Position = 50, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaTitle},
+        ${TaxClassId},
         [Parameter(Position = 51, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaDescription},
+        ${MetaTitle},
         [Parameter(Position = 52, ValueFromPipelineByPropertyName = $true)]
-        [String[]]
-        ${MetaKeywords},
+        [String]
+        ${MetaDescription},
         [Parameter(Position = 53, ValueFromPipelineByPropertyName = $true)]
         [String[]]
-        ${SearchKeywords},
+        ${MetaKeywords},
         [Parameter(Position = 54, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${HarmonizedSystemCode},
+        [String[]]
+        ${SearchKeywords},
         [Parameter(Position = 55, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Url},
+        ${HarmonizedSystemCode},
         [Parameter(Position = 56, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SeoUrl},
+        ${Url},
         [Parameter(Position = 57, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Manufacturer},
+        ${SeoUrl},
         [Parameter(Position = 58, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ManufacturerId},
+        ${ExternalProductLink},
         [Parameter(Position = 59, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${BackorderStatus},
+        ${Manufacturer},
         [Parameter(Position = 60, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${ManufacturerId},
+        [Parameter(Position = 61, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${BackorderStatus},
+        [Parameter(Position = 62, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Images},
-        [Parameter(Position = 61, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 63, ValueFromPipelineByPropertyName = $true)]
         [String[]]
         ${Tags},
-        [Parameter(Position = 62, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 64, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Files}
     )
@@ -409,6 +419,7 @@ function Initialize-ProductAddBatchPayloadInner {
             "manage_stock" = ${ManageStock}
             "product_type" = ${ProductType}
             "marketplace_item_properties" = ${MarketplaceItemProperties}
+            "specifics" = ${Specifics}
             "is_free_shipping" = ${IsFreeShipping}
             "taxable" = ${Taxable}
             "status" = ${Status}
@@ -443,6 +454,7 @@ function Initialize-ProductAddBatchPayloadInner {
             "harmonized_system_code" = ${HarmonizedSystemCode}
             "url" = ${Url}
             "seo_url" = ${SeoUrl}
+            "external_product_link" = ${ExternalProductLink}
             "manufacturer" = ${Manufacturer}
             "manufacturer_id" = ${ManufacturerId}
             "backorder_status" = ${BackorderStatus}
@@ -486,7 +498,7 @@ function ConvertFrom-JsonToProductAddBatchPayloadInner {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductAddBatchPayloadInner
-        $AllProperties = ("name", "description", "short_description", "sku", "model", "asin", "upc", "ean", "gtin", "mpn", "barcode", "price", "old_price", "cost_price", "special_price", "sprice_create", "sprice_expire", "advanced_prices", "fixed_cost_shipping_price", "quantity", "manage_stock", "product_type", "marketplace_item_properties", "is_free_shipping", "taxable", "status", "condition", "visible", "available_for_view", "available_for_sale", "is_virtual", "in_stock", "type", "downloadable", "weight", "length", "width", "height", "weight_unit", "dimensions_unit", "store_id", "lang_id", "category_id", "warehouse_id", "categories_ids", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "stores_ids", "tax_class_id", "meta_title", "meta_description", "meta_keywords", "search_keywords", "harmonized_system_code", "url", "seo_url", "manufacturer", "manufacturer_id", "backorder_status", "images", "tags", "files")
+        $AllProperties = ("name", "description", "short_description", "sku", "model", "asin", "upc", "ean", "gtin", "mpn", "barcode", "price", "old_price", "cost_price", "special_price", "sprice_create", "sprice_expire", "advanced_prices", "fixed_cost_shipping_price", "quantity", "manage_stock", "product_type", "marketplace_item_properties", "specifics", "is_free_shipping", "taxable", "status", "condition", "visible", "available_for_view", "available_for_sale", "is_virtual", "in_stock", "type", "downloadable", "weight", "length", "width", "height", "weight_unit", "dimensions_unit", "store_id", "lang_id", "category_id", "warehouse_id", "categories_ids", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "stores_ids", "tax_class_id", "meta_title", "meta_description", "meta_keywords", "search_keywords", "harmonized_system_code", "url", "seo_url", "external_product_link", "manufacturer", "manufacturer_id", "backorder_status", "images", "tags", "files")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -629,6 +641,12 @@ function ConvertFrom-JsonToProductAddBatchPayloadInner {
             $MarketplaceItemProperties = $null
         } else {
             $MarketplaceItemProperties = $JsonParameters.PSobject.Properties["marketplace_item_properties"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "specifics"))) { #optional property not found
+            $Specifics = $null
+        } else {
+            $Specifics = $JsonParameters.PSobject.Properties["specifics"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "is_free_shipping"))) { #optional property not found
@@ -835,6 +853,12 @@ function ConvertFrom-JsonToProductAddBatchPayloadInner {
             $SeoUrl = $JsonParameters.PSobject.Properties["seo_url"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "external_product_link"))) { #optional property not found
+            $ExternalProductLink = $null
+        } else {
+            $ExternalProductLink = $JsonParameters.PSobject.Properties["external_product_link"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "manufacturer"))) { #optional property not found
             $Manufacturer = $null
         } else {
@@ -895,6 +919,7 @@ function ConvertFrom-JsonToProductAddBatchPayloadInner {
             "manage_stock" = ${ManageStock}
             "product_type" = ${ProductType}
             "marketplace_item_properties" = ${MarketplaceItemProperties}
+            "specifics" = ${Specifics}
             "is_free_shipping" = ${IsFreeShipping}
             "taxable" = ${Taxable}
             "status" = ${Status}
@@ -929,6 +954,7 @@ function ConvertFrom-JsonToProductAddBatchPayloadInner {
             "harmonized_system_code" = ${HarmonizedSystemCode}
             "url" = ${Url}
             "seo_url" = ${SeoUrl}
+            "external_product_link" = ${ExternalProductLink}
             "manufacturer" = ${Manufacturer}
             "manufacturer_id" = ${ManufacturerId}
             "backorder_status" = ${BackorderStatus}

@@ -133,6 +133,7 @@ Class | Method | HTTP request | Description
 *MarketplaceApi* | [**Invoke-MarketplaceProductFind**](docs/MarketplaceApi.md#Invoke-MarketplaceProductFind) | **GET** /marketplace.product.find.json | marketplace.product.find
 *OrderApi* | [**Invoke-OrderAbandonedList**](docs/OrderApi.md#Invoke-OrderAbandonedList) | **GET** /order.abandoned.list.json | order.abandoned.list
 *OrderApi* | [**Invoke-OrderAdd**](docs/OrderApi.md#Invoke-OrderAdd) | **POST** /order.add.json | order.add
+*OrderApi* | [**Invoke-OrderCalculate**](docs/OrderApi.md#Invoke-OrderCalculate) | **POST** /order.calculate.json | order.calculate
 *OrderApi* | [**Invoke-OrderCount**](docs/OrderApi.md#Invoke-OrderCount) | **GET** /order.count.json | order.count
 *OrderApi* | [**Invoke-OrderFinancialStatusList**](docs/OrderApi.md#Invoke-OrderFinancialStatusList) | **GET** /order.financial_status.list.json | order.financial_status.list
 *OrderApi* | [**Invoke-OrderFulfillmentStatusList**](docs/OrderApi.md#Invoke-OrderFulfillmentStatusList) | **GET** /order.fulfillment_status.list.json | order.fulfillment_status.list
@@ -409,6 +410,15 @@ Class | Method | HTTP request | Description
  - [PSOpenAPITools\Model.OrderAddOrderItemInner](docs/OrderAddOrderItemInner.md)
  - [PSOpenAPITools\Model.OrderAddOrderItemInnerOrderItemOptionInner](docs/OrderAddOrderItemInnerOrderItemOptionInner.md)
  - [PSOpenAPITools\Model.OrderAddOrderItemInnerOrderItemPropertyInner](docs/OrderAddOrderItemInnerOrderItemPropertyInner.md)
+ - [PSOpenAPITools\Model.OrderCalculate](docs/OrderCalculate.md)
+ - [PSOpenAPITools\Model.OrderCalculate200Response](docs/OrderCalculate200Response.md)
+ - [PSOpenAPITools\Model.OrderCalculateDiscount](docs/OrderCalculateDiscount.md)
+ - [PSOpenAPITools\Model.OrderCalculateItem](docs/OrderCalculateItem.md)
+ - [PSOpenAPITools\Model.OrderCalculateOrderItemInner](docs/OrderCalculateOrderItemInner.md)
+ - [PSOpenAPITools\Model.OrderCalculateOrderItemInnerOrderItemOptionInner](docs/OrderCalculateOrderItemInnerOrderItemOptionInner.md)
+ - [PSOpenAPITools\Model.OrderCalculateShippingRate](docs/OrderCalculateShippingRate.md)
+ - [PSOpenAPITools\Model.OrderCalculateSubtotal](docs/OrderCalculateSubtotal.md)
+ - [PSOpenAPITools\Model.OrderCalculateTax](docs/OrderCalculateTax.md)
  - [PSOpenAPITools\Model.OrderCount200Response](docs/OrderCount200Response.md)
  - [PSOpenAPITools\Model.OrderCount200ResponseResult](docs/OrderCount200ResponseResult.md)
  - [PSOpenAPITools\Model.OrderFinancialStatusList200Response](docs/OrderFinancialStatusList200Response.md)

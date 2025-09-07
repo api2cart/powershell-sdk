@@ -10,7 +10,7 @@ Describe -tag 'PSOpenAPITools' -name 'ProductReview' {
     Context 'ProductReview' {
         It 'Initialize-ProductReview' {
             # a simple test to create an object
-            #$NewObject = Initialize-ProductReview -Id "TEST_VALUE" -ProductId "TEST_VALUE" -CustomerId "TEST_VALUE" -NickName "TEST_VALUE" -Email "TEST_VALUE" -Summary "TEST_VALUE" -Message "TEST_VALUE" -Rating "TEST_VALUE" -Ratings "TEST_VALUE" -Status "TEST_VALUE" -CreatedTime "TEST_VALUE" -Medias "TEST_VALUE" -AdditionalFields "TEST_VALUE" -CustomFields "TEST_VALUE"
+            #$NewObject = Initialize-ProductReview -Id "TEST_VALUE" -ProductId "TEST_VALUE" -CustomerId "TEST_VALUE" -NickName "TEST_VALUE" -Email "TEST_VALUE" -Summary "TEST_VALUE" -Message "TEST_VALUE" -Rating "TEST_VALUE" -Ratings "TEST_VALUE" -Status "TEST_VALUE" -CreatedTime "TEST_VALUE" -ModifiedTime "TEST_VALUE" -Medias "TEST_VALUE" -AdditionalFields "TEST_VALUE" -CustomFields "TEST_VALUE"
             #$NewObject | Should -BeOfType ProductReview
             #$NewObject.property | Should -Be 0
         }

@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**Invoke-OrderAbandonedList**](OrderApi.md#Invoke-OrderAbandonedList) | **GET** /order.abandoned.list.json | order.abandoned.list
 [**Invoke-OrderAdd**](OrderApi.md#Invoke-OrderAdd) | **POST** /order.add.json | order.add
+[**Invoke-OrderCalculate**](OrderApi.md#Invoke-OrderCalculate) | **POST** /order.calculate.json | order.calculate
 [**Invoke-OrderCount**](OrderApi.md#Invoke-OrderCount) | **GET** /order.count.json | order.count
 [**Invoke-OrderFinancialStatusList**](OrderApi.md#Invoke-OrderFinancialStatusList) | **GET** /order.financial_status.list.json | order.financial_status.list
 [**Invoke-OrderFulfillmentStatusList**](OrderApi.md#Invoke-OrderFulfillmentStatusList) | **GET** /order.fulfillment_status.list.json | order.fulfillment_status.list
@@ -171,6 +172,64 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**OrderAdd200Response**](OrderAdd200Response.md) (PSCustomObject)
+
+### Authorization
+
+[StoreKeyAuth](../README.md#StoreKeyAuth), [ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a id="Invoke-OrderCalculate"></a>
+# **Invoke-OrderCalculate**
+> OrderCalculate200Response Invoke-OrderCalculate<br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-OrderCalculate] <PSCustomObject><br>
+
+order.calculate
+
+<p>Calculates the total cost of an order for a given customer and a set of products, as well as the available shipping methods based on the specified address. The calculation takes into account store product prices, discounts, taxes, shipping costs, and other store settings. The result includes a detailed breakdown of the final order cost by its components.</p> <p>Note that the final totals, taxes, and other amounts must include the corresponding values for the selected shipping method.</p><p>The result of this method can be used when creating an order using the <strong>order.add</strong> method.</p>
+
+### Example
+```powershell
+# general setting of the PowerShell module, e.g. base URL, authentication, etc
+$Configuration = Get-Configuration
+# Configure API key authorization: StoreKeyAuth
+$Configuration.ApiKey.x-store-key = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.x-store-key = "Bearer"
+
+# Configure API key authorization: ApiKeyAuth
+$Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+#$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
+
+$OrderCalculateOrderItemInnerOrderItemOptionInner = Initialize-OrderCalculateOrderItemInnerOrderItemOptionInner -OrderItemOptionName "Color" -OrderItemOptionValue "green"
+$OrderCalculateOrderItemInner = Initialize-OrderCalculateOrderItemInner -OrderItemId "125, where {x} - 1,2,3,... etc" -OrderItemQuantity 5, where {x} - 1,2,3,... etc -OrderItemVariantId "52" -OrderItemOption $OrderCalculateOrderItemInnerOrderItemOptionInner
+
+$OrderCalculate = Initialize-OrderCalculate -CustomerEmail "jubari@hannsgroup.com" -CurrencyId "usd" -StoreId "1" -Coupons "MyCoupons" -ShippFirstName "John" -ShippLastName "Smith" -ShippAddress1 "Green str. 35" -ShippAddress2 "Green str. 35" -ShippCity "Chicago" -ShippPostcode "24545" -ShippState "IL" -ShippCountry "US" -ShippCompany "Apple" -ShippPhone "880086544564" -BillFirstName "Adam" -BillLastName "Smith" -BillAddress1 "Green str. 35" -BillAddress2 "Red str, 2" -BillCity "Chicago" -BillPostcode "12345" -BillState "IL" -BillCountry "US" -BillCompany "Apple" -BillPhone "8 800 5659 6896" -ResponseFields "{result}" -OrderItem $OrderCalculateOrderItemInner # OrderCalculate | 
+
+# order.calculate
+try {
+    $Result = Invoke-OrderCalculate -OrderCalculate $OrderCalculate
+} catch {
+    Write-Host ("Exception occurred when calling Invoke-OrderCalculate: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
+    Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **OrderCalculate** | [**OrderCalculate**](OrderCalculate.md)|  | 
+
+### Return type
+
+[**OrderCalculate200Response**](OrderCalculate200Response.md) (PSCustomObject)
 
 ### Authorization
 

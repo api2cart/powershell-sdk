@@ -3619,6 +3619,24 @@ Defines product’s manufacturer's name
 .PARAMETER StoreId
 Store Id
 
+.PARAMETER MetaTitle
+Defines unique meta title for each entity
+
+.PARAMETER MetaKeywords
+Defines unique meta keywords for each entity
+
+.PARAMETER MetaDescription
+Defines unique meta description of a entity
+
+.PARAMETER SearchKeywords
+Defines unique search keywords
+
+.PARAMETER ImageUrl
+Image Url
+
+.PARAMETER SeoUrl
+Defines unique URL for SEO
+
 .PARAMETER WithHttpInfo
 
 A switch when turned on will return a hash table of Response, StatusCode and Headers instead of just the Response
@@ -3639,6 +3657,24 @@ function Invoke-ProductManufacturerAdd {
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${StoreId},
+        [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${MetaTitle},
+        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${MetaKeywords},
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${MetaDescription},
+        [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${SearchKeywords},
+        [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ImageUrl},
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${SeoUrl},
         [Switch]
         $WithHttpInfo
     )
@@ -3674,6 +3710,30 @@ function Invoke-ProductManufacturerAdd {
 
         if ($StoreId) {
             $LocalVarQueryParameters['store_id'] = $StoreId
+        }
+
+        if ($MetaTitle) {
+            $LocalVarQueryParameters['meta_title'] = $MetaTitle
+        }
+
+        if ($MetaKeywords) {
+            $LocalVarQueryParameters['meta_keywords'] = $MetaKeywords
+        }
+
+        if ($MetaDescription) {
+            $LocalVarQueryParameters['meta_description'] = $MetaDescription
+        }
+
+        if ($SearchKeywords) {
+            $LocalVarQueryParameters['search_keywords'] = $SearchKeywords
+        }
+
+        if ($ImageUrl) {
+            $LocalVarQueryParameters['image_url'] = $ImageUrl
+        }
+
+        if ($SeoUrl) {
+            $LocalVarQueryParameters['seo_url'] = $SeoUrl
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -5136,8 +5196,26 @@ Retrieves reviews specified by ids
 .PARAMETER StoreId
 Store Id
 
+.PARAMETER LangId
+Language id
+
 .PARAMETER Status
 Defines status
+
+.PARAMETER CreatedFrom
+Retrieve entities from their creation date
+
+.PARAMETER CreatedTo
+Retrieve entities to their creation date
+
+.PARAMETER CustomerId
+Retrieves orders specified by customer id
+
+.PARAMETER SortBy
+Set field to sort by
+
+.PARAMETER SortDirection
+Set sorting direction
 
 .PARAMETER ResponseFields
 Set this parameter in order to choose which entity fields you want to retrieve
@@ -5179,14 +5257,32 @@ function Invoke-ProductReviewList {
         ${StoreId},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Status},
+        ${LangId},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Status},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Params},
+        ${CreatedFrom},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CreatedTo},
+        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${CustomerId},
+        [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${SortBy},
+        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${SortDirection},
+        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ResponseFields},
+        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${Params},
+        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${Exclude},
         [Switch]
@@ -5237,8 +5333,32 @@ function Invoke-ProductReviewList {
             $LocalVarQueryParameters['store_id'] = $StoreId
         }
 
+        if ($LangId) {
+            $LocalVarQueryParameters['lang_id'] = $LangId
+        }
+
         if ($Status) {
             $LocalVarQueryParameters['status'] = $Status
+        }
+
+        if ($CreatedFrom) {
+            $LocalVarQueryParameters['created_from'] = $CreatedFrom
+        }
+
+        if ($CreatedTo) {
+            $LocalVarQueryParameters['created_to'] = $CreatedTo
+        }
+
+        if ($CustomerId) {
+            $LocalVarQueryParameters['customer_id'] = $CustomerId
+        }
+
+        if ($SortBy) {
+            $LocalVarQueryParameters['sort_by'] = $SortBy
+        }
+
+        if ($SortDirection) {
+            $LocalVarQueryParameters['sort_direction'] = $SortDirection
         }
 
         if ($ResponseFields) {

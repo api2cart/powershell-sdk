@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **Ratings** | [**ProductReviewRating[]**](ProductReviewRating.md) |  | [optional] 
 **Status** | **String** |  | [optional] 
 **CreatedTime** | [**A2CDateTime**](A2CDateTime.md) |  | [optional] 
+**ModifiedTime** | [**A2CDateTime**](A2CDateTime.md) |  | [optional] 
 **Medias** | [**Media[]**](Media.md) |  | [optional] 
 **AdditionalFields** | [**SystemCollectionsHashtable**](.md) |  | [optional] 
 **CustomFields** | [**SystemCollectionsHashtable**](.md) |  | [optional] 
@@ -33,6 +34,7 @@ $ProductReview = Initialize-PSOpenAPIToolsProductReview  -Id null `
  -Ratings null `
  -Status null `
  -CreatedTime null `
+ -ModifiedTime null `
  -Medias null `
  -AdditionalFields null `
  -CustomFields null

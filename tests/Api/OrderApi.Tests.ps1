@@ -23,6 +23,14 @@ Describe -tag 'PSOpenAPITools' -name 'OrderApi' {
         }
     }
 
+    Context 'Invoke-OrderCalculate' {
+        It 'Test Invoke-OrderCalculate' {
+            #$TestResult = Invoke-OrderCalculate -OrderCalculate "TEST_VALUE"
+            #$TestResult | Should -BeOfType TODO
+            #$TestResult.property | Should -Be 0
+        }
+    }
+
     Context 'Invoke-OrderCount' {
         It 'Test Invoke-OrderCount' {
             #$TestResult = Invoke-OrderCount -OrderIds "TEST_VALUE" -Ids "TEST_VALUE" -CustomerId "TEST_VALUE" -StoreId "TEST_VALUE" -CustomerEmail "TEST_VALUE" -OrderStatus "TEST_VALUE" -OrderStatusIds "TEST_VALUE" -EbayOrderStatus "TEST_VALUE" -FinancialStatus "TEST_VALUE" -FinancialStatusIds "TEST_VALUE" -FulfillmentChannel "TEST_VALUE" -FulfillmentStatus "TEST_VALUE" -ShippingMethod "TEST_VALUE" -DeliveryMethod "TEST_VALUE" -Tags "TEST_VALUE" -ShipNodeType "TEST_VALUE" -CreatedFrom "TEST_VALUE" -CreatedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE"

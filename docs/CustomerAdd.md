@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **LastName** | **String** | Defines customer&#39;s last name | [optional] 
 **Password** | **String** | Defines customer&#39;s unique password | [optional] 
 **Group** | **String** | Defines the group where the customer | [optional] 
+**GroupId** | **String** | Customer group_id | [optional] 
 **GroupIds** | **String** | Groups that will be assigned to a customer | [optional] 
 **Status** | **String** | Defines customer&#39;s status | [optional] [default to "enabled"]
 **CreatedTime** | **String** | Entity&#39;s date creation | [optional] 
@@ -36,6 +37,7 @@ $CustomerAdd = Initialize-PSOpenAPIToolsCustomerAdd  -Email mail@example.com `
  -LastName Smith `
  -Password fd5gfd5g75fd `
  -Group Register `
+ -GroupId 3 `
  -GroupIds 1,2,3 `
  -Status disabled `
  -CreatedTime 2014-01-30 15:58:41 `

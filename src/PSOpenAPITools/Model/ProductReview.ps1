@@ -37,6 +37,8 @@ No description available.
 No description available.
 .PARAMETER CreatedTime
 No description available.
+.PARAMETER ModifiedTime
+No description available.
 .PARAMETER Medias
 No description available.
 .PARAMETER AdditionalFields
@@ -85,12 +87,15 @@ function Initialize-ProductReview {
         [PSCustomObject]
         ${CreatedTime},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
+        [PSCustomObject]
+        ${ModifiedTime},
+        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Medias},
-        [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${AdditionalFields},
-        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${CustomFields}
     )
@@ -112,6 +117,7 @@ function Initialize-ProductReview {
             "ratings" = ${Ratings}
             "status" = ${Status}
             "created_time" = ${CreatedTime}
+            "modified_time" = ${ModifiedTime}
             "medias" = ${Medias}
             "additional_fields" = ${AdditionalFields}
             "custom_fields" = ${CustomFields}
@@ -152,7 +158,7 @@ function ConvertFrom-JsonToProductReview {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductReview
-        $AllProperties = ("id", "product_id", "customer_id", "nick_name", "email", "summary", "message", "rating", "ratings", "status", "created_time", "medias", "additional_fields", "custom_fields")
+        $AllProperties = ("id", "product_id", "customer_id", "nick_name", "email", "summary", "message", "rating", "ratings", "status", "created_time", "modified_time", "medias", "additional_fields", "custom_fields")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -225,6 +231,12 @@ function ConvertFrom-JsonToProductReview {
             $CreatedTime = $JsonParameters.PSobject.Properties["created_time"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "modified_time"))) { #optional property not found
+            $ModifiedTime = $null
+        } else {
+            $ModifiedTime = $JsonParameters.PSobject.Properties["modified_time"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "medias"))) { #optional property not found
             $Medias = $null
         } else {
@@ -255,6 +267,7 @@ function ConvertFrom-JsonToProductReview {
             "ratings" = ${Ratings}
             "status" = ${Status}
             "created_time" = ${CreatedTime}
+            "modified_time" = ${ModifiedTime}
             "medias" = ${Medias}
             "additional_fields" = ${AdditionalFields}
             "custom_fields" = ${CustomFields}

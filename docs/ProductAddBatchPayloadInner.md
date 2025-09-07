@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **ManageStock** | **Boolean** |  | [optional] 
 **ProductType** | **String** |  | [optional] 
 **MarketplaceItemProperties** | [**SystemCollectionsHashtable**](.md) |  | [optional] 
+**Specifics** | [**SystemCollectionsHashtable**](.md) |  | [optional] 
 **IsFreeShipping** | **Boolean** |  | [optional] 
 **Taxable** | **Boolean** |  | [optional] 
 **Status** | **String** |  | [optional] 
@@ -60,6 +61,7 @@ Name | Type | Description | Notes
 **HarmonizedSystemCode** | **String** |  | [optional] 
 **Url** | **String** |  | [optional] 
 **SeoUrl** | **String** |  | [optional] 
+**ExternalProductLink** | **String** |  | [optional] 
 **Manufacturer** | **String** |  | [optional] 
 **ManufacturerId** | **String** |  | [optional] 
 **BackorderStatus** | **String** |  | [optional] 
@@ -94,6 +96,7 @@ $ProductAddBatchPayloadInner = Initialize-PSOpenAPIToolsProductAddBatchPayloadIn
  -ManageStock null `
  -ProductType null `
  -MarketplaceItemProperties null `
+ -Specifics null `
  -IsFreeShipping null `
  -Taxable null `
  -Status null `
@@ -128,6 +131,7 @@ $ProductAddBatchPayloadInner = Initialize-PSOpenAPIToolsProductAddBatchPayloadIn
  -HarmonizedSystemCode null `
  -Url null `
  -SeoUrl null `
+ -ExternalProductLink null `
  -Manufacturer null `
  -ManufacturerId null `
  -BackorderStatus null `
