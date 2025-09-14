@@ -30,6 +30,7 @@ Name | Type | Description | Notes
 **Avail** | **Boolean** | Defines category&#39;s visibility status | [optional] [default to $true]
 **AvailFrom** | **String** | Allows to schedule a time in the future that the item becomes available. The value should be greater than the current date and time. | [optional] 
 **ProductClass** | **String** | A categorization for the product | [optional] 
+**BrandName** | **String** | Retrieves brands specified by brand name | [optional] 
 **AvailableForView** | **Boolean** | Specifies the set of visible/invisible products for users | [optional] 
 **StoresIds** | **String** | Assign product to the stores that is specified by comma-separated stores&#39; id | [optional] 
 **StoreId** | **String** | Defines store id where the product should be found | [optional] 
@@ -122,8 +123,9 @@ $ProductUpdate = Initialize-PSOpenAPIToolsProductUpdate  -Id 10 `
  -Visible search `
  -InStock true `
  -Avail false `
- -AvailFrom avail_from&#x3D;2029-10-25T15:54:37-0500 `
+ -AvailFrom 2029-10-25T15:54:37-0500 `
  -ProductClass Shirts `
+ -BrandName Abidas `
  -AvailableForView false `
  -StoresIds 1,2 `
  -StoreId 1 `

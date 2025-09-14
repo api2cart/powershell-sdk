@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **Status** | **String** |  | [optional] 
 **Type** | **String** |  | [optional] 
 **Condition** | **String** |  | [optional] 
+**ConditionDescription** | **String** |  | [optional] 
 **Visible** | **String** |  | [optional] 
 **AvailableForView** | **Boolean** |  | [optional] 
 **AvailableForSale** | **Boolean** |  | [optional] 
@@ -94,6 +95,7 @@ $ProductUpdateBatchPayloadInner = Initialize-PSOpenAPIToolsProductUpdateBatchPay
  -Status null `
  -Type null `
  -Condition null `
+ -ConditionDescription null `
  -Visible null `
  -AvailableForView null `
  -AvailableForSale null `

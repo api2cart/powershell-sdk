@@ -200,7 +200,7 @@ $ProductAdd = Initialize-PSOpenAPIToolsProductAdd  -Name Bag `
  -Materials materials[0]&#x3D;Aluminum&amp;materials[1]&#x3D;Brass `
  -Certifications null `
  -Specifics null `
- -AvailFrom avail_from&#x3D;2029-10-25T15:54:37-0500 `
+ -AvailFrom 2029-10-25T15:54:37-0500 `
  -SpriceCreate 2018-08-25 23:56:12 `
  -SpriceModified 2018-12-05 13:46:20 `
  -SpriceExpire 2018-08-25 23:56:12 `

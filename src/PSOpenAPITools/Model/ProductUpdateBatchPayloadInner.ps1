@@ -61,6 +61,8 @@ No description available.
 No description available.
 .PARAMETER Condition
 No description available.
+.PARAMETER ConditionDescription
+No description available.
 .PARAMETER Visible
 No description available.
 .PARAMETER AvailableForView
@@ -220,122 +222,125 @@ function Initialize-ProductUpdateBatchPayloadInner {
         ${Condition},
         [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Visible},
+        ${ConditionDescription},
         [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${AvailableForView},
+        [String]
+        ${Visible},
         [Parameter(Position = 25, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${AvailableForSale},
+        ${AvailableForView},
         [Parameter(Position = 26, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${AvailableForSale},
+        [Parameter(Position = 27, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${AvailFrom},
-        [Parameter(Position = 27, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${Weight},
         [Parameter(Position = 28, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Length},
+        ${Weight},
         [Parameter(Position = 29, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Width},
+        ${Length},
         [Parameter(Position = 30, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${Height},
+        ${Width},
         [Parameter(Position = 31, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${DimensionsUnit},
+        [System.Nullable[Decimal]]
+        ${Height},
         [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${WeightUnit},
+        ${DimensionsUnit},
         [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${ManageStock},
+        [String]
+        ${WeightUnit},
         [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${InStock},
+        ${ManageStock},
         [Parameter(Position = 35, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${InStock},
+        [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${BackorderStatus},
-        [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${IsFreeShipping},
         [Parameter(Position = 37, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${IsVirtual},
+        ${IsFreeShipping},
         [Parameter(Position = 38, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${Taxable},
+        ${IsVirtual},
         [Parameter(Position = 39, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${Downloadable},
+        ${Taxable},
         [Parameter(Position = 40, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${WarehouseId},
+        [System.Nullable[Boolean]]
+        ${Downloadable},
         [Parameter(Position = 41, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${TaxClassId},
+        ${WarehouseId},
         [Parameter(Position = 42, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${TaxClassId},
+        [Parameter(Position = 43, ValueFromPipelineByPropertyName = $true)]
         [String[]]
         ${CategoriesIds},
-        [Parameter(Position = 43, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${MetaTitle},
         [Parameter(Position = 44, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaDescription},
+        ${MetaTitle},
         [Parameter(Position = 45, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${MetaDescription},
+        [Parameter(Position = 46, ValueFromPipelineByPropertyName = $true)]
         [String[]]
         ${MetaKeywords},
-        [Parameter(Position = 46, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Url},
         [Parameter(Position = 47, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SeoUrl},
+        ${Url},
         [Parameter(Position = 48, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Manufacturer},
+        ${SeoUrl},
         [Parameter(Position = 49, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ManufacturerId},
+        ${Manufacturer},
         [Parameter(Position = 50, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Mpn},
+        ${ManufacturerId},
         [Parameter(Position = 51, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Gtin},
+        ${Mpn},
         [Parameter(Position = 52, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Upc},
+        ${Gtin},
         [Parameter(Position = 53, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Isbn},
+        ${Upc},
         [Parameter(Position = 54, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Ean},
+        ${Isbn},
         [Parameter(Position = 55, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Barcode},
+        ${Ean},
         [Parameter(Position = 56, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Barcode},
+        [Parameter(Position = 57, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Images},
-        [Parameter(Position = 57, ValueFromPipelineByPropertyName = $true)]
-        [String[]]
-        ${RelatedProductsIds},
         [Parameter(Position = 58, ValueFromPipelineByPropertyName = $true)]
         [String[]]
-        ${UpSellProductsIds},
+        ${RelatedProductsIds},
         [Parameter(Position = 59, ValueFromPipelineByPropertyName = $true)]
         [String[]]
-        ${CrossSellProductsIds},
+        ${UpSellProductsIds},
         [Parameter(Position = 60, ValueFromPipelineByPropertyName = $true)]
         [String[]]
-        ${Tags},
+        ${CrossSellProductsIds},
         [Parameter(Position = 61, ValueFromPipelineByPropertyName = $true)]
         [String[]]
-        ${SearchKeywords},
+        ${Tags},
         [Parameter(Position = 62, ValueFromPipelineByPropertyName = $true)]
+        [String[]]
+        ${SearchKeywords},
+        [Parameter(Position = 63, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${HarmonizedSystemCode}
     )
@@ -393,6 +398,7 @@ function Initialize-ProductUpdateBatchPayloadInner {
             "status" = ${Status}
             "type" = ${Type}
             "condition" = ${Condition}
+            "condition_description" = ${ConditionDescription}
             "visible" = ${Visible}
             "available_for_view" = ${AvailableForView}
             "available_for_sale" = ${AvailableForSale}
@@ -470,7 +476,7 @@ function ConvertFrom-JsonToProductUpdateBatchPayloadInner {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductUpdateBatchPayloadInner
-        $AllProperties = ("id", "name", "description", "short_description", "sku", "model", "price", "special_price", "sprice_create", "sprice_expire", "cost_price", "old_price", "fixed_cost_shipping_price", "advanced_prices", "quantity", "increase_quantity", "reduce_quantity", "reserve_quantity", "store_id", "lang_id", "status", "type", "condition", "visible", "available_for_view", "available_for_sale", "avail_from", "weight", "length", "width", "height", "dimensions_unit", "weight_unit", "manage_stock", "in_stock", "backorder_status", "is_free_shipping", "is_virtual", "taxable", "downloadable", "warehouse_id", "tax_class_id", "categories_ids", "meta_title", "meta_description", "meta_keywords", "url", "seo_url", "manufacturer", "manufacturer_id", "mpn", "gtin", "upc", "isbn", "ean", "barcode", "images", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "tags", "search_keywords", "harmonized_system_code")
+        $AllProperties = ("id", "name", "description", "short_description", "sku", "model", "price", "special_price", "sprice_create", "sprice_expire", "cost_price", "old_price", "fixed_cost_shipping_price", "advanced_prices", "quantity", "increase_quantity", "reduce_quantity", "reserve_quantity", "store_id", "lang_id", "status", "type", "condition", "condition_description", "visible", "available_for_view", "available_for_sale", "avail_from", "weight", "length", "width", "height", "dimensions_unit", "weight_unit", "manage_stock", "in_stock", "backorder_status", "is_free_shipping", "is_virtual", "taxable", "downloadable", "warehouse_id", "tax_class_id", "categories_ids", "meta_title", "meta_description", "meta_keywords", "url", "seo_url", "manufacturer", "manufacturer_id", "mpn", "gtin", "upc", "isbn", "ean", "barcode", "images", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "tags", "search_keywords", "harmonized_system_code")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -617,6 +623,12 @@ function ConvertFrom-JsonToProductUpdateBatchPayloadInner {
             $Condition = $null
         } else {
             $Condition = $JsonParameters.PSobject.Properties["condition"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "condition_description"))) { #optional property not found
+            $ConditionDescription = $null
+        } else {
+            $ConditionDescription = $JsonParameters.PSobject.Properties["condition_description"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "visible"))) { #optional property not found
@@ -883,6 +895,7 @@ function ConvertFrom-JsonToProductUpdateBatchPayloadInner {
             "status" = ${Status}
             "type" = ${Type}
             "condition" = ${Condition}
+            "condition_description" = ${ConditionDescription}
             "visible" = ${Visible}
             "available_for_view" = ${AvailableForView}
             "available_for_sale" = ${AvailableForSale}
