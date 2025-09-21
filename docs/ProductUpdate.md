@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **TierPrices** | [**ProductAddTierPricesInner[]**](ProductAddTierPricesInner.md) | Defines product&#39;s tier prices | [optional] 
 **ReservePrice** | **Decimal** | Defines reserve price value | [optional] 
 **BuyitnowPrice** | **Decimal** | Defines buy it now value | [optional] 
-**Taxable** | **Boolean** | Specifies whether a tax is charged | [optional] [default to $true]
+**Taxable** | **Boolean** | Specifies whether a tax is charged | [optional] 
 **TaxClassId** | **String** | Defines tax classes where entity has to be added | [optional] 
 **Type** | **String** | Defines product&#39;s type | [optional] 
 **Status** | **String** | Defines product&#39;s status | [optional] 

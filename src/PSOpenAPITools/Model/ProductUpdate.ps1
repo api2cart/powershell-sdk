@@ -256,7 +256,7 @@ function Initialize-ProductUpdate {
         ${BuyitnowPrice},
         [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${Taxable} = $true,
+        ${Taxable},
         [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${TaxClassId},

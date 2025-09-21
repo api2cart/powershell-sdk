@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **Avail** | **Boolean** | Defines category&#39;s visibility status | [optional] [default to $true]
 **IsDefault** | **Boolean** | Defines as a default variant | [optional] 
 **IsFreeShipping** | **Boolean** | Specifies variant&#39;s free shipping flag that has to be added | [optional] 
-**Taxable** | **Boolean** | Specifies whether a tax is charged | [optional] [default to $true]
+**Taxable** | **Boolean** | Specifies whether a tax is charged | [optional] 
 **TaxClassId** | **String** | Defines tax classes where entity has to be added | [optional] 
 **IsVirtual** | **Boolean** | Defines whether the product is virtual | [optional] [default to $false]
 **ManageStock** | **Boolean** | Defines inventory tracking for product variant | [optional] 
@@ -55,6 +55,7 @@ Name | Type | Description | Notes
 **MetaTitle** | **String** | Defines unique meta title for each entity | [optional] 
 **MetaDescription** | **String** | Defines unique meta description of a entity | [optional] 
 **MetaKeywords** | **String** | Defines unique meta keywords for each entity | [optional] 
+**Manufacturer** | **String** | Specifies the product variant&#39;s manufacturer | [optional] 
 **Reindex** | **Boolean** | Is reindex required | [optional] [default to $true]
 **ClearCache** | **Boolean** | Is cache clear required | [optional] [default to $true]
 
@@ -114,6 +115,7 @@ $ProductVariantUpdate = Initialize-PSOpenAPIToolsProductVariantUpdate  -Id 10 `
  -MetaTitle category,test `
  -MetaDescription category,test `
  -MetaKeywords category,test `
+ -Manufacturer Samsung `
  -Reindex false `
  -ClearCache false
 ```

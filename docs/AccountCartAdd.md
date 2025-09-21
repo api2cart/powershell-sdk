@@ -96,6 +96,7 @@ Name | Type | Description | Notes
 **ShoplazzaAccessToken** | **String** | Access token authorizing the app to access resources on behalf of a user | [optional] 
 **ShoplazzaSharedSecret** | **String** | Shared secret | [optional] 
 **ShopwareAccessKey** | **String** | Shopware access key | [optional] 
+**UnasApiKey** | **String** | UNAS API Key | [optional] 
 **ShopwareApiKey** | **String** | Shopware api key | [optional] 
 **ShopwareApiSecret** | **String** | Shopware client secret access key | [optional] 
 **MivaAccessToken** | **String** | Miva access token | [optional] 
@@ -266,6 +267,7 @@ $AccountCartAdd = Initialize-PSOpenAPIToolsAccountCartAdd  -CartId Opencart14 `
  -ShoplazzaAccessToken igse8e4rdmzkxdi937qe69d59en1imw `
  -ShoplazzaSharedSecret gmz3iz45x2 `
  -ShopwareAccessKey SWSCS3O1RJBSRNBYQLFIYJN2ZQ `
+ -UnasApiKey c238908e29ceb6e6ad3df15f89a6234709d3f000 `
  -ShopwareApiKey SWSCS3O1RJBSRNBYQLFIYJN2ZQ `
  -ShopwareApiSecret V3NYNWg2b1dZdHBUWDN1cmdKdGhnenp5enVJYlJ0WlJvOFF2bnQ `
  -MivaAccessToken 227cbe434a1e358d72db0de993x9d9fd `

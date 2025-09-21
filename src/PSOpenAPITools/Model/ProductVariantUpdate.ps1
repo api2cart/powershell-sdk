@@ -119,6 +119,8 @@ Defines unique meta title for each entity
 Defines unique meta description of a entity
 .PARAMETER MetaKeywords
 Defines unique meta keywords for each entity
+.PARAMETER Manufacturer
+Specifies the product variant's manufacturer
 .PARAMETER Reindex
 Is reindex required
 .PARAMETER ClearCache
@@ -187,7 +189,7 @@ function Initialize-ProductVariantUpdate {
         ${IsFreeShipping},
         [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${Taxable} = $true,
+        ${Taxable},
         [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${TaxClassId},
@@ -288,9 +290,12 @@ function Initialize-ProductVariantUpdate {
         [String]
         ${MetaKeywords},
         [Parameter(Position = 52, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Manufacturer},
+        [Parameter(Position = 53, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${Reindex} = $true,
-        [Parameter(Position = 53, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 54, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${ClearCache} = $true
     )
@@ -353,6 +358,7 @@ function Initialize-ProductVariantUpdate {
             "meta_title" = ${MetaTitle}
             "meta_description" = ${MetaDescription}
             "meta_keywords" = ${MetaKeywords}
+            "manufacturer" = ${Manufacturer}
             "reindex" = ${Reindex}
             "clear_cache" = ${ClearCache}
         }
@@ -392,7 +398,7 @@ function ConvertFrom-JsonToProductVariantUpdate {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductVariantUpdate
-        $AllProperties = ("id", "product_id", "store_id", "lang_id", "options", "name", "description", "short_description", "model", "sku", "visible", "status", "backorder_status", "low_stock_threshold", "available_for_sale", "avail", "is_default", "is_free_shipping", "taxable", "tax_class_id", "is_virtual", "manage_stock", "in_stock", "warehouse_id", "reserve_quantity", "quantity", "increase_quantity", "reduce_quantity", "price", "special_price", "retail_price", "old_price", "cost_price", "fixed_cost_shipping_price", "sprice_create", "sprice_expire", "weight", "barcode", "width", "weight_unit", "height", "length", "gtin", "upc", "mpn", "ean", "isbn", "harmonized_system_code", "country_of_origin", "meta_title", "meta_description", "meta_keywords", "reindex", "clear_cache")
+        $AllProperties = ("id", "product_id", "store_id", "lang_id", "options", "name", "description", "short_description", "model", "sku", "visible", "status", "backorder_status", "low_stock_threshold", "available_for_sale", "avail", "is_default", "is_free_shipping", "taxable", "tax_class_id", "is_virtual", "manage_stock", "in_stock", "warehouse_id", "reserve_quantity", "quantity", "increase_quantity", "reduce_quantity", "price", "special_price", "retail_price", "old_price", "cost_price", "fixed_cost_shipping_price", "sprice_create", "sprice_expire", "weight", "barcode", "width", "weight_unit", "height", "length", "gtin", "upc", "mpn", "ean", "isbn", "harmonized_system_code", "country_of_origin", "meta_title", "meta_description", "meta_keywords", "manufacturer", "reindex", "clear_cache")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -711,6 +717,12 @@ function ConvertFrom-JsonToProductVariantUpdate {
             $MetaKeywords = $JsonParameters.PSobject.Properties["meta_keywords"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "manufacturer"))) { #optional property not found
+            $Manufacturer = $null
+        } else {
+            $Manufacturer = $JsonParameters.PSobject.Properties["manufacturer"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "reindex"))) { #optional property not found
             $Reindex = $null
         } else {
@@ -776,6 +788,7 @@ function ConvertFrom-JsonToProductVariantUpdate {
             "meta_title" = ${MetaTitle}
             "meta_description" = ${MetaDescription}
             "meta_keywords" = ${MetaKeywords}
+            "manufacturer" = ${Manufacturer}
             "reindex" = ${Reindex}
             "clear_cache" = ${ClearCache}
         }
