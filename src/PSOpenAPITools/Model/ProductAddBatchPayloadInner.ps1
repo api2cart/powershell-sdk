@@ -35,6 +35,8 @@ No description available.
 No description available.
 .PARAMETER Mpn
 No description available.
+.PARAMETER Isbn
+No description available.
 .PARAMETER Barcode
 No description available.
 .PARAMETER Price
@@ -49,9 +51,17 @@ No description available.
 No description available.
 .PARAMETER SpriceExpire
 No description available.
+.PARAMETER AvailFrom
+No description available.
 .PARAMETER AdvancedPrices
 No description available.
 .PARAMETER FixedCostShippingPrice
+No description available.
+.PARAMETER BuyitnowPrice
+No description available.
+.PARAMETER ReservePrice
+No description available.
+.PARAMETER BestOffer
 No description available.
 .PARAMETER Quantity
 No description available.
@@ -71,6 +81,8 @@ No description available.
 No description available.
 .PARAMETER Condition
 No description available.
+.PARAMETER ConditionDescription
+No description available.
 .PARAMETER Visible
 No description available.
 .PARAMETER AvailableForView
@@ -82,6 +94,10 @@ No description available.
 .PARAMETER InStock
 No description available.
 .PARAMETER Type
+No description available.
+.PARAMETER ListingType
+No description available.
+.PARAMETER ListingDuration
 No description available.
 .PARAMETER Downloadable
 No description available.
@@ -116,6 +132,8 @@ No description available.
 .PARAMETER StoresIds
 No description available.
 .PARAMETER TaxClassId
+No description available.
+.PARAMETER SalesTax
 No description available.
 .PARAMETER MetaTitle
 No description available.
@@ -185,167 +203,194 @@ function Initialize-ProductAddBatchPayloadInner {
         ${Mpn},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Barcode},
+        ${Isbn},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${Price},
+        [String]
+        ${Barcode},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${OldPrice},
+        ${Price},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${CostPrice},
+        ${OldPrice},
         [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
-        ${SpecialPrice},
+        ${CostPrice},
         [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${SpriceCreate},
+        [System.Nullable[Decimal]]
+        ${SpecialPrice},
         [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${SpriceExpire},
+        ${SpriceCreate},
         [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${SpriceExpire},
+        [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${AvailFrom},
+        [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${AdvancedPrices},
-        [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${FixedCostShippingPrice},
-        [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${BuyitnowPrice},
+        [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${ReservePrice},
+        [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Decimal]]
+        ${BestOffer},
+        [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${Quantity},
-        [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${ManageStock},
-        [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${ProductType},
-        [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
-        ${MarketplaceItemProperties},
-        [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject]
-        ${Specifics},
-        [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${IsFreeShipping},
         [Parameter(Position = 25, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${Taxable},
+        ${ManageStock},
         [Parameter(Position = 26, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Status},
+        ${ProductType},
         [Parameter(Position = 27, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Condition},
+        [PSCustomObject]
+        ${MarketplaceItemProperties},
         [Parameter(Position = 28, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Visible},
+        [PSCustomObject]
+        ${Specifics},
         [Parameter(Position = 29, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${AvailableForView},
+        ${IsFreeShipping},
         [Parameter(Position = 30, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${AvailableForSale},
+        ${Taxable},
         [Parameter(Position = 31, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${IsVirtual},
+        [String]
+        ${Status},
         [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${InStock},
+        [String]
+        ${Condition},
         [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Type},
+        ${ConditionDescription},
         [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${Downloadable},
+        [String]
+        ${Visible},
         [Parameter(Position = 35, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${Weight},
+        [System.Nullable[Boolean]]
+        ${AvailableForView},
         [Parameter(Position = 36, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${Length},
+        [System.Nullable[Boolean]]
+        ${AvailableForSale},
         [Parameter(Position = 37, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${Width},
+        [System.Nullable[Boolean]]
+        ${IsVirtual},
         [Parameter(Position = 38, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Decimal]]
-        ${Height},
+        [System.Nullable[Boolean]]
+        ${InStock},
         [Parameter(Position = 39, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${WeightUnit},
+        ${Type},
         [Parameter(Position = 40, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${DimensionsUnit},
+        ${ListingType},
         [Parameter(Position = 41, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${StoreId},
+        ${ListingDuration},
         [Parameter(Position = 42, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${LangId},
+        [System.Nullable[Boolean]]
+        ${Downloadable},
         [Parameter(Position = 43, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${CategoryId},
+        [System.Nullable[Decimal]]
+        ${Weight},
         [Parameter(Position = 44, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${WarehouseId},
+        [System.Nullable[Decimal]]
+        ${Length},
         [Parameter(Position = 45, ValueFromPipelineByPropertyName = $true)]
-        [String[]]
-        ${CategoriesIds},
+        [System.Nullable[Decimal]]
+        ${Width},
         [Parameter(Position = 46, ValueFromPipelineByPropertyName = $true)]
-        [String[]]
-        ${RelatedProductsIds},
+        [System.Nullable[Decimal]]
+        ${Height},
         [Parameter(Position = 47, ValueFromPipelineByPropertyName = $true)]
-        [String[]]
-        ${UpSellProductsIds},
+        [String]
+        ${WeightUnit},
         [Parameter(Position = 48, ValueFromPipelineByPropertyName = $true)]
-        [String[]]
-        ${CrossSellProductsIds},
+        [String]
+        ${DimensionsUnit},
         [Parameter(Position = 49, ValueFromPipelineByPropertyName = $true)]
-        [String[]]
-        ${StoresIds},
+        [String]
+        ${StoreId},
         [Parameter(Position = 50, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${TaxClassId},
+        ${LangId},
         [Parameter(Position = 51, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaTitle},
+        ${CategoryId},
         [Parameter(Position = 52, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MetaDescription},
+        ${WarehouseId},
         [Parameter(Position = 53, ValueFromPipelineByPropertyName = $true)]
         [String[]]
-        ${MetaKeywords},
+        ${CategoriesIds},
         [Parameter(Position = 54, ValueFromPipelineByPropertyName = $true)]
         [String[]]
-        ${SearchKeywords},
+        ${RelatedProductsIds},
         [Parameter(Position = 55, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${HarmonizedSystemCode},
+        [String[]]
+        ${UpSellProductsIds},
         [Parameter(Position = 56, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Url},
+        [String[]]
+        ${CrossSellProductsIds},
         [Parameter(Position = 57, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${SeoUrl},
+        [String[]]
+        ${StoresIds},
         [Parameter(Position = 58, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ExternalProductLink},
+        ${TaxClassId},
         [Parameter(Position = 59, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${Manufacturer},
+        [PSCustomObject]
+        ${SalesTax},
         [Parameter(Position = 60, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ManufacturerId},
+        ${MetaTitle},
         [Parameter(Position = 61, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${BackorderStatus},
+        ${MetaDescription},
         [Parameter(Position = 62, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject[]]
-        ${Images},
+        [String[]]
+        ${MetaKeywords},
         [Parameter(Position = 63, ValueFromPipelineByPropertyName = $true)]
         [String[]]
-        ${Tags},
+        ${SearchKeywords},
         [Parameter(Position = 64, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${HarmonizedSystemCode},
+        [Parameter(Position = 65, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Url},
+        [Parameter(Position = 66, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${SeoUrl},
+        [Parameter(Position = 67, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${ExternalProductLink},
+        [Parameter(Position = 68, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Manufacturer},
+        [Parameter(Position = 69, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${ManufacturerId},
+        [Parameter(Position = 70, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${BackorderStatus},
+        [Parameter(Position = 71, ValueFromPipelineByPropertyName = $true)]
+        [PSCustomObject[]]
+        ${Images},
+        [Parameter(Position = 72, ValueFromPipelineByPropertyName = $true)]
+        [String[]]
+        ${Tags},
+        [Parameter(Position = 73, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Files}
     )
@@ -406,6 +451,7 @@ function Initialize-ProductAddBatchPayloadInner {
             "ean" = ${Ean}
             "gtin" = ${Gtin}
             "mpn" = ${Mpn}
+            "isbn" = ${Isbn}
             "barcode" = ${Barcode}
             "price" = ${Price}
             "old_price" = ${OldPrice}
@@ -413,8 +459,12 @@ function Initialize-ProductAddBatchPayloadInner {
             "special_price" = ${SpecialPrice}
             "sprice_create" = ${SpriceCreate}
             "sprice_expire" = ${SpriceExpire}
+            "avail_from" = ${AvailFrom}
             "advanced_prices" = ${AdvancedPrices}
             "fixed_cost_shipping_price" = ${FixedCostShippingPrice}
+            "buyitnow_price" = ${BuyitnowPrice}
+            "reserve_price" = ${ReservePrice}
+            "best_offer" = ${BestOffer}
             "quantity" = ${Quantity}
             "manage_stock" = ${ManageStock}
             "product_type" = ${ProductType}
@@ -424,12 +474,15 @@ function Initialize-ProductAddBatchPayloadInner {
             "taxable" = ${Taxable}
             "status" = ${Status}
             "condition" = ${Condition}
+            "condition_description" = ${ConditionDescription}
             "visible" = ${Visible}
             "available_for_view" = ${AvailableForView}
             "available_for_sale" = ${AvailableForSale}
             "is_virtual" = ${IsVirtual}
             "in_stock" = ${InStock}
             "type" = ${Type}
+            "listing_type" = ${ListingType}
+            "listing_duration" = ${ListingDuration}
             "downloadable" = ${Downloadable}
             "weight" = ${Weight}
             "length" = ${Length}
@@ -447,6 +500,7 @@ function Initialize-ProductAddBatchPayloadInner {
             "cross_sell_products_ids" = ${CrossSellProductsIds}
             "stores_ids" = ${StoresIds}
             "tax_class_id" = ${TaxClassId}
+            "sales_tax" = ${SalesTax}
             "meta_title" = ${MetaTitle}
             "meta_description" = ${MetaDescription}
             "meta_keywords" = ${MetaKeywords}
@@ -498,7 +552,7 @@ function ConvertFrom-JsonToProductAddBatchPayloadInner {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductAddBatchPayloadInner
-        $AllProperties = ("name", "description", "short_description", "sku", "model", "asin", "upc", "ean", "gtin", "mpn", "barcode", "price", "old_price", "cost_price", "special_price", "sprice_create", "sprice_expire", "advanced_prices", "fixed_cost_shipping_price", "quantity", "manage_stock", "product_type", "marketplace_item_properties", "specifics", "is_free_shipping", "taxable", "status", "condition", "visible", "available_for_view", "available_for_sale", "is_virtual", "in_stock", "type", "downloadable", "weight", "length", "width", "height", "weight_unit", "dimensions_unit", "store_id", "lang_id", "category_id", "warehouse_id", "categories_ids", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "stores_ids", "tax_class_id", "meta_title", "meta_description", "meta_keywords", "search_keywords", "harmonized_system_code", "url", "seo_url", "external_product_link", "manufacturer", "manufacturer_id", "backorder_status", "images", "tags", "files")
+        $AllProperties = ("name", "description", "short_description", "sku", "model", "asin", "upc", "ean", "gtin", "mpn", "isbn", "barcode", "price", "old_price", "cost_price", "special_price", "sprice_create", "sprice_expire", "avail_from", "advanced_prices", "fixed_cost_shipping_price", "buyitnow_price", "reserve_price", "best_offer", "quantity", "manage_stock", "product_type", "marketplace_item_properties", "specifics", "is_free_shipping", "taxable", "status", "condition", "condition_description", "visible", "available_for_view", "available_for_sale", "is_virtual", "in_stock", "type", "listing_type", "listing_duration", "downloadable", "weight", "length", "width", "height", "weight_unit", "dimensions_unit", "store_id", "lang_id", "category_id", "warehouse_id", "categories_ids", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "stores_ids", "tax_class_id", "sales_tax", "meta_title", "meta_description", "meta_keywords", "search_keywords", "harmonized_system_code", "url", "seo_url", "external_product_link", "manufacturer", "manufacturer_id", "backorder_status", "images", "tags", "files")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -565,6 +619,12 @@ function ConvertFrom-JsonToProductAddBatchPayloadInner {
             $Mpn = $JsonParameters.PSobject.Properties["mpn"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "isbn"))) { #optional property not found
+            $Isbn = $null
+        } else {
+            $Isbn = $JsonParameters.PSobject.Properties["isbn"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "barcode"))) { #optional property not found
             $Barcode = $null
         } else {
@@ -607,6 +667,12 @@ function ConvertFrom-JsonToProductAddBatchPayloadInner {
             $SpriceExpire = $JsonParameters.PSobject.Properties["sprice_expire"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "avail_from"))) { #optional property not found
+            $AvailFrom = $null
+        } else {
+            $AvailFrom = $JsonParameters.PSobject.Properties["avail_from"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "advanced_prices"))) { #optional property not found
             $AdvancedPrices = $null
         } else {
@@ -617,6 +683,24 @@ function ConvertFrom-JsonToProductAddBatchPayloadInner {
             $FixedCostShippingPrice = $null
         } else {
             $FixedCostShippingPrice = $JsonParameters.PSobject.Properties["fixed_cost_shipping_price"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "buyitnow_price"))) { #optional property not found
+            $BuyitnowPrice = $null
+        } else {
+            $BuyitnowPrice = $JsonParameters.PSobject.Properties["buyitnow_price"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "reserve_price"))) { #optional property not found
+            $ReservePrice = $null
+        } else {
+            $ReservePrice = $JsonParameters.PSobject.Properties["reserve_price"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "best_offer"))) { #optional property not found
+            $BestOffer = $null
+        } else {
+            $BestOffer = $JsonParameters.PSobject.Properties["best_offer"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "quantity"))) { #optional property not found
@@ -673,6 +757,12 @@ function ConvertFrom-JsonToProductAddBatchPayloadInner {
             $Condition = $JsonParameters.PSobject.Properties["condition"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "condition_description"))) { #optional property not found
+            $ConditionDescription = $null
+        } else {
+            $ConditionDescription = $JsonParameters.PSobject.Properties["condition_description"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "visible"))) { #optional property not found
             $Visible = $null
         } else {
@@ -707,6 +797,18 @@ function ConvertFrom-JsonToProductAddBatchPayloadInner {
             $Type = $null
         } else {
             $Type = $JsonParameters.PSobject.Properties["type"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "listing_type"))) { #optional property not found
+            $ListingType = $null
+        } else {
+            $ListingType = $JsonParameters.PSobject.Properties["listing_type"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "listing_duration"))) { #optional property not found
+            $ListingDuration = $null
+        } else {
+            $ListingDuration = $JsonParameters.PSobject.Properties["listing_duration"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "downloadable"))) { #optional property not found
@@ -811,6 +913,12 @@ function ConvertFrom-JsonToProductAddBatchPayloadInner {
             $TaxClassId = $JsonParameters.PSobject.Properties["tax_class_id"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "sales_tax"))) { #optional property not found
+            $SalesTax = $null
+        } else {
+            $SalesTax = $JsonParameters.PSobject.Properties["sales_tax"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "meta_title"))) { #optional property not found
             $MetaTitle = $null
         } else {
@@ -906,6 +1014,7 @@ function ConvertFrom-JsonToProductAddBatchPayloadInner {
             "ean" = ${Ean}
             "gtin" = ${Gtin}
             "mpn" = ${Mpn}
+            "isbn" = ${Isbn}
             "barcode" = ${Barcode}
             "price" = ${Price}
             "old_price" = ${OldPrice}
@@ -913,8 +1022,12 @@ function ConvertFrom-JsonToProductAddBatchPayloadInner {
             "special_price" = ${SpecialPrice}
             "sprice_create" = ${SpriceCreate}
             "sprice_expire" = ${SpriceExpire}
+            "avail_from" = ${AvailFrom}
             "advanced_prices" = ${AdvancedPrices}
             "fixed_cost_shipping_price" = ${FixedCostShippingPrice}
+            "buyitnow_price" = ${BuyitnowPrice}
+            "reserve_price" = ${ReservePrice}
+            "best_offer" = ${BestOffer}
             "quantity" = ${Quantity}
             "manage_stock" = ${ManageStock}
             "product_type" = ${ProductType}
@@ -924,12 +1037,15 @@ function ConvertFrom-JsonToProductAddBatchPayloadInner {
             "taxable" = ${Taxable}
             "status" = ${Status}
             "condition" = ${Condition}
+            "condition_description" = ${ConditionDescription}
             "visible" = ${Visible}
             "available_for_view" = ${AvailableForView}
             "available_for_sale" = ${AvailableForSale}
             "is_virtual" = ${IsVirtual}
             "in_stock" = ${InStock}
             "type" = ${Type}
+            "listing_type" = ${ListingType}
+            "listing_duration" = ${ListingDuration}
             "downloadable" = ${Downloadable}
             "weight" = ${Weight}
             "length" = ${Length}
@@ -947,6 +1063,7 @@ function ConvertFrom-JsonToProductAddBatchPayloadInner {
             "cross_sell_products_ids" = ${CrossSellProductsIds}
             "stores_ids" = ${StoresIds}
             "tax_class_id" = ${TaxClassId}
+            "sales_tax" = ${SalesTax}
             "meta_title" = ${MetaTitle}
             "meta_description" = ${MetaDescription}
             "meta_keywords" = ${MetaKeywords}

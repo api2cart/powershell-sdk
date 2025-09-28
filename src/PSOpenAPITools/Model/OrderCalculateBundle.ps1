@@ -39,8 +39,6 @@ No description available.
 No description available.
 .PARAMETER VariantId
 No description available.
-.PARAMETER BundleProductId
-No description available.
 .PARAMETER Options
 No description available.
 .PARAMETER AdditionalFields
@@ -49,10 +47,10 @@ No description available.
 No description available.
 .OUTPUTS
 
-OrderCalculateItem<PSCustomObject>
+OrderCalculateBundle<PSCustomObject>
 #>
 
-function Initialize-OrderCalculateItem {
+function Initialize-OrderCalculateBundle {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -92,21 +90,18 @@ function Initialize-OrderCalculateItem {
         [String]
         ${VariantId},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${BundleProductId},
-        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Options},
-        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${AdditionalFields},
-        [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${CustomFields}
     )
 
     Process {
-        'Creating PSCustomObject: PSOpenAPITools => OrderCalculateItem' | Write-Debug
+        'Creating PSCustomObject: PSOpenAPITools => OrderCalculateBundle' | Write-Debug
         $PSBoundParameters | Out-DebugParameter | Write-Debug
 
 
@@ -123,7 +118,6 @@ function Initialize-OrderCalculateItem {
             "weight_unit" = ${WeightUnit}
             "barcode" = ${Barcode}
             "variant_id" = ${VariantId}
-            "bundle_product_id" = ${BundleProductId}
             "options" = ${Options}
             "additional_fields" = ${AdditionalFields}
             "custom_fields" = ${CustomFields}
@@ -137,11 +131,11 @@ function Initialize-OrderCalculateItem {
 <#
 .SYNOPSIS
 
-Convert from JSON to OrderCalculateItem<PSCustomObject>
+Convert from JSON to OrderCalculateBundle<PSCustomObject>
 
 .DESCRIPTION
 
-Convert from JSON to OrderCalculateItem<PSCustomObject>
+Convert from JSON to OrderCalculateBundle<PSCustomObject>
 
 .PARAMETER Json
 
@@ -149,22 +143,22 @@ Json object
 
 .OUTPUTS
 
-OrderCalculateItem<PSCustomObject>
+OrderCalculateBundle<PSCustomObject>
 #>
-function ConvertFrom-JsonToOrderCalculateItem {
+function ConvertFrom-JsonToOrderCalculateBundle {
     Param(
         [AllowEmptyString()]
         [string]$Json
     )
 
     Process {
-        'Converting JSON to PSCustomObject: PSOpenAPITools => OrderCalculateItem' | Write-Debug
+        'Converting JSON to PSCustomObject: PSOpenAPITools => OrderCalculateBundle' | Write-Debug
         $PSBoundParameters | Out-DebugParameter | Write-Debug
 
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
-        # check if Json contains properties not defined in OrderCalculateItem
-        $AllProperties = ("product_id", "sku", "name", "quantity", "price", "price_inc_tax", "tax_rate", "unit_discount", "weight", "weight_unit", "barcode", "variant_id", "bundle_product_id", "options", "additional_fields", "custom_fields")
+        # check if Json contains properties not defined in OrderCalculateBundle
+        $AllProperties = ("product_id", "sku", "name", "quantity", "price", "price_inc_tax", "tax_rate", "unit_discount", "weight", "weight_unit", "barcode", "variant_id", "options", "additional_fields", "custom_fields")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -243,12 +237,6 @@ function ConvertFrom-JsonToOrderCalculateItem {
             $VariantId = $JsonParameters.PSobject.Properties["variant_id"].value
         }
 
-        if (!([bool]($JsonParameters.PSobject.Properties.name -match "bundle_product_id"))) { #optional property not found
-            $BundleProductId = $null
-        } else {
-            $BundleProductId = $JsonParameters.PSobject.Properties["bundle_product_id"].value
-        }
-
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "options"))) { #optional property not found
             $Options = $null
         } else {
@@ -280,7 +268,6 @@ function ConvertFrom-JsonToOrderCalculateItem {
             "weight_unit" = ${WeightUnit}
             "barcode" = ${Barcode}
             "variant_id" = ${VariantId}
-            "bundle_product_id" = ${BundleProductId}
             "options" = ${Options}
             "additional_fields" = ${AdditionalFields}
             "custom_fields" = ${CustomFields}

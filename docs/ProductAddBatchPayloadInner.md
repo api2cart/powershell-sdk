@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Ean** | **String** |  | [optional] 
 **Gtin** | **String** |  | [optional] 
 **Mpn** | **String** |  | [optional] 
+**Isbn** | **String** |  | [optional] 
 **Barcode** | **String** |  | [optional] 
 **Price** | **Decimal** |  | [optional] 
 **OldPrice** | **Decimal** |  | [optional] 
@@ -20,8 +21,12 @@ Name | Type | Description | Notes
 **SpecialPrice** | **Decimal** |  | [optional] 
 **SpriceCreate** | **String** |  | [optional] 
 **SpriceExpire** | **String** |  | [optional] 
+**AvailFrom** | **String** |  | [optional] 
 **AdvancedPrices** | [**ProductAddBatchPayloadInnerAdvancedPricesInner[]**](ProductAddBatchPayloadInnerAdvancedPricesInner.md) |  | [optional] 
 **FixedCostShippingPrice** | **Decimal** |  | [optional] 
+**BuyitnowPrice** | **Decimal** |  | [optional] 
+**ReservePrice** | **Decimal** |  | [optional] 
+**BestOffer** | **Decimal** |  | [optional] 
 **Quantity** | **Decimal** |  | [optional] 
 **ManageStock** | **Boolean** |  | [optional] 
 **ProductType** | **String** |  | [optional] 
@@ -31,12 +36,15 @@ Name | Type | Description | Notes
 **Taxable** | **Boolean** |  | [optional] 
 **Status** | **String** |  | [optional] 
 **Condition** | **String** |  | [optional] 
+**ConditionDescription** | **String** |  | [optional] 
 **Visible** | **String** |  | [optional] 
 **AvailableForView** | **Boolean** |  | [optional] 
 **AvailableForSale** | **Boolean** |  | [optional] 
 **IsVirtual** | **Boolean** |  | [optional] 
 **InStock** | **Boolean** |  | [optional] 
 **Type** | **String** |  | [optional] 
+**ListingType** | **String** |  | [optional] 
+**ListingDuration** | **String** |  | [optional] 
 **Downloadable** | **Boolean** |  | [optional] 
 **Weight** | **Decimal** |  | [optional] 
 **Length** | **Decimal** |  | [optional] 
@@ -54,6 +62,7 @@ Name | Type | Description | Notes
 **CrossSellProductsIds** | **String[]** |  | [optional] 
 **StoresIds** | **String[]** |  | [optional] 
 **TaxClassId** | **String** |  | [optional] 
+**SalesTax** | [**ProductAddBatchPayloadInnerSalesTax**](ProductAddBatchPayloadInnerSalesTax.md) |  | [optional] 
 **MetaTitle** | **String** |  | [optional] 
 **MetaDescription** | **String** |  | [optional] 
 **MetaKeywords** | **String[]** |  | [optional] 
@@ -83,6 +92,7 @@ $ProductAddBatchPayloadInner = Initialize-PSOpenAPIToolsProductAddBatchPayloadIn
  -Ean null `
  -Gtin null `
  -Mpn null `
+ -Isbn null `
  -Barcode null `
  -Price null `
  -OldPrice null `
@@ -90,8 +100,12 @@ $ProductAddBatchPayloadInner = Initialize-PSOpenAPIToolsProductAddBatchPayloadIn
  -SpecialPrice null `
  -SpriceCreate null `
  -SpriceExpire null `
+ -AvailFrom null `
  -AdvancedPrices null `
  -FixedCostShippingPrice null `
+ -BuyitnowPrice null `
+ -ReservePrice null `
+ -BestOffer null `
  -Quantity null `
  -ManageStock null `
  -ProductType null `
@@ -101,12 +115,15 @@ $ProductAddBatchPayloadInner = Initialize-PSOpenAPIToolsProductAddBatchPayloadIn
  -Taxable null `
  -Status null `
  -Condition null `
+ -ConditionDescription null `
  -Visible null `
  -AvailableForView null `
  -AvailableForSale null `
  -IsVirtual null `
  -InStock null `
  -Type null `
+ -ListingType null `
+ -ListingDuration null `
  -Downloadable null `
  -Weight null `
  -Length null `
@@ -124,6 +141,7 @@ $ProductAddBatchPayloadInner = Initialize-PSOpenAPIToolsProductAddBatchPayloadIn
  -CrossSellProductsIds null `
  -StoresIds null `
  -TaxClassId null `
+ -SalesTax null `
  -MetaTitle null `
  -MetaDescription null `
  -MetaKeywords null `

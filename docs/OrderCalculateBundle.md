@@ -1,4 +1,4 @@
-# OrderCalculateItem
+# OrderCalculateBundle
 ## Properties
 
 Name | Type | Description | Notes
@@ -15,7 +15,6 @@ Name | Type | Description | Notes
 **WeightUnit** | **String** |  | [optional] 
 **Barcode** | **String** |  | [optional] 
 **VariantId** | **String** |  | [optional] 
-**BundleProductId** | **String** |  | [optional] 
 **Options** | [**OrderItemOption[]**](OrderItemOption.md) |  | [optional] 
 **AdditionalFields** | [**SystemCollectionsHashtable**](.md) |  | [optional] 
 **CustomFields** | [**SystemCollectionsHashtable**](.md) |  | [optional] 
@@ -24,7 +23,7 @@ Name | Type | Description | Notes
 
 - Prepare the resource
 ```powershell
-$OrderCalculateItem = Initialize-PSOpenAPIToolsOrderCalculateItem  -ProductId null `
+$OrderCalculateBundle = Initialize-PSOpenAPIToolsOrderCalculateBundle  -ProductId null `
  -Sku null `
  -Name null `
  -Quantity null `
@@ -36,7 +35,6 @@ $OrderCalculateItem = Initialize-PSOpenAPIToolsOrderCalculateItem  -ProductId nu
  -WeightUnit null `
  -Barcode null `
  -VariantId null `
- -BundleProductId null `
  -Options null `
  -AdditionalFields null `
  -CustomFields null
@@ -44,7 +42,7 @@ $OrderCalculateItem = Initialize-PSOpenAPIToolsOrderCalculateItem  -ProductId nu
 
 - Convert the resource to JSON
 ```powershell
-$OrderCalculateItem | ConvertTo-JSON
+$OrderCalculateBundle | ConvertTo-JSON
 ```
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

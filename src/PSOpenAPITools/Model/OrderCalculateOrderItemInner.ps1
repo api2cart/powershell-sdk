@@ -21,6 +21,10 @@ Defines orders specified by order item id
 Defines orders specified by order item quantity
 .PARAMETER OrderItemVariantId
 Ordered product variant. Where x is order item ID
+.PARAMETER OrderItemParent
+Index of the parent grouped/bundle product
+.PARAMETER OrderItemParentOptionName
+Option name of the parent grouped/bundle product
 .PARAMETER OrderItemOption
 No description available.
 .OUTPUTS
@@ -41,6 +45,12 @@ function Initialize-OrderCalculateOrderItemInner {
         [String]
         ${OrderItemVariantId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Int32]]
+        ${OrderItemParent},
+        [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${OrderItemParentOptionName},
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${OrderItemOption}
     )
@@ -62,6 +72,8 @@ function Initialize-OrderCalculateOrderItemInner {
             "order_item_id" = ${OrderItemId}
             "order_item_quantity" = ${OrderItemQuantity}
             "order_item_variant_id" = ${OrderItemVariantId}
+            "order_item_parent" = ${OrderItemParent}
+            "order_item_parent_option_name" = ${OrderItemParentOptionName}
             "order_item_option" = ${OrderItemOption}
         }
 
@@ -100,7 +112,7 @@ function ConvertFrom-JsonToOrderCalculateOrderItemInner {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in OrderCalculateOrderItemInner
-        $AllProperties = ("order_item_id", "order_item_quantity", "order_item_variant_id", "order_item_option")
+        $AllProperties = ("order_item_id", "order_item_quantity", "order_item_variant_id", "order_item_parent", "order_item_parent_option_name", "order_item_option")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -129,6 +141,18 @@ function ConvertFrom-JsonToOrderCalculateOrderItemInner {
             $OrderItemVariantId = $JsonParameters.PSobject.Properties["order_item_variant_id"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "order_item_parent"))) { #optional property not found
+            $OrderItemParent = $null
+        } else {
+            $OrderItemParent = $JsonParameters.PSobject.Properties["order_item_parent"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "order_item_parent_option_name"))) { #optional property not found
+            $OrderItemParentOptionName = $null
+        } else {
+            $OrderItemParentOptionName = $JsonParameters.PSobject.Properties["order_item_parent_option_name"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "order_item_option"))) { #optional property not found
             $OrderItemOption = $null
         } else {
@@ -139,6 +163,8 @@ function ConvertFrom-JsonToOrderCalculateOrderItemInner {
             "order_item_id" = ${OrderItemId}
             "order_item_quantity" = ${OrderItemQuantity}
             "order_item_variant_id" = ${OrderItemVariantId}
+            "order_item_parent" = ${OrderItemParent}
+            "order_item_parent_option_name" = ${OrderItemParentOptionName}
             "order_item_option" = ${OrderItemOption}
         }
 

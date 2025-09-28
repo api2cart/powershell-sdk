@@ -10,7 +10,7 @@ Describe -tag 'PSOpenAPITools' -name 'OrderCalculateOrderItemInner' {
     Context 'OrderCalculateOrderItemInner' {
         It 'Initialize-OrderCalculateOrderItemInner' {
             # a simple test to create an object
-            #$NewObject = Initialize-OrderCalculateOrderItemInner -OrderItemId "TEST_VALUE" -OrderItemQuantity "TEST_VALUE" -OrderItemVariantId "TEST_VALUE" -OrderItemOption "TEST_VALUE"
+            #$NewObject = Initialize-OrderCalculateOrderItemInner -OrderItemId "TEST_VALUE" -OrderItemQuantity "TEST_VALUE" -OrderItemVariantId "TEST_VALUE" -OrderItemParent "TEST_VALUE" -OrderItemParentOptionName "TEST_VALUE" -OrderItemOption "TEST_VALUE"
             #$NewObject | Should -BeOfType OrderCalculateOrderItemInner
             #$NewObject.property | Should -Be 0
         }

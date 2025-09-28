@@ -208,7 +208,7 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
 $OrderCalculateOrderItemInnerOrderItemOptionInner = Initialize-OrderCalculateOrderItemInnerOrderItemOptionInner -OrderItemOptionName "Color" -OrderItemOptionValue "green"
-$OrderCalculateOrderItemInner = Initialize-OrderCalculateOrderItemInner -OrderItemId "125, where {x} - 1,2,3,... etc" -OrderItemQuantity 5, where {x} - 1,2,3,... etc -OrderItemVariantId "52" -OrderItemOption $OrderCalculateOrderItemInnerOrderItemOptionInner
+$OrderCalculateOrderItemInner = Initialize-OrderCalculateOrderItemInner -OrderItemId "125, where {x} - 1,2,3,... etc" -OrderItemQuantity 5, where {x} - 1,2,3,... etc -OrderItemVariantId "52" -OrderItemParent 2 -OrderItemParentOptionName "Internal Memory Storage" -OrderItemOption $OrderCalculateOrderItemInnerOrderItemOptionInner
 
 $OrderCalculate = Initialize-OrderCalculate -CustomerEmail "jubari@hannsgroup.com" -CurrencyId "usd" -StoreId "1" -Coupons "MyCoupons" -ShippFirstName "John" -ShippLastName "Smith" -ShippAddress1 "Green str. 35" -ShippAddress2 "Green str. 35" -ShippCity "Chicago" -ShippPostcode "24545" -ShippState "IL" -ShippCountry "US" -ShippCompany "Apple" -ShippPhone "880086544564" -BillFirstName "Adam" -BillLastName "Smith" -BillAddress1 "Green str. 35" -BillAddress2 "Red str, 2" -BillCity "Chicago" -BillPostcode "12345" -BillState "IL" -BillCountry "US" -BillCompany "Apple" -BillPhone "8 800 5659 6896" -ResponseFields "{result}" -OrderItem $OrderCalculateOrderItemInner # OrderCalculate | 
 

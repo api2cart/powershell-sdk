@@ -202,6 +202,7 @@ docs/OrderAddOrderItemInnerOrderItemPropertyInner.md
 docs/OrderApi.md
 docs/OrderCalculate.md
 docs/OrderCalculate200Response.md
+docs/OrderCalculateBundle.md
 docs/OrderCalculateDiscount.md
 docs/OrderCalculateItem.md
 docs/OrderCalculateOrderItemInner.md
@@ -270,6 +271,7 @@ docs/ProductAddBatch.md
 docs/ProductAddBatchPayloadInner.md
 docs/ProductAddBatchPayloadInnerAdvancedPricesInner.md
 docs/ProductAddBatchPayloadInnerImagesInner.md
+docs/ProductAddBatchPayloadInnerSalesTax.md
 docs/ProductAddBestOffer.md
 docs/ProductAddCertificationsInner.md
 docs/ProductAddCertificationsInnerFilesInner.md
@@ -652,6 +654,7 @@ src/PSOpenAPITools/Model/OrderAddOrderItemInnerOrderItemOptionInner.ps1
 src/PSOpenAPITools/Model/OrderAddOrderItemInnerOrderItemPropertyInner.ps1
 src/PSOpenAPITools/Model/OrderCalculate.ps1
 src/PSOpenAPITools/Model/OrderCalculate200Response.ps1
+src/PSOpenAPITools/Model/OrderCalculateBundle.ps1
 src/PSOpenAPITools/Model/OrderCalculateDiscount.ps1
 src/PSOpenAPITools/Model/OrderCalculateItem.ps1
 src/PSOpenAPITools/Model/OrderCalculateOrderItemInner.ps1
@@ -720,6 +723,7 @@ src/PSOpenAPITools/Model/ProductAddBatch.ps1
 src/PSOpenAPITools/Model/ProductAddBatchPayloadInner.ps1
 src/PSOpenAPITools/Model/ProductAddBatchPayloadInnerAdvancedPricesInner.ps1
 src/PSOpenAPITools/Model/ProductAddBatchPayloadInnerImagesInner.ps1
+src/PSOpenAPITools/Model/ProductAddBatchPayloadInnerSalesTax.ps1
 src/PSOpenAPITools/Model/ProductAddBestOffer.ps1
 src/PSOpenAPITools/Model/ProductAddCertificationsInner.ps1
 src/PSOpenAPITools/Model/ProductAddCertificationsInnerFilesInner.ps1
@@ -1102,6 +1106,7 @@ tests/Model/OrderAddOrderItemInnerOrderItemOptionInner.Tests.ps1
 tests/Model/OrderAddOrderItemInnerOrderItemPropertyInner.Tests.ps1
 tests/Model/OrderCalculate.Tests.ps1
 tests/Model/OrderCalculate200Response.Tests.ps1
+tests/Model/OrderCalculateBundle.Tests.ps1
 tests/Model/OrderCalculateDiscount.Tests.ps1
 tests/Model/OrderCalculateItem.Tests.ps1
 tests/Model/OrderCalculateOrderItemInner.Tests.ps1
@@ -1170,6 +1175,7 @@ tests/Model/ProductAddBatch.Tests.ps1
 tests/Model/ProductAddBatchPayloadInner.Tests.ps1
 tests/Model/ProductAddBatchPayloadInnerAdvancedPricesInner.Tests.ps1
 tests/Model/ProductAddBatchPayloadInnerImagesInner.Tests.ps1
+tests/Model/ProductAddBatchPayloadInnerSalesTax.Tests.ps1
 tests/Model/ProductAddBestOffer.Tests.ps1
 tests/Model/ProductAddCertificationsInner.Tests.ps1
 tests/Model/ProductAddCertificationsInnerFilesInner.Tests.ps1
