@@ -74,6 +74,7 @@ Name | Type | Description | Notes
 **CountryOfOrigin** | **String** | The country where the inventory item was made | [optional] 
 **HarmonizedSystemCode** | **String** | Harmonized System Code. An HSC is a 6-digit identifier that allows participating countries to classify traded goods on a common basis for customs purposes | [optional] 
 **ShippingTemplateId** | **Int32** | The numeric ID of the shipping template associated with the products in Etsy. You can find possible values in the &quot;&quot;cart.info&quot;&quot; API method response, in the field shipping_zones[]-&gt;id. | [optional] [default to 0]
+**ProcessingProfileId** | **Int32** | The numeric ID of the processing profile (readiness state) for physical products in Etsy. You can find possible values in the &quot;&quot;cart.info&quot;&quot; API method response, in the field processing_profiles[]-&gt;readiness_state_id. | [optional] 
 **WhenMade** | **String** | An enumerated string for the era in which the maker made the product. | [optional] [default to "made_to_order"]
 **IsSupply** | **Boolean** | If true, it indicates the product as a supply, otherwise it indicates that it is a finished product. | [optional] [default to $true]
 **Downloadable** | **Boolean** | Defines whether the product is downloadable | [optional] [default to $false]
@@ -169,6 +170,7 @@ $ProductUpdate = Initialize-PSOpenAPIToolsProductUpdate  -Id 10 `
  -CountryOfOrigin 123456 `
  -HarmonizedSystemCode 123456 `
  -ShippingTemplateId 40256592690 `
+ -ProcessingProfileId &#x60;12345678&#x60; `
  -WhenMade 2020_2025 `
  -IsSupply false `
  -Downloadable true `

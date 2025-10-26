@@ -917,6 +917,9 @@ If the value is 'true' and order exist in our cache, we will return order.info r
 .PARAMETER UseLatestApiVersion
 Use the latest platform API version
 
+.PARAMETER RoundingPrecision
+<p>Specifies the rounding precision for fractional numeric values (such as prices, taxes, and weights).</p> <p>Supported values range from <b>1</b> to <b>6</b>.</p> <p>The default rounding precision may vary depending on the platform. You can retrieve the default value using the <strong>cart.info</strong> method in the <code>default_rounding_precision</code> field. </p><p>Values are rounded to the nearest number at the specified precision. Fractions of .5 or higher are rounded up, while fractions lower than .5 are rounded down.</p>
+
 .PARAMETER WithHttpInfo
 
 A switch when turned on will return a hash table of Response, StatusCode and Headers instead of just the Response
@@ -952,6 +955,9 @@ function Invoke-OrderInfo {
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${UseLatestApiVersion},
+        [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Int32]]
+        ${RoundingPrecision},
         [Switch]
         $WithHttpInfo
     )
@@ -1005,6 +1011,10 @@ function Invoke-OrderInfo {
 
         if ($UseLatestApiVersion) {
             $LocalVarQueryParameters['use_latest_api_version'] = $UseLatestApiVersion
+        }
+
+        if ($RoundingPrecision) {
+            $LocalVarQueryParameters['rounding_precision'] = $RoundingPrecision
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {
@@ -1170,6 +1180,9 @@ If the value is 'true', we will cache orders for a 15 minutes in order to increa
 .PARAMETER UseLatestApiVersion
 Use the latest platform API version
 
+.PARAMETER RoundingPrecision
+<p>Specifies the rounding precision for fractional numeric values (such as prices, taxes, and weights).</p> <p>Supported values range from <b>1</b> to <b>6</b>.</p> <p>The default rounding precision may vary depending on the platform. You can retrieve the default value using the <strong>cart.info</strong> method in the <code>default_rounding_precision</code> field. </p><p>Values are rounded to the nearest number at the specified precision. Fractions of .5 or higher are rounded up, while fractions lower than .5 are rounded down.</p>
+
 .PARAMETER WithHttpInfo
 
 A switch when turned on will return a hash table of Response, StatusCode and Headers instead of just the Response
@@ -1295,6 +1308,9 @@ function Invoke-OrderList {
         [Parameter(Position = 37, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${UseLatestApiVersion},
+        [Parameter(Position = 38, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Int32]]
+        ${RoundingPrecision},
         [Switch]
         $WithHttpInfo
     )
@@ -1468,6 +1484,10 @@ function Invoke-OrderList {
 
         if ($UseLatestApiVersion) {
             $LocalVarQueryParameters['use_latest_api_version'] = $UseLatestApiVersion
+        }
+
+        if ($RoundingPrecision) {
+            $LocalVarQueryParameters['rounding_precision'] = $RoundingPrecision
         }
 
         if ($Configuration["ApiKeyPrefix"] -and $Configuration["ApiKeyPrefix"]["x-store-key"]) {

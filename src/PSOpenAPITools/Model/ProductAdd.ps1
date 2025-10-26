@@ -205,6 +205,8 @@ Identifies the payment method (such as PayPal) that the seller will accept when 
 Valid PayPal email address for the PayPal account that the seller will use if they offer PayPal as a payment method for the listing.
 .PARAMETER ShippingTemplateId
 The numeric ID of the shipping template associated with the products in Etsy. You can find possible values in the ""cart.info"" API method response, in the field shipping_zones[]->id.
+.PARAMETER ProcessingProfileId
+The numeric ID of the processing profile (readiness state) for physical products in Etsy. You can find possible values in the ""cart.info"" API method response, in the field processing_profiles[]->readiness_state_id.
 .PARAMETER ShippingDetails
 The shipping details, including flat and calculated shipping costs and shipping insurance costs. Look at cart.info method response for allowed values.<hr><div style=""font-style:normal"">Param structure:<div style=""margin-left: 2%;""><code style=""padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;"">shipping_details[0][<b>shipping_type</b>] = string </br>shipping_details[0][<b>shipping_service</b>] = string</br>shipping_details[0][<b>shipping_cost</b>] = decimal</br>shipping_details[1][<b>shipping_type</b>] = string </br>shipping_details[1][<b>shipping_service</b>] = string</br>shipping_details[1][<b>shipping_cost</b>] = decimal</br></code></div></div>
 .PARAMETER IsFreeShipping
@@ -545,72 +547,75 @@ function Initialize-ProductAdd {
         [System.Nullable[Int32]]
         ${ShippingTemplateId} = 0,
         [Parameter(Position = 95, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Int32]]
+        ${ProcessingProfileId},
+        [Parameter(Position = 96, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${ShippingDetails},
-        [Parameter(Position = 96, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 97, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${IsFreeShipping},
-        [Parameter(Position = 97, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${DeliveryCode},
         [Parameter(Position = 98, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${DeliveryType},
+        ${DeliveryCode},
         [Parameter(Position = 99, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${DeliveryType},
+        [Parameter(Position = 100, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
         ${DeliveryTime},
-        [Parameter(Position = 100, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 101, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${DeliveryOptionIds},
-        [Parameter(Position = 101, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 102, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${PackageDetails},
-        [Parameter(Position = 102, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 103, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${LogisticInfo},
-        [Parameter(Position = 103, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${ListingDuration},
         [Parameter(Position = 104, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ListingType} = "FixedPrice",
+        ${ListingDuration},
         [Parameter(Position = 105, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${CategoryType},
+        ${ListingType} = "FixedPrice",
         [Parameter(Position = 106, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${CategoryType},
+        [Parameter(Position = 107, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${ReturnAccepted},
-        [Parameter(Position = 107, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 108, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${SellerProfiles},
-        [Parameter(Position = 108, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 109, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${AuctionConfidentialityLevel},
-        [Parameter(Position = 109, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 110, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${BestOffer},
-        [Parameter(Position = 110, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${ProductionPartnerIds},
         [Parameter(Position = 111, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MarketplaceItemProperties},
+        ${ProductionPartnerIds},
         [Parameter(Position = 112, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${MarketplaceItemProperties},
+        [Parameter(Position = 113, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${ClearCache} = $true,
-        [Parameter(Position = 113, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Int32]]
-        ${ViewedCount} = 0,
         [Parameter(Position = 114, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
-        ${OrderedCount} = 0,
+        ${ViewedCount} = 0,
         [Parameter(Position = 115, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
-        ${ShopSectionId},
+        ${OrderedCount} = 0,
         [Parameter(Position = 116, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
-        ${ReturnPolicyId},
+        ${ShopSectionId},
         [Parameter(Position = 117, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Int32]]
+        ${ReturnPolicyId},
+        [Parameter(Position = 118, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${PersonalizationDetails}
     )
@@ -732,6 +737,7 @@ function Initialize-ProductAdd {
             "payment_methods" = ${PaymentMethods}
             "paypal_email" = ${PaypalEmail}
             "shipping_template_id" = ${ShippingTemplateId}
+            "processing_profile_id" = ${ProcessingProfileId}
             "shipping_details" = ${ShippingDetails}
             "is_free_shipping" = ${IsFreeShipping}
             "delivery_code" = ${DeliveryCode}
@@ -792,7 +798,7 @@ function ConvertFrom-JsonToProductAdd {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductAdd
-        $AllProperties = ("name", "model", "description", "price", "sku", "short_description", "type", "status", "visible", "category_id", "categories_ids", "product_class", "product_type", "is_virtual", "downloadable", "is_supply", "available_for_view", "available_for_sale", "store_id", "stores_ids", "lang_id", "old_price", "special_price", "wholesale_price", "cost_price", "fixed_cost_shipping_price", "tier_prices", "group_prices", "buyitnow_price", "reserve_price", "quantity", "in_stock", "manage_stock", "warehouse_id", "backorder_status", "min_order_quantity", "max_order_quantity", "low_stock_threshold", "weight", "weight_unit", "width", "height", "length", "dimensions_unit", "barcode", "upc", "ean", "isbn", "gtin", "mpn", "asin", "product_reference", "external_product_link", "harmonized_system_code", "country_of_origin", "manufacturer", "manufacturer_id", "manufacturer_info", "brand_name", "image_url", "image_name", "additional_image_urls", "files", "size_chart", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "attribute_set_name", "attribute_name", "search_keywords", "tags", "materials", "certifications", "specifics", "avail_from", "sprice_create", "sprice_modified", "sprice_expire", "created_at", "auto_renew", "when_made", "meta_title", "meta_keywords", "meta_description", "url", "seo_url", "tax_class_id", "taxable", "sales_tax", "condition", "condition_description", "allow_display_condition", "payment_methods", "paypal_email", "shipping_template_id", "shipping_details", "is_free_shipping", "delivery_code", "delivery_type", "delivery_time", "delivery_option_ids", "package_details", "logistic_info", "listing_duration", "listing_type", "category_type", "return_accepted", "seller_profiles", "auction_confidentiality_level", "best_offer", "production_partner_ids", "marketplace_item_properties", "clear_cache", "viewed_count", "ordered_count", "shop_section_id", "return_policy_id", "personalization_details")
+        $AllProperties = ("name", "model", "description", "price", "sku", "short_description", "type", "status", "visible", "category_id", "categories_ids", "product_class", "product_type", "is_virtual", "downloadable", "is_supply", "available_for_view", "available_for_sale", "store_id", "stores_ids", "lang_id", "old_price", "special_price", "wholesale_price", "cost_price", "fixed_cost_shipping_price", "tier_prices", "group_prices", "buyitnow_price", "reserve_price", "quantity", "in_stock", "manage_stock", "warehouse_id", "backorder_status", "min_order_quantity", "max_order_quantity", "low_stock_threshold", "weight", "weight_unit", "width", "height", "length", "dimensions_unit", "barcode", "upc", "ean", "isbn", "gtin", "mpn", "asin", "product_reference", "external_product_link", "harmonized_system_code", "country_of_origin", "manufacturer", "manufacturer_id", "manufacturer_info", "brand_name", "image_url", "image_name", "additional_image_urls", "files", "size_chart", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "attribute_set_name", "attribute_name", "search_keywords", "tags", "materials", "certifications", "specifics", "avail_from", "sprice_create", "sprice_modified", "sprice_expire", "created_at", "auto_renew", "when_made", "meta_title", "meta_keywords", "meta_description", "url", "seo_url", "tax_class_id", "taxable", "sales_tax", "condition", "condition_description", "allow_display_condition", "payment_methods", "paypal_email", "shipping_template_id", "processing_profile_id", "shipping_details", "is_free_shipping", "delivery_code", "delivery_type", "delivery_time", "delivery_option_ids", "package_details", "logistic_info", "listing_duration", "listing_type", "category_type", "return_accepted", "seller_profiles", "auction_confidentiality_level", "best_offer", "production_partner_ids", "marketplace_item_properties", "clear_cache", "viewed_count", "ordered_count", "shop_section_id", "return_policy_id", "personalization_details")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -1373,6 +1379,12 @@ function ConvertFrom-JsonToProductAdd {
             $ShippingTemplateId = $JsonParameters.PSobject.Properties["shipping_template_id"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "processing_profile_id"))) { #optional property not found
+            $ProcessingProfileId = $null
+        } else {
+            $ProcessingProfileId = $JsonParameters.PSobject.Properties["processing_profile_id"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "shipping_details"))) { #optional property not found
             $ShippingDetails = $null
         } else {
@@ -1607,6 +1619,7 @@ function ConvertFrom-JsonToProductAdd {
             "payment_methods" = ${PaymentMethods}
             "paypal_email" = ${PaypalEmail}
             "shipping_template_id" = ${ShippingTemplateId}
+            "processing_profile_id" = ${ProcessingProfileId}
             "shipping_details" = ${ShippingDetails}
             "is_free_shipping" = ${IsFreeShipping}
             "delivery_code" = ${DeliveryCode}

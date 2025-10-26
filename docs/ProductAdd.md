@@ -98,6 +98,7 @@ Name | Type | Description | Notes
 **PaymentMethods** | **String[]** | Identifies the payment method (such as PayPal) that the seller will accept when the buyer pays for the item. Look at cart.info method response for allowed values.&lt;hr&gt;&lt;div style&#x3D;&quot;&quot;font-style:normal&quot;&quot;&gt;Param structure:&lt;div style&#x3D;&quot;&quot;margin-left: 2%;&quot;&quot;&gt;&lt;code style&#x3D;&quot;&quot;padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;&quot;&quot;&gt;payment_methods[0] &#x3D; string&lt;/br&gt;payment_methods[1] &#x3D; string&lt;/br&gt;&lt;/code&gt;&lt;/div&gt;&lt;/div&gt; | [optional] 
 **PaypalEmail** | **String** | Valid PayPal email address for the PayPal account that the seller will use if they offer PayPal as a payment method for the listing. | [optional] 
 **ShippingTemplateId** | **Int32** | The numeric ID of the shipping template associated with the products in Etsy. You can find possible values in the &quot;&quot;cart.info&quot;&quot; API method response, in the field shipping_zones[]-&gt;id. | [optional] [default to 0]
+**ProcessingProfileId** | **Int32** | The numeric ID of the processing profile (readiness state) for physical products in Etsy. You can find possible values in the &quot;&quot;cart.info&quot;&quot; API method response, in the field processing_profiles[]-&gt;readiness_state_id. | [optional] 
 **ShippingDetails** | [**ProductAddShippingDetailsInner[]**](ProductAddShippingDetailsInner.md) | The shipping details, including flat and calculated shipping costs and shipping insurance costs. Look at cart.info method response for allowed values.&lt;hr&gt;&lt;div style&#x3D;&quot;&quot;font-style:normal&quot;&quot;&gt;Param structure:&lt;div style&#x3D;&quot;&quot;margin-left: 2%;&quot;&quot;&gt;&lt;code style&#x3D;&quot;&quot;padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;&quot;&quot;&gt;shipping_details[0][&lt;b&gt;shipping_type&lt;/b&gt;] &#x3D; string &lt;/br&gt;shipping_details[0][&lt;b&gt;shipping_service&lt;/b&gt;] &#x3D; string&lt;/br&gt;shipping_details[0][&lt;b&gt;shipping_cost&lt;/b&gt;] &#x3D; decimal&lt;/br&gt;shipping_details[1][&lt;b&gt;shipping_type&lt;/b&gt;] &#x3D; string &lt;/br&gt;shipping_details[1][&lt;b&gt;shipping_service&lt;/b&gt;] &#x3D; string&lt;/br&gt;shipping_details[1][&lt;b&gt;shipping_cost&lt;/b&gt;] &#x3D; decimal&lt;/br&gt;&lt;/code&gt;&lt;/div&gt;&lt;/div&gt; | [optional] 
 **IsFreeShipping** | **Boolean** | Specifies product&#39;s free shipping flag that has to be added | [optional] 
 **DeliveryCode** | **String** | The delivery promise that applies to offer | [optional] 
@@ -221,6 +222,7 @@ $ProductAdd = Initialize-PSOpenAPIToolsProductAdd  -Name Bag `
  -PaymentMethods payment_methods[0]&#x3D;CashOnPickup&amp;payment_methods[1]&#x3D;PayPal `
  -PaypalEmail paypall@mail.com `
  -ShippingTemplateId 40256592690 `
+ -ProcessingProfileId &#x60;12345678&#x60; `
  -ShippingDetails null `
  -IsFreeShipping true `
  -DeliveryCode 24uurs-23 `

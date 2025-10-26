@@ -57,7 +57,7 @@ Describe -tag 'PSOpenAPITools' -name 'OrderApi' {
 
     Context 'Invoke-OrderInfo' {
         It 'Test Invoke-OrderInfo' {
-            #$TestResult = Invoke-OrderInfo -Id "TEST_VALUE" -OrderId "TEST_VALUE" -StoreId "TEST_VALUE" -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE" -EnableCache "TEST_VALUE" -UseLatestApiVersion "TEST_VALUE"
+            #$TestResult = Invoke-OrderInfo -Id "TEST_VALUE" -OrderId "TEST_VALUE" -StoreId "TEST_VALUE" -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE" -EnableCache "TEST_VALUE" -UseLatestApiVersion "TEST_VALUE" -RoundingPrecision "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }
@@ -65,7 +65,7 @@ Describe -tag 'PSOpenAPITools' -name 'OrderApi' {
 
     Context 'Invoke-OrderList' {
         It 'Test Invoke-OrderList' {
-            #$TestResult = Invoke-OrderList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -Ids "TEST_VALUE" -OrderIds "TEST_VALUE" -SinceId "TEST_VALUE" -StoreId "TEST_VALUE" -CustomerId "TEST_VALUE" -CustomerEmail "TEST_VALUE" -BasketId "TEST_VALUE" -CurrencyId "TEST_VALUE" -Phone "TEST_VALUE" -OrderStatus "TEST_VALUE" -OrderStatusIds "TEST_VALUE" -EbayOrderStatus "TEST_VALUE" -FinancialStatus "TEST_VALUE" -FinancialStatusIds "TEST_VALUE" -FulfillmentStatus "TEST_VALUE" -ReturnStatus "TEST_VALUE" -FulfillmentChannel "TEST_VALUE" -ShippingMethod "TEST_VALUE" -SkipOrderIds "TEST_VALUE" -IsDeleted "TEST_VALUE" -ShippingCountryIso3 "TEST_VALUE" -DeliveryMethod "TEST_VALUE" -ShipNodeType "TEST_VALUE" -CreatedTo "TEST_VALUE" -CreatedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -Tags "TEST_VALUE" -SortBy "TEST_VALUE" -SortDirection "TEST_VALUE" -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE" -EnableCache "TEST_VALUE" -UseLatestApiVersion "TEST_VALUE"
+            #$TestResult = Invoke-OrderList -Start "TEST_VALUE" -Count "TEST_VALUE" -PageCursor "TEST_VALUE" -Ids "TEST_VALUE" -OrderIds "TEST_VALUE" -SinceId "TEST_VALUE" -StoreId "TEST_VALUE" -CustomerId "TEST_VALUE" -CustomerEmail "TEST_VALUE" -BasketId "TEST_VALUE" -CurrencyId "TEST_VALUE" -Phone "TEST_VALUE" -OrderStatus "TEST_VALUE" -OrderStatusIds "TEST_VALUE" -EbayOrderStatus "TEST_VALUE" -FinancialStatus "TEST_VALUE" -FinancialStatusIds "TEST_VALUE" -FulfillmentStatus "TEST_VALUE" -ReturnStatus "TEST_VALUE" -FulfillmentChannel "TEST_VALUE" -ShippingMethod "TEST_VALUE" -SkipOrderIds "TEST_VALUE" -IsDeleted "TEST_VALUE" -ShippingCountryIso3 "TEST_VALUE" -DeliveryMethod "TEST_VALUE" -ShipNodeType "TEST_VALUE" -CreatedTo "TEST_VALUE" -CreatedFrom "TEST_VALUE" -ModifiedTo "TEST_VALUE" -ModifiedFrom "TEST_VALUE" -Tags "TEST_VALUE" -SortBy "TEST_VALUE" -SortDirection "TEST_VALUE" -Params "TEST_VALUE" -ResponseFields "TEST_VALUE" -Exclude "TEST_VALUE" -EnableCache "TEST_VALUE" -UseLatestApiVersion "TEST_VALUE" -RoundingPrecision "TEST_VALUE"
             #$TestResult | Should -BeOfType TODO
             #$TestResult.property | Should -Be 0
         }

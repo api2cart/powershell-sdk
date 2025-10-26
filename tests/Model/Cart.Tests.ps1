@@ -10,7 +10,7 @@ Describe -tag 'PSOpenAPITools' -name 'Cart' {
     Context 'Cart' {
         It 'Initialize-Cart' {
             # a simple test to create an object
-            #$NewObject = Initialize-Cart -Name "TEST_VALUE" -Url "TEST_VALUE" -Version "TEST_VALUE" -BridgeVersion "TEST_VALUE" -DbPrefix "TEST_VALUE" -StoresInfo "TEST_VALUE" -Warehouses "TEST_VALUE" -ShippingZones "TEST_VALUE" -AdditionalFields "TEST_VALUE" -CustomFields "TEST_VALUE"
+            #$NewObject = Initialize-Cart -Name "TEST_VALUE" -Url "TEST_VALUE" -Version "TEST_VALUE" -BridgeVersion "TEST_VALUE" -DefaultRoundingPrecision "TEST_VALUE" -DbPrefix "TEST_VALUE" -StoresInfo "TEST_VALUE" -Warehouses "TEST_VALUE" -ShippingZones "TEST_VALUE" -AdditionalFields "TEST_VALUE" -CustomFields "TEST_VALUE"
             #$NewObject | Should -BeOfType Cart
             #$NewObject.property | Should -Be 0
         }

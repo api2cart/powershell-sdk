@@ -157,6 +157,8 @@ The country where the inventory item was made
 Harmonized System Code. An HSC is a 6-digit identifier that allows participating countries to classify traded goods on a common basis for customs purposes
 .PARAMETER ShippingTemplateId
 The numeric ID of the shipping template associated with the products in Etsy. You can find possible values in the ""cart.info"" API method response, in the field shipping_zones[]->id.
+.PARAMETER ProcessingProfileId
+The numeric ID of the processing profile (readiness state) for physical products in Etsy. You can find possible values in the ""cart.info"" API method response, in the field processing_profiles[]->readiness_state_id.
 .PARAMETER WhenMade
 An enumerated string for the era in which the maker made the product.
 .PARAMETER IsSupply
@@ -417,60 +419,63 @@ function Initialize-ProductUpdate {
         [System.Nullable[Int32]]
         ${ShippingTemplateId} = 0,
         [Parameter(Position = 71, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Int32]]
+        ${ProcessingProfileId},
+        [Parameter(Position = 72, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${WhenMade} = "made_to_order",
-        [Parameter(Position = 72, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${IsSupply} = $true,
         [Parameter(Position = 73, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${Downloadable} = $false,
+        ${IsSupply} = $true,
         [Parameter(Position = 74, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${Downloadable} = $false,
+        [Parameter(Position = 75, ValueFromPipelineByPropertyName = $true)]
         [String[]]
         ${Materials},
-        [Parameter(Position = 75, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${AutoRenew} = $false,
         [Parameter(Position = 76, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${OnSale} = $false,
+        ${AutoRenew} = $false,
         [Parameter(Position = 77, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${OnSale} = $false,
+        [Parameter(Position = 78, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${ProductionPartnerIds},
-        [Parameter(Position = 78, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 79, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${ManufacturerInfo},
-        [Parameter(Position = 79, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 80, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${ReportRequestId},
-        [Parameter(Position = 80, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${DisableReportCache} = $false,
         [Parameter(Position = 81, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${Reindex} = $true,
+        ${DisableReportCache} = $false,
         [Parameter(Position = 82, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${ClearCache} = $true,
+        ${Reindex} = $true,
         [Parameter(Position = 83, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${CheckProcessStatus} = $false,
+        ${ClearCache} = $true,
         [Parameter(Position = 84, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${CheckProcessStatus} = $false,
+        [Parameter(Position = 85, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
         ${Specifics},
-        [Parameter(Position = 85, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 86, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int32]]
         ${ShopSectionId},
-        [Parameter(Position = 86, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 87, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${PersonalizationDetails},
-        [Parameter(Position = 87, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${ExternalProductLink},
         [Parameter(Position = 88, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${MarketplaceItemProperties},
+        ${ExternalProductLink},
         [Parameter(Position = 89, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${MarketplaceItemProperties},
+        [Parameter(Position = 90, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Decimal]]
         ${MinOrderQuantity}
     )
@@ -552,6 +557,7 @@ function Initialize-ProductUpdate {
             "country_of_origin" = ${CountryOfOrigin}
             "harmonized_system_code" = ${HarmonizedSystemCode}
             "shipping_template_id" = ${ShippingTemplateId}
+            "processing_profile_id" = ${ProcessingProfileId}
             "when_made" = ${WhenMade}
             "is_supply" = ${IsSupply}
             "downloadable" = ${Downloadable}
@@ -608,7 +614,7 @@ function ConvertFrom-JsonToProductUpdate {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in ProductUpdate
-        $AllProperties = ("id", "model", "sku", "name", "description", "short_description", "price", "old_price", "special_price", "sprice_create", "sprice_expire", "cost_price", "fixed_cost_shipping_price", "retail_price", "tier_prices", "reserve_price", "buyitnow_price", "taxable", "tax_class_id", "type", "status", "condition", "visible", "in_stock", "avail", "avail_from", "product_class", "brand_name", "available_for_view", "stores_ids", "store_id", "lang_id", "quantity", "reserve_quantity", "manage_stock", "backorder_status", "increase_quantity", "reduce_quantity", "low_stock_threshold", "warehouse_id", "weight", "weight_unit", "height", "length", "width", "dimensions_unit", "is_virtual", "is_free_shipping", "gtin", "upc", "mpn", "ean", "isbn", "barcode", "manufacturer", "manufacturer_id", "categories_ids", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "meta_title", "meta_keywords", "meta_description", "seo_url", "search_keywords", "tags", "delivery_code", "package_details", "country_of_origin", "harmonized_system_code", "shipping_template_id", "when_made", "is_supply", "downloadable", "materials", "auto_renew", "on_sale", "production_partner_ids", "manufacturer_info", "report_request_id", "disable_report_cache", "reindex", "clear_cache", "check_process_status", "specifics", "shop_section_id", "personalization_details", "external_product_link", "marketplace_item_properties", "min_order_quantity")
+        $AllProperties = ("id", "model", "sku", "name", "description", "short_description", "price", "old_price", "special_price", "sprice_create", "sprice_expire", "cost_price", "fixed_cost_shipping_price", "retail_price", "tier_prices", "reserve_price", "buyitnow_price", "taxable", "tax_class_id", "type", "status", "condition", "visible", "in_stock", "avail", "avail_from", "product_class", "brand_name", "available_for_view", "stores_ids", "store_id", "lang_id", "quantity", "reserve_quantity", "manage_stock", "backorder_status", "increase_quantity", "reduce_quantity", "low_stock_threshold", "warehouse_id", "weight", "weight_unit", "height", "length", "width", "dimensions_unit", "is_virtual", "is_free_shipping", "gtin", "upc", "mpn", "ean", "isbn", "barcode", "manufacturer", "manufacturer_id", "categories_ids", "related_products_ids", "up_sell_products_ids", "cross_sell_products_ids", "meta_title", "meta_keywords", "meta_description", "seo_url", "search_keywords", "tags", "delivery_code", "package_details", "country_of_origin", "harmonized_system_code", "shipping_template_id", "processing_profile_id", "when_made", "is_supply", "downloadable", "materials", "auto_renew", "on_sale", "production_partner_ids", "manufacturer_info", "report_request_id", "disable_report_cache", "reindex", "clear_cache", "check_process_status", "specifics", "shop_section_id", "personalization_details", "external_product_link", "marketplace_item_properties", "min_order_quantity")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -1041,6 +1047,12 @@ function ConvertFrom-JsonToProductUpdate {
             $ShippingTemplateId = $JsonParameters.PSobject.Properties["shipping_template_id"].value
         }
 
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "processing_profile_id"))) { #optional property not found
+            $ProcessingProfileId = $null
+        } else {
+            $ProcessingProfileId = $JsonParameters.PSobject.Properties["processing_profile_id"].value
+        }
+
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "when_made"))) { #optional property not found
             $WhenMade = $null
         } else {
@@ -1227,6 +1239,7 @@ function ConvertFrom-JsonToProductUpdate {
             "country_of_origin" = ${CountryOfOrigin}
             "harmonized_system_code" = ${HarmonizedSystemCode}
             "shipping_template_id" = ${ShippingTemplateId}
+            "processing_profile_id" = ${ProcessingProfileId}
             "when_made" = ${WhenMade}
             "is_supply" = ${IsSupply}
             "downloadable" = ${Downloadable}

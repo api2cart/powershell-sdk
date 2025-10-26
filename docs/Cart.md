@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Url** | **String** |  | [optional] 
 **Version** | **String** |  | [optional] 
 **BridgeVersion** | **String** |  | [optional] 
+**DefaultRoundingPrecision** | **Int32** |  | [optional] 
 **DbPrefix** | **String** |  | [optional] 
 **StoresInfo** | [**CartStoreInfo[]**](CartStoreInfo.md) |  | [optional] 
 **Warehouses** | [**CartWarehouse[]**](CartWarehouse.md) |  | [optional] 
@@ -22,6 +23,7 @@ $Cart = Initialize-PSOpenAPIToolsCart  -Name null `
  -Url null `
  -Version null `
  -BridgeVersion null `
+ -DefaultRoundingPrecision null `
  -DbPrefix null `
  -StoresInfo null `
  -Warehouses null `

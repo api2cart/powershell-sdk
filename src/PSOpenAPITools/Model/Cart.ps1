@@ -23,6 +23,8 @@ No description available.
 No description available.
 .PARAMETER BridgeVersion
 No description available.
+.PARAMETER DefaultRoundingPrecision
+No description available.
 .PARAMETER DbPrefix
 No description available.
 .PARAMETER StoresInfo
@@ -56,21 +58,24 @@ function Initialize-Cart {
         [String]
         ${BridgeVersion},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Int32]]
+        ${DefaultRoundingPrecision},
+        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${DbPrefix},
-        [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true)]
-        [PSCustomObject[]]
-        ${StoresInfo},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
-        ${Warehouses},
+        ${StoresInfo},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject[]]
-        ${ShippingZones},
+        ${Warehouses},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true)]
+        [PSCustomObject[]]
+        ${ShippingZones},
+        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${AdditionalFields},
-        [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true)]
         [PSCustomObject]
         ${CustomFields}
     )
@@ -85,6 +90,7 @@ function Initialize-Cart {
             "url" = ${Url}
             "version" = ${Version}
             "bridge_version" = ${BridgeVersion}
+            "default_rounding_precision" = ${DefaultRoundingPrecision}
             "db_prefix" = ${DbPrefix}
             "stores_info" = ${StoresInfo}
             "warehouses" = ${Warehouses}
@@ -128,7 +134,7 @@ function ConvertFrom-JsonToCart {
         $JsonParameters = ConvertFrom-Json -InputObject $Json
 
         # check if Json contains properties not defined in Cart
-        $AllProperties = ("name", "url", "version", "bridge_version", "db_prefix", "stores_info", "warehouses", "shipping_zones", "additional_fields", "custom_fields")
+        $AllProperties = ("name", "url", "version", "bridge_version", "default_rounding_precision", "db_prefix", "stores_info", "warehouses", "shipping_zones", "additional_fields", "custom_fields")
         foreach ($name in $JsonParameters.PsObject.Properties.Name) {
             if (!($AllProperties.Contains($name))) {
                 throw "Error! JSON key '$name' not found in the properties: $($AllProperties)"
@@ -157,6 +163,12 @@ function ConvertFrom-JsonToCart {
             $BridgeVersion = $null
         } else {
             $BridgeVersion = $JsonParameters.PSobject.Properties["bridge_version"].value
+        }
+
+        if (!([bool]($JsonParameters.PSobject.Properties.name -match "default_rounding_precision"))) { #optional property not found
+            $DefaultRoundingPrecision = $null
+        } else {
+            $DefaultRoundingPrecision = $JsonParameters.PSobject.Properties["default_rounding_precision"].value
         }
 
         if (!([bool]($JsonParameters.PSobject.Properties.name -match "db_prefix"))) { #optional property not found
@@ -200,6 +212,7 @@ function ConvertFrom-JsonToCart {
             "url" = ${Url}
             "version" = ${Version}
             "bridge_version" = ${BridgeVersion}
+            "default_rounding_precision" = ${DefaultRoundingPrecision}
             "db_prefix" = ${DbPrefix}
             "stores_info" = ${StoresInfo}
             "warehouses" = ${Warehouses}

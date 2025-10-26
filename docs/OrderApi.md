@@ -470,6 +470,7 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-EnableCache] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-UseLatestApiVersion] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-RoundingPrecision] <System.Nullable[Int32]><br>
 
 order.info
 
@@ -497,10 +498,11 @@ $ResponseFields = "{result{order_id,customer,totals,address,items,bundles,status
 $Exclude = "order_id,totals,status" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 $EnableCache = $true # Boolean | If the value is 'true' and order exist in our cache, we will return order.info response from cache (optional) (default to $false)
 $UseLatestApiVersion = $true # Boolean | Use the latest platform API version (optional) (default to $false)
+$RoundingPrecision = 3 # Int32 | <p>Specifies the rounding precision for fractional numeric values (such as prices, taxes, and weights).</p> <p>Supported values range from <b>1</b> to <b>6</b>.</p> <p>The default rounding precision may vary depending on the platform. You can retrieve the default value using the <strong>cart.info</strong> method in the <code>default_rounding_precision</code> field. </p><p>Values are rounded to the nearest number at the specified precision. Fractions of .5 or higher are rounded up, while fractions lower than .5 are rounded down.</p> (optional)
 
 # order.info
 try {
-    $Result = Invoke-OrderInfo -Id $Id -OrderId $OrderId -StoreId $StoreId -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude -EnableCache $EnableCache -UseLatestApiVersion $UseLatestApiVersion
+    $Result = Invoke-OrderInfo -Id $Id -OrderId $OrderId -StoreId $StoreId -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude -EnableCache $EnableCache -UseLatestApiVersion $UseLatestApiVersion -RoundingPrecision $RoundingPrecision
 } catch {
     Write-Host ("Exception occurred when calling Invoke-OrderInfo: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -519,6 +521,7 @@ Name | Type | Description  | Notes
  **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
  **EnableCache** | **Boolean**| If the value is &#39;true&#39; and order exist in our cache, we will return order.info response from cache | [optional] [default to $false]
  **UseLatestApiVersion** | **Boolean**| Use the latest platform API version | [optional] [default to $false]
+ **RoundingPrecision** | **Int32**| &lt;p&gt;Specifies the rounding precision for fractional numeric values (such as prices, taxes, and weights).&lt;/p&gt; &lt;p&gt;Supported values range from &lt;b&gt;1&lt;/b&gt; to &lt;b&gt;6&lt;/b&gt;.&lt;/p&gt; &lt;p&gt;The default rounding precision may vary depending on the platform. You can retrieve the default value using the &lt;strong&gt;cart.info&lt;/strong&gt; method in the &lt;code&gt;default_rounding_precision&lt;/code&gt; field. &lt;/p&gt;&lt;p&gt;Values are rounded to the nearest number at the specified precision. Fractions of .5 or higher are rounded up, while fractions lower than .5 are rounded down.&lt;/p&gt; | [optional] 
 
 ### Return type
 
@@ -576,6 +579,7 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Exclude] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-EnableCache] <System.Nullable[Boolean]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-UseLatestApiVersion] <System.Nullable[Boolean]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-RoundingPrecision] <System.Nullable[Int32]><br>
 
 order.list
 
@@ -633,10 +637,11 @@ $ResponseFields = "{return_code,pagination,result{order{order_id,customer,totals
 $Exclude = "order_id,totals,status" # String | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all (optional)
 $EnableCache = $true # Boolean | If the value is 'true', we will cache orders for a 15 minutes in order to increase speed and reduce requests throttling for some methods and shoping platforms (for example order.shipment.add) (optional) (default to $false)
 $UseLatestApiVersion = $true # Boolean | Use the latest platform API version (optional) (default to $false)
+$RoundingPrecision = 3 # Int32 | <p>Specifies the rounding precision for fractional numeric values (such as prices, taxes, and weights).</p> <p>Supported values range from <b>1</b> to <b>6</b>.</p> <p>The default rounding precision may vary depending on the platform. You can retrieve the default value using the <strong>cart.info</strong> method in the <code>default_rounding_precision</code> field. </p><p>Values are rounded to the nearest number at the specified precision. Fractions of .5 or higher are rounded up, while fractions lower than .5 are rounded down.</p> (optional)
 
 # order.list
 try {
-    $Result = Invoke-OrderList -Start $Start -Count $Count -PageCursor $PageCursor -Ids $Ids -OrderIds $OrderIds -SinceId $SinceId -StoreId $StoreId -CustomerId $CustomerId -CustomerEmail $CustomerEmail -BasketId $BasketId -CurrencyId $CurrencyId -Phone $Phone -OrderStatus $OrderStatus -OrderStatusIds $OrderStatusIds -EbayOrderStatus $EbayOrderStatus -FinancialStatus $FinancialStatus -FinancialStatusIds $FinancialStatusIds -FulfillmentStatus $FulfillmentStatus -ReturnStatus $ReturnStatus -FulfillmentChannel $FulfillmentChannel -ShippingMethod $ShippingMethod -SkipOrderIds $SkipOrderIds -IsDeleted $IsDeleted -ShippingCountryIso3 $ShippingCountryIso3 -DeliveryMethod $DeliveryMethod -ShipNodeType $ShipNodeType -CreatedTo $CreatedTo -CreatedFrom $CreatedFrom -ModifiedTo $ModifiedTo -ModifiedFrom $ModifiedFrom -Tags $Tags -SortBy $SortBy -SortDirection $SortDirection -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude -EnableCache $EnableCache -UseLatestApiVersion $UseLatestApiVersion
+    $Result = Invoke-OrderList -Start $Start -Count $Count -PageCursor $PageCursor -Ids $Ids -OrderIds $OrderIds -SinceId $SinceId -StoreId $StoreId -CustomerId $CustomerId -CustomerEmail $CustomerEmail -BasketId $BasketId -CurrencyId $CurrencyId -Phone $Phone -OrderStatus $OrderStatus -OrderStatusIds $OrderStatusIds -EbayOrderStatus $EbayOrderStatus -FinancialStatus $FinancialStatus -FinancialStatusIds $FinancialStatusIds -FulfillmentStatus $FulfillmentStatus -ReturnStatus $ReturnStatus -FulfillmentChannel $FulfillmentChannel -ShippingMethod $ShippingMethod -SkipOrderIds $SkipOrderIds -IsDeleted $IsDeleted -ShippingCountryIso3 $ShippingCountryIso3 -DeliveryMethod $DeliveryMethod -ShipNodeType $ShipNodeType -CreatedTo $CreatedTo -CreatedFrom $CreatedFrom -ModifiedTo $ModifiedTo -ModifiedFrom $ModifiedFrom -Tags $Tags -SortBy $SortBy -SortDirection $SortDirection -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude -EnableCache $EnableCache -UseLatestApiVersion $UseLatestApiVersion -RoundingPrecision $RoundingPrecision
 } catch {
     Write-Host ("Exception occurred when calling Invoke-OrderList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -685,6 +690,7 @@ Name | Type | Description  | Notes
  **Exclude** | **String**| Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter &#x60;params&#x60; equal force_all | [optional] 
  **EnableCache** | **Boolean**| If the value is &#39;true&#39;, we will cache orders for a 15 minutes in order to increase speed and reduce requests throttling for some methods and shoping platforms (for example order.shipment.add) | [optional] [default to $false]
  **UseLatestApiVersion** | **Boolean**| Use the latest platform API version | [optional] [default to $false]
+ **RoundingPrecision** | **Int32**| &lt;p&gt;Specifies the rounding precision for fractional numeric values (such as prices, taxes, and weights).&lt;/p&gt; &lt;p&gt;Supported values range from &lt;b&gt;1&lt;/b&gt; to &lt;b&gt;6&lt;/b&gt;.&lt;/p&gt; &lt;p&gt;The default rounding precision may vary depending on the platform. You can retrieve the default value using the &lt;strong&gt;cart.info&lt;/strong&gt; method in the &lt;code&gt;default_rounding_precision&lt;/code&gt; field. &lt;/p&gt;&lt;p&gt;Values are rounded to the nearest number at the specified precision. Fractions of .5 or higher are rounded up, while fractions lower than .5 are rounded down.&lt;/p&gt; | [optional] 
 
 ### Return type
 
