@@ -72,6 +72,7 @@ Name | Type | Description | Notes
 **NoteAttributes** | [**OrderAddNoteAttributesInner[]**](OrderAddNoteAttributesInner.md) | Defines note attributes | [optional] 
 **ClearCache** | **Boolean** | Is cache clear required | [optional] [default to $true]
 **Origin** | **String** | The source of the order | [optional] 
+**FeePrice** | **Decimal** | Specifies refund&#39;s fee price | [optional] 
 **OrderItem** | [**OrderAddOrderItemInner[]**](OrderAddOrderItemInner.md) |  | 
 
 ## Examples
@@ -147,6 +148,7 @@ $OrderAdd = Initialize-PSOpenAPIToolsOrderAdd  -Id 10 `
  -NoteAttributes null `
  -ClearCache false `
  -Origin newsletter `
+ -FeePrice 5.5 `
  -OrderItem null
 ```
 

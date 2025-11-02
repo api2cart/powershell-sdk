@@ -1618,6 +1618,9 @@ product.count
 
 No description available.
 
+.PARAMETER Sku
+Filter by product's sku
+
 .PARAMETER ProductIds
 Counts products specified by product ids
 
@@ -1656,6 +1659,9 @@ Retrieve entities to their modification date
 
 .PARAMETER BrandName
 Retrieves brands specified by brand name
+
+.PARAMETER ManufacturerId
+Defines product's manufacturer by manufacturer_id
 
 .PARAMETER ProductAttributes
 Defines product attributes
@@ -1700,71 +1706,77 @@ function Invoke-ProductCount {
     Param (
         [Parameter(Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ProductIds},
+        ${Sku},
         [Parameter(Position = 1, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SinceId},
+        ${ProductIds},
         [Parameter(Position = 2, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CategoriesIds},
+        ${SinceId},
         [Parameter(Position = 3, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CategoryId},
+        ${CategoriesIds},
         [Parameter(Position = 4, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${StoreId},
+        ${CategoryId},
         [Parameter(Position = 5, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${LangId},
+        ${StoreId},
         [Parameter(Position = 6, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Boolean]]
-        ${AvailView},
+        [String]
+        ${LangId},
         [Parameter(Position = 7, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
-        ${AvailSale},
+        ${AvailView},
         [Parameter(Position = 8, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${CreatedFrom},
+        [System.Nullable[Boolean]]
+        ${AvailSale},
         [Parameter(Position = 9, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${CreatedTo},
+        ${CreatedFrom},
         [Parameter(Position = 10, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedFrom},
+        ${CreatedTo},
         [Parameter(Position = 11, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ModifiedTo},
+        ${ModifiedFrom},
         [Parameter(Position = 12, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${BrandName},
+        ${ModifiedTo},
         [Parameter(Position = 13, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String[]]
-        ${ProductAttributes},
+        [String]
+        ${BrandName},
         [Parameter(Position = 14, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Status},
+        ${ManufacturerId},
         [Parameter(Position = 15, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Type},
+        [String[]]
+        ${ProductAttributes},
         [Parameter(Position = 16, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Visible},
+        ${Status},
         [Parameter(Position = 17, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${FindValue},
+        ${Type},
         [Parameter(Position = 18, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${FindWhere},
+        ${Visible},
         [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ReportRequestId},
+        ${FindValue},
         [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${FindWhere},
+        [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${ReportRequestId},
+        [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${ReturnGlobal},
-        [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${DisableReportCache},
-        [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${UseLatestApiVersion},
         [Switch]
@@ -1789,6 +1801,10 @@ function Invoke-ProductCount {
         $LocalVarAccepts = @('application/json')
 
         $LocalVarUri = '/product.count.json'
+
+        if ($Sku) {
+            $LocalVarQueryParameters['sku'] = $Sku
+        }
 
         if ($ProductIds) {
             $LocalVarQueryParameters['product_ids'] = $ProductIds
@@ -1840,6 +1856,10 @@ function Invoke-ProductCount {
 
         if ($BrandName) {
             $LocalVarQueryParameters['brand_name'] = $BrandName
+        }
+
+        if ($ManufacturerId) {
+            $LocalVarQueryParameters['manufacturer_id'] = $ManufacturerId
         }
 
         if ($ProductAttributes) {
@@ -3234,6 +3254,9 @@ Retrieves brands specified by brand name
 .PARAMETER ProductAttributes
 Defines product attributes
 
+.PARAMETER ManufacturerId
+Defines product's manufacturer by manufacturer_id
+
 .PARAMETER Status
 Defines product's status
 
@@ -3352,50 +3375,53 @@ function Invoke-ProductList {
         ${ProductAttributes},
         [Parameter(Position = 19, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Status},
+        ${ManufacturerId},
         [Parameter(Position = 20, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Type},
+        ${Status},
         [Parameter(Position = 21, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Visible},
+        ${Type},
         [Parameter(Position = 22, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${FindValue},
+        ${Visible},
         [Parameter(Position = 23, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${FindWhere},
+        ${FindValue},
         [Parameter(Position = 24, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [String]
+        ${FindWhere},
+        [Parameter(Position = 25, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
         ${ReturnGlobal},
-        [Parameter(Position = 25, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [String]
-        ${Params},
         [Parameter(Position = 26, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ResponseFields},
+        ${Params},
         [Parameter(Position = 27, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${Exclude},
+        ${ResponseFields},
         [Parameter(Position = 28, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SortBy},
+        ${Exclude},
         [Parameter(Position = 29, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${SortDirection},
+        ${SortBy},
         [Parameter(Position = 30, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
-        ${ReportRequestId},
+        ${SortDirection},
         [Parameter(Position = 31, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
-        [System.Nullable[Boolean]]
-        ${DisableCache},
+        [String]
+        ${ReportRequestId},
         [Parameter(Position = 32, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
-        ${DisableReportCache},
+        ${DisableCache},
         [Parameter(Position = 33, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [System.Nullable[Boolean]]
-        ${UseLatestApiVersion},
+        ${DisableReportCache},
         [Parameter(Position = 34, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [System.Nullable[Boolean]]
+        ${UseLatestApiVersion},
+        [Parameter(Position = 35, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         [String]
         ${ProductType},
         [Switch]
@@ -3495,6 +3521,10 @@ function Invoke-ProductList {
 
         if ($ProductAttributes) {
             $LocalVarQueryParameters['product_attributes'] = $ProductAttributes
+        }
+
+        if ($ManufacturerId) {
+            $LocalVarQueryParameters['manufacturer_id'] = $ManufacturerId
         }
 
         if ($Status) {

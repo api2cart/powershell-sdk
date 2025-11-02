@@ -811,6 +811,7 @@ Name | Type | Description  | Notes
 <a id="Invoke-ProductCount"></a>
 # **Invoke-ProductCount**
 > ProductCount200Response Invoke-ProductCount<br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Sku] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductIds] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-SinceId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-CategoriesIds] <String><br>
@@ -824,6 +825,7 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedFrom] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ModifiedTo] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-BrandName] <String><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ManufacturerId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductAttributes] <String[]><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Status] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Type] <String><br>
@@ -853,6 +855,7 @@ $Configuration.ApiKey.x-api-key = "YOUR_API_KEY"
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 #$Configuration.ApiKeyPrefix.x-api-key = "Bearer"
 
+$Sku = "bag_01" # String | Filter by product's sku (optional)
 $ProductIds = "4,5" # String | Counts products specified by product ids (optional)
 $SinceId = "56" # String | Retrieve entities starting from the specified id. (optional)
 $CategoriesIds = "23,56" # String | Defines product add that is specified by comma-separated categories id (optional)
@@ -866,6 +869,7 @@ $CreatedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their creatio
 $ModifiedFrom = "2010-07-29 13:45:52" # String | Retrieve entities from their modification date (optional)
 $ModifiedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their modification date (optional)
 $BrandName = "Abidas" # String | Retrieves brands specified by brand name (optional)
+$ManufacturerId = "1" # String | Defines product's manufacturer by manufacturer_id (optional)
 $ProductAttributes = "MyProductAttributes" # String[] | Defines product attributes (optional)
 $Status = "disabled" # String | Defines product's status (optional)
 $Type = "simple" # String | Defines products's type (optional)
@@ -879,7 +883,7 @@ $UseLatestApiVersion = $true # Boolean | Use the latest platform API version (op
 
 # product.count
 try {
-    $Result = Invoke-ProductCount -ProductIds $ProductIds -SinceId $SinceId -CategoriesIds $CategoriesIds -CategoryId $CategoryId -StoreId $StoreId -LangId $LangId -AvailView $AvailView -AvailSale $AvailSale -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -BrandName $BrandName -ProductAttributes $ProductAttributes -Status $Status -Type $Type -Visible $Visible -FindValue $FindValue -FindWhere $FindWhere -ReportRequestId $ReportRequestId -ReturnGlobal $ReturnGlobal -DisableReportCache $DisableReportCache -UseLatestApiVersion $UseLatestApiVersion
+    $Result = Invoke-ProductCount -Sku $Sku -ProductIds $ProductIds -SinceId $SinceId -CategoriesIds $CategoriesIds -CategoryId $CategoryId -StoreId $StoreId -LangId $LangId -AvailView $AvailView -AvailSale $AvailSale -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -BrandName $BrandName -ManufacturerId $ManufacturerId -ProductAttributes $ProductAttributes -Status $Status -Type $Type -Visible $Visible -FindValue $FindValue -FindWhere $FindWhere -ReportRequestId $ReportRequestId -ReturnGlobal $ReturnGlobal -DisableReportCache $DisableReportCache -UseLatestApiVersion $UseLatestApiVersion
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ProductCount: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -890,6 +894,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **Sku** | **String**| Filter by product&#39;s sku | [optional] 
  **ProductIds** | **String**| Counts products specified by product ids | [optional] 
  **SinceId** | **String**| Retrieve entities starting from the specified id. | [optional] 
  **CategoriesIds** | **String**| Defines product add that is specified by comma-separated categories id | [optional] 
@@ -903,6 +908,7 @@ Name | Type | Description  | Notes
  **ModifiedFrom** | **String**| Retrieve entities from their modification date | [optional] 
  **ModifiedTo** | **String**| Retrieve entities to their modification date | [optional] 
  **BrandName** | **String**| Retrieves brands specified by brand name | [optional] 
+ **ManufacturerId** | **String**| Defines product&#39;s manufacturer by manufacturer_id | [optional] 
  **ProductAttributes** | [**String[]**](String.md)| Defines product attributes | [optional] 
  **Status** | **String**| Defines product&#39;s status | [optional] 
  **Type** | **String**| Defines products&#39;s type | [optional] 
@@ -1564,6 +1570,7 @@ Name | Type | Description  | Notes
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Sku] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-BrandName] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ProductAttributes] <String[]><br>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-ManufacturerId] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Status] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Type] <String><br>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Visible] <String><br>
@@ -1618,6 +1625,7 @@ $ModifiedTo = "2100-08-29 13:45:52" # String | Retrieve entities to their modifi
 $Sku = "bag_01" # String | Filter by product's sku (optional)
 $BrandName = "Abidas" # String | Retrieves brands specified by brand name (optional)
 $ProductAttributes = "MyProductAttributes" # String[] | Defines product attributes (optional)
+$ManufacturerId = "1" # String | Defines product's manufacturer by manufacturer_id (optional)
 $Status = "disabled" # String | Defines product's status (optional)
 $Type = "simple" # String | Defines products's type (optional)
 $Visible = "everywhere" # String | Filter items by visibility status (optional) (default to "everywhere")
@@ -1637,7 +1645,7 @@ $ProductType = "BICYCLE" # String | A categorization for the product (optional)
 
 # product.list
 try {
-    $Result = Invoke-ProductList -Start $Start -Count $Count -PageCursor $PageCursor -ProductIds $ProductIds -SinceId $SinceId -CategoriesIds $CategoriesIds -CategoryId $CategoryId -StoreId $StoreId -LangId $LangId -CurrencyId $CurrencyId -AvailView $AvailView -AvailSale $AvailSale -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -Sku $Sku -BrandName $BrandName -ProductAttributes $ProductAttributes -Status $Status -Type $Type -Visible $Visible -FindValue $FindValue -FindWhere $FindWhere -ReturnGlobal $ReturnGlobal -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude -SortBy $SortBy -SortDirection $SortDirection -ReportRequestId $ReportRequestId -DisableCache $DisableCache -DisableReportCache $DisableReportCache -UseLatestApiVersion $UseLatestApiVersion -ProductType $ProductType
+    $Result = Invoke-ProductList -Start $Start -Count $Count -PageCursor $PageCursor -ProductIds $ProductIds -SinceId $SinceId -CategoriesIds $CategoriesIds -CategoryId $CategoryId -StoreId $StoreId -LangId $LangId -CurrencyId $CurrencyId -AvailView $AvailView -AvailSale $AvailSale -CreatedFrom $CreatedFrom -CreatedTo $CreatedTo -ModifiedFrom $ModifiedFrom -ModifiedTo $ModifiedTo -Sku $Sku -BrandName $BrandName -ProductAttributes $ProductAttributes -ManufacturerId $ManufacturerId -Status $Status -Type $Type -Visible $Visible -FindValue $FindValue -FindWhere $FindWhere -ReturnGlobal $ReturnGlobal -Params $Params -ResponseFields $ResponseFields -Exclude $Exclude -SortBy $SortBy -SortDirection $SortDirection -ReportRequestId $ReportRequestId -DisableCache $DisableCache -DisableReportCache $DisableReportCache -UseLatestApiVersion $UseLatestApiVersion -ProductType $ProductType
 } catch {
     Write-Host ("Exception occurred when calling Invoke-ProductList: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -1667,6 +1675,7 @@ Name | Type | Description  | Notes
  **Sku** | **String**| Filter by product&#39;s sku | [optional] 
  **BrandName** | **String**| Retrieves brands specified by brand name | [optional] 
  **ProductAttributes** | [**String[]**](String.md)| Defines product attributes | [optional] 
+ **ManufacturerId** | **String**| Defines product&#39;s manufacturer by manufacturer_id | [optional] 
  **Status** | **String**| Defines product&#39;s status | [optional] 
  **Type** | **String**| Defines products&#39;s type | [optional] 
  **Visible** | **String**| Filter items by visibility status | [optional] [default to &quot;everywhere&quot;]
